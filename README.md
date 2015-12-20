@@ -31,7 +31,7 @@ The easiest way to start is to look at the vignette to know how the package work
 
 You can see the vignette [here](https://github.com/priviere/shinemas2R/blob/master/vignettes/shinemas2R.pdf). You can download it by clicking on 'Raw' in the top right corner.
 
-Do not hesitate to let a message [in the issues](https://github.com/priviere/PPBstats/issues) or to send me an email if some points are not clear in the vignette or you find bugs.
+Do not hesitate to let a message [in the issues](https://github.com/priviere/shinemas2R/issues) or to send me an email if some points are not clear in the vignette or you find bugs.
 
 
 ### 2. Translate
@@ -42,13 +42,17 @@ More informations on R package translation [here](http://developer.r-project.org
 
 
 ###  3. Update `format.data`
-You can update `format.data` in order to format data for existing R packages.
+You can update `format.data` [here](https://github.com/priviere/shinemas2R/blob/master/R/format.data.R) in order to format data for existing R packages.
 Note that the output of the R packages must be a ggplot object to be taken by `get.pdf`.
 
+If so, send me an email and we'll see how we can work together!
 
 ### 4. Update functions to answer your specific needs
 
-You may want new query types (`get.data`), new plots (`get.ggplot`) or new tables (`get.table`) to answer your specific needs.
+You may want new query types (`get.data` [here](https://github.com/priviere/shinemas2R/blob/master/R/get.data.R)), 
+new plots (`get.ggplot` [here](https://github.com/priviere/shinemas2R/blob/master/R/get.ggplot.R)) or 
+new tables (`get.table` [here](https://github.com/priviere/shinemas2R/blob/master/R/get.table.R)) 
+to answer your specific needs.
 
 If so, send me an email and we'll see how we can work together!
 
