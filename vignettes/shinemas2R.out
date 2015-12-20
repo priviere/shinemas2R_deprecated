@@ -1,0 +1,42 @@
+\BOOKMARK [1][-]{section.1}{Philosophy of shinemas2R}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{What is SHiNeMaS?}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Function relations in shinemas2R}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Let\220s go!}{section.1}% 4
+\BOOKMARK [1][-]{section.2}{Raw information on levels and variables}{}% 5
+\BOOKMARK [1][-]{section.3}{Network relations between seed-lots}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{Get the data set}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Get the ggplots}{section.3}% 8
+\BOOKMARK [3][-]{subsubsection.3.2.1}{ggplot.type = "network-network"}{subsection.3.2}% 9
+\BOOKMARK [3][-]{subsubsection.3.2.2}{ggplot.type = "network-reproduction-harvested"}{subsection.3.2}% 10
+\BOOKMARK [3][-]{subsubsection.3.2.3}{ggplot.type = "network-diffusion-relation"}{subsection.3.2}% 11
+\BOOKMARK [3][-]{subsubsection.3.2.4}{ggplot.type = "network-reproduction-crossed"}{subsection.3.2}% 12
+\BOOKMARK [3][-]{subsubsection.3.2.5}{Others ggplot.type}{subsection.3.2}% 13
+\BOOKMARK [2][-]{subsection.3.3}{Get the tables}{section.3}% 14
+\BOOKMARK [1][-]{section.4}{Data linked to the seed-lots and to the relations between seed-lots}{}% 15
+\BOOKMARK [2][-]{subsection.4.1}{Get the data set}{section.4}% 16
+\BOOKMARK [3][-]{subsubsection.4.1.1}{query.type = "data-classic"}{subsection.4.1}% 17
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Selection differentia \(query.type = "data-S"\), response to selection \(query.type = "data-SR"\) and heritability}{subsection.4.1}% 18
+\BOOKMARK [2][-]{subsection.4.2}{Get the ggplots}{section.4}% 19
+\BOOKMARK [3][-]{subsubsection.4.2.1}{ggplots for data-classic }{subsection.4.2}% 20
+\BOOKMARK [3][-]{subsubsection.4.2.2}{ggplots for data-S }{subsection.4.2}% 21
+\BOOKMARK [3][-]{subsubsection.4.2.3}{ggplots for data-SR }{subsection.4.2}% 22
+\BOOKMARK [2][-]{subsection.4.3}{Get the tables}{section.4}% 23
+\BOOKMARK [3][-]{subsubsection.4.3.1}{tables for data-classic }{subsection.4.3}% 24
+\BOOKMARK [3][-]{subsubsection.4.3.2}{tables for data-S and data-SR}{subsection.4.3}% 25
+\BOOKMARK [1][-]{section.5}{pdf compilation with LaTeX}{}% 26
+\BOOKMARK [2][-]{subsection.5.1}{Philosophy of get.pdf }{section.5}% 27
+\BOOKMARK [2][-]{subsection.5.2}{Examples}{section.5}% 28
+\BOOKMARK [3][-]{subsubsection.5.2.1}{First Information}{subsection.5.2}% 29
+\BOOKMARK [3][-]{subsubsection.5.2.2}{LaTeX body}{subsection.5.2}% 30
+\BOOKMARK [3][-]{subsubsection.5.2.3}{Compile the pdf}{subsection.5.2}% 31
+\BOOKMARK [1][-]{section.6}{Common use rights}{}% 32
+\BOOKMARK [1][-]{section*.8}{To cite shinemas2R}{}% 33
+\BOOKMARK [1][-]{section*.9}{Aknowledgement}{}% 34
+\BOOKMARK [1][-]{section*.10}{References}{}% 35
+\BOOKMARK [1][-]{Appendix.a.A}{Appendix Install SHiNeMaS on localhost}{}% 36
+\BOOKMARK [2][-]{subsection.a.A.1}{Install PostgreSQL and SHiNeMaS}{Appendix.a.A}% 37
+\BOOKMARK [2][-]{subsection.a.A.2}{Set up the information to connect to SHiNeMaS with get.data}{Appendix.a.A}% 38
+\BOOKMARK [1][-]{Appendix.a.B}{Appendix Therory regarding selection differentia, response to selection and heritability}{}% 39
+\BOOKMARK [1][-]{Appendix.a.C}{Appendix get.pdf examples}{}% 40
+\BOOKMARK [2][-]{subsection.a.C.1}{LaTeX\137head examples}{Appendix.a.C}% 41
+\BOOKMARK [2][-]{subsection.a.C.2}{.tex examples for input}{Appendix.a.C}% 42
