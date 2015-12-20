@@ -1,0 +1,125 @@
+%\VignetteIndexEntry{shinemas2R}
+%\VignetteEngine{knitr::knitr}
+
+\documentclass{article}
+
+
+\usepackage[titletoc]{appendix} % To add Appendix into annex section number i.e. Appendix A
+
+% to draw on figure or create figures
+\usepackage{tikz}
+\usepackage{pstricks}
+
+\usetikzlibrary{shapes,arrows}
+\graphicspath{{./figures/}}
+\usepackage{wrapfig}
+
+\usepackage{multicol}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[T1]{fontenc}
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=2cm]{geometry}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{url}
+\usepackage[round]{natbib}
+\usepackage[a4paper=true, colorlinks=true, linkcolor=black,urlcolor=blue,citecolor=black]{hyperref}
+
+
+\usepackage{colortbl, xcolor}
+\usepackage{float}
+
+\newcommand{\R}{\texttt{R}}
+\renewcommand{\sl}{seed-lots}
+\newcommand{\BDfull}{Seed History and Network Management System}
+\newcommand{\BD}{SHiNeMaS}
+\newcommand{\pack}{\texttt{shinemas2R}}
+
+\newcommand{\versionnumber}{0.9}
+
+\begin{document}
+
+% Define block styles for the figure
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, text width=5.8em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+    
+<<setup, include=FALSE, cache=FALSE>>=
+library(xtable)
+library(knitr)
+## set global chunk options
+opts_chunk$set(fig.path='figures/shinemas2R_', cache.path='cache/shinemas2R-', fig.align='center', fig.show='hold', par=TRUE, warning=FALSE)
+## I use = but I can replace it with <-; set code/output width to be 68
+options(replace.assign=TRUE, width=68)
+## tune details of base graphics (http://yihui.name/knitr/hooks)
+knit_hooks$set(par=function(before, options, envir){
+if (before && options$fig.show!='none') par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3)
+})
+@
+
+\input{./sections/1.head}
+
+\newpage
+
+<<child='sections/2.philo_pack.Rnw'>>=
+@
+
+\newpage
+
+<<child='sections/3.raw_info.Rnw'>>=
+@
+
+\newpage
+
+<<child='sections/4.network.Rnw'>>=
+@
+
+\newpage
+
+<<child='sections/5.data.Rnw'>>=
+@
+
+\newpage
+
+<<child='sections/6.pdf.Rnw'>>=
+@
+
+\newpage
+
+\input{./sections/7.use_rights}
+
+\newpage
+
+
+\section*{To cite \pack} \addcontentsline{toc}{section}{To cite \pack}
+To cite this package and or this vignette:
+
+<<message=TRUE,cache=FALSE>>=
+citation("shinemas2R")
+@
+
+\newpage
+
+\input{./sections/8.tail}
+
+\newpage
+
+\begin{appendices}
+
+<<child='sections/a1.install_shinemas.Rnw'>>=
+@
+
+\newpage
+
+\input{./sections/a2.text_SandR}
+
+\newpage
+
+\input{./sections/a3.getpdf_examples}
+
+\newpage
+
+\end{appendices}
+
+
+\end{document}

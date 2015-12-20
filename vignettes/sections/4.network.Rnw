@@ -1,0 +1,683 @@
+\section{Network relations between \sl }
+\label{network}
+
+\subsection{Get the data set}
+
+To get the data, use the function \texttt{get.data} with \texttt{query.type = "network"}.
+
+You can set filters to the query with the following argument :
+
+\begin{itemize}
+\item \texttt{filter.in} to choose nothing expect \texttt{filter.in}
+\item \texttt{filter.out} to choose everything expect \texttt{filter.out}
+\end{itemize}
+
+values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation} or \texttt{reproduction type}.
+
+
+It is important to choose if you apply the filter on the \texttt{father} or the \texttt{son} of a relation.
+This can be done with the argument \texttt{filter.on}.
+Possibles values are \texttt{"father"}, \texttt{"son"} or \texttt{"father-son"}.
+It is set by default to \texttt{"father-son"}.
+
+It is possible to get the \texttt{Mdist} square matrix with the number of reproductions that separate two seed-lots since their last common diffusion (argument \texttt{Mdist = TRUE}).
+This square matrix can be compared to a differenciation distance. 
+It can be put in relation with genetic $F_{st}$ for example \citep{nei_analysis_1973}\footnote{The \R~package \texttt{adegenet} can be used for that.}.
+
+
+<<message=TRUE,cache=FALSE>>=
+#data_network = get.data(
+#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+#	query.type = "network", # network query
+#	germplasm.in = "Rouge-du-Roc", # germplasm to keep
+#	filter.on = "father-son", # filter on father AND son
+#	Mdist = TRUE
+#	)
+
+# 1. Query SHiNeMaS ...
+# 2. Create network matrix ...
+# 3. Link information to vertex and edges ...
+# 4. Get network information on seed-lots ...
+# 5. Get Mdist square matrix ...
+
+#data_network = encrypt.data(data_network)
+#The key has been written in /home/pierre/key_network_Tue Nov 24 11:52:47 2015.RData
+
+load("./data/data_network.RData")
+@
+
+The function returns a list with:
+\begin{itemize}
+\item the netwok object
+<<message=TRUE,cache=FALSE>>=
+n = data_network$data$network
+n
+@
+
+Note you can convert this object to an \texttt{igraph} object.
+This may be useful if you like to use the \texttt{igraph} package.
+See \url{http://mbojan.github.io/intergraph/} for more information.
+
+<<message=TRUE,cache=FALSE>>=
+n_igraph = intergraph::asIgraph(n)
+n_igraph
+@
+
+
+\item the network.info matrix with information on relation in the network.
+<<message=TRUE,cache=FALSE>>=
+head(data_network$data$network.info)
+@
+
+\item the \texttt{Mdist} square matrix
+<<message=TRUE,cache=FALSE>>=
+dim(data_network$data$Mdist)
+@
+
+\end{itemize}
+
+
+You may want to fill gaps into you network data set regarding diffusion events (if the information is stored in \BD!).
+This may be usefull, regarding a network on one person, to know where do the seed-lots come from.
+To do so, use \texttt{fill.diffusion.gap = TRUE}.
+
+<<message=TRUE,cache=FALSE>>=
+#data_network_JAB = get.data(
+#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+#	db_name = info_db$db_name, db_password = info_db$db_password,  # db infos
+#	query.type = "network", # network query
+#	person.in = "JAB", # person to keep
+#	filter.on = "father-son" # filter on father AND son
+#	)
+
+# 1. Query SHiNeMaS ...
+# 2. Create network matrix ...
+# 3. Link information to vertex and edges ...
+# 4. Get network information on seed-lots ...
+
+#data_network_JAB = encrypt.data(data_network_JAB)
+# The key has been written in /home/pierre/key_network_Tue Nov 24 11:54:53 2015.RData
+
+load("./data/data_network_JAB.RData")
+@
+
+<<message=TRUE,cache=FALSE>>=
+#data_network_JAB_fill_gap = get.data(
+#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+#	query.type = "network", # network query
+#	person.in = "JAB", # person to keep
+#	filter.on = "father-son", # filter on father AND son
+#	fill.diffusion.gap = TRUE
+#	)
+
+# 1. Query SHiNeMaS ...
+# 2. Create network matrix ...
+# 2.1. Fill diffusion gaps ...
+# 3. Link information to vertex and edges ...
+# 4. Get network information on seed-lots ...
+
+#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)
+# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData
+
+load("./data/data_network_JAB_fill_gap.RData")
+@
+
+
+\subsection{Get the ggplots}
+
+Once, you have got the data, you can do plots with the function \texttt{get.ggplot}.
+
+
+<<message=TRUE,cache=FALSE>>=
+default_network_ggplot = get.ggplot(data_network)
+@
+
+By default, all the possibles plots or maps are done.
+
+<<message=TRUE,cache=FALSE>>=
+names(default_network_ggplot)
+@
+
+It is possible to get only one plot by choosing one of the above name with the argument \texttt{ggplot.type}.
+Each \texttt{ggplot.type} with default and custom arguments are explained in the following sub-sections.
+
+\subsubsection{\texttt{ggplot.type = "network-network"}}
+
+\paragraph{Default arguments}
+
+By default, the following network is display:
+
+<<message=TRUE,cache=FALSE>>=
+p_net_RdR = default_network_ggplot$"network-network"
+p_net_RdR
+@
+
+
+Regarding the argument \texttt{fill.diffusion.gap} in the function \texttt{get.data}:
+
+<<message=TRUE,cache=FALSE>>=
+p_JAB = get.ggplot(
+	data_network_JAB,
+	ggplot.type = "network-network", 
+	vertex.color = "person"
+	)
+p_JAB = p_JAB$`network-network`
+
+p_JAB_fill_gap = get.ggplot(
+	data_network_JAB_fill_gap, 
+	ggplot.type = "network-network", 
+	vertex.color = "person"
+	)
+p_JAB_fill_gap = p_JAB_fill_gap$`network-network`
+@
+
+We can see that extra information are added to know from where come the seed-lots.
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p\_JAB} & \texttt{p\_JAB\_fill\_gap} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".5\\textwidth">>=
+p_JAB
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".5\\textwidth">>=
+p_JAB_fill_gap
+@
+\\
+\end{tabular}
+\end{center}
+
+
+
+\paragraph{Custom arguments}
+
+It is possible to tune the following arguments (Table \ref{custom.network}):
+
+
+\begin{center}
+\begin{table}[H]
+\begin{tabular}{ p{.2\textwidth} p{.15\textwidth} p{.6\textwidth} }
+\hline
+\texttt{argument} & \texttt{default value} & description \\
+\hline
+
+\texttt{filter.on} & \texttt{"father-son"} & it chooses on which seed-lots the filters is applied: \texttt{"son"}, \texttt{"father"} or \texttt{"father-son"}. \\
+
+\texttt{vertex.size} & \texttt{3} &  size of the vertex \\
+
+\texttt{vertex.color} & \texttt{"year"} & color of the vertex. 
+It can be chosen according to  \texttt{"person"}, \texttt{"germplasm"} or \texttt{"year"}. 
+If \texttt{NULL}, it is in black. \\
+
+\texttt{organise.sl} & \texttt{FALSE} & organise seed-lots for an easier visualisation \\
+
+\texttt{hide.labels.parts} & \texttt{"all"} & parts of the label hidden: \texttt{"germplasm"}, \texttt{"person"}, \texttt{"year"}, \texttt{"person:germplasm"}, \texttt{"year:germplasm"}, \texttt{"person:year"}, \texttt{"all"}. 
+\texttt{"all"} means that no labels are dispayed. 
+If \texttt{NULL} labels are displayed. Labels are based on seed-lots names under the form \texttt{germplasm\_year\_person\_digit}.
+For easier visualisation, Digit is never display unless you choose \texttt{NULL}.
+\\
+
+\texttt{labels.sex} & \texttt{TRUE} & if \texttt{TRUE}, display the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = \texttt{"all"}. \\
+
+\texttt{labels.generation} & \texttt{TRUE} & if TRUE, display generation for each reproduction \\
+
+\texttt{labels.size} & \texttt{3} & size of the labels \\
+\hline
+\end{tabular}
+\caption{Possible arguments to custom arguments regarding network.}
+\label{custom.network}
+\end{table}
+\end{center}
+
+
+For example,
+
+<<message=TRUE,cache=FALSE>>=
+get.ggplot(
+	data_network,
+	ggplot.type = "network-network",
+	organise.sl = TRUE,
+	hide.labels.parts = "year:germplasm", 
+	vertex.color = "year"
+	)
+@
+
+\subsubsection{\texttt{ggplot.type = "network-reproduction-harvested"}}
+
+
+\texttt{ggplot.type = "network-reproduction-harvested"} corresponds to seed-lots that have been harvested after a reproduction.
+
+
+Two plots are possibles regarding \texttt{ggplot.display}.
+
+\begin{center}
+\begin{tabular}{ p{.2\textwidth} p{.15\textwidth} p{.6\textwidth} }
+\hline
+argument & default value & description \\
+\hline
+\texttt{ggplot.display} & \texttt{NULL} & \texttt{"barplot"} or  \texttt{"map"}.
+It can be a vector of several elements i.e. \texttt{c("barplot", "map")}. 
+\texttt{NULL} by default: both are done. \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\paragraph{\texttt{ggplot.display = barplot}}
+
+For \texttt{ggplot.display = "barplot"}, you may chose what you want in the x axis (\texttt{x.axis} argument) and in color (\texttt{in.col} argument).
+The possible values for \texttt{x.axis} and \texttt{in.col} are: \texttt{germplasm}, \texttt{year}, \texttt{person}.
+By default all combinaisons of \texttt{x.axis} and \texttt{in.col} are done with default argument settings.
+The name of the plot is under the form \texttt{x.axis}-\texttt{in.col}.
+
+
+\begin{itemize}
+
+\item Default arguments
+
+<<message=TRUE,cache=FALSE>>=
+p_slh = default_network_ggplot$`network-reproduction-harvested`$barplot
+p1_slh = p_slh$`germplasm-year`$`x.axis-1|in.col-1`
+p2_slh = p_slh$`germplasm-person`$`x.axis-1|in.col-1`
+p3_slh = p_slh$`person-year`$`x.axis-1|in.col-1`
+p4_slh = p_slh$`person-germplasm`$`x.axis-1|in.col-1`
+p5_slh = p_slh$`year-person`$`x.axis-1|in.col-1`
+p6_slh = p_slh$`year-germplasm`$`x.axis-1|in.col-1`
+@
+
+with
+
+\begin{center}
+\begin{tabular}{ccc}
+\hline
+plot & \texttt{x.axis} & \texttt{in.col} \\
+\hline
+\texttt{p1\_slh} & \texttt{"germplasm"} & \texttt{"year"} \\
+\texttt{p2\_slh} & \texttt{"germplasm"} & \texttt{"person"} \\
+\texttt{p3\_slh} & \texttt{"person"} & \texttt{"year"} \\
+\texttt{p4\_slh} & \texttt{"person"} & \texttt{"germplasm"} \\
+\texttt{p5\_slh} & \texttt{"year"} & \texttt{"person"} \\
+\texttt{p6\_slh} & \texttt{"year"} & \texttt{"germplasm"} \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p1\_slh} & \texttt{p2\_slh} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p1_slh
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p2_slh
+@
+\\
+\texttt{p3\_slh} & \texttt{p4\_slh} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p3_slh
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p4_slh
+@
+\\
+\texttt{p5\_slh} & \texttt{p6\_slh} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p5_slh
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p6_slh
+@
+\\
+\end{tabular}
+\end{center}
+
+\item Custom arguments
+
+It is possible to tune the following arguments:
+
+\begin{center}
+\begin{table}[H]
+\begin{tabular}{ p{.35\textwidth} p{.15\textwidth} p{.45\textwidth} }
+\hline
+argument & default value & description \\
+\hline
+
+\texttt{x.axis} & \texttt{NULL} & factor display on the x.axis of a plot: \texttt{"germplasm"}, \texttt{"year"} or \texttt{"person"} referring to the attributes of a seed-lots. If NULL, all the combinaison are done for \texttt{x.axis} and \texttt{in.col}. \\
+\hline
+
+\texttt{in.col} & \texttt{NULL} & display in color of a plot: \texttt{"germplasm"}, \texttt{"year"} or \texttt{"person"} referring to the attributes of a seed-lots. If \texttt{NULL}, \texttt{in.col} is not displayed. \\
+\hline
+
+\texttt{nb\_parameters\_per\_plot\_x.axis} & \texttt{NULL} & the number of parameters per plot on \texttt{x.axis} argument \\
+\hline
+
+\texttt{nb\_parameters\_per\_plot\_in.col} & \texttt{NULL} & the number of parameters per plot for \texttt{in.col} argument \\
+
+\hline
+\end{tabular}
+\caption{Possible arguments to custom arguments regarding barplot.}
+\label{custom.barplot}
+\end{table}
+\end{center}
+
+
+
+For example, for a given \texttt{x.axis} and a given \texttt{in.col}:
+<<message=TRUE,cache=FALSE>>=
+p_slh = get.ggplot(
+	data_network,
+	ggplot.type = "network-reproduction-harvested",
+	ggplot.display = "barplot",
+	x.axis = "person",
+	in.col = "year"
+	)
+@
+
+It can be useful to separate the plot in several plots regarding \texttt{x.axis}:
+<<message=TRUE,cache=FALSE>>=
+p1_slh = get.ggplot(
+	data_network,
+	ggplot.type = "network-reproduction-harvested",
+	ggplot.display = "barplot",
+	x.axis = "person",
+	in.col = "year",
+	nb_parameters_per_plot_x.axis = 10
+	)
+
+p11_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-1`
+p12_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-2|in.col-1`
+p13_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-3|in.col-1`
+p14_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-4|in.col-1`
+p15_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-5|in.col-1`
+@
+
+
+Note that you can easily change settings of the plot as it is a ggplot object, for example
+<<message=TRUE,cache=FALSE>>=
+p15_slh_bw = p15_slh + theme_bw()
+@
+
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p11\_slh} & \texttt{p12\_slh} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p11_slh
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p12_slh
+@
+\\
+\texttt{p13\_slh} & \texttt{p14\_slh} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p13_slh
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p14_slh
+@
+\\
+\texttt{p15\_slh} & \texttt{p15\_slh\_bw}  \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p15_slh
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p15_slh_bw
+@
+\\
+\end{tabular}
+\end{center}
+
+
+
+Or for \texttt{in.col}:
+<<message=TRUE,cache=FALSE>>=
+p2_slh = get.ggplot(
+	data_network,
+	ggplot.type = "network-reproduction-harvested",
+	ggplot.display = "barplot",
+	x.axis = "person",
+	in.col = "year",
+	nb_parameters_per_plot_in.col = 3
+	)
+
+p21_slh = p2_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-1`
+p22_slh = p2_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-2`
+p23_slh = p2_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-3`
+@
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p21\_slh} & \texttt{p22\_slh} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p21_slh
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p22_slh
+@
+\\
+\texttt{p23\_slh} & \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p23_slh
+@
+&
+\\
+\end{tabular}
+\end{center}
+
+
+Or for both, for each subset of \texttt{x.axis}, you have the set of \texttt{in.col}.
+
+\end{itemize}
+
+
+\paragraph{\texttt{ggplot.display = map}}
+
+There are as many maps as years and a map with all the years mixed.
+The scale represent the number of seed-lots harvected.
+
+\begin{itemize}
+
+\item Default arguments
+
+<<message=TRUE,cache=FALSE>>=
+m_slh = default_network_ggplot$`network-reproduction-harvested`$map
+names(m_slh)
+
+m4_slh = m_slh$`map-[2011]`
+m9_slh = m_slh$`map-[2002, 2006, 2008, 2009, 2010, 2011, 2012, 2014]`
+@
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{m4\_slh} & \texttt{m9\_slh} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+m4_slh
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+m9_slh
+@
+\\
+\end{tabular}
+\end{center}
+
+
+\item Custom arguments
+
+It is possible to tune the following arguments (Table \ref{custom.map}):
+
+\begin{center}
+\begin{table}[H]
+\begin{tabular}{ p{.2\textwidth} p{.15\textwidth} p{.5\textwidth} }
+\hline
+argument & default value & description \\
+\hline
+
+\texttt{hide.labels.parts} & \texttt{NULL} & can be NULL or "all" as only person can be display. \texttt{NULL} by default \\
+\hline
+
+\texttt{labels.size} & \texttt{3} & size of the labels \\
+\hline
+
+\texttt{location.map} & \texttt{"france"} & location of the map see \texttt{?map} for more details \\
+\hline
+
+\texttt{pie.size} & \texttt{.5} & size of the pie when using pies \\
+
+\hline
+\end{tabular}
+\caption{Possible arguments to custom arguments regarding maps.}
+\label{custom.map}
+\end{table}
+\end{center}
+
+For example,
+
+<<message=TRUE,cache=FALSE,out.width=".6\\textwidth">>=
+p_slh = get.ggplot(
+	data_network,
+	ggplot.type = "network-reproduction-harvested",
+	ggplot.display = "map",
+	hide.labels.parts = NULL
+	)
+
+p_slh$`network-reproduction-harvested`$map$`map-[2011]`
+@
+
+\end{itemize}
+
+\subsubsection{\texttt{ggplot.type = "network-diffusion-relation"}}
+
+\texttt{ggplot.type = "network-diffusion-relation"} corresponds to diffusion of seed-lots on a map.
+Note that \texttt{ggplot.display} is useless here.
+
+There are as many maps as years and a map with all the years mixed.
+The size of the arrows is proprotionnal to the number of diffusions (\texttt{nb\_diffusions}).
+
+\begin{itemize}
+
+\item Default arguments
+
+<<message=TRUE,cache=FALSE>>=
+m_dr = default_network_ggplot$`network-diffusion-relation`$map
+names(m_dr)
+
+m4_dr = m_dr$`map-[2009]`
+m7_dr = m_dr$`map-[2002, 2007, 2008, 2009, 2010, 2011]`
+@
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{m4\_dr} & \texttt{m7\_dr} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+m4_dr
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+m7_dr
+@
+\\
+\end{tabular}
+\end{center}
+
+
+\item Custom arguments
+
+Arguments can be customed related to maps. See Table \ref{custom.map}.
+
+\end{itemize}
+
+
+\subsubsection{\texttt{ggplot.type = "network-reproduction-crossed"}}
+
+Information on the crosses, their parents (mother and father) and grandparents (grandmother and grandfather).
+It may be useful to know information on grandparents, especially location, if the cross have been done on another location.
+
+Note that in this example, it represents all the cross where \texttt{Rouge-du-Roc} is involved as \texttt{"father"} or \texttt{"son"} in relation.
+This is because in \texttt{get.data}, the following arguments were set: \texttt{germplasm.in = Rouge-du-Roc} and \texttt{filter.on = "father-son"}.
+
+
+\begin{itemize}
+
+\item Default arguments
+
+<<message=TRUE,cache=FALSE>>=
+cb = default_network_ggplot$`network-reproduction-crossed`$barplot
+names(cb)
+
+cm = default_network_ggplot$`network-reproduction-crossed`$map
+names(cm)
+@
+
+For example:
+
+<<message=TRUE,cache=FALSE,out.width=".6\\textwidth">>=
+cb$cross$barplot$`year-germplasm`$`x.axis-1|in.col-1`
+@
+
+<<message=TRUE,cache=FALSE,out.width=".6\\textwidth">>=
+cm$cross$map$`map-[2002, 2008, 2009]`
+@
+
+\item Custom arguments
+
+Arguments can be customed related to barplots (Table \ref{custom.barplot}) or maps (Table \ref{custom.map}).
+
+\end{itemize}
+
+\subsubsection{Others \texttt{ggplot.type}}
+
+For the others \texttt{ggplot.type}, as it is exactly the same types of plots than for
+\texttt{ggplot.type = "network-reproduction-harvested"}, no examples are displayed in this vignette.
+
+The following table describe the different \texttt{ggplot.type}:
+
+\begin{center}
+\begin{tabular}{ p{.5\textwidth} p{.5\textwidth} }
+\hline
+\texttt{ggplot.type} & description \\
+\hline
+
+\texttt{"network-reproduction-positive-inter-selected"} & seed-lots that have been harvested after a reproduction and have been sown the next season.
+It corresponds to positive inter selection. \\
+
+\texttt{"network-reproduction-negative-inter-selected"} & seed-lots that have been harvested after a reproduction and have NOT been sown the next season.
+It corresponds to negative inter selection. \\
+
+\texttt{"network-diffusion-sent"} & seed-lots that have been sent to another location. \\
+
+\texttt{"network-diffusion-received"} & seed-lots that have been received to a given location. \\
+
+\texttt{"network-mixture"} & seed-lots that have been mixted into a mixture. Note that mixture of replications are not counted here. \\
+
+\texttt{"network-positive-intra-selected"} & seed-lots where intra germplasm selection have been done.
+It corresponds to mass selection. \\
+
+\hline
+\end{tabular}
+\end{center}
+
+
+\subsection{Get the tables}
+
+It is possible to get the table from the data used for the plot.
+For example,
+
+<<message=TRUE,cache=FALSE>>=
+p = default_network_ggplot$`network-reproduction-crossed`$barplot$cross$barplot
+p = p$`year-germplasm`$`x.axis-1|in.col-1`
+tab_p = get.table(p)
+tab_p
+@
+
+

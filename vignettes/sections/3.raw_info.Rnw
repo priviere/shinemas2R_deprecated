@@ -1,0 +1,39 @@
+\section{Raw information on levels and variables}
+\label{raw}
+
+Severals information are stored in \BD.
+To get information on raw information and levels and variable, you must use the argument \texttt{query.type} in \texttt{get.data}.
+The following table summarize the different possibilities:
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+\texttt{query.type} & type of information present in \BD \\
+\hline
+"variable" & variable \\
+"person" & person \\
+"year" & year \\
+"project" & projet \\
+"seed.lot" & seed-lots \\
+"selection.person" & persons that did intra-varietal mass selection \\
+"reproduction.type" & reproduction type \\
+"germplasm.type" & germplasm type \\
+"germplasm" & germplasm \\
+\hline
+\end{tabular}
+\end{center}
+
+For example,
+
+<<message=TRUE,cache=FALSE,warning=FALSE>>=
+# person = get.data(
+#	db_user = info_db$db_user, db_host = info_db$db_host,# db infos
+#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+#	query.type = "person" # information on person present in SHiNeMaS
+#	)
+
+load("data/person.RData")
+person$data
+@
+
+

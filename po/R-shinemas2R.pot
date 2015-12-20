@@ -1,0 +1,377 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: shinemas2R 0.9\n"
+"POT-Creation-Date: 2015-11-24 14:10\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "data must come from shinemas2R::get.data."
+msgstr ""
+
+msgid "The key has been written in"
+msgstr ""
+
+msgid "/"
+msgstr ""
+
+msgid "ATTENTION !!! en attendant que les projets soient liées aux relations, il faut bien définir un projet sinon ça le fait pas !!!"
+msgstr ""
+
+msgid "query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lot\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", or \"germplasm\"."
+msgstr ""
+
+msgid "You can not use a filter on raw information on levels and variables."
+msgstr ""
+
+msgid "With a filter, you must set filter.on: \"son\", \"father\" or \"father-son\"."
+msgstr ""
+
+msgid "With query.type in \"data-\", data.type must not be NULL. data.type can be \"relation\" or \"seed-lots\"."
+msgstr ""
+
+msgid "data.type must be \"relation\" or \"seed-lots\""
+msgstr ""
+
+msgid "filter.on must be set: either \"son\" \"father\" or \"father-son\""
+msgstr ""
+
+msgid "filter.on must be \"son\", \"father\" or \"father-son\"."
+msgstr ""
+
+msgid "relation.in must be \"reproduction\", \"mixture\", \"selection\" or \"diffusion\"."
+msgstr ""
+
+msgid ","
+msgstr ""
+
+msgid "do not exist in SHiNeMaS"
+msgstr ""
+
+msgid "1. Query SHiNeMaS ..."
+msgstr ""
+
+msgid "2. Create network matrix ..."
+msgstr ""
+
+msgid "2.1. Fill diffusion gaps ..."
+msgstr ""
+
+msgid "3. Link information to vertex and edges ..."
+msgstr ""
+
+msgid "4. Get network information on seed-lots ..."
+msgstr ""
+
+msgid "give-receive"
+msgstr ""
+
+msgid "give"
+msgstr ""
+
+msgid "receive"
+msgstr ""
+
+msgid "harvest"
+msgstr ""
+
+msgid "sow"
+msgstr ""
+
+msgid "harvest-sow"
+msgstr ""
+
+msgid "5. Get Mdist square matrix ..."
+msgstr ""
+
+msgid "2. Set up data set ..."
+msgstr ""
+
+msgid "data is NULL: nothing is done !"
+msgstr ""
+
+msgid "data must come from shinemas2R::get.data"
+msgstr ""
+
+msgid "ggplot.type"
+msgstr ""
+
+msgid "are not possible.\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t ggplot.type must be \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t netwok- type:\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-network\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-reproduction-harvested\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-reproduction-positive-inter-selected\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-reproduction-positive-inter-selected\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-reproduction-negative-inter-selected\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-reproduction-crossed\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-diffusion-sent\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-diffusion-received\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-diffusion-relation\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-mixture\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"network-positive-intra-selected\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t or data- type:\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"data-barplot\", \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"data-boxplot\", \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"data-interaction\", \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"data-radar\", \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"data-biplot\", \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"data-pie.on.map\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \"data-pie.on.network\"."
+msgstr ""
+
+msgid "As ggplot.type is NULL, ggplot.type is set to"
+msgstr ""
+
+msgid "With data from \"network\", ggplot.type must be"
+msgstr ""
+
+msgid "As ggplot.type is NULL, ggplot.Type is set to"
+msgstr ""
+
+msgid "As ggplot.type is NULL and data come from \"data-S\" or \"data-SR\", ggplot.type is set to \"data-barplot\", \"data-boxplot\", \"data-interaction\"."
+msgstr ""
+
+msgid "With data from \"data-...\", ggplot.type must be"
+msgstr ""
+
+msgid "With ggplot.type == \"network-diffusion-relation\", ggplot.display is set to \"map\"."
+msgstr ""
+
+msgid "As ggplot.display is NULL, ggplot.display is set to c(\"barplot\", \"map\"). Note that for ggplot.type == \"network-diffusion-relation\", ggplot.display is set to \"map\""
+msgstr ""
+
+msgid "With ggplot.type in network- type, ggplot.display must be \"barplot\" or \"map\"."
+msgstr ""
+
+msgid "With \"data-S\" and \"data-SR\", in.col and x.axis are set automaticaly."
+msgstr ""
+
+msgid "With ggplot.type \"data-radar\"and \"data-biplot\", x.axis is not use."
+msgstr ""
+
+msgid "x.axis must be \"germplasm\", \"year\" or \"person\"."
+msgstr ""
+
+msgid "in.col must be \"germplasm\", \"year\" or \"person\"."
+msgstr ""
+
+msgid "As x.axis and in.col are NULL, all the combinaisons of x.axis and in.col are done for barplot."
+msgstr ""
+
+msgid "As x.axis is NULL, all the combinaisons of in.col="
+msgstr ""
+
+msgid "and x.axis are done for barplot."
+msgstr ""
+
+msgid "As x.axis and in.col are NULL, all the combinaisons of x.axis and in.col are done for data-barplot, data-boxplot and data-interaction."
+msgstr ""
+
+msgid "and x.axis are done for  data-barplot, data-boxplot and data-interaction."
+msgstr ""
+
+msgid "As in.col is NULL, each in.col are done for data-radar and data-biplot."
+msgstr ""
+
+msgid "With ggplot.type with data-, vec_variables must be not NULL."
+msgstr ""
+
+msgid "With data in \"network-\", vec_variables must be NULL (default setting)."
+msgstr ""
+
+msgid "None elements of vec_variables are in data."
+msgstr ""
+
+msgid "Variables"
+msgstr ""
+
+msgid "are not in data."
+msgstr ""
+
+msgid "has only NA and has been removed from the dataset"
+msgstr ""
+
+msgid "No ggplot can be done as there are no variables anymore in the dataset"
+msgstr ""
+
+msgid "labels.on must be \"son\" or \"father\"."
+msgstr ""
+
+msgid "For data-biplot, hide.labels.parts has been set to NULL instead of \"all\"."
+msgstr ""
+
+msgid "harvested seed-lots"
+msgstr ""
+
+msgid "positive-inter-selected seed-lots"
+msgstr ""
+
+msgid "negative-inter-selected seed-lots"
+msgstr ""
+
+msgid "diffusion-sent seed-lots"
+msgstr ""
+
+msgid "diffusion-received seed-lots"
+msgstr ""
+
+msgid "The information do not fit on the map. You should zoom out."
+msgstr ""
+
+msgid ":"
+msgstr ""
+
+msgid "have no informations for coordinates and are not represented on the map."
+msgstr ""
+
+msgid "With ggplot.type \"network-\" and ggplot.display = \"map\" hide.labels.parts can be NULL or \"all\"."
+msgstr ""
+
+msgid "mixed seed-lots"
+msgstr ""
+
+msgid "positive-intra-selected seed-lots"
+msgstr ""
+
+msgid "cross"
+msgstr ""
+
+msgid "cross father"
+msgstr ""
+
+msgid "cross grandfather"
+msgstr ""
+
+msgid "cross mother"
+msgstr ""
+
+msgid "cross grandmother"
+msgstr ""
+
+msgid "No radar plot because there is only one variable in vec_variables. You need at least two variables."
+msgstr ""
+
+msgid "No biplot plot because there is only one variable in vec_variables. You need at least two variables."
+msgstr ""
+
+msgid "rows have been deleted for variables"
+msgstr ""
+
+msgid "because of only NA on the row for these variables."
+msgstr ""
+
+msgid "is not an element of LaTeX_body. Possibles elements are :"
+msgstr ""
+
+msgid "."
+msgstr ""
+
+msgid "Elements of titlepage must be \"title\", \"authors\", \"email\" or \"date\"."
+msgstr ""
+
+msgid "Elements of title within titlepage must be characters"
+msgstr ""
+
+msgid "Elements of authors within titlepage must be characters"
+msgstr ""
+
+msgid "Elements of email within titlepage must be characters"
+msgstr ""
+
+msgid "Elements of date within titlepage must be characters"
+msgstr ""
+
+msgid "Element of tableofcontents must be TRUE or FALSE"
+msgstr ""
+
+msgid "Elements of chapter must be characters"
+msgstr ""
+
+msgid "Elements of section must be characters"
+msgstr ""
+
+msgid "Elements of subsection must be characters"
+msgstr ""
+
+msgid "Elements of subsubsection must be characters"
+msgstr ""
+
+msgid "Elements of table must be \"content\", \"caption\", \"landscape\", \"display.rownames\"."
+msgstr ""
+
+msgid "Elements of caption within table must be characters"
+msgstr ""
+
+msgid "Element of landscape within table must be TRUE or FALSE"
+msgstr ""
+
+msgid "Element of display.rows within table must be TRUE or FALSE"
+msgstr ""
+
+msgid "Elements of figure must be \"content\", \"caption\", \"layout\", \"width\", \"landscape\"."
+msgstr ""
+
+msgid "Elements of caption within figure must be characters"
+msgstr ""
+
+msgid "Element of width within table must be numeric"
+msgstr ""
+
+msgid "Elements of text must be characters"
+msgstr ""
+
+msgid "Elements of includepdf must be a character"
+msgstr ""
+
+msgid "Elements of input must be a character"
+msgstr ""
+
+msgid "The folder"
+msgstr ""
+
+msgid "already exists ! Delete the folder"
+msgstr ""
+
+msgid "or find a new name."
+msgstr ""
+
+msgid "1. Get LaTeX head ..."
+msgstr ""
+
+msgid "has been added to LaTeX head."
+msgstr ""
+
+msgid "2. Get LaTeX body ..."
+msgstr ""
+
+msgid "3. Compilation of .tex ..."
+msgstr ""
+
+msgid ".pdf has been compiled."
+msgstr ""
+
+msgid "col_to_display must be a vector with \"person\", \"year\", \"germplasm\", \"block\", \"X\" and/or \"Y\"."
+msgstr ""
+
+msgid "With table.type = \"mean.sd.cv\", col_to_display mus not be NULL."
+msgstr ""
+
+msgid "With table.type = \"summary\", col_to_display mus not be NULL."
+msgstr ""
+
+msgid "tab must be a dataframe."
+msgstr ""
+
+msgid "net must be a network object of class 'network' or 'igraph'"
+msgstr ""
+
+msgid "Unsupported placement method."
+msgstr ""
+
+msgid "Node groups and node colors are of unequal length; using default colors."
+msgstr ""
+
+msgid "must be a factor"
+msgstr ""
+
+msgid "It must be the same value in the x.origin column for a given level of factor"
+msgstr ""
+
+msgid "It must be the same value in the y.origin column for a given level of factor"
+msgstr ""
+
+msgid "No pie for"
+msgstr ""
+
+msgid "because there are no informations on coordinates."
+msgstr ""
+
+msgid "pie.size is too big and pie does not fit on the map."
+msgstr ""
+
+msgid "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!! Thanks for using shinemas2R :-)\n!!! For a tutorial, type vignette(\"shinemas2R\")\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+msgstr ""
