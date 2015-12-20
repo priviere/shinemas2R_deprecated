@@ -1,0 +1,2582 @@
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.12.4)  20 DEC 2015 13:39
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**shinemas2R.tex
+(./shinemas2R.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, et
+hiopic, farsi, arabic, pinyin, croatian, bulgarian, ukrainian, russian, slovak,
+ czech, danish, dutch, usenglishmax, ukenglish, finnish, french, basque, ngerma
+n, german, swissgerman, ngerman-x-2012-05-30, german-x-2012-05-30, monogreek, g
+reek, ibycus, ancientgreek, hungarian, bengali, tamil, hindi, telugu, gujarati,
+ sanskrit, malayalam, kannada, assamese, marathi, oriya, panjabi, italian, lati
+n, latvian, lithuanian, mongolian, mongolianlmc, nynorsk, bokmal, indonesian, e
+speranto, coptic, welsh, irish, interlingua, serbian, serbianc, slovenian, friu
+lan, romansh, estonian, romanian, armenian, uppersorbian, turkish, afrikaans, i
+celandic, kurmanji, polish, portuguese, galician, catalan, spanish, swedish, th
+ai, loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip43
+\fb@frw=\dimen105
+\fb@frh=\dimen106
+\FrameRule=\dimen107
+\FrameSep=\dimen108
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/alltt.sty
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+)
+(/usr/share/texlive/texmf-dist/tex/latex/appendix/appendix.sty
+Package: appendix 2009/09/02 v1.2b extra appendix facilities
+\c@@pps=\count88
+\c@@ppsavesec=\count89
+\c@@ppsaveapp=\count90
+)
+(/usr/share/texmf/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texmf/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks15
+)
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box26
+
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2010/10/25 v2.10 (rcs-revision 1.24)
+))
+Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
+
+(/usr/share/texmf/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texmf/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
+
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks16
+\pgfkeys@temptoks=\toks17
+
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks18
+))
+\pgf@x=\dimen109
+\pgf@y=\dimen110
+\pgf@xa=\dimen111
+\pgf@ya=\dimen112
+\pgf@xb=\dimen113
+\pgf@yb=\dimen114
+\pgf@xc=\dimen115
+\pgf@yc=\dimen116
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count91
+\c@pgf@countb=\count92
+\c@pgf@countc=\count93
+\c@pgf@countd=\count94
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Package pgfsys Info: Driver file for pgf: pgfsys-pdftex.def on input line 900.
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2009/05/22  (rcs-revision 1.26)
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2008/05/19  (rcs-revision 1.10)
+)))
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
+\pgfsyssoftpath@smallbuffer@items=\count95
+\pgfsyssoftpath@bigbuffer@items=\count96
+)
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+))
+(/usr/share/texmf/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+LaTeX Info: Redefining \color on input line 702.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
+
+(/usr/share/texmf/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen117
+\pgfmath@count=\count97
+\pgfmath@box=\box27
+\pgfmath@toks=\toks19
+\pgfmath@stack@operand=\toks20
+\pgfmath@stack@operation=\toks21
+)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.random.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.base.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.round.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)))
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count98
+))
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
+\pgf@picminx=\dimen118
+\pgf@picmaxx=\dimen119
+\pgf@picminy=\dimen120
+\pgf@picmaxy=\dimen121
+\pgf@pathminx=\dimen122
+\pgf@pathmaxx=\dimen123
+\pgf@pathminy=\dimen124
+\pgf@pathmaxy=\dimen125
+\pgf@xx=\dimen126
+\pgf@xy=\dimen127
+\pgf@yx=\dimen128
+\pgf@yy=\dimen129
+\pgf@zx=\dimen130
+\pgf@zy=\dimen131
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
+\pgf@path@lastx=\dimen132
+\pgf@path@lasty=\dimen133
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
+\pgf@shorten@end@additional=\dimen134
+\pgf@shorten@start@additional=\dimen135
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
+\pgfpic=\box28
+\pgf@hbox=\box29
+\pgf@layerbox@main=\box30
+\pgf@picture@serial@count=\count99
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
+\pgflinewidth=\dimen136
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
+\pgf@pt@x=\dimen137
+\pgf@pt@y=\dimen138
+\pgf@pt@temp=\dimen139
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2008/10/09  (rcs-revision 1.8)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
+\pgf@max=\dimen140
+\pgf@sys@shading@range@num=\count100
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
+
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2010/09/01  (rcs-revision 1.17)
+\pgfexternal@startupbox=\box31
+))
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2010/08/27  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2008/01/17  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2009/07/02  (rcs-revision 1.3)
+)))
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
+\pgfnodeparttextbox=\box32
+)
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
+)
+(/usr/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen141
+\pgf@nodesepend=\dimen142
+)
+(/usr/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
+))
+(/usr/share/texmf/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texmf/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texmf/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
+\pgffor@iter=\dimen143
+\pgffor@skip=\dimen144
+\pgffor@stack=\toks22
+\pgffor@toks=\toks23
+))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
+
+(/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
+\pgf@plot@mark@count=\count101
+\pgfplotmarksize=\dimen145
+)
+\tikz@lastx=\dimen146
+\tikz@lasty=\dimen147
+\tikz@lastxsaved=\dimen148
+\tikz@lastysaved=\dimen149
+\tikzleveldistance=\dimen150
+\tikzsiblingdistance=\dimen151
+\tikz@figbox=\box33
+\tikz@tempbox=\box34
+\tikztreelevel=\count102
+\tikznumberofchildren=\count103
+\tikznumberofcurrentchild=\count104
+\tikz@fig@count=\count105
+
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
+\pgfmatrixcurrentrow=\count106
+\pgfmatrixcurrentcolumn=\count107
+\pgf@matrix@numberofcolumns=\count108
+)
+\tikz@expandcount=\count109
+
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopat
+hs.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
+))) (/usr/share/texlive/texmf-dist/tex/latex/pstricks/pstricks.sty
+Package: pstricks 2011/10/31 v0.52 LaTeX wrapper for `PSTricks' (RN,HV)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pstricks/pstricks.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/pst-xkey.tex
+File: pst-xkey.tex 2005/11/25 v1.6 PSTricks specialization of xkeyval (HA)
+
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks24
+\XKV@tempa@toks=\toks25
+\XKV@depth=\count110
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pstricks/pst-fp.tex
+`pst-fp' v0.05, 2010/01/17 (hv)
+\pstFP@xs=\count111
+\pstFP@xia=\count112
+\pstFP@xib=\count113
+\pstFP@xfa=\count114
+\pstFP@xfb=\count115
+\pstFP@rega=\count116
+\pstFP@regb=\count117
+\pstFP@regs=\count118
+\pstFP@times=\count119
+)
+\psLoopIndex=\count120
+
+`PSTricks' v2.29  <2012/06/04> (tvz)
+\pst@dima=\dimen152
+\pst@dimb=\dimen153
+\pst@dimc=\dimen154
+\pst@dimd=\dimen155
+\pst@dimg=\dimen156
+\pst@dimh=\dimen157
+\pst@dimm=\dimen158
+\pst@dimn=\dimen159
+\pst@dimo=\dimen160
+\pst@dimp=\dimen161
+\pst@hbox=\box35
+\pst@ibox=\box36
+\pst@boxg=\box37
+\pst@cnta=\count121
+\pst@cntb=\count122
+\pst@cntc=\count123
+\pst@cntd=\count124
+\pst@cntg=\count125
+\pst@cnth=\count126
+\pst@cntm=\count127
+\pst@cntn=\count128
+\pst@cnto=\count129
+\pst@cntp=\count130
+\@zero=\count131
+\pst@toks=\toks26
+(/usr/share/texlive/texmf-dist/tex/generic/pstricks/pstricks.con)
+\psunit=\dimen162
+\psxunit=\dimen163
+\psyunit=\dimen164
+\pst@C@@rType=\count132
+\pslinewidth=\dimen165
+\psk@startLW=\dimen166
+\psk@endLW=\dimen167
+\pst@customdefs=\toks27
+\pslinearc=\dimen168
+\pst@symbolStep=\dimen169
+\pst@symbolWidth=\dimen170
+\pst@symbolLinewidth=\dimen171
+\everypsbox=\toks28
+\psframesep=\dimen172
+\pslabelsep=\dimen173
+\pst@shift=\dimen174
+\theoverlaybox=\box38
+)
+File: pstricks.tex 2012/06/04 v2.29 `PSTricks' (tvz,hv)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pstricks/pst-fp.tex)
+File: pst-fp.tex 2012/06/04 v2.29 `PST-fp' (hv)
+)
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshape
+s.code.tex
+File: tikzlibraryshapes.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshape
+s.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/share/texmf/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.c
+ode.tex
+File: pgflibraryshapes.geometric.code.tex 2008/06/26 v2.10 (rcs-revision 1.1)
+))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshape
+s.misc.code.tex
+File: tikzlibraryshapes.misc.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/share/texmf/tex/generic/pgf/libraries/shapes/pgflibraryshapes.misc.code.t
+ex
+File: pgflibraryshapes.misc.code.tex 2008/10/07 v2.10 (rcs-revision 1.3)
+))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshape
+s.symbols.code.tex
+File: tikzlibraryshapes.symbols.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/share/texmf/tex/generic/pgf/libraries/shapes/pgflibraryshapes.symbols.cod
+e.tex
+File: pgflibraryshapes.symbols.code.tex 2009/10/27 v2.10 (rcs-revision 1.3)
+))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshape
+s.arrows.code.tex
+File: tikzlibraryshapes.arrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/share/texmf/tex/generic/pgf/libraries/shapes/pgflibraryshapes.arrows.code
+.tex
+File: pgflibraryshapes.arrows.code.tex 2008/06/26 v2.10 (rcs-revision 1.1)
+))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshape
+s.callouts.code.tex
+(/usr/share/texmf/tex/generic/pgf/libraries/shapes/pgflibraryshapes.callouts.co
+de.tex))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshape
+s.multipart.code.tex
+File: tikzlibraryshapes.multipart.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/share/texmf/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.c
+ode.tex
+File: pgflibraryshapes.multipart.code.tex 2010/01/07 v2.10 (rcs-revision 1.2)
+\pgfnodepartlowerbox=\box39
+\pgfnodeparttwobox=\box40
+\pgfnodepartthreebox=\box41
+\pgfnodepartfourbox=\box42
+\pgfnodeparttwentybox=\box43
+\pgfnodepartnineteenbox=\box44
+\pgfnodeparteighteenbox=\box45
+\pgfnodepartseventeenbox=\box46
+\pgfnodepartsixteenbox=\box47
+\pgfnodepartfifteenbox=\box48
+\pgfnodepartfourteenbox=\box49
+\pgfnodepartthirteenbox=\box50
+\pgfnodeparttwelvebox=\box51
+\pgfnodepartelevenbox=\box52
+\pgfnodeparttenbox=\box53
+\pgfnodepartninebox=\box54
+\pgfnodeparteightbox=\box55
+\pgfnodepartsevenbox=\box56
+\pgfnodepartsixbox=\box57
+\pgfnodepartfivebox=\box58
+)))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrow
+s.code.tex
+File: tikzlibraryarrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
+File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
+\arrowsize=\dimen175
+))
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen176
+\WF@size=\dimen177
+\c@WF@wrappedlines=\count133
+\WF@box=\box59
+\WF@everypar=\toks29
+Package: wrapfig 2003/01/31  v 3.6
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
+\c@tracingmulticols=\count134
+\mult@box=\box60
+\multicol@leftmargin=\dimen178
+\c@unbalance=\count135
+\c@collectmore=\count136
+\doublecol@number=\count137
+\multicoltolerance=\count138
+\multicolpretolerance=\count139
+\full@width=\dimen179
+\page@free=\dimen180
+\premulticols=\dimen181
+\postmulticols=\dimen182
+\multicolsep=\skip44
+\multicolbaselineskip=\skip45
+\partial@page=\box61
+\last@line=\box62
+\mult@rightbox=\box63
+\mult@grightbox=\box64
+\mult@gfirstbox=\box65
+\mult@firstbox=\box66
+\@tempa=\box67
+\@tempa=\box68
+\@tempa=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\c@columnbadness=\count140
+\c@finalcolumnbadness=\count141
+\last@try=\dimen183
+\multicolovershoot=\dimen184
+\multicolundershoot=\dimen185
+\mult@nat@firstbox=\box84
+\colbreak@box=\box85
+\multicol@sort@counter=\count142
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks30
+\inpenc@posthook=\toks31
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+Now handling font encoding OML ...
+... no UTF-8 mapping file for font encoding OML
+Now handling font encoding T1 ...
+... processing UTF-8 mapping file for font encoding T1
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
+File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00BB (decimal 187)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C0 (decimal 192)
+   defining Unicode char U+00C1 (decimal 193)
+   defining Unicode char U+00C2 (decimal 194)
+   defining Unicode char U+00C3 (decimal 195)
+   defining Unicode char U+00C4 (decimal 196)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00C7 (decimal 199)
+   defining Unicode char U+00C8 (decimal 200)
+   defining Unicode char U+00C9 (decimal 201)
+   defining Unicode char U+00CA (decimal 202)
+   defining Unicode char U+00CB (decimal 203)
+   defining Unicode char U+00CC (decimal 204)
+   defining Unicode char U+00CD (decimal 205)
+   defining Unicode char U+00CE (decimal 206)
+   defining Unicode char U+00CF (decimal 207)
+   defining Unicode char U+00D0 (decimal 208)
+   defining Unicode char U+00D1 (decimal 209)
+   defining Unicode char U+00D2 (decimal 210)
+   defining Unicode char U+00D3 (decimal 211)
+   defining Unicode char U+00D4 (decimal 212)
+   defining Unicode char U+00D5 (decimal 213)
+   defining Unicode char U+00D6 (decimal 214)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00D9 (decimal 217)
+   defining Unicode char U+00DA (decimal 218)
+   defining Unicode char U+00DB (decimal 219)
+   defining Unicode char U+00DC (decimal 220)
+   defining Unicode char U+00DD (decimal 221)
+   defining Unicode char U+00DE (decimal 222)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E0 (decimal 224)
+   defining Unicode char U+00E1 (decimal 225)
+   defining Unicode char U+00E2 (decimal 226)
+   defining Unicode char U+00E3 (decimal 227)
+   defining Unicode char U+00E4 (decimal 228)
+   defining Unicode char U+00E5 (decimal 229)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00E7 (decimal 231)
+   defining Unicode char U+00E8 (decimal 232)
+   defining Unicode char U+00E9 (decimal 233)
+   defining Unicode char U+00EA (decimal 234)
+   defining Unicode char U+00EB (decimal 235)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F0 (decimal 240)
+   defining Unicode char U+00F1 (decimal 241)
+   defining Unicode char U+00F2 (decimal 242)
+   defining Unicode char U+00F3 (decimal 243)
+   defining Unicode char U+00F4 (decimal 244)
+   defining Unicode char U+00F5 (decimal 245)
+   defining Unicode char U+00F6 (decimal 246)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+00F9 (decimal 249)
+   defining Unicode char U+00FA (decimal 250)
+   defining Unicode char U+00FB (decimal 251)
+   defining Unicode char U+00FC (decimal 252)
+   defining Unicode char U+00FD (decimal 253)
+   defining Unicode char U+00FE (decimal 254)
+   defining Unicode char U+00FF (decimal 255)
+   defining Unicode char U+0102 (decimal 258)
+   defining Unicode char U+0103 (decimal 259)
+   defining Unicode char U+0104 (decimal 260)
+   defining Unicode char U+0105 (decimal 261)
+   defining Unicode char U+0106 (decimal 262)
+   defining Unicode char U+0107 (decimal 263)
+   defining Unicode char U+010C (decimal 268)
+   defining Unicode char U+010D (decimal 269)
+   defining Unicode char U+010E (decimal 270)
+   defining Unicode char U+010F (decimal 271)
+   defining Unicode char U+0110 (decimal 272)
+   defining Unicode char U+0111 (decimal 273)
+   defining Unicode char U+0118 (decimal 280)
+   defining Unicode char U+0119 (decimal 281)
+   defining Unicode char U+011A (decimal 282)
+   defining Unicode char U+011B (decimal 283)
+   defining Unicode char U+011E (decimal 286)
+   defining Unicode char U+011F (decimal 287)
+   defining Unicode char U+0130 (decimal 304)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0132 (decimal 306)
+   defining Unicode char U+0133 (decimal 307)
+   defining Unicode char U+0139 (decimal 313)
+   defining Unicode char U+013A (decimal 314)
+   defining Unicode char U+013D (decimal 317)
+   defining Unicode char U+013E (decimal 318)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0143 (decimal 323)
+   defining Unicode char U+0144 (decimal 324)
+   defining Unicode char U+0147 (decimal 327)
+   defining Unicode char U+0148 (decimal 328)
+   defining Unicode char U+014A (decimal 330)
+   defining Unicode char U+014B (decimal 331)
+   defining Unicode char U+0150 (decimal 336)
+   defining Unicode char U+0151 (decimal 337)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+0154 (decimal 340)
+   defining Unicode char U+0155 (decimal 341)
+   defining Unicode char U+0158 (decimal 344)
+   defining Unicode char U+0159 (decimal 345)
+   defining Unicode char U+015A (decimal 346)
+   defining Unicode char U+015B (decimal 347)
+   defining Unicode char U+015E (decimal 350)
+   defining Unicode char U+015F (decimal 351)
+   defining Unicode char U+0160 (decimal 352)
+   defining Unicode char U+0161 (decimal 353)
+   defining Unicode char U+0162 (decimal 354)
+   defining Unicode char U+0163 (decimal 355)
+   defining Unicode char U+0164 (decimal 356)
+   defining Unicode char U+0165 (decimal 357)
+   defining Unicode char U+016E (decimal 366)
+   defining Unicode char U+016F (decimal 367)
+   defining Unicode char U+0170 (decimal 368)
+   defining Unicode char U+0171 (decimal 369)
+   defining Unicode char U+0178 (decimal 376)
+   defining Unicode char U+0179 (decimal 377)
+   defining Unicode char U+017A (decimal 378)
+   defining Unicode char U+017B (decimal 379)
+   defining Unicode char U+017C (decimal 380)
+   defining Unicode char U+017D (decimal 381)
+   defining Unicode char U+017E (decimal 382)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201A (decimal 8218)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+   defining Unicode char U+201E (decimal 8222)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+2039 (decimal 8249)
+   defining Unicode char U+203A (decimal 8250)
+   defining Unicode char U+2423 (decimal 9251)
+)
+Now handling font encoding OT1 ...
+... processing UTF-8 mapping file for font encoding OT1
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
+File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00B8 (decimal 184)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+)
+Now handling font encoding OMS ...
+... processing UTF-8 mapping file for font encoding OMS
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
+File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+)
+Now handling font encoding OMX ...
+... no UTF-8 mapping file for font encoding OMX
+Now handling font encoding U ...
+... no UTF-8 mapping file for font encoding U
+   defining Unicode char U+00A9 (decimal 169)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+02C6 (decimal 710)
+   defining Unicode char U+02DC (decimal 732)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2026 (decimal 8230)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+2423 (decimal 9251)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count143
+\Gm@cntv=\count144
+\c@Gm@tempcnt=\count145
+\Gm@bindingoffset=\dimen186
+\Gm@wd@mp=\dimen187
+\Gm@odd@mp=\dimen188
+\Gm@even@mp=\dimen189
+\Gm@layoutwidth=\dimen190
+\Gm@layoutheight=\dimen191
+\Gm@layouthoffset=\dimen192
+\Gm@layoutvoffset=\dimen193
+\Gm@dimlist=\toks32
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip46
+\bibsep=\skip47
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count146
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2012/05/13 v6.82q Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package hobsub Info: Skipping package `ifvtex' (already loaded).
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2012/05/28 v1.2 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+)
+\@linkdim=\dimen194
+\Hy@linkcounter=\count147
+\Hy@pagecounter=\count148
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2012/05/13 v6.82q Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+\Hy@SavedSpaceFactor=\count149
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+
+Package hyperref Warning: Option `a4paper' is no longer used.
+
+Package hyperref Info: Option `colorlinks' set `true' on input line 3941.
+Package hyperref Info: Hyper figures OFF on input line 4062.
+Package hyperref Info: Link nesting OFF on input line 4067.
+Package hyperref Info: Hyper index ON on input line 4070.
+Package hyperref Info: Plain pages OFF on input line 4077.
+Package hyperref Info: Backreferencing OFF on input line 4082.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4300.
+\c@Hy@tempcnt=\count150
+LaTeX Info: Redefining \url on input line 4653.
+\Fld@menulength=\count151
+\Field@Width=\dimen195
+\Fld@charsize=\dimen196
+Package hyperref Info: Hyper figures OFF on input line 5773.
+Package hyperref Info: Link nesting OFF on input line 5778.
+Package hyperref Info: Hyper index ON on input line 5781.
+Package hyperref Info: backreferencing OFF on input line 5788.
+Package hyperref Info: Link coloring ON on input line 5791.
+Package hyperref Info: Link coloring with OCG OFF on input line 5798.
+Package hyperref Info: PDF/A mode OFF on input line 5803.
+LaTeX Info: Redefining \ref on input line 5843.
+LaTeX Info: Redefining \pageref on input line 5847.
+\Hy@abspage=\count152
+\c@Item=\count153
+\c@Hfootnote=\count154
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2012/05/13 v6.82q Hyperref driver for pdfTeX
+\Fld@listcount=\count155
+\c@bookmark@seq@number=\count156
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip48
+)
+(/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen197
+\extrarowheight=\dimen198
+\NC@list=\toks33
+\extratabsurround=\skip49
+\backup@length=\skip50
+)
+\everycr=\toks34
+\minrowclearance=\skip51
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count157
+\float@exts=\toks35
+\float@box=\box86
+\@float@everytoks=\toks36
+\@floatcapt=\box87
+)
+(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+Now handling font encoding TS1 ...
+... processing UTF-8 mapping file for font encoding TS1
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.dfu
+File: ts1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A2 (decimal 162)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00A4 (decimal 164)
+   defining Unicode char U+00A5 (decimal 165)
+   defining Unicode char U+00A6 (decimal 166)
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00A8 (decimal 168)
+   defining Unicode char U+00A9 (decimal 169)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AC (decimal 172)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00AF (decimal 175)
+   defining Unicode char U+00B0 (decimal 176)
+   defining Unicode char U+00B1 (decimal 177)
+   defining Unicode char U+00B2 (decimal 178)
+   defining Unicode char U+00B3 (decimal 179)
+   defining Unicode char U+00B4 (decimal 180)
+   defining Unicode char U+00B5 (decimal 181)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+00B9 (decimal 185)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+00BC (decimal 188)
+   defining Unicode char U+00BD (decimal 189)
+   defining Unicode char U+00BE (decimal 190)
+   defining Unicode char U+00D7 (decimal 215)
+   defining Unicode char U+00F7 (decimal 247)
+   defining Unicode char U+0192 (decimal 402)
+   defining Unicode char U+02C7 (decimal 711)
+   defining Unicode char U+02D8 (decimal 728)
+   defining Unicode char U+02DD (decimal 733)
+   defining Unicode char U+0E3F (decimal 3647)
+   defining Unicode char U+2016 (decimal 8214)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+203B (decimal 8251)
+   defining Unicode char U+203D (decimal 8253)
+   defining Unicode char U+2044 (decimal 8260)
+   defining Unicode char U+204E (decimal 8270)
+   defining Unicode char U+2052 (decimal 8274)
+   defining Unicode char U+20A1 (decimal 8353)
+   defining Unicode char U+20A4 (decimal 8356)
+   defining Unicode char U+20A6 (decimal 8358)
+   defining Unicode char U+20A9 (decimal 8361)
+   defining Unicode char U+20AB (decimal 8363)
+   defining Unicode char U+20AC (decimal 8364)
+   defining Unicode char U+20B1 (decimal 8369)
+   defining Unicode char U+2103 (decimal 8451)
+   defining Unicode char U+2116 (decimal 8470)
+   defining Unicode char U+2117 (decimal 8471)
+   defining Unicode char U+211E (decimal 8478)
+   defining Unicode char U+2120 (decimal 8480)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+2126 (decimal 8486)
+   defining Unicode char U+2127 (decimal 8487)
+   defining Unicode char U+212E (decimal 8494)
+   defining Unicode char U+2190 (decimal 8592)
+   defining Unicode char U+2191 (decimal 8593)
+   defining Unicode char U+2192 (decimal 8594)
+   defining Unicode char U+2193 (decimal 8595)
+   defining Unicode char U+2329 (decimal 9001)
+   defining Unicode char U+232A (decimal 9002)
+   defining Unicode char U+2422 (decimal 9250)
+   defining Unicode char U+25E6 (decimal 9702)
+   defining Unicode char U+25EF (decimal 9711)
+   defining Unicode char U+266A (decimal 9834)
+))
+LaTeX Info: Redefining \oldstylenums on input line 266.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 281.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 282.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 283.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 284.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 285.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 286.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 287.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 288.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 289.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 290.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 291.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 292.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 293.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 294.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 295.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 296.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 297.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 298.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 299.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 300.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 301.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 302.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 303.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 304.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 305.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 306.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 307.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 308.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 309.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 310.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 311.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 312.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 313.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 314.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 315.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 316.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 317.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 318.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 319.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 320.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 321.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 322.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 323.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 324.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 325.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 326.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 327.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 328.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 329.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 330.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 331.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 332.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 333.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 334.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 335.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 336.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 337.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 338.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 339.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
+)) (./shinemas2R.aux)
+\openout1 = `shinemas2R.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 90.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 90.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 90.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count158
+\scratchdimen=\dimen199
+\scratchbox=\box88
+\nofMPsegments=\count159
+\nofMParguments=\count160
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count161
+\MPscratchDim=\dimen200
+\MPnumerator=\count162
+\makeMPintoPDFobject=\count163
+\everyMPtoPDFconversion=\toks38
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+ABD: EveryShipout initializing macros
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(85.35826pt, 472.03123pt, 56.9055pt)
+* v-part:(T,H,B)=(56.9055pt, 681.15898pt, 56.9055pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=472.03123pt
+* \textheight=681.15898pt
+* \oddsidemargin=13.08827pt
+* \evensidemargin=13.08827pt
+* \topmargin=-52.36449pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+\AtBeginShipoutBox=\box89
+Package hyperref Info: Link coloring ON on input line 90.
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count164
+)
+LaTeX Info: Redefining \ref on input line 90.
+LaTeX Info: Redefining \pageref on input line 90.
+LaTeX Info: Redefining \nameref on input line 90.
+
+(./shinemas2R.out) (./shinemas2R.out)
+\@outlinefile=\write4
+\openout4 = `shinemas2R.out'.
+
+ (./sections/1.head.tex
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 2.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 14.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 14.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 19.
+
+<./figures/cc-by-nc-sa.png, id=178, 97.0827pt x 33.9669pt>
+File: ./figures/cc-by-nc-sa.png Graphic file (type png)
+
+<use ./figures/cc-by-nc-sa.png>
+Package pdftex.def Info: ./figures/cc-by-nc-sa.png used on input line 33.
+(pdftex.def)             Requested size: 70.8018pt x 24.77281pt.
+
+<./figures/Logo-RSP.png, id=180, 1127.99016pt x 1140.13152pt>
+File: ./figures/Logo-RSP.png Graphic file (type png)
+
+<use ./figures/Logo-RSP.png>
+Package pdftex.def Info: ./figures/Logo-RSP.png used on input line 40.
+(pdftex.def)             Requested size: 70.8018pt x 71.55379pt.
+
+<./figures/Logo-UMRGV.jpg, id=182, 1277.77374pt x 496.85625pt>
+File: ./figures/Logo-UMRGV.jpg Graphic file (type jpg)
+
+<use ./figures/Logo-UMRGV.jpg>
+Package pdftex.def Info: ./figures/Logo-UMRGV.jpg used on input line 52.
+(pdftex.def)             Requested size: 70.8018pt x 27.52808pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--66
+
+ []
+
+[1
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!
+
+
+Non-PDF special ignored!
+Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./
+figures/cc-by-nc-sa.png> <./figures/Logo-RSP.png> <./figures/Logo-UMRGV.jpg>]
+(./shinemas2R.toc
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1.
+)
+\tf@toc=\write5
+\openout5 = `shinemas2R.toc'.
+
+ <./figures/wheat.JPG, id=241, 2826.56pt x 2119.92pt>
+File: ./figures/wheat.JPG Graphic file (type jpg)
+
+<use ./figures/wheat.JPG>
+Package pdftex.def Info: ./figures/wheat.JPG used on input line 80.
+(pdftex.def)             Requested size: 377.62642pt x 283.2009pt.
+ [2] [3 <./figures/wheat.JPG>])
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 103.
+
+<./figures/relation_SL_EN.pdf, id=260, 796.9775pt x 597.23125pt>
+File: ./figures/relation_SL_EN.pdf Graphic file (type pdf)
+
+<use ./figures/relation_SL_EN.pdf>
+Package pdftex.def Info: ./figures/relation_SL_EN.pdf used on input line 121.
+(pdftex.def)             Requested size: 377.62642pt x 282.97697pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 133--135
+
+ []
+
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 140.
+[4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
+has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.147 \begin{itemize}
+                      <./figures/relation_SL_EN.pdf>]
+<./figures/shinemas2R_function_relations.pdf, id=293, 796.9775pt x 426.59375pt>
+File: ./figures/shinemas2R_function_relations.pdf Graphic file (type pdf)
+<use ./figures/shinemas2R_function_relations.pdf>
+Package pdftex.def Info: ./figures/shinemas2R_function_relations.pdf used on in
+put line 181.
+(pdftex.def)             Requested size: 472.03123pt x 252.658pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 195.
+
+
+Package xcolor Warning: Incompatible color definition on input line 207.
+
+
+Overfull \hbox (89.58162pt too wide) in paragraph at lines 210--210
+[][]\T1/cmtt/m/n/10 system[][]([][]"cp -r /home/pierre/Documents/geek/R-stats/R
+dev/R_package_shinemas2R/shinemas2R_data/*RData ./data"[][])[][] 
+ []
+
+[5pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
+has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.224 \newpage
+               <./figures/shinemas2R_function_relations.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 255.
+
+[6]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 320.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 320.
+
+
+Package xcolor Warning: Incompatible color definition on input line 324.
+
+
+Package xcolor Warning: Incompatible color definition on input line 353.
+
+[7]
+
+Package xcolor Warning: Incompatible color definition on input line 384.
+
+
+Package xcolor Warning: Incompatible color definition on input line 409.
+
+
+Package xcolor Warning: Incompatible color definition on input line 441.
+
+[8]
+
+Package xcolor Warning: Incompatible color definition on input line 459.
+
+
+Package xcolor Warning: Incompatible color definition on input line 483.
+
+
+Package xcolor Warning: Incompatible color definition on input line 515.
+
+
+Package xcolor Warning: Incompatible color definition on input line 521.
+
+
+Overfull \hbox (37.09444pt too wide) in paragraph at lines 521--521
+[]\T1/cmtt/m/it/10 ## As ggplot.type is NULL, ggplot.type is set to network-net
+work, network-reproduction-harvested,
+ []
+
+
+Overfull \hbox (5.60213pt too wide) in paragraph at lines 521--521
+\T1/cmtt/m/it/10 network-reproduction-positive-inter-selected, network-reproduc
+tion-positive-inter-selected,
+ []
+
+
+Overfull \hbox (47.59187pt too wide) in paragraph at lines 521--521
+\T1/cmtt/m/it/10 network-reproduction-negative-inter-selected, network-reproduc
+tion-crossed, network-diffusion-sent,
+ []
+
+
+Overfull \hbox (73.83546pt too wide) in paragraph at lines 521--521
+\T1/cmtt/m/it/10 network-diffusion-received, network-diffusion-relation, networ
+k-mixture, network-positive-intra-selected 
+ []
+
+
+Overfull \hbox (0.35341pt too wide) in paragraph at lines 521--521
+\T1/cmtt/m/it/10 ## As ggplot.display is NULL, ggplot.display is set to c("barp
+lot", "map"). Note that for
+ []
+
+
+Overfull \hbox (37.09444pt too wide) in paragraph at lines 521--521
+\T1/cmtt/m/it/10 ## As x.axis and in.col are NULL, all the combinaisons of x.ax
+is and in.col are done for barplot.[] 
+ []
+
+[9]
+
+Package xcolor Warning: Incompatible color definition on input line 531.
+
+
+Package xcolor Warning: Incompatible color definition on input line 560.
+
+<figures/shinemas2R_unnamed-chunk-20-1.pdf, id=352, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-20-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-20-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-20-1.pdf used on inpu
+t line 567.
+(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
+ [10]
+
+Package xcolor Warning: Incompatible color definition on input line 579.
+
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 586
+.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+
+Package xcolor Warning: Incompatible color definition on input line 604.
+
+<figures/shinemas2R_unnamed-chunk-22-1.pdf, id=358, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-22-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-22-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-22-1.pdf used on inpu
+t line 606.
+(pdftex.def)             Requested size: 236.01561pt x 236.01605pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 615.
+
+<figures/shinemas2R_unnamed-chunk-23-1.pdf, id=359, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-23-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-23-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-23-1.pdf used on inpu
+t line 617.
+(pdftex.def)             Requested size: 236.01561pt x 236.01605pt.
+
+Overfull \hbox (43.9951pt too wide) in paragraph at lines 601--626
+ [] 
+ []
+
+[11 <./figures/shinemas2R_unnamed-chunk-20-1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 652--657
+\T1/cmtt/m/n/10 "person:germplasm"\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 "year:germpl
+asm"\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 "person:year"\T1/cmr/m/n/10 ,
+ []
+
+
+Overfull \hbox (12.39699pt too wide) in paragraph at lines 637--665
+[][]
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 674.
+
+[12pdfTeX warning (ext4): destination with the same identifier (name{table.1}) 
+has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.687 \end{kframe}
+                   <./figures/shinemas2R_unnamed-chunk-22-1.pdf> <./figures/shi
+nemas2R_unnamed-chunk-23-1.pdf>]
+<figures/shinemas2R_unnamed-chunk-24-1.pdf, id=402, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-24-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-24-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-24-1.pdf used on inpu
+t line 690.
+(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
+
+Overfull \hbox (12.39699pt too wide) in paragraph at lines 707--716
+ [] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 732.
+
+[13 <./figures/shinemas2R_unnamed-chunk-24-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 767.
+
+<figures/shinemas2R_unnamed-chunk-26-1.pdf, id=419, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-26-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-26-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-26-1.pdf used on inpu
+t line 769.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 778.
+
+<figures/shinemas2R_unnamed-chunk-27-1.pdf, id=420, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-27-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-27-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-27-1.pdf used on inpu
+t line 780.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 790.
+
+<figures/shinemas2R_unnamed-chunk-28-1.pdf, id=421, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-28-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-28-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-28-1.pdf used on inpu
+t line 792.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 801.
+
+<figures/shinemas2R_unnamed-chunk-29-1.pdf, id=422, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-29-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-29-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-29-1.pdf used on inpu
+t line 803.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 813.
+
+<figures/shinemas2R_unnamed-chunk-30-1.pdf, id=423, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-30-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-30-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-30-1.pdf used on inpu
+t line 815.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 824.
+
+<figures/shinemas2R_unnamed-chunk-31-1.pdf, id=424, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-31-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-31-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-31-1.pdf used on inpu
+t line 826.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+ [14]
+Underfull \hbox (badness 8170) in paragraph at lines 848--849
+[]|\T1/cmr/m/n/10 factor dis-play on the x.axis of a plot:
+ []
+
+
+Overfull \hbox (12.39699pt too wide) in paragraph at lines 843--861
+[][]
+ []
+
+[15 <./figures/shinemas2R_unnamed-chunk-26-1.pdf> <./figures/shinemas2R_unnamed
+-chunk-27-1.pdf> <./figures/shinemas2R_unnamed-chunk-28-1.pdf> <./figures/shine
+mas2R_unnamed-chunk-29-1.pdf> <./figures/shinemas2R_unnamed-chunk-30-1.pdf> <./
+figures/shinemas2R_unnamed-chunk-31-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 870.
+
+
+Package xcolor Warning: Incompatible color definition on input line 885.
+
+
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 896--896
+[][]\T1/cmtt/m/n/10 p11_slh[] []=[] []p1_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
+/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
+[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
+ `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-1\
+TS1/cmtt/m/n/10 `[][] 
+ []
+
+
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 897--897
+[][]\T1/cmtt/m/n/10 p12_slh[] []=[] []p1_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
+/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
+[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
+ `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-2|in.col-1\
+TS1/cmtt/m/n/10 `[][] 
+ []
+
+
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 898--898
+[][]\T1/cmtt/m/n/10 p13_slh[] []=[] []p1_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
+/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
+[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
+ `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-3|in.col-1\
+TS1/cmtt/m/n/10 `[][] 
+ []
+
+
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 899--899
+[][]\T1/cmtt/m/n/10 p14_slh[] []=[] []p1_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
+/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
+[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
+ `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-4|in.col-1\
+TS1/cmtt/m/n/10 `[][] 
+ []
+
+
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 900--900
+[][]\T1/cmtt/m/n/10 p15_slh[] []=[] []p1_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
+/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
+[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
+ `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-5|in.col-1\
+TS1/cmtt/m/n/10 `[][] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 908.
+
+
+Package xcolor Warning: Incompatible color definition on input line 920.
+
+<figures/shinemas2R_unnamed-chunk-35-1.pdf, id=464, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-35-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-35-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-35-1.pdf used on inpu
+t line 922.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 931.
+
+<figures/shinemas2R_unnamed-chunk-36-1.pdf, id=465, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-36-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-36-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-36-1.pdf used on inpu
+t line 933.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 943.
+
+<figures/shinemas2R_unnamed-chunk-37-1.pdf, id=466, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-37-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-37-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-37-1.pdf used on inpu
+t line 945.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 954.
+
+<figures/shinemas2R_unnamed-chunk-38-1.pdf, id=467, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-38-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-38-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-38-1.pdf used on inpu
+t line 956.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 966.
+
+<figures/shinemas2R_unnamed-chunk-39-1.pdf, id=468, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-39-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-39-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-39-1.pdf used on inpu
+t line 968.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 977.
+
+<figures/shinemas2R_unnamed-chunk-40-1.pdf, id=469, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-40-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-40-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-40-1.pdf used on inpu
+t line 979.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+ [16pdfTeX warning (ext4): destination with the same identifier (name{table.2})
+ has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.988 \end{center}
+                  ]
+
+Package xcolor Warning: Incompatible color definition on input line 994.
+
+
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 1005--1005
+[][]\T1/cmtt/m/n/10 p21_slh[] []=[] []p2_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
+/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
+[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
+ `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-1\
+TS1/cmtt/m/n/10 `[][] 
+ []
+
+
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 1006--1006
+[][]\T1/cmtt/m/n/10 p22_slh[] []=[] []p2_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
+/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
+[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
+ `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-2\
+TS1/cmtt/m/n/10 `[][] 
+ []
+
+
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 1007--1007
+[][]\T1/cmtt/m/n/10 p23_slh[] []=[] []p2_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
+/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
+[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
+ `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-3\
+TS1/cmtt/m/n/10 `[][] 
+ []
+
+[17 <./figures/shinemas2R_unnamed-chunk-35-1.pdf> <./figures/shinemas2R_unnamed
+-chunk-36-1.pdf> <./figures/shinemas2R_unnamed-chunk-37-1.pdf> <./figures/shine
+mas2R_unnamed-chunk-38-1.pdf> <./figures/shinemas2R_unnamed-chunk-39-1.pdf> <./
+figures/shinemas2R_unnamed-chunk-40-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1016.
+
+<figures/shinemas2R_unnamed-chunk-42-1.pdf, id=510, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-42-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-42-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-42-1.pdf used on inpu
+t line 1018.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1027.
+
+<figures/shinemas2R_unnamed-chunk-43-1.pdf, id=511, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-43-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-43-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-43-1.pdf used on inpu
+t line 1029.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1039.
+
+<figures/shinemas2R_unnamed-chunk-44-1.pdf, id=512, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-44-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-44-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-44-1.pdf used on inpu
+t line 1041.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1069.
+
+[18 <./figures/shinemas2R_unnamed-chunk-42-1.pdf> <./figures/shinemas2R_unnamed
+-chunk-43-1.pdf> <./figures/shinemas2R_unnamed-chunk-44-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1096.
+
+<figures/shinemas2R_unnamed-chunk-46-1.pdf, id=533, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-46-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-46-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-46-1.pdf used on inpu
+t line 1098.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1107.
+
+<figures/shinemas2R_unnamed-chunk-47-1.pdf, id=534, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-47-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-47-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-47-1.pdf used on inpu
+t line 1109.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1153.
+
+<figures/shinemas2R_unnamed-chunk-48-1.pdf, id=536, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-48-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-48-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-48-1.pdf used on inpu
+t line 1166.
+(pdftex.def)             Requested size: 283.22162pt x 283.22699pt.
+ [19pdfTeX warning (ext4): destination with the same identifier (name{table.3})
+ has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.1174 \end{itemize}
+                     <./figures/shinemas2R_unnamed-chunk-46-1.pdf> <./figures/s
+hinemas2R_unnamed-chunk-47-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1189.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1214.
+
+<figures/shinemas2R_unnamed-chunk-50-1.pdf, id=557, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-50-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-50-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-50-1.pdf used on inpu
+t line 1216.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1225.
+
+<figures/shinemas2R_unnamed-chunk-51-1.pdf, id=558, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-51-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-51-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-51-1.pdf used on inpu
+t line 1227.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+ [20 <./figures/shinemas2R_unnamed-chunk-48-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1260.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1283.
+
+<figures/shinemas2R_unnamed-chunk-53-1.pdf, id=571, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-53-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-53-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-53-1.pdf used on inpu
+t line 1289.
+(pdftex.def)             Requested size: 283.22162pt x 283.22699pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1298.
+
+[21 <./figures/shinemas2R_unnamed-chunk-50-1.pdf> <./figures/shinemas2R_unnamed
+-chunk-51-1.pdf>]
+<figures/shinemas2R_unnamed-chunk-54-1.pdf, id=588, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-54-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-54-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-54-1.pdf used on inpu
+t line 1304.
+(pdftex.def)             Requested size: 283.22162pt x 283.22699pt.
+
+Overfull \hbox (94.80257pt too wide) in paragraph at lines 1320--1322
+\T1/cmr/m/n/10 For the oth-ers \T1/cmtt/m/n/10 ggplot.type\T1/cmr/m/n/10 , as i
+t is ex-actly the same types of plots than for \T1/cmtt/m/n/10 ggplot.type = "n
+etwork-reproduction-harvested"\T1/cmr/m/n/10 ,
+ []
+
+[22 <./figures/shinemas2R_unnamed-chunk-53-1.pdf> <./figures/shinemas2R_unnamed
+-chunk-54-1.pdf>]
+Overfull \hbox (5.42543pt too wide) in paragraph at lines 1331--1331
+[]|\T1/cmtt/m/n/10 "network-reproduction-positive-inter-selected"| 
+ []
+
+
+Overfull \hbox (5.42543pt too wide) in paragraph at lines 1334--1334
+[]|\T1/cmtt/m/n/10 "network-reproduction-negative-inter-selected"| 
+ []
+
+
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 1326--1348
+ [] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1357.
+
+[23]
+
+Package xcolor Warning: Incompatible color definition on input line 1434.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1444.
+
+
+Overfull \hbox (44.07884pt too wide) in paragraph at lines 1462--1462
+[][]\T1/cmtt/m/it/10 #The key has been written in /home/pierre/key_data-classic
+-relation_Tue Nov 24 11:59:59 2015.RData[][] 
+ []
+
+[24]
+Overfull \hbox (17.95605pt too wide) in paragraph at lines 1500--1500
+[]\T1/cmr/bx/n/10 Selection dif-fer-en-tia (\T1/cmtt/m/n/10 query.type = "data-
+S"\T1/cmr/bx/n/10 ), re-sponse to se-lec-tion (\T1/cmtt/m/n/10 query.type = "da
+ta-SR"\T1/cmr/bx/n/10 )
+ []
+
+<./figures/SandR_EN.pdf, id=621, page=8, 796.9775pt x 597.23125pt>
+File: ./figures/SandR_EN.pdf Graphic file (type pdf)
+
+<use ./figures/SandR_EN.pdf, page 8>
+Package pdftex.def Info: ./figures/SandR_EN.pdf, page8 used on input line 1516.
+
+(pdftex.def)             Requested size: 377.62642pt x 282.97697pt.
+ [25]
+
+Package xcolor Warning: Incompatible color definition on input line 1529.
+
+
+Overfull \hbox (12.58653pt too wide) in paragraph at lines 1548--1548
+[][]\T1/cmtt/m/it/10 #The key has been written in /home/pierre/key_data-S-relat
+ion_Tue Nov 24 12:01:25 2015.RData[][] 
+ []
+
+[26pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
+ has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.1576 \end{kframe}
+                    <./figures/SandR_EN.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1588.
+
+
+Overfull \hbox (17.83525pt too wide) in paragraph at lines 1607--1607
+[][]\T1/cmtt/m/it/10 #The key has been written in /home/pierre/key_data-SR-rela
+tion_Tue Nov 24 12:02:25 2015.RData[][] 
+ []
+
+[27]
+
+Package xcolor Warning: Incompatible color definition on input line 1645.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1666.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1675.
+
+
+Overfull \hbox (68.34831pt too wide) in paragraph at lines 1675--1675
+[]\T1/cmtt/m/it/10 ## As ggplot.type is NULL, ggplot.Type is set to data-barplo
+t, data-boxplot, data-interaction,
+ []
+
+
+Overfull \hbox (15.86113pt too wide) in paragraph at lines 1675--1675
+\T1/cmtt/m/it/10 ## As x.axis and in.col are NULL, all the combinaisons of x.ax
+is and in.col are done
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1682.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1687.
+
+
+Overfull \hbox (23.80122pt too wide) in paragraph at lines 1701--1718
+ [] 
+ []
+
+[28]
+
+Package xcolor Warning: Incompatible color definition on input line 1726.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1740.
+
+
+Overfull \hbox (0.11497pt too wide) in paragraph at lines 1743--1743
+[][]\T1/cmtt/m/n/10 p_cal_ph_bar[] []=[] []p_cal_ph_bar_all[][]$[][]\TS1/cmtt/m
+/n/10 `\T1/cmtt/m/n/10 plant_height---plant_height\TS1/cmtt/m/n/10 `[][]\T1/cmt
+t/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-1\TS1/cmtt/m/n/
+10 `[][] 
+ []
+
+<figures/shinemas2R_unnamed-chunk-64-1.pdf, id=657, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-64-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-64-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-64-1.pdf used on inpu
+t line 1748.
+(pdftex.def)             Requested size: 425.0312pt x 425.03732pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1757.
+
+[29]
+Overfull \hbox (0.11497pt too wide) in paragraph at lines 1760--1760
+[][]\T1/cmtt/m/n/10 p_cal_ph_box[] []=[] []p_cal_ph_box_all[][]$[][]\TS1/cmtt/m
+/n/10 `\T1/cmtt/m/n/10 plant_height---plant_height\TS1/cmtt/m/n/10 `[][]\T1/cmt
+t/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-1\TS1/cmtt/m/n/
+10 `[][] 
+ []
+
+<figures/shinemas2R_unnamed-chunk-65-1.pdf, id=662, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-65-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-65-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-65-1.pdf used on inpu
+t line 1765.
+(pdftex.def)             Requested size: 425.0312pt x 425.03732pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1774.
+
+[30 <./figures/shinemas2R_unnamed-chunk-64-1.pdf>]
+Overfull \hbox (5.3637pt too wide) in paragraph at lines 1776--1776
+[][]\T1/cmtt/m/n/10 p_cal_ph_int_all[] []=[] []default_data_classic_ggplot[][]$
+[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 data-interaction\TS1/cmtt/m/n/10 `[][]\T1
+/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 year-germplasm\TS1/cmtt/m/n
+/10 `[][] 
+ []
+
+
+Overfull \hbox (0.11497pt too wide) in paragraph at lines 1777--1777
+[][]\T1/cmtt/m/n/10 p_cal_ph_int[] []=[] []p_cal_ph_int_all[][]$[][]\TS1/cmtt/m
+/n/10 `\T1/cmtt/m/n/10 plant_height---plant_height\TS1/cmtt/m/n/10 `[][]\T1/cmt
+t/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-1\TS1/cmtt/m/n/
+10 `[][] 
+ []
+
+<figures/shinemas2R_unnamed-chunk-66-1.pdf, id=672, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-66-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-66-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-66-1.pdf used on inpu
+t line 1782.
+(pdftex.def)             Requested size: 425.0312pt x 425.03732pt.
+ [31 <./figures/shinemas2R_unnamed-chunk-65-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1795.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1808.
+
+<figures/shinemas2R_unnamed-chunk-68-1.pdf, id=684, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-68-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-68-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-68-1.pdf used on inpu
+t line 1816.
+(pdftex.def)             Requested size: 425.0312pt x 425.03732pt.
+ [32 <./figures/shinemas2R_unnamed-chunk-66-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1826.
+
+
+Overfull \hbox (73.59703pt too wide) in paragraph at lines 1830--1830
+[][]\T1/cmtt/m/n/10 p_cal_ph_sl_bip[] []=[] []p_cal_ph_sl_bip[][]$[][]\TS1/cmtt
+/m/n/10 `\T1/cmtt/m/n/10 plant_height---plant_height - spike_lenght---spike_len
+gth_F\TS1/cmtt/m/n/10 `[][] 
+ []
+
+<figures/shinemas2R_unnamed-chunk-69-1.pdf, id=695, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-69-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-69-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-69-1.pdf used on inpu
+t line 1836.
+(pdftex.def)             Requested size: 425.0312pt x 425.03732pt.
+ [33 <./figures/shinemas2R_unnamed-chunk-68-1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 1859--1859
+[]|\T1/cmr/m/n/10 default
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1888--1888
+[]|\T1/cmtt/m/n/10 nb_parameters_per
+ []
+
+
+Underfull \hbox (badness 1281) in paragraph at lines 1890--1890
+[]|\T1/cmr/m/n/10 the num-ber of pa-ram-e-ters per plot on
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1898--1898
+[]|\T1/cmtt/m/n/10 nb_parameters_per
+ []
+
+
+Underfull \hbox (badness 1062) in paragraph at lines 1900--1900
+[]|\T1/cmr/m/n/10 the num-ber of pa-ram-e-ters per plot for
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1910--1914
+\T1/cmtt/m/n/10 "year:germplasm"\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 "person:year"\
+T1/cmr/m/n/10 ,
+ []
+
+[34 <./figures/shinemas2R_unnamed-chunk-69-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1947.
+
+
+Overfull \hbox (22.84554pt too wide) in paragraph at lines 1977--1977
+[][]\T1/cmtt/m/it/10 # The key has been written in /home/pierre/key_network_Wed
+ Nov 25 22:30:16 2015.RData[][] 
+ []
+
+[35pdfTeX warning (ext4): destination with the same identifier (name{table.4}) 
+has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.1981 \end{kframe}
+                   ]
+
+Package xcolor Warning: Incompatible color definition on input line 1989.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2007.
+
+<figures/shinemas2R_unnamed-chunk-72-1.pdf, id=719, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-72-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-72-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-72-1.pdf used on inpu
+t line 2009.
+(pdftex.def)             Requested size: 283.22162pt x 283.22699pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2019.
+
+<figures/shinemas2R_unnamed-chunk-73-1.pdf, id=720, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-73-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-73-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-73-1.pdf used on inpu
+t line 2021.
+(pdftex.def)             Requested size: 377.62642pt x 377.6334pt.
+ [36]
+Overfull \vbox (5.90149pt too high) has occurred while \output is active []
+
+
+[37 <./figures/shinemas2R_unnamed-chunk-72-1.pdf> <./figures/shinemas2R_unnamed
+-chunk-73-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 2048.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2083.
+
+<figures/shinemas2R_unnamed-chunk-75-1.pdf, id=753, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-75-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-75-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-75-1.pdf used on inpu
+t line 2089.
+(pdftex.def)             Requested size: 377.62642pt x 377.6334pt.
+ [38]
+
+Package xcolor Warning: Incompatible color definition on input line 2112.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2122.
+
+
+Overfull \hbox (21.34828pt too wide) in paragraph at lines 2122--2122
+[]\T1/cmtt/m/it/10 ## As ggplot.type is NULL, ggplot.Type is set to data-barplo
+t, data-boxplot, data-interaction,
+ []
+
+
+Overfull \hbox (79.08418pt too wide) in paragraph at lines 2122--2122
+\T1/cmtt/m/it/10 ## As ggplot.type is NULL and data come from "data-S" or "data
+-SR", ggplot.type is set to "data-barplot",
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 2133.
+
+[39 <./figures/shinemas2R_unnamed-chunk-75-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 2146.
+
+<figures/shinemas2R_unnamed-chunk-78-1.pdf, id=770, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-78-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-78-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-78-1.pdf used on inpu
+t line 2154.
+(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2164.
+
+<figures/shinemas2R_unnamed-chunk-79-1.pdf, id=771, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-79-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-79-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-79-1.pdf used on inpu
+t line 2172.
+(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2182.
+
+[40 <./figures/shinemas2R_unnamed-chunk-78-1.pdf>]
+<figures/shinemas2R_unnamed-chunk-80-1.pdf, id=781, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-80-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-80-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-80-1.pdf used on inpu
+t line 2190.
+(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
+ [41 <./figures/shinemas2R_unnamed-chunk-79-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 2203.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2213.
+
+
+Overfull \hbox (21.34828pt too wide) in paragraph at lines 2213--2213
+[]\T1/cmtt/m/it/10 ## As ggplot.type is NULL, ggplot.Type is set to data-barplo
+t, data-boxplot, data-interaction,
+ []
+
+
+Overfull \hbox (79.08418pt too wide) in paragraph at lines 2213--2213
+\T1/cmtt/m/it/10 ## As ggplot.type is NULL and data come from "data-S" or "data
+-SR", ggplot.type is set to "data-barplot",
+ []
+
+[42 <./figures/shinemas2R_unnamed-chunk-80-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 2224.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2237.
+
+<figures/shinemas2R_unnamed-chunk-83-1.pdf, id=803, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-83-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-83-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-83-1.pdf used on inpu
+t line 2245.
+(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2255.
+
+[43 <./figures/shinemas2R_unnamed-chunk-83-1.pdf>]
+<figures/shinemas2R_unnamed-chunk-84-1.pdf, id=814, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-84-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-84-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-84-1.pdf used on inpu
+t line 2263.
+(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2273.
+
+<figures/shinemas2R_unnamed-chunk-85-1.pdf, id=815, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-85-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-85-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-85-1.pdf used on inpu
+t line 2281.
+(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
+ [44 <./figures/shinemas2R_unnamed-chunk-84-1.pdf>]
+Overfull \hbox (16.7997pt too wide) in paragraph at lines 2298--2318
+ [] 
+ []
+
+[45 <./figures/shinemas2R_unnamed-chunk-85-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 2333.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2347.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2360.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2375.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2403.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2417.
+
+
+Overfull \hbox (76.67961pt too wide) in paragraph at lines 2413--2417
+\T1/cmtt/m/n/10 "year", "block", "X", "Y")\T1/cmr/m/n/10 , there-fore, the in-f
+or-ma-tion is un-der the form : \T1/cmtt/m/n/10 person-germplasm-year-block-X-Y
+\T1/cmr/m/n/10 .
+ []
+
+
+Overfull \hbox (23855.53947pt too wide) in paragraph at lines 2424--2424
+[]\T1/cmtt/m/n/10 ##                                                           
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                     seed-lots[] 
+ []
+
+
+Overfull \hbox (23855.53947pt too wide) in paragraph at lines 2424--2424
+[]\T1/cmtt/m/n/10 ## 1 person-106-germplasm-337-2010-1-A-13, person-106-germpla
+sm-337-2011-2-B-8, person-106-germplasm-337-2011-2-B-9, person-106-germplasm-33
+7-2008-1-NA-NA, person-106-germplasm-337-2009-2-NA-NA, person-106-germplasm-337
+-2009-1-NA-1, person-106-germplasm-337-2009-1-NA-2, person-106-germplasm-337-20
+10-2-A-2, person-106-germplasm-337-2010-1-A-12, person-106-germplasm-337-2011-1
+-C-2, person-106-germplasm-337-2011-2-B-7, person-106-germplasm-352-2011-1-E-1,
+ person-106-germplasm-356-2011-1-E-5, person-106-germplasm-360-2011-2-C-9, pers
+on-106-germplasm-398-2009-3-NA-NA, person-106-germplasm-399-2009-3-NA-NA, perso
+n-106-germplasm-400-2009-3-NA-NA, person-106-germplasm-401-2009-3-NA-NA, person
+-106-germplasm-397-2011-2-B-6, person-106-germplasm-403-2009-3-NA-NA, person-10
+6-germplasm-404-2009-3-NA-NA, person-106-germplasm-405-2009-3-NA-NA, person-106
+-germplasm-402-2011-1-E-4, person-106-germplasm-407-2009-3-NA-NA, person-106-ge
+rmplasm-408-2009-3-NA-NA, person-106-germplasm-406-2011-1-B-1, person-106-germp
+lasm-410-2009-3-NA-NA, person-106-germplasm-411-2009-3-NA-NA, person-106-germpl
+asm-409-2011-1-C-1, person-106-germplasm-413-2009-3-NA-NA, person-106-germplasm
+-414-2009-3-NA-NA, person-106-germplasm-415-2009-3-NA-NA, person-106-germplasm-
+412-2011-2-A-6, person-106-germplasm-417-2009-3-NA-NA, person-106-germplasm-418
+-2009-3-NA-NA, person-106-germplasm-419-2009-3-NA-NA, person-106-germplasm-416-
+2011-1-A-2, person-106-germplasm-217-2010-1-A-19, person-106-germplasm-217-2011
+-2-C-7, person-106-germplasm-217-2011-2-C-8, person-106-germplasm-217-2008-1-NA
+-NA, person-106-germplasm-217-2009-1-NA-NA, person-106-germplasm-217-2010-1-A-1
+6, person-106-germplasm-217-2011-2-E-7, person-106-germplasm-432-2010-1-A-20, p
+erson-106-germplasm-432-2011-2-D-6, person-106-germplasm-432-2009-2-NA-1, perso
+n-106-germplasm-432-2009-2-NA-2, person-106-germplasm-432-2009-1-NA-NA, person-
+106-germplasm-432-2010-2-A-3, person-106-germplasm-432-2010-1-A-17, person-106-
+germplasm-432-2011-1-D-5, person-106-germplasm-432-2011-2-A-9, person-106-germp
+lasm-432-2009-2-NA-NA, person-106-germplasm-432-2010-2-A-1, person-106-germplas
+m-432-2011-1-C-3, person-106-germplasm-432-2011-2-D-7, person-106-germplasm-452
+-2011-2-E-9, person-106-germplasm-452-2010-1-A-25, person-106-germplasm-452-201
+1-2-E-8, person-106-germplasm-459-2010-1-A-15, person-106-germplasm-459-2011-2-
+A-7, person-106-germplasm-459-2011-2-A-8, person-106-germplasm-459-2008-1-NA-NA
+, person-106-germplasm-459-2009-2-NA-NA, person-106-germplasm-459-2010-2-A-11, 
+person-106-germplasm-459-2011-2-C-10, person-106-germplasm-466-2011-1-D-4, pers
+on-106-germplasm-467-2008-1-NA-NA, person-106-germplasm-467-2009-2-NA-NA, perso
+n-106-germplasm-480-2010-2-A-6, person-106-germplasm-480-2011-1-C-4, person-106
+-germplasm-480-2011-1-C-5, person-106-germplasm-480-2008-1-NA-NA, person-106-ge
+rmplasm-480-2009-1-NA-NA, person-106-germplasm-480-2010-2-A-4, person-106-germp
+lasm-480-2011-2-D-10, person-106-germplasm-498-2011-1-A-5, person-106-germplasm
+-498-2008-1-NA-NA, person-106-germplasm-498-2009-2-NA-NA, person-106-germplasm-
+498-2010-1-A-23, person-106-germplasm-498-2011-1-A-4, person-106-germplasm-504-
+2008-1-NA-NA, person-106-germplasm-504-2009-1-NA-NA, person-106-germplasm-504-2
+010-1-A-22, person-106-germplasm-504-2011-1-A-3, person-106-germplasm-497-2008-
+1-NA-NA, person-106-germplasm-497-2009-2-NA-NA, person-106-germplasm-497-2010-1
+-A-14, person-106-germplasm-497-2011-1-B-5, person-106-germplasm-510-2010-2-A-8
+, person-106-germplasm-510-2011-1-B-2, person-106-germplasm-510-2011-1-B-3, per
+son-106-germplasm-510-2008-1-NA-NA, person-106-germplasm-510-2009-1-NA-NA, pers
+on-106-germplasm-510-2010-2-A-5, person-106-germplasm-510-2011-2-B-10, person-1
+06-germplasm-530-2011-2-D-9, person-106-germplasm-646-2011-1-B-4, person-106-ge
+rmplasm-646-2011-2-D-8, person-106-germplasm-740-2010-2-A-10, person-106-germpl
+asm-740-2011-1-E-2, person-106-germplasm-842-2009-2-NA-NA, person-106-germplasm
+-842-2009-1-NA-NA, person-106-germplasm-842-2010-2-A-9, person-106-germplasm-84
+2-2010-1-A-24, person-106-germplasm-842-2011-1-E-3, person-106-germplasm-842-20
+11-2-C-6, person-106-germplasm-879-2011-1-D-1, person-106-germplasm-879-2011-2-
+E-6, person-106-germplasm-879-2011-2-A-10, person-106-germplasm-882-2011-1-D-2,
+ person-106-germplasm-882-2011-1-D-3, person-106-germplasm-882-2008-1-NA-1, per
+son-106-germplasm-882-2008-1-NA-2, person-106-germplasm-882-2008-1-NA-3, person
+-106-germplasm-882-2009-2-NA-NA, person-106-germplasm-882-2009-1-NA-NA, person-
+106-germplasm-882-2010-2-A-7, person-106-germplasm-882-2010-1-A-18, person-106-
+germplasm-882-2011-1-A-1, person-106-germplasm-882-2011-2-E-10[] 
+ []
+
+[46]
+
+Package xcolor Warning: Incompatible color definition on input line 2430.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2444.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2460.
+
+[47]
+Underfull \hbox (badness 10000) in paragraph at lines 2527--2527
+[]|\T1/cmtt/m/n/10 c("person",
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2527--2527
+\T1/cmtt/m/n/10 "germplasm",
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2527--2527
+\T1/cmtt/m/n/10 "year", "block",
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 2545.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2564.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2580.
+
+[48pdfTeX warning (ext4): destination with the same identifier (name{table.5}) 
+has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.2604 \end{kframe}
+                   ] [49] [50]
+
+Package xcolor Warning: Incompatible color definition on input line 2722.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2731.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2745.
+
+
+Overfull \hbox (5.60213pt too wide) in paragraph at lines 2795--2795
+[]                []\T1/cmtt/m/n/10 "caption"[] []=[] []"Seed-lots harvested fo
+r each person by year for Rouge du Roc"[][],[][] 
+ []
+
+[51pdfTeX warning (ext4): destination with the same identifier (name{table.6}) 
+has been already used, duplicate ignored
+
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.2872 \end{kframe}
+                   ]
+Underfull \vbox (badness 10000) detected at line 2872
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2872
+ []
+
+[52]
+
+Package xcolor Warning: Incompatible color definition on input line 2882.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2894.
+
+
+Overfull \hbox (47.59187pt too wide) in paragraph at lines 2894--2894
+[]\T1/cmtt/m/n/10 ## Error in get.pdf(dir = dir, form.name = form.name, LaTeX_h
+ead = NULL, : The folder my_first_pdf
+ []
+
+[53] [54] (./sections/7.use_rights.tex) [55]
+
+Package xcolor Warning: Incompatible color definition on input line 2910.
+
+
+Overfull \hbox (241.79445pt too wide) in paragraph at lines 2931--2931
+[]\T1/cmtt/m/n/10 ##     title = {shinemas2R: An R package to visualize outputs
+ from the data base Seed History and Network Management System (SHiNeMaS)},[] 
+ []
+
+[56] (./sections/8.tail.tex
+<./figures/Logo-Diversifood.jpg, id=902, 664.4022pt x 285.9483pt>
+File: ./figures/Logo-Diversifood.jpg Graphic file (type jpg)
+
+<use ./figures/Logo-Diversifood.jpg>
+Package pdftex.def Info: ./figures/Logo-Diversifood.jpg used on input line 8.
+(pdftex.def)             Requested size: 132.16817pt x 56.88321pt.
+
+<./figures/Logo-SOLIBAM.jpg, id=903, 301.125pt x 253.94875pt>
+File: ./figures/Logo-SOLIBAM.jpg Graphic file (type jpg)
+
+<use ./figures/Logo-SOLIBAM.jpg>
+Package pdftex.def Info: ./figures/Logo-SOLIBAM.jpg used on input line 9.
+(pdftex.def)             Requested size: 84.96216pt x 71.65152pt.
+
+<./figures/Logo-EU.jpg, id=904, 5722.37875pt x 3788.1525pt>
+File: ./figures/Logo-EU.jpg Graphic file (type jpg)
+
+<use ./figures/Logo-EU.jpg>
+Package pdftex.def Info: ./figures/Logo-EU.jpg used on input line 10.
+(pdftex.def)             Requested size: 94.4048pt x 62.48447pt.
+
+<./figures/Logo-FdF.jpg, id=905, 595.22375pt x 621.32124pt>
+File: ./figures/Logo-FdF.jpg Graphic file (type jpg)
+
+<use ./figures/Logo-FdF.jpg>
+Package pdftex.def Info: ./figures/Logo-FdF.jpg used on input line 11.
+(pdftex.def)             Requested size: 84.96216pt x 88.6814pt.
+ (./shinemas2R.bbl)) [57 <./figures/Logo-Diversifood.jpg> <./figures/Logo-SOLIB
+AM.jpg> <./figures/Logo-EU.jpg> <./figures/Logo-FdF.jpg>]
+
+Package xcolor Warning: Incompatible color definition on input line 2987.
+
+[58] (./sections/a2.text_SandR.tex) [59] (./sections/a3.getpdf_examples.tex)
+[60]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3019.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3019.
+ (./shinemas2R.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3019.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3019.
+
+Package rerunfilecheck Info: File `shinemas2R.out' has not changed.
+(rerunfilecheck)             Checksum: E487600382EC6B5AB9935606A972076B;3304.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3019.
+ ) 
+Here is how much of TeX's memory you used:
+ 19368 strings out of 493485
+ 357762 string characters out of 3143526
+ 569099 words of memory out of 3000000
+ 22063 multiletter control sequences out of 15000+200000
+ 18047 words of font info for 43 fonts, out of 3000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 56i,12n,56p,4643b,508s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/
+fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0700.pfb></usr/share/
+texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/pu
+blic/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx14
+40.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit1000.pfb></usr/share/t
+exmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/pub
+lic/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm080
+0.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/te
+xmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/publ
+ic/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0800
+.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/tex
+mf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf/fonts/type1/publi
+c/cm-super/sftt1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt2488.
+pfb>
+Output written on shinemas2R.pdf (60 pages, 8333203 bytes).
+PDF statistics:
+ 1029 PDF objects out of 1200 (max. 8388607)
+ 824 compressed objects within 9 object streams
+ 133 named destinations out of 1000 (max. 500000)
+ 604 words of extra memory for PDF output out of 10000 (max. 10000000)
+
