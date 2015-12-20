@@ -12,7 +12,7 @@ The copyright of the R code and the vignette are owned by Réseau Semences Paysa
 
 ## Participate to development
 
-You can participate in four ways:
+You can participate in three ways:
 
 1. test this development version and reports bugs
 2. help to make translation of the package
