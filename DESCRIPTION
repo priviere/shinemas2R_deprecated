@@ -13,6 +13,8 @@ Description: This package analyses outputs from the data base SHiNeMaS (Seeds
     formats data for existing R packages to perform statistical analysis
     as well as compiles results in pdf.
 License: GPL-3
+URL: http://github.com/priviere/shinemas2R
+BugReports: http://github.com/priviere/shinemas2R/issues
 Depends: 
     RPostgreSQL,
     network,
