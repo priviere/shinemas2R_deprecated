@@ -16,8 +16,7 @@ You can participate in four ways:
 
 1. test this development version and reports bugs
 2. help to make translation of the package
-3. update 'format.data' in order to format the data for existing R packages
-4. update functions to answer your specific needs
+3. update functions to answer your specific needs
 
 ### 1. Test and report bugs
 
@@ -40,14 +39,9 @@ The package is in english.
 Every contributions to other languages are welcome!
 More informations on R package translation [here](http://developer.r-project.org/Translations30.html).
 
-
-###  3. Update `format.data`
+### 3. Update functions to answer your specific needs
 You can update `format.data` [here](https://github.com/priviere/shinemas2R/blob/master/R/format.data.R) in order to format data for existing R packages.
 Note that the output of the R packages must be a ggplot object to be taken by `get.pdf`.
-
-If so, send me an email and we'll see how we can work together!
-
-### 4. Update functions to answer your specific needs
 
 You may want new query types (`get.data` [here](https://github.com/priviere/shinemas2R/blob/master/R/get.data.R)), 
 new plots (`get.ggplot` [here](https://github.com/priviere/shinemas2R/blob/master/R/get.ggplot.R)) or 
