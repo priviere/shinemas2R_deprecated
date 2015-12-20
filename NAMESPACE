@@ -1,0 +1,2 @@
+exportPattern("^[[:alpha:]]+")
+import(RPostgreSQL,network,xtable,maps,plyr,dplyr,grid,ggplot2,knitr,RColorBrewer,sna,scales,tidyr)

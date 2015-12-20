@@ -1,0 +1,39 @@
+Package: shinemas2R
+Type: Package
+Title: An R package to visualize outputs from the data base Seed History and Network Management System (SHiNeMaS)
+Version: 0.9
+Date: 2015-11-12
+Authors@R: c(person("Yannick", "de Oliveira", role = "ctb"),
+    person("Pierre", "Riviere", role = c("aut", "cre")))
+Author: Pierre Rivière
+Maintainer: Pierre Rivière <pierre@semencespaysannes.org>
+Description: This package analyses outputs from the data base SHiNeMaS (Seeds
+    History and Network Management System). 
+    It does descriptive analysis, 
+    formats data for existing R packages to perform statistical analysis
+    as well as compiles results in pdf.
+License: GPL-3
+Depends: 
+    RPostgreSQL,
+    network,
+    maps,
+    xtable,
+    plyr,
+    dplyr,
+    grid,
+    ggplot2,
+    RColorBrewer,
+    sna,
+    scales,
+    tidyr
+Suggests: 
+    GGally,
+    FactoMineR,
+    agricolae,
+    intergraph,
+    igraph,
+    knitr
+SystemRequirements: LaTeX with packages longtable, lscape, graphicx, pdfpages,
+    float, hyperref and fancyhdr
+LazyLoad: yes
+VignetteBuilder: knitr

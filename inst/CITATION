@@ -1,0 +1,20 @@
+citHeader("To cite the shinemas2R package in publications use:")
+
+citEntry(
+  entry = "manual",
+  title = "shinemas2R: An R package to visualize outputs from the data base Seed History and Network Management System (SHiNeMaS)",
+  author = "Pierre Riviere and Yannick de Oliveira",
+  organisation = "Reseau Semences Paysannes, INRA",
+  year = "2015",
+  url = "github.com/priviere/shinemas2R",
+  note = "R code is under licence GPL-3. 
+          Vignette is under licence creative commons BY-NC-SA 4.0.",
+          
+  textVersion = "Pierre Riviere and Yannick de Oliveira, 2015, 
+								  shinemas2R: An R package to visualize outputs 
+								  from the data base Seed History and 
+								  Network Management System (SHiNeMaS).
+                  Version 0.9.,
+                  URL: github.com/priviere/shinemas2R"
+)
+
