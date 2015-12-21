@@ -2,7 +2,7 @@
 #' Query SHiNeMaS and return the datasets
 #'
 #' @description
-#' \code{get.data} queries SHiNeMaS and return the datas.
+#' \code{get.data} queries SHiNeMaS and return the data-sets.
 #'
 #' @param db_user user name of SHiNeMaS
 #' 
@@ -10,9 +10,9 @@
 #' 
 #' @param db_name name fo the data base
 #' 
-#' @param db_password your password to login. If no password is needed, put ""	
+#' @param db_password your password to login. If no password is needed, put ""
 #'
-#' @param query.type Type of query, which will create a data set. There are four types: 
+#' @param query.type Type of query, which will create a data set. There are five types: 
 #' \enumerate{
 #' 
 #' \item "network": network relations between seed-lots
@@ -45,9 +45,9 @@
 #' 
 #' @param fill.diffusion.gap For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)
 #' 
-#' @param Mdist For query.type = "network", compute the Mdist matrix. See details.
+#' @param network.info For query.type = "network", if TRUE, aggregate information on relation and seed-lots on the network.
 #' 
-#' @param network.info For query.type = "network", aggregate information on relation and seed-lots on the network.
+#' @param Mdist For query.type = "network", if TRUE, compute the Mdist matrix. See details.
 #' 
 #' @param data.type For queries in "data-", type of data: "relation" for data linked to relation between seed lots and "seed-lots" for data linked to seed lots
 #' 
@@ -116,7 +116,7 @@
 #' \item the Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
 #' }
 #' 
-#' \item For SL.mix, it returns a data frame with seed-lots son (i.e. coming from the mixture), seed-lots father and for each germplasm, person, year and project
+#' \item For SL.mix, it returns a data frame with seed-lots son (i.e. coming from the mixture), seed-lots father, germplasm, person, year and project
 #' 
 #' \item For raw information on levels and variables present in SHiNeMaS it returns a vector
 #' 
@@ -135,7 +135,7 @@
 #' 
 #' @author Pierre Riviere for R code and Yannick de Oliveira for SQL code 
 #' 
-#' @seealso \code{\link{encrypt.data}}, \code{\link{get.ggplot}}, \code{\link{get.table}}
+#' @seealso \code{\link{encrypt.data}}, \code{\link{translate.data}},, \code{\link{get.ggplot}}, \code{\link{get.table}}
 #' 
 #' 
 get.data <- function(
