@@ -1,7 +1,7 @@
 # 0. help -----------------------------------------------------------------
-#' Format data from get.data to be used by several R packages
+#' Format data from \code{get.data} to be used by several R packages
 #'
-#' @param data output from the get.data function
+#' @param data output from the \code{get.data} function
 #' 
 #' @param data.on "son" or "father" depending on which seed-lots you want the information.
 #' 
@@ -9,17 +9,12 @@
 #' 
 #' @param correlated.variables If TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables
 #' 
-#' @param format the format you want. It is under the form name_of_the_package or name_of_the_package::name_of_the_function if there are severals format within a package. Possible values are "PPBstats"
+#' @param format the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are severals format within a package. Possible values are "PPBstats"
 #' 
 #' @return The data set with the right format for the R package
 #' 
-#' @examples
-#' data.agro = get.data()
-#' data.bayes = format.data(out.get.data = data.agro, format = "PPBstats::model.mean.comparisons.on.farm")
-#' 
 #' @seealso \code{\link{get.data}} 
 #' 
-
 format.data = function(
 data,
 data.on = "son",
@@ -30,7 +25,18 @@ format = "PPBstats"
 	# lets go !!! ----------
 
 {
-	# A FAIRE !!!!! get.data avec data type -------------
+	shinemas2R.object = attributes(data)$shinemas2R.object
+	
+	mess = "data must come from shinemas2R::get.data"
+	if( is.null(shinemas2R.object) ) { stop(mess) }
+	if( !is.element(shinemas2R.object, 
+									c("data-classic-relation", 
+										"data-S-relation", 
+										"data-SR-relation", 
+										"data-classic-seed-lots",
+										"data-S-seed-lots", 
+										"data-SR-seed-lots")) 
+	) { stop(mess) }  
 	
 	if( correlated.variables ) { 
 		data = data$datasets.with.correlated.variables 
