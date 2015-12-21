@@ -81,10 +81,6 @@
 #' 
 #' @seealso \code{\link{get.ggplot}}, \code{\link{get.table}}
 #' 
-#' @examples
-#'
-#'# to do
-#'
 get.pdf = function(
 	dir = "./",
 	form.name,
