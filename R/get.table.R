@@ -2,9 +2,9 @@
 #' Get table from \code{get.data}
 #'
 #' @description
-#' \code{get.table} generates table
+#' \code{get.table} generates tables object from \code{get.data} data-set or ggplot.objet from \code{get.ggplot}.
 #'
-#' @param data It can be either output from \code{get.data}.
+#' @param data It can be either output from \code{get.data} or ggplot.object from \code{get.ggplot}.
 #' 
 #' @param correlated.variables For data from \code{get.data}. If TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables
 #' 
@@ -85,7 +85,7 @@ get.table <- function(
 											"data-classic-seed-lots",
 											"data-S-seed-lots", 
 											"data-SR-seed-lots")) 
-		) { stop("data must be a ggplot object or come from shinemas2R::get.data") }  
+		) { stop(mess) }  
 		
 		
 		if( is.null(data$datasets.with.correlated.variables) & is.null(data$datasets.with.non.correlated.variables) ) { warning("data is NULL: nothing is done !"); return(NULL) }
