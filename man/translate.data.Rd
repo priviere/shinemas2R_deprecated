@@ -7,7 +7,7 @@
 translate.data(data, list_translation)
 }
 \arguments{
-\item{data}{output from the get.data function}
+\item{data}{output from the \code{get.data} function}
 
 \item{list_translation}{A list with as many element as variables to translate. It is under the form list(c("tkw", "pmg"), c("protein", "proteine")).}
 }

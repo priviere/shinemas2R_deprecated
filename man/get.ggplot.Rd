@@ -125,28 +125,7 @@ The function returns a list with several ggplot objects according to the data an
 }
 }
 \description{
-\code{get.ggplot} generates ggplot object according to data-set from \code{get.data}
-}
-\examples{
-# 1. Network data
-net1 = get.data(query.type = "network", relation.on = "father-son", germplasm.in = "C21")
-
-# 1.1.Get all plots
-p = get.ggplot(net1)
-
-# 1.2. Get specific plots
-get.ggplot(net1, ggplot.type = "network-reproduction-harvested", ggplot.display = "barplot", x.axis = "year", in.col = "germplasm")
-
-
-# There are as many seed-lots sent than received !
-get.ggplot(net1, ggplot.type = "network-diffusion-sent", ggplot.display = "barplot", x.axis = "year", in.col = "germplasm")
-
-get.ggplot(net1, ggplot.type = "network-diffusion-received", ggplot.display = "barplot", x.axis = "year", in.col = "germplasm")
-
-# Look at the map of the diffusion
-get.ggplot(net1, ggplot.type = "network-diffusion-relation")
-
-!!! To continue ... in the vignette !
+\code{get.ggplot} generates ggplot object from \code{get.data} data-set
 }
 \author{
 Pierre Riviere

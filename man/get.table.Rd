@@ -11,7 +11,7 @@ get.table(data, correlated.variables = TRUE, fuse_g_and_s = FALSE,
   invert_row_col = FALSE)
 }
 \arguments{
-\item{data}{It can be either output from \code{get.data}.}
+\item{data}{It can be either output from \code{get.data} or ggplot.object from \code{get.ggplot}.}
 
 \item{correlated.variables}{For data from \code{get.data}. If TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables}
 
@@ -49,7 +49,7 @@ The function returns a list with two elements
 }
 }
 \description{
-\code{get.table} generates table
+\code{get.table} generates tables object from \code{get.data} data-set or ggplot.objet from \code{get.ggplot}.
 }
 \author{
 Pierre Riviere

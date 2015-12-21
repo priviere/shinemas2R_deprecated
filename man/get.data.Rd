@@ -23,7 +23,7 @@ get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
 
 \item{db_password}{your password to login. If no password is needed, put ""}
 
-\item{query.type}{Type of query, which will create a data set. There are four types:
+\item{query.type}{Type of query, which will create a data set. There are five types:
 \enumerate{
 
 \item "network": network relations between seed-lots
@@ -56,9 +56,9 @@ get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
 
 \item{fill.diffusion.gap}{For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)}
 
-\item{network.info}{For query.type = "network", aggregate information on relation and seed-lots on the network.}
+\item{network.info}{For query.type = "network", if TRUE, aggregate information on relation and seed-lots on the network.}
 
-\item{Mdist}{For query.type = "network", compute the Mdist matrix. See details.}
+\item{Mdist}{For query.type = "network", if TRUE, compute the Mdist matrix. See details.}
 
 \item{data.type}{For queries in "data-", type of data: "relation" for data linked to relation between seed lots and "seed-lots" for data linked to seed lots}
 
@@ -108,7 +108,7 @@ The function returns a list with
 \item the Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
 }
 
-\item For SL.mix, it returns a data frame with seed-lots son (i.e. coming from the mixture), seed-lots father and for each germplasm, person, year and project
+\item For SL.mix, it returns a data frame with seed-lots son (i.e. coming from the mixture), seed-lots father, germplasm, person, year and project
 
 \item For raw information on levels and variables present in SHiNeMaS it returns a vector
 
@@ -125,7 +125,7 @@ The function returns a list with
 }
 }
 \description{
-\code{get.data} queries SHiNeMaS and return the datas.
+\code{get.data} queries SHiNeMaS and return the data-sets.
 }
 \details{
 \itemize{
@@ -155,6 +155,6 @@ The Mdist square matrix can be compared to a differenciation distance. It can be
 Pierre Riviere for R code and Yannick de Oliveira for SQL code
 }
 \seealso{
-\code{\link{encrypt.data}}, \code{\link{get.ggplot}}, \code{\link{get.table}}
+\code{\link{encrypt.data}}, \code{\link{translate.data}},, \code{\link{get.ggplot}}, \code{\link{get.table}}
 }
 
