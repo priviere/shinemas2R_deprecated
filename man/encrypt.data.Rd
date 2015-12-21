@@ -7,7 +7,7 @@
 encrypt.data(data)
 }
 \arguments{
-\item{data}{Output from \code{get.data}}
+\item{data}{output from \code{get.data}}
 }
 \value{
 The function returns the data frame encrypt and write in the work directory a file.txt with the key

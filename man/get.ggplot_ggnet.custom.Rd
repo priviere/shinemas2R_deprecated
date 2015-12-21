@@ -71,12 +71,6 @@ for details see https://github.com/briatte/ggnet/blob/master/ggnet.R
 
 The \code{weight.method} argument produces visually scaled nodes that are proportionally sized to their unweighted degree. To compute weighted centrality or degree measures, see Tore Opsahl's \code{tnet} package.
 }
-\examples{
-net1 = get.data(query.type = "network", relation.on = "father-son", germplasm.in = "C21")
-
-pnet1 = ggnet.custom(net1$network, size = 3, node.color = "red", segment.color = "black")
-pnet1
-}
 \author{
 Moritz Marbach and Francois Briatte for the core function. Pierre Rivière for the little changes in the output.
 }

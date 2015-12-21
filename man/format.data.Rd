@@ -2,13 +2,13 @@
 % Please edit documentation in R/format.data.R
 \name{format.data}
 \alias{format.data}
-\title{Format data from get.data to be used by several R packages}
+\title{Format data from \code{get.data} to be used by several R packages}
 \usage{
 \method{format}{data}(data, data.on = "son", fuse_g_and_s = FALSE,
   correlated.variables = TRUE, format = "PPBstats")
 }
 \arguments{
-\item{data}{output from the get.data function}
+\item{data}{output from the \code{get.data} function}
 
 \item{data.on}{"son" or "father" depending on which seed-lots you want the information.}
 
@@ -16,17 +16,13 @@
 
 \item{correlated.variables}{If TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables}
 
-\item{format}{the format you want. It is under the form name_of_the_package or name_of_the_package::name_of_the_function if there are severals format within a package. Possible values are "PPBstats"}
+\item{format}{the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are severals format within a package. Possible values are "PPBstats"}
 }
 \value{
 The data set with the right format for the R package
 }
 \description{
-Format data from get.data to be used by several R packages
-}
-\examples{
-data.agro = get.data()
-data.bayes = format.data(out.get.data = data.agro, format = "PPBstats::model.mean.comparisons.on.farm")
+Format data from \code{get.data} to be used by several R packages
 }
 \seealso{
 \code{\link{get.data}}
