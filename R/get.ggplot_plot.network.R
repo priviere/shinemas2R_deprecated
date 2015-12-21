@@ -1,3 +1,7 @@
+#' Function use in get.ggplot
+#' @description
+#' get network representation in ggplot
+#' 
 get.ggplot_plot.network = function(data, vertex.color, vertex.size, hide.labels.parts, display.labels.sex, labels.generation, organise.sl, labels.size = 1) {
 	n = data$network
 	
