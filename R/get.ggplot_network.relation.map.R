@@ -1,3 +1,7 @@
+#' Function use in get.ggplot
+#' @description
+#' draw pie on maps for network relations
+#' 
 get.ggplot_network.relation.map = function(map, data, relation = "reproduction", relation.type = "recolte", name = "harvested seed-lots", pie.size, hide.labels.parts, labels.size){	
 	
 	if(relation == "cross.info") {

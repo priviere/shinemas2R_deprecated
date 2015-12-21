@@ -1,3 +1,7 @@
+#' Function use in get.ggplot
+#' @description
+#' hide parts of seed-lots labels
+#' 
 get.ggplot_hide.labels.part = function(label, hide.labels.parts) {
 	if( !is.null(hide.labels.parts)){
 		label = as.character(label)

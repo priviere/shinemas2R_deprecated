@@ -1,3 +1,7 @@
+#' Function use in get.ggplot
+#' @description
+#' get ggplots: barplot, boxplots, interaction plots, radar, biplot
+#' 
 get.ggplot_plot.it = function(
 	d, 
 	titre = NULL, 

@@ -1,16 +1,16 @@
 # 0. help -----------------------------------------------------------------
-#' Display pies on ggplot object such as network or map
+#' Display pies on ggplot object such as network or map within \code{get.ggplot}
 #'
 #' @description
 #' \code{get.ggplot_pie.on.ggplot} display pies on ggplot object such as network or map
 #'
 #' @param ggplot a ggplot object on wich put the pies
 #' 
-#' @param data
+#' @param data A data set with at least four columns: the variable, the factor, the X and Y coordinates for the pie.
 #' 
-#' @param variable
+#' @param variable Name of the column of data with the variable
 #'
-#' @param factor
+#' @param factor Name of the column of data with the factor. factor is a location.
 #'
 #' @param x.origin the x origin of the pie
 #' 
@@ -18,22 +18,15 @@
 #' 
 #' @param r the radius of the pie. If the radius is too big and the pie do not fit on the ggplot object, an error is returned.
 #' 
-#' @param hide.labels.parts
+#' @param hide.labels.parts see hide.labels.parts argument in \code{get.ggplot}
 #' 
-#' @param label.size label correspond to factor
+#' @param label.size Size of the label. label correspond to factor
 #' 
 #' @param precision The precision in the drawing of the pie. The higher the better.
 #' 
 #' @return The function returns a ggplot with pies on it 
 #' 
 #' @author Pierre Rivière
-#' 
-#' @seealso \code{\link{get.ggplot}}
-#' 
-#' @examples
-#'
-#'to do
-#'
 #'
 get.ggplot_pie.on.ggplot = function(
 	ggplot, 

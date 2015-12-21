@@ -1,3 +1,7 @@
+#' Function use in get.ggplot
+#' @description
+#' draw barplot for network relations
+#' 
 get.ggplot_network.relation.barplot = function(data, combi, relation = "reproduction", relation.type = "recolte", name = "harvested seed-lots", nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col, ggplot.type){
 	
 	if(relation == "cross.info") {
