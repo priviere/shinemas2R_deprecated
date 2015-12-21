@@ -4,7 +4,7 @@
 #' @description
 #' \code{encrypt.data} encrypts data from \code{get.data}
 #'
-#' @param data Output from \code{get.data}
+#' @param data output from \code{get.data}
 #' 
 #' @details
 #' The following information are encrypt : 
