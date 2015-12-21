@@ -2,7 +2,7 @@
 #' Get ggplot objects from \code{get.data}
 #'
 #' @description
-#' \code{get.ggplot} generates ggplot object according to data-set from \code{get.data}
+#' \code{get.ggplot} generates ggplot object from \code{get.data} data-set
 #'
 #' @param data output from get.data with query.type = "network" or query.type = "data-...".
 #' 
