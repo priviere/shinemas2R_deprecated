@@ -9,7 +9,7 @@
 #' 
 #' @param correlated.variables If TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables
 #' 
-#' @param format the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are severals format within a package. Possible values are "PPBstats"
+#' @param format the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are severals format within a package. Possible values are "PPBstats".
 #' 
 #' @return The data set with the right format for the R package
 #' 
@@ -25,6 +25,7 @@ format = "PPBstats"
 	# lets go !!! ----------
 
 {
+	data = data$data
 	shinemas2R.object = attributes(data)$shinemas2R.object
 	
 	mess = "data must come from shinemas2R::get.data"
