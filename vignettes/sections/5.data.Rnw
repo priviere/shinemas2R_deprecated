@@ -455,7 +455,7 @@ Arguments can be customed related to network plots (Table \ref{custom.network}).
 \end{itemize}
 
 
-\item pies on network
+\item pies on map
 
 \begin{itemize}
 
@@ -790,6 +790,24 @@ colnames(tab_S_msc$not_duplicated_infos$`set-1`)
 
 It is possible to customize the tables as presented in Table \ref{custom.table}.
 
+\subsection{Format the data for existing \R~packages}
+
+It is often useful to go beyond descriptive analysis and apply statistical tests to your data.
+To do so, you need to use existing \R~packages to perform such analysis.
+
+You need to format your data in order to use these packages. 
+This is done with \texttt{format.data} which format your data for the following packages: \listpackformatdata.
+
+For example, if you want to use the \texttt{PPBstats} package:
+
+<<message=TRUE,cache=FALSE>>=
+data_for_PPBstats = format.data(
+	data_classic,
+	format = "PPBstats"
+)
+
+head(data_for_PPBstats)
+@
 
 %\section{Set of \sl}
 
@@ -797,7 +815,5 @@ It is possible to customize the tables as presented in Table \ref{custom.table}.
 
 %\subsection{\texttt{query.type = "cross"}}
 
-
 % parler de fuse g s et correlated var pour plot et table
 
-% Faire des exemples avec PPBstats, FactoMineR, etc ? A faire plutôt dans PPBformations ?!?
