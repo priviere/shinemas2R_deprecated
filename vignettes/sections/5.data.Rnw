@@ -241,24 +241,49 @@ names(default_data_classic_ggplot$`data-barplot`)
 @
 
 Knowing a combinaison of \texttt{x.axis} and \texttt{in.col}, choose the variable you want to get.
-For example,
+For example:
+
+\begin{itemize}
+\item For barplot:
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_bar_all = default_data_classic_ggplot$`data-barplot`$`germplasm-year`
 p_cal_ph_bar = p_cal_ph_bar_all$`plant_height---plant_height`$`x.axis-1|in.col-1`
-p_cal_ph_bar
 @
 
+\item For bolxplot:
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_box_all = default_data_classic_ggplot$`data-boxplot`$`germplasm-year`
 p_cal_ph_box = p_cal_ph_box_all$`plant_height---plant_height`$`x.axis-1|in.col-1`
-p_cal_ph_box
 @
 
+\item For interaction plot:
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_int_all = default_data_classic_ggplot$`data-interaction`$`year-germplasm`
 p_cal_ph_int = p_cal_ph_int_all$`plant_height---plant_height`$`x.axis-1|in.col-1`
+@
+\end{itemize}
+
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p\_cal\_ph\_bar} & \texttt{p\_cal\_ph\_box} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p_cal_ph_bar
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p_cal_ph_box
+@
+\\
+\texttt{p\_cal\_ph\_int} & \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
 p_cal_ph_int
 @
+&
+\\
+\end{tabular}
+\end{center}
+
 
 
 For \texttt{ggplot.type = } \texttt{data-radar}, \texttt{data-biplot}, you may chose what you want in color (\texttt{in.col} argument).
@@ -268,12 +293,10 @@ The possible values for \texttt{in.col} are: \texttt{germplasm}, \texttt{year} a
 names(default_data_classic_ggplot$`data-radar`)
 @
 
-
 For example,
 <<message=TRUE,cache=FALSE>>=
 p_cal_rad_all = default_data_classic_ggplot$`data-radar`
 p_cal_rad = p_cal_rad_all$`NA-germplasm`$`x.axis-1|in.col-1`
-p_cal_rad
 @
 
 For biplot, you must choose the pair of variables you wish, for example,
@@ -282,8 +305,22 @@ p_cal_ph_sl_bip_all = default_data_classic_ggplot$`data-biplot`
 p_cal_ph_sl_bip = p_cal_ph_sl_bip_all$`NA-year`
 p_cal_ph_sl_bip = p_cal_ph_sl_bip$`plant_height---plant_height - spike_lenght---spike_length_F`
 p_cal_ph_sl_bip = p_cal_ph_sl_bip$`x.axis-1|in.col-1`
+@
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p\_cal\_rad} & \texttt{p\_cal\_ph\_sl\_bip} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p_cal_rad
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
 p_cal_ph_sl_bip
 @
+\\
+\end{tabular}
+\end{center}
+
 
 \item Custom arguments 
 
@@ -492,9 +529,30 @@ load("./data/pm.RData")
 names(pm$`data-pie.on.map`)
 @
 
+You can get the default ggplot (\texttt{p}) or customized it (\texttt{p\_bis}):
+
 <<message=TRUE,cache=FALSE,out.width=".8\\textwidth">>=
-pm$`data-pie.on.map`$`spike_weight---spike_weight`$`map-[2013]`
+p = pm$`data-pie.on.map`$`spike_weight---spike_weight`$`map-[2013]`
+
+p_bis = p + 
+	ggtitle("spike_weight in 2013") + # change the title
+	theme(legend.title=element_blank()) # delete the name of the legend
 @
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p} & \texttt{p\_bis} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p_bis
+@
+\\
+\end{tabular}
+\end{center}
+
 
 \item Custom arguments
 
@@ -526,25 +584,49 @@ names(default_data_S_ggplot)
 
 which correpond to ggplot.type arguments as explained in the previous section.
 
+\begin{itemize}
+
+\item For barplot:
 <<message=TRUE,cache=FALSE>>=
 p_S_sw_bar_all = default_data_S_ggplot$`data-barplot`
 p_S_sw_bar = p_S_sw_bar_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
-p_S_sw_bar
 @
 
-
+\item For boxplot:
 <<message=TRUE,cache=FALSE>>=
 p_S_sw_box_all = default_data_S_ggplot$`data-boxplot`
 p_S_sw_box = p_S_sw_box_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
-p_S_sw_box
 @
 
-
+\item For interaction plot:
 <<message=TRUE,cache=FALSE>>=
 p_S_sw_int_all = default_data_S_ggplot$`data-interaction`
 p_S_sw_int = p_S_sw_int_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+@
+
+\end{itemize}
+
+
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p\_S\_sw\_bar} & \texttt{p\_S\_sw\_box} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p_S_sw_bar
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p_S_sw_box
+@
+\\
+\texttt{p\_S\_sw\_int} & \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
 p_S_sw_int
 @
+&
+\\
+\end{tabular}
+\end{center}
 
 It is possible to customize the plots as presented in Table \ref{custom.plot}.
 
@@ -566,25 +648,45 @@ names(default_data_SR_ggplot)
 
 which correpond to ggplot.type arguments as explained in the previsou section.
 
+\begin{itemize}
+\item For barplot:
 <<message=TRUE,cache=FALSE>>=
 p_SR_sw_bar_all = default_data_S_ggplot$`data-barplot`
 p_SR_sw_bar = p_SR_sw_bar_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
-p_SR_sw_bar
 @
 
-
+\item For boxplot:
 <<message=TRUE,cache=FALSE>>=
 p_SR_sw_box_all = default_data_S_ggplot$`data-boxplot`
 p_SR_sw_box = p_SR_sw_box_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
-p_SR_sw_box
 @
 
-
+\item For interaction plot:
 <<message=TRUE,cache=FALSE>>=
 p_SR_sw_int_all = default_data_S_ggplot$`data-interaction`
 p_SR_sw_int = p_SR_sw_int_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+@
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p\_SR\_sw\_bar} & \texttt{p\_SR\_sw\_box} \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p_SR_sw_bar
+@
+&
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+p_SR_sw_box
+@
+\\
+\texttt{p\_SR\_sw\_int} & \\
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
 p_SR_sw_int
 @
+&
+\\
+\end{tabular}
+\end{center}
+
 
 It is possible to customize the plots as presented in Table \ref{custom.plot}.
 
