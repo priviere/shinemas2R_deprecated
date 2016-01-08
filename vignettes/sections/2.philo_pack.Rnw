@@ -50,7 +50,7 @@ There are two types of data:
 \item From the data,
 	\begin{enumerate}
 	\item Get descriptive outputs from the data: plots with \texttt{get.ggplot} or tables with \texttt{get.table}
-	\item Get statistical outputs by formating the data with \texttt{format.data} in order to use an existing \R~package~(Up to now the following packages can be used: \texttt{PPBstats})
+	\item Get statistical outputs by formating the data with \texttt{format.data} in order to use an existing \R~package~(The following packages can be used: \listpackformatdata).
 	\end{enumerate}
 \item Get a pdf that compiles the outputs in a pdf document with \texttt{get.pdf} (section \ref{pdf})
 \end{enumerate}
@@ -105,8 +105,28 @@ system("cp -r /home/pierre/Documents/geek/R-stats/Rdev/R_package_shinemas2R/shin
 and then \texttt{load()} it.
 
 
-Nevertheless, it may be useful to install \BD~in order to test the \texttt{get.data} function.
+Nevertheless, it may be useful to test the \texttt{get.data} function on \BD~directly.
+
+Two options:
+\begin{itemize}
+\item \BD~is installed on a sever where you can have access. 
+You need to ask the admin the following informations : \texttt{db\_user}, \texttt{db\_host}, \texttt{db\_name}, \texttt{db\_password}. 
+Add these informations in \texttt{info\_db}, which is needed in the next steps in get.data.
+For example: 
+
+<<message=TRUE,cache=FALSE>>=
+info_db = list(
+	db_user = "toto",
+	db_host = "127.175.166.175", 
+	db_name = "my_shinemas",
+	db_password = "secret"
+	)
+@
+
+\item install a demo of \BD.
 The procedure to do so is explained in appendix \ref{install_shinemas}.
+
+\end{itemize}
 
 For an easier visualisation, all warning messages are not representing (NAs introduced, rows deleted, etc.)
 
