@@ -41,6 +41,8 @@
 #' \item "data-SR": seed-lots pairs of selection differential for year n-1 and response to selection for year n.
 #' }
 #' 
+#' \item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. Filters can be applied on variables.
+#' 
 #' }
 #' 
 #' @param fill.diffusion.gap For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)
@@ -175,7 +177,7 @@ variable.in = NULL
 	
 # 1. Check parameters ----------
 
-if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", or \"germplasm\".") }
+if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\" or \"methods\".") }
 
 test = c(germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in, variable.in)
 if(is.element(query.type, c( "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm")) & !is.null(test)) { stop("You can not use a filter on raw information on levels and variables.") }
@@ -197,7 +199,7 @@ test = c(germplasm.in,
 				 reproduction.type.in,
 				 variable.in)
 
-if( !is.null(test[1]) & is.null(filter.on) ) { stop("With a filter, you must set filter.on: \"son\", \"father\" or \"father-son\".") }
+if( !is.null(test[1]) & is.null(filter.on) & query.type != "methods") { stop("With a filter, you must set filter.on: \"son\", \"father\" or \"father-son\".") }
 
 
 if( is.null(data.type) & length(grep("data-", query.type)) > 0 ) { stop("With query.type in \"data-\", data.type must not be NULL. data.type can be \"relation\" or \"seed-lots\".")
@@ -968,6 +970,24 @@ query.grandparents = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL
 	}
 
 
+query.methods = function(V = NULL){
+
+if( !is.null (V) ) { w = " WHERE" } else { w = NULL }
+
+query = paste(
+"SELECT DISTINCT m.method_name AS variable_name, v1.name AS method_name, m.method_description ,m.unit 
+FROM eppdata_env_pra_phe_raw_data d 
+INNER JOIN eppdata_env_pra_phe_method m ON d.method_id=m.id 
+INNER JOIN eppdata_env_pra_phe_variable v1 ON d.variable_id=v1.id",
+
+w,
+V, sep = "")
+
+d = get.d(query, info_db)
+
+return(d)
+}
+
 
 # 4. Filters --------------------------------------------------------------
 
@@ -1679,6 +1699,15 @@ filter_V = V.sql(variable.in)
 		}	
 		}
 	}
+
+
+# 5.6. data on methods ----------	
+if(query.type == "methods") {
+	message("1. Query SHiNeMaS ...")
+	d = query.methods(filter_V)
+	attributes(d)$shinemas2R.object = "methods"
+	}
+
 
 d = list("data" = d, "info_db" = info_db)
 return(d)
