@@ -52,6 +52,8 @@ get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
 \item "data-SR": seed-lots pairs of selection differential for year n-1 and response to selection for year n.
 }
 
+\item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. Filters can be applied on variables.
+
 }}
 
 \item{fill.diffusion.gap}{For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)}
