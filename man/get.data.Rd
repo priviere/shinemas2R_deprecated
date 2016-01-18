@@ -118,9 +118,8 @@ The function returns a list with
 \itemize{
 		\item the data set with correlated variables
 		\item the data set with non correlated variables
-		\item the description of the methodes used for each variable
+		\item the description of methods used for each variable in with its description and units
 		}
-
 }
 
 \item information to connect to SHiNeMaS
