@@ -126,9 +126,8 @@
 #' \itemize{
 #' 		\item the data set with correlated variables
 #' 		\item the data set with non correlated variables
-#' 		\item the description of the methodes used for each variable
+#' 		\item the description of methods used for each variable in with its description and units
 #' 		}
-#' 		 
 #' }
 #' 
 #' \item information to connect to SHiNeMaS
@@ -1684,8 +1683,8 @@ filter_V = V.sql(variable.in)
 											 )
 				
 				# description of methods
-				m = NULL # !!!!!!!!! cf demande à Yannick --------------
-				print("ajouter le tableau avec les méthodes quand on aura les infos de yannick")
+				m = query.methods(filter_V)
+				m$"variable---methods" = paste(m$variable_name, m$method_name, sep = "---")
 				m = list("methods" = m)
 
 				d = c(out.d, m)
