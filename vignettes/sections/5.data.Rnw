@@ -43,6 +43,11 @@ The function returns a list with
 \item the description of methods used for each variable in with its description and units
 \end{itemize}
 
+Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. 
+Therefore the element of the list for non correlated data is always NULL.
+For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
+
+
 The name of the variables are under the form \texttt{variable\_name---methods}.
 
 \vspace{.5cm}
