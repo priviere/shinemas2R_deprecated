@@ -24,7 +24,7 @@ values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \t
 It is important to choose if you apply the filter on the \texttt{father} or the \texttt{son} of a relation.
 This can be done with the argument \texttt{filter.on}.
 Possibles values are \texttt{"father"}, \texttt{"son"} or \texttt{"father-son"}.
-It is set by default to \texttt{"father-son"}.
+
 
 You can either query information on relation between \sl~or on \sl.
 This is set with the argument \texttt{data.type}.
@@ -36,12 +36,11 @@ Possibles values are
 \end{itemize}
 
 
-Each \texttt{query.type} are explained in the following sub-sections.
-For all, the function returns a list with
+The function returns a list with
 \begin{itemize}
 \item the data set with correlated variables
 \item the data set with non correlated variables
-\item the description of the methodes used for each variable
+\item the description of methods used for each variable in with its description and units
 \end{itemize}
 
 The name of the variables are under the form \texttt{variable\_name---methods}.
@@ -81,6 +80,9 @@ load("./data/data_classic.RData")
 
 names(data_classic$data)
 colnames(data_classic$data$datasets.with.correlated.variables)
+
+head(data_classic$methods)
+
 @
 
 
