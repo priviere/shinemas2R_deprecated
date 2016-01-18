@@ -116,8 +116,8 @@ The function returns a list with
 
 \item For data with variable on specific seed-lots it returns a list with
 \itemize{
-		\item the data set with correlated variables
-		\item the data set with non correlated variables
+		\item a data frame with the data set
+		\item a list with data set with individuals that are correlated for a set of variables
 		\item the description of methods used for each variable in with its description and units
 		}
 }
@@ -150,6 +150,11 @@ The query "data-SR" takes into account when selection have been done in a seed l
 \item Query "network"
 
 The Mdist square matrix can be compared to a differenciation distance. It can be put in relation with genetic Fst for example.
+
+\item Correlated data or not
+Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot.
+Therefore the element of the list for non correlated data is always NULL.
+For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
 }
 }
 \author{
