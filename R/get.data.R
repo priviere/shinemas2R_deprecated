@@ -102,6 +102,11 @@
 #' \item Query "network"
 #' 
 #' The Mdist square matrix can be compared to a differenciation distance. It can be put in relation with genetic Fst for example.
+#' 
+#' \item Correlated data or not
+#' Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. Therefore the element of the list for non correlated data is always NULL.
+#' For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
+
 #' }
 #' 
 #' 
@@ -384,11 +389,10 @@ return(d)
 
 query.data.seed_lots = function(G = NULL, GT = NULL, Y = NULL, P = NULL, V = NULL, SL = NULL, Proj = NULL) {
 if( !is.null (c(G, GT, Y, P, V, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL }
-if( !is.null(R[1]) ) { if(length(grep("nr.reproduction_id", R[1])) == 1) { w =" WHERE nr.selection_id IS NULL "} }
 
 query = 
 paste("
-SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, gpt1germplasm_type AS germplasm_type, p1.short_name AS person,v1.name AS variable_name,rd.raw_data, met.method_name, met.quali_quanti_notes, pro1.project_name AS project
+SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, gpt1.germplasm_type AS germplasm_type, p1.short_name AS person,v1.name AS variable_name,rd.raw_data, met.method_name, met.quali_quanti_notes, pro1.project_name AS project
 
 FROM entities_seed_lot sl1 
 LEFT OUTER JOIN eppdata_env_pra_phe_raw_data_seed_lot dr ON sl1.id = dr.seed_lot_id 
@@ -974,7 +978,7 @@ query.methods = function(V = NULL){
 if( !is.null (V) ) { w = " WHERE" } else { w = NULL }
 
 query = paste(
-"SELECT DISTINCT m.method_name AS variable_name, v1.name AS method_name, m.method_description ,m.unit 
+"SELECT DISTINCT m.method_name AS method_name, v1.name AS variable_name, m.method_description ,m.unit 
 FROM eppdata_env_pra_phe_raw_data d 
 INNER JOIN eppdata_env_pra_phe_method m ON d.method_id=m.id 
 INNER JOIN eppdata_env_pra_phe_variable v1 ON d.variable_id=v1.id",
@@ -1594,7 +1598,7 @@ filter_V = V.sql(variable.in)
  	if( query.type == "germplasm.type"){ d = query.germplasm.type(); attributes(d)$shinemas2R.object = "germplasm.type"
  }
  	
-	
+
 	# 5.5. data with variable on specific seed-lots ----------	
 	if(query.type == "data-classic") {
 		if(data.type == "seed-lots") { message("1. Query SHiNeMaS ..."); d = query.data.seed_lots(filter_G, filter_GT, filter_Y, filter_P, filter_V, filter_SL, filter_Proj) }
@@ -1617,33 +1621,40 @@ filter_V = V.sql(variable.in)
 		}		
 
 	# Set up datasets
-	if(query.type == "data-classic" | query.type == "data-S" | query.type == "data-SR") {			
-		if( !is.null(unique(d$variable_name)[1]) ) { variable = unique(d$variable_name) }
-		if( is.null(d) ) { variable = NULL }
-		if( !is.null(d) & !is.null(variable)) {
+	if( !is.null(unique(d$variable_name)[1]) ) { variable = unique(d$variable_name) }
+	if( is.null(d) ) { variable = NULL }
+
+	if( query.type == "data-classic" | query.type == "data-S" | query.type == "data-SR" ) {
+			if( !is.null(d) & !is.null(variable)) {
 			vec_variable = na.omit(unique(as.character(d$variable_name)))		
 			
 			if(length(vec_variable) != 0) { # If there are no variables, nothing is done
 				message("2. Set up data set ... \n")	
 											
-				# correlated variable
+				# correlated variable for both data.type = relation and data.type = seed.lots
 				d1 = d # en attendant de pourvoir séparer (cf demande à Yannick) ----------
 				print("en attendant de pourvoir séparer (cf demande à Yannick)")
 				
-				# non correlated variable
-				d2 = NULL
+				# non correlated variable only for data.type = relation
+				if(data.type == "relation") { d2 = NULL }
+				
+				if(data.type == "seed-lots") { d2 = NULL }
 				
 				# Arrange datasets
-				arrange.data = function(data){
+				arrange.data = function(data, data.type){
 					if(!is.null(data)){
 						# an ID is needed to get unicity
 						# sl_name for data.type = "seed-lots"
 						# son & son_ind & father for data.type = "relation"
 						# expe for query.type = "S" or "SR"
 						
-						data$ID = paste(as.character(data$sl_name), as.character(data$son), as.character(data$son_ind), as.character(data$expe), as.character(data$father), sep = "~") 
+						if(data.type == "relation") {
+							data$ID = paste(as.character(data$sl_name), as.character(data$son), as.character(data$son_ind), as.character(data$expe), as.character(data$father), sep = "~") 
+						}
 						
-						data$var_meth = paste(data$variable_name, data$method_name, sep="---")
+						if(data.type == "seed-lots") { data$ID = paste(as.character(data$sl)) }
+						
+						data$var_meth = paste(data$variable_name, data$method_name, sep = "---")
 						var_meth = unique(data$var_meth)
 						
 						if( is.element("NA---NA", var_meth) ) {
@@ -1679,14 +1690,21 @@ filter_V = V.sql(variable.in)
 				
 				out.d = lapply(list("datasets.with.correlated.variables" = d1, 
 														"datasets.with.non.correlated.variables" = d2),
-											 function(x){arrange.data(x)}
+											 arrange.data, data.type
 											 )
 				
 				# description of methods
+				filter_V = V.sql(vec_variable)
 				m = query.methods(filter_V)
 				m$"variable---methods" = paste(m$variable_name, m$method_name, sep = "---")
+				var_meth_to_keep = c(colnames(out.d$datasets.with.correlated.variables), 
+														 colnames(out.d$datasets.with.non.correlated.variables)
+				)
+				var_meth_to_keep = var_meth_to_keep[grep("---", var_meth_to_keep)]
+				m = m[is.element(m$"variable---methods", var_meth_to_keep),]
 				m = list("methods" = m)
-
+				
+				
 				d = c(out.d, m)
 				
 				if(query.type == "data-classic" & data.type == "seed-lots") { attributes(d)$shinemas2R.object = "data-classic-seed-lots" }
@@ -1698,6 +1716,7 @@ filter_V = V.sql(variable.in)
 		}	
 		}
 	}
+
 
 
 # 5.6. data on methods ----------	
