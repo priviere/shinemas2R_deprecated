@@ -1632,13 +1632,25 @@ filter_V = V.sql(variable.in)
 				message("2. Set up data set ... \n")	
 											
 				# correlated variable for both data.type = relation and data.type = seed.lots
-				d1 = d # en attendant de pourvoir séparer (cf demande à Yannick) ----------
-				print("en attendant de pourvoir séparer (cf demande à Yannick)")
+				if(data.type == "relation") { 
+					d$correlation_group = rep("gp1, gp2", times = nrow(d))
+					# en attendant de pourvoir séparer (cf demande à Yannick) ----------
+					print("en attendant de pourvoir séparer (cf demande à Yannick)")
+					
+					corr_gp = c("gp1", "gp2") # unique(d$correlation_group)
+					out_corr = list()
+					for(corr in corr_gp){ out_corr = c(out_corr, list(d)) }
+					names(out_corr) = corr_gp
+					for(cg in corr_gp){	out_corr[[cg]] = d[grep(cg, d$correlation_group),] }
+					}
 				
+				if(data.type == "seed-lots") { out_corr = list(d) }
+				
+
 				# non correlated variable only for data.type = relation
-				if(data.type == "relation") { d2 = NULL }
+				if(data.type == "relation") { out_not_corr = NULL }
 				
-				if(data.type == "seed-lots") { d2 = NULL }
+				if(data.type == "seed-lots") { out_not_corr = NULL }
 				
 				# Arrange datasets
 				arrange.data = function(data, data.type){
@@ -1652,7 +1664,7 @@ filter_V = V.sql(variable.in)
 							data$ID = paste(as.character(data$sl_name), as.character(data$son), as.character(data$son_ind), as.character(data$expe), as.character(data$father), sep = "~") 
 						}
 						
-						if(data.type == "seed-lots") { data$ID = paste(as.character(data$sl)) }
+						if(data.type == "seed-lots") { data$ID = as.character(data$sl) }
 						
 						data$var_meth = paste(data$variable_name, data$method_name, sep = "---")
 						var_meth = unique(data$var_meth)
@@ -1688,10 +1700,11 @@ filter_V = V.sql(variable.in)
 					return(D)
 				}
 				
-				out.d = lapply(list("datasets.with.correlated.variables" = d1, 
-														"datasets.with.non.correlated.variables" = d2),
-											 arrange.data, data.type
-											 )
+				d1 = lapply(out_corr, arrange.data, data.type)
+				d2 = lapply(out_not_corr, arrange.data, data.type)
+				
+				out.d = list("datasets.with.correlated.variables" = d1,
+										 "datasets.with.non.correlated.variables" = d2)
 				
 				# description of methods
 				filter_V = V.sql(vec_variable)
