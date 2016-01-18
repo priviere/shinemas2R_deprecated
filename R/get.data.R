@@ -104,9 +104,9 @@
 #' The Mdist square matrix can be compared to a differenciation distance. It can be put in relation with genetic Fst for example.
 #' 
 #' \item Correlated data or not
-#' Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. Therefore the element of the list for non correlated data is always NULL.
+#' Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. 
+#' Therefore the element of the list for non correlated data is always NULL.
 #' For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
-
 #' }
 #' 
 #' 
