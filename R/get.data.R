@@ -129,8 +129,8 @@
 #' 
 #' \item For data with variable on specific seed-lots it returns a list with
 #' \itemize{
-#' 		\item the data set with correlated variables
-#' 		\item the data set with non correlated variables
+#' 		\item a data frame with the data set 
+#' 		\item a list with data set with individuals that are correlated for a set of variables
 #' 		\item the description of methods used for each variable in with its description and units
 #' 		}
 #' }
@@ -1631,7 +1631,7 @@ filter_V = V.sql(variable.in)
 			if(length(vec_variable) != 0) { # If there are no variables, nothing is done
 				message("2. Set up data set ... \n")	
 											
-				# correlated variable for both data.type = relation and data.type = seed.lots
+				# Get subset of correlated variable for data.type = relation
 				if(data.type == "relation") { 
 					d$correlation_group = rep("gp1, gp2", times = nrow(d))
 					# en attendant de pourvoir séparer (cf demande à Yannick) ----------
@@ -1644,13 +1644,11 @@ filter_V = V.sql(variable.in)
 					for(cg in corr_gp){	out_corr[[cg]] = d[grep(cg, d$correlation_group),] }
 					}
 				
-				if(data.type == "seed-lots") { out_corr = list(d) }
+				if(data.type == "seed-lots") { out_corr = NULL }
 				
 
-				# non correlated variable only for data.type = relation
-				if(data.type == "relation") { out_not_corr = NULL }
-				
-				if(data.type == "seed-lots") { out_not_corr = NULL }
+				# All the data set for both data.type
+				out_d = list(d)
 				
 				# Arrange datasets
 				arrange.data = function(data, data.type){
@@ -1701,17 +1699,16 @@ filter_V = V.sql(variable.in)
 				}
 				
 				d1 = lapply(out_corr, arrange.data, data.type)
-				d2 = lapply(out_not_corr, arrange.data, data.type)
+				d2 = lapply(out_d, arrange.data, data.type)
 				
-				out.d = list("datasets.with.correlated.variables" = d1,
-										 "datasets.with.non.correlated.variables" = d2)
+				out.d = list("datasets.with.correlated.variables" = d2, "datasets.with.correlated.variables" = d1)
 				
 				# description of methods
 				filter_V = V.sql(vec_variable)
 				m = query.methods(filter_V)
 				m$"variable---methods" = paste(m$variable_name, m$method_name, sep = "---")
-				var_meth_to_keep = c(colnames(out.d$datasets.with.correlated.variables), 
-														 colnames(out.d$datasets.with.non.correlated.variables)
+				var_meth_to_keep = c(colnames(out.d$datasets), 
+														 colnames(out.d$datasets.with.correlated.variables)
 				)
 				var_meth_to_keep = var_meth_to_keep[grep("---", var_meth_to_keep)]
 				m = m[is.element(m$"variable---methods", var_meth_to_keep),]
