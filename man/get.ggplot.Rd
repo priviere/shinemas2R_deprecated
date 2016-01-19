@@ -54,9 +54,9 @@ The possibilites are:
 
 \item{ggplot.on}{For "data-" type. father" or "son" depending on which seed-lot you want to plot.}
 
-\item{x.axis}{factor display on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.}
+\item{x.axis}{factor displayed on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.}
 
-\item{in.col}{factor display in color of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, in.col is not displayed. Note it is compulsory for data-biplot and data-radar as in these cases x.axis is not used.}
+\item{in.col}{factor displayed in color of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, in.col is not displayed. Note it is compulsory for data-biplot and data-radar as in these cases x.axis is not used.}
 
 \item{vec_variables}{For "data-" type : a vector of variables displayed.}
 

@@ -5,7 +5,7 @@
 \title{Format data from \code{get.data} to be used by several R packages}
 \usage{
 \method{format}{data}(data, data.on = "son", fuse_g_and_s = FALSE,
-  correlated.variables = TRUE, format = "PPBstats")
+  correlated_group = NULL, format = "PPBstats")
 }
 \arguments{
 \item{data}{output from the \code{get.data} function}
@@ -14,7 +14,7 @@
 
 \item{fuse_g_and_s}{Fuse germplasm and selection name information in a column named germplasm}
 
-\item{correlated.variables}{If TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables}
+\item{correlated_group}{Name of the group of correlation in data. NULL by default.}
 
 \item{format}{the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are severals format within a package. Possible values are "PPBstats".}
 }
