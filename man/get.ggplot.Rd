@@ -52,7 +52,7 @@ The possibilites are:
 
 \item{ggplot.display}{For "network-" data: "barplot", "map". It can be a vector of several elements i.e. c("barplot", "map"). NULL by default: both are done.}
 
-\item{ggplot.on}{For "data-" type. father" or "son" depending on which seed-lot you want to plot.}
+\item{ggplot.on}{For "data-" type. "father" or "son" depending on which seed-lot you want to plot.}
 
 \item{x.axis}{factor displayed on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.}
 
