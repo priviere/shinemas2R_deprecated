@@ -43,9 +43,9 @@
 #' 
 #' @param ggplot.on For "data-" type. father" or "son" depending on which seed-lot you want to plot.
 #' 
-#' @param x.axis factor display on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.
+#' @param x.axis factor displayed on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.
 #' 
-#' @param in.col factor display in color of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, in.col is not displayed. Note it is compulsory for data-biplot and data-radar as in these cases x.axis is not used.
+#' @param in.col factor displayed in color of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, in.col is not displayed. Note it is compulsory for data-biplot and data-radar as in these cases x.axis is not used.
 #' 
 #' @param vec_variables For "data-" type : a vector of variables displayed.
 #' 
@@ -165,13 +165,16 @@ if(
 	is.null(data$network)
 ) { message("data is NULL: nothing is done !"); return(NULL) }
 
-if( is.null(correlated_group) ) {
-	data = data$data	
-} else { 
-	data_tmp = data$data.with.correlated.variables
-	if(is.element(correlated_group, names(d))) {
-		data = data_tmp[[correlated_group]]
-	} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
+
+if( test2 ){
+	if( is.null(correlated_group) ) {
+		data = data$data	
+	} else { 
+		data_tmp = data$data.with.correlated.variables
+		if(is.element(correlated_group, names(d))) {
+			data = data_tmp[[correlated_group]]
+		} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
+	}
 }
 
 
