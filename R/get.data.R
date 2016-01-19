@@ -1621,10 +1621,10 @@ filter_V = V.sql(variable.in)
 		}		
 
 	# Set up datasets
-	if( !is.null(unique(d$variable_name)[1]) ) { variable = unique(d$variable_name) }
-	if( is.null(d) ) { variable = NULL }
-
 	if( query.type == "data-classic" | query.type == "data-S" | query.type == "data-SR" ) {
+		if( !is.null(unique(d$variable_name)[1]) ) { variable = unique(d$variable_name) }
+		if( is.null(d) ) { variable = NULL }
+		
 			if( !is.null(d) & !is.null(variable)) {
 			vec_variable = na.omit(unique(as.character(d$variable_name)))		
 			
