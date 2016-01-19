@@ -4,18 +4,18 @@
 
 \subsection{Get the data set}
 
-Three types of queries are possibles:
+Three types of queries are possible:
 \begin{itemize}
-\item \texttt{query.type = "data-classic"} to study classic variables for each seed-lots or relation between seed-lots (subsection \ref{data-classic})
-\item \texttt{query.type = "data-S"} to study selection differential (subsection \ref{data-S-and-SR})
+\item \texttt{query.type = "data-classic"} to study classic variables for each seed-lot or relation between seed-lots (subsection \ref{data-classic})
+\item \texttt{query.type = "data-S"} to study selection differentia (subsection \ref{data-S-and-SR})
 \item \texttt{query.type = "data-SR"} to study response to selection (subsection \ref{data-S-and-SR})
 \end{itemize}
 
 You can set filters to the query with the following argument :
 
 \begin{itemize}
-\item \texttt{filter.in} to choose nothing expect \texttt{filter.in}
-\item \texttt{filter.out} to choose everything expect \texttt{filter.out}
+\item \texttt{filter.in} to choose nothing except \texttt{filter.in}
+\item \texttt{filter.out} to choose everything except \texttt{filter.out}
 \end{itemize}
 
 values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation}, \texttt{reproduction type} or \texttt{variable}.
@@ -28,7 +28,7 @@ It is set by default to \texttt{"father-son"}.
 
 You can either query information on relation between \sl~or on \sl.
 This is set with the argument \texttt{data.type}.
-Possibles values are 
+Possible values are 
 
 \begin{itemize}
 \item \texttt{"relation"} for data linked to relation between seed lots and 
@@ -36,15 +36,15 @@ Possibles values are
 \end{itemize}
 
 
-Each \texttt{query.type} are explained in the following sub-sections.
-For all, the function returns a list with
+Each \texttt{query.type} is explained in the following sub-sections.
+For each of them, the function returns a list with
 \begin{itemize}
 \item the data set with correlated variables
 \item the data set with non correlated variables
-\item the description of the methodes used for each variable
+\item the description of the methods used for each variable
 \end{itemize}
 
-The name of the variables are under the form \texttt{variable\_name---methods}.
+The names of the variables are under the form \texttt{variable\_name---methods}.
 
 \vspace{.5cm}
 
@@ -87,8 +87,8 @@ colnames(data_classic$data$datasets.with.correlated.variables)
 \subsubsection{Selection differentia (\texttt{query.type = "data-S"}), response to selection (\texttt{query.type = "data-SR"}) and heritability}
 \label{data-S-and-SR}
 
-For a given trait, selection differentia corresponds to the difference between mean of selected spikes and mean of bulk (i.e. spikes that have not been selected).
-Response to selection correponds to the difference between mean of spikes coming from the selected spikes and the spikes coming from the bulk (Figure \ref{SandR}).
+For a given trait, selection differentia corresponds to the difference between mean of the selected spikes and mean of the bulk (i.e. spikes that have not been selected).
+Response to selection correponds to the difference between the mean of spikes coming from the selected spikes and the mean of spikes coming from the bulk (Figure \ref{SandR}).
 
 Selection differentia ($S$) and response to selection ($R$) are linked with the realized heritability ($h_{r}^2$):
 
@@ -96,7 +96,7 @@ Selection differentia ($S$) and response to selection ($R$) are linked with the 
 R = h_{r}^2 \times S
 \end{displaymath}
 
-See appendix \ref{text_SandR} for more details on the theroy behind this.
+See appendix \ref{text_SandR} for more details on the theory behind this.
 
 \begin{figure}[H]
 \begin{center}
@@ -143,9 +143,9 @@ colnames(data_S$data$datasets.with.correlated.variables)
 
 \paragraph{\texttt{query.type = "data-SR"}}
 
-The data frame returned has a column \texttt{"expe"} which corresponds to an id of one selection differential and the corresponding response to selection
+The data frame returned has a column \texttt{"expe"} which corresponds to an id of one selection differential and the corresponding response to selection.
 
-The query takes into account when selection have been done in a seed lot, that this seed lot have been merged and then have been sown. It is the case when selection have been carried out in a replication that have been merge after. Even if this case should not arrise, it may happen.
+The query takes into account when selection have been done in a seed lot, that this seed lot have been merged and then have been sown. It is the case when selection have been carried out in a replication that have been merged afterwards. Even if this case should not arise, it might happen.
 
 <<message=TRUE,cache=FALSE>>=
 #data_SR = get.data(
@@ -179,7 +179,7 @@ colnames(data_SR$data$datasets.with.correlated.variables)
 
 To get the plots, use the function \texttt{get.ggplot}.
 
-The name of the variables are under the form \texttt{variable\_name---methods}:
+The names of the variables are under the form \texttt{variable\_name---methods}:
 <<message=TRUE,cache=FALSE>>=
 vec_variables = c(
 	"plant_height---plant_height", 
@@ -232,7 +232,7 @@ which correpond to \texttt{ggplot.type} arguments:
 \end{center}
 
 For \texttt{ggplot.type = } \texttt{data-barplot}, \texttt{data-boxplot} and \texttt{data-interaction}, you may chose what you want in the x axis (\texttt{x.axis} argument) and in color (\texttt{in.col} argument).
-The posible values for \texttt{x.axis} and \texttt{in.col} are: \texttt{germplasm}, \texttt{year}, \texttt{person}.
+The possible values for \texttt{x.axis} and \texttt{in.col} are: \texttt{germplasm}, \texttt{year}, \texttt{person}.
 By default all combinaisons of \texttt{x.axis} and \texttt{in.col} are done with default argument settings.
 The name of the plot is under the form \texttt{x.axis}-\texttt{in.col}.
 
@@ -261,7 +261,7 @@ p_cal_ph_int
 @
 
 
-For \texttt{ggplot.type = } \texttt{data-radar}, \texttt{data-biplot}, you may chose what you want in color (\texttt{in.col} argument).
+For \texttt{ggplot.type = } \texttt{data-radar}, \texttt{data-biplot}, you may choose what you want in color (\texttt{in.col} argument).
 The possible values for \texttt{in.col} are: \texttt{germplasm}, \texttt{year} and \texttt{person}.
 
 <<message=TRUE,cache=FALSE>>=
@@ -311,7 +311,7 @@ description &
 
 \texttt{x.axis} & 
 \texttt{NULL} & 
-factor display on the \texttt{x.axis}	 of a plot: \texttt{"germplasm"}, \texttt{"year"} or \texttt{"person"} referring to the attributes of a seed-lots. If \texttt{NULL}, all the combinaison are done for \texttt{x.axis} and \texttt{in.col}. &
+factor displayed on the \texttt{x.axis}	 of a plot: \texttt{"germplasm"}, \texttt{"year"} or \texttt{"person"} referring to the attributes of a seed-lot. If \texttt{NULL}, all the combinaisons are done for \texttt{x.axis} and \texttt{in.col}. &
 X &
 X &
 X &
@@ -321,7 +321,7 @@ X &
 
 \texttt{in.col} & 
 \texttt{NULL} & 
-display in color of a plot: \texttt{"germplasm"}, \texttt{"year"} or \texttt{"person"} referring to the attributes of a seed-lots. If \texttt{NULL}, \texttt{in.col} is not displayed. Note it is compulsory for data-biplot and data-radar as in these cases \texttt{x.axis} is not used. &
+displayed in color of a plot: \texttt{"germplasm"}, \texttt{"year"} or \texttt{"person"} referring to the attributes of a seed-lot. If \texttt{NULL}, \texttt{in.col} is not displayed. Note that it is compulsory for data-biplot and data-radar as in these cases \texttt{x.axis} is not used. &
 X &
 X &
 X &
@@ -352,10 +352,10 @@ X \\
 \texttt{hide.labels.parts} & 
 \texttt{"all"} & 
 parts of the label hidden: \texttt{"germplasm"}, \texttt{"person"}, \texttt{"year"}, \texttt{"person:germplasm"}, \texttt{"year:germplasm"}, \texttt{"person:year"}, \texttt{"all"}. 
-\texttt{"all"} means that no labels are dispayed. 
-If \texttt{NULL} labels are displayed. Labels are based on seed-lots names under the form \texttt{germplasm\_year\_person\_digit}.
+\texttt{"all"} means that no label is dispayed. 
+If \texttt{NULL} labels are displayed. Labels are based on seed-lots' names under the form \texttt{germplasm\_year\_person\_digit}.
 For \texttt{"data-biplot"}, the default value is \texttt{NULL}.
-For easier visualisation, Digit is never display unless you choose \texttt{NULL}. &
+For easier visualization, digit is never displayed unless you choose \texttt{NULL}. &
   &
   &
   &
@@ -365,7 +365,7 @@ X \\
 \hline
 \end{tabular}
 \caption{Possible arguments regarding \texttt{ggplot.type}.
-A cross (X) means that for a given \texttt{ggplot.type}, a given argument can be used}
+A cross (X) means that for a given \texttt{ggplot.type}, a given argument can be used.}
 \label{custom.plot}
 \end{table}
 \end{center}
@@ -382,7 +382,7 @@ A cross (X) means that for a given \texttt{ggplot.type}, a given argument can be
 It is possible to add pies on seed-lots represented on a network.
 The pie represent the distribution of a given variable for a given seed-lot.
 
-In the following example, as we're working with encrypt data, \texttt{get.ggplot} reverse the transcription to query \BD~and encrypt again.
+In the following example, as we're working with encrypted data, \texttt{get.ggplot} reverse the transcription to query \BD~and encrypt again.
 
 Note that this example is done on a little data set.
 Indeed, the pies are drawn with a polygon which need lots of points that take memory.
@@ -422,9 +422,9 @@ Indeed, the pies are drawn with a polygon which need lots of points that take me
 load("./data/pn.RData")
 @
 
-As we're working for one person, we set \texttt{hide.labels.parts = "person"}.
+As we're working on one person, we set \texttt{hide.labels.parts = "person"}.
 
-The result id divided into two plots: the empty network and the network with the pies.
+The result is divided into two plots: the empty network and the network with the pies.
 
 <<message=TRUE,cache=FALSE>>=
 names(pn$`data-pie.on.network`)
@@ -450,7 +450,7 @@ p2
 
 \item Custom arguments
 
-Arguments can be customed related to network plots (Table \ref{custom.network}).
+Arguments can be customized related to network plots (Table \ref{custom.network}).
 
 \end{itemize}
 
@@ -498,7 +498,7 @@ pm$`data-pie.on.map`$`spike_weight---spike_weight`$`map-[2013]`
 
 \item Custom arguments
 
-Arguments can be customed related to map plots (Table \ref{custom.map}).
+Arguments can be customized related to map plots (Table \ref{custom.map}).
 
 For \texttt{data-pie.on.map}, it is also possible to choose \texttt{x.axis} in order to get a map for each \texttt{year} or each \texttt{germplasm}.
 
@@ -592,7 +592,7 @@ It is possible to customize the plots as presented in Table \ref{custom.plot}.
 \subsection{Get the tables}
 
 From the data, to get the tables, use the function \texttt{get.table}.
-Five types of tables can be display according to \texttt{table.type} argument :
+Five types of tables can be displayed according to \texttt{table.type} argument:
 
 \begin{center}
 \begin{tabular}{ll}
@@ -603,13 +603,13 @@ Five types of tables can be display according to \texttt{table.type} argument :
 \texttt{"raw"} & display raw data. Useful with text for example \\
 \hline
 
-\texttt{"mean"} & display for each variable columns with mean \\
+\texttt{"mean"} & displayed for each variable columns with mean \\
 \hline
 
-\texttt{"mean.sd"} & display for each variable columns with mean and standard deviation \\
+\texttt{"mean.sd"} & displayed for each variable columns with mean and standard deviation \\
 \hline
 
-\texttt{"mean.sd.cv"} & display for each variable columns with mean, standard deviation and coefficient of variation \\
+\texttt{"mean.sd.cv"} & displayed for each variable columns with mean, standard deviation and coefficient of variation \\
 \hline
 
 \texttt{"summary"} & display \texttt{"Min."}, \texttt{"1st Qu."}, \texttt{"Median"}, \texttt{"3rd Qu."}, \texttt{"Max."} of the data \\
@@ -618,8 +618,8 @@ Five types of tables can be display according to \texttt{table.type} argument :
 \end{center}
 
 The table always display information with seed-lots on the left side.
-For information on relation, you must choose if seed-lots displayed in the table are the son or the father with the argument \texttt{table.on}.
-For information on seed-lots, there is no problems.
+For information on relations, you must choose if the seed-lots displayed in the table are the son or the father with the argument \texttt{table.on}.
+For information on seed-lots, there is no problem.
 
 Then you should set \texttt{vec\_variables} with the variables displayed in the table.
 
@@ -649,7 +649,7 @@ names(tab_class)
 tab_class$duplicated_infos$`set-1`
 @
 
-It is \texttt{NULL} as there are no duplicated information here.
+It is \texttt{NULL} as there is no duplicated information here.
 
 An example with duplicated information:
 
@@ -732,20 +732,20 @@ argument & default value & description \\
 \texttt{nb\_row} & \texttt{NULL} & the number of rows in the table \\
 \hline
 
-\texttt{nb\_col} & \texttt{NULL} & the number of columns for variable in the table. \texttt{col\_to\_display} remains fixed. \\
+\texttt{nb\_col} & \texttt{NULL} & the number of columns for variables in the table. \texttt{col\_to\_display} remains fixed. \\
 \hline
 
 \texttt{nb\_duplicated\_rows} & \texttt{NULL} & minimum number of duplicated rows for each variable of a table up to which the information is put in only one row. \\
 \hline
 
-\texttt{col\_to\_display} & \texttt{c("person", "germplasm", "year", "block", "X", "Y")} & columns to display in the table. It can be a vector with \texttt{"person"}, \texttt{"year"}, \texttt{"germplasm"}, \texttt{"block"}, \texttt{"X"} and \texttt{"Y"}. If \texttt{NULL}, none of these columns are displayed. The variables follow these columns. 
+\texttt{col\_to\_display} & \texttt{c("person", "germplasm", "year", "block", "X", "Y")} & columns to display in the table. It can be a vector with \texttt{"person"}, \texttt{"year"}, \texttt{"germplasm"}, \texttt{"block"}, \texttt{"X"} and \texttt{"Y"}. If \texttt{NULL}, none of these columns is displayed. The variables follow these columns. 
 For \texttt{"data-S"} and \texttt{"data-SR"} type, the column \texttt{"expe"} and \texttt{"sl\_statut"} are added by default. \\
 \hline
 
 \texttt{invert\_row\_col} & \texttt{FALSE} & if \texttt{TRUE}, invert row and col in the table. This is possible only for \texttt{col\_to\_display = NULL}. \\
 \hline
 \end{tabular}
-\caption{Possible arguments to custom \texttt{get.table}.}
+\caption{Possible arguments to customize \texttt{get.table}.}
 \label{custom.table}
 \end{table}
 \end{center}
@@ -753,7 +753,7 @@ For \texttt{"data-S"} and \texttt{"data-SR"} type, the column \texttt{"expe"} an
 
 \end{itemize}
 
-For examples,
+For example,
 
 <<message=TRUE,cache=FALSE>>=
 tab_class = get.table(

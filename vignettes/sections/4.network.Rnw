@@ -348,7 +348,7 @@ It is possible to tune the following arguments:
 argument & default value & description \\
 \hline
 
-\texttt{x.axis} & \texttt{NULL} & factor display on the x.axis of a plot: \texttt{"germplasm"}, \texttt{"year"} or \texttt{"person"} referring to the attributes of a seed-lots. If NULL, all the combinaison are done for \texttt{x.axis} and \texttt{in.col}. \\
+\texttt{x.axis} & \texttt{NULL} & factor displayed on the x.axis of a plot: \texttt{"germplasm"}, \texttt{"year"} or \texttt{"person"} referring to the attributes of a seed-lots. If NULL, all the combinaisons are done for \texttt{x.axis} and \texttt{in.col}. \\
 \hline
 
 \texttt{in.col} & \texttt{NULL} & display in color of a plot: \texttt{"germplasm"}, \texttt{"year"} or \texttt{"person"} referring to the attributes of a seed-lots. If \texttt{NULL}, \texttt{in.col} is not displayed. \\
@@ -483,7 +483,7 @@ Or for both, for each subset of \texttt{x.axis}, you have the set of \texttt{in.
 \paragraph{\texttt{ggplot.display = map}}
 
 There are as many maps as years and a map with all the years mixed.
-The scale represent the number of seed-lots harvected.
+The scale represent the number of seed-lots harvested.
 
 \begin{itemize}
 
@@ -593,7 +593,7 @@ m7_dr
 
 \item Custom arguments
 
-Arguments can be customed related to maps. See Table \ref{custom.map}.
+Arguments can be customized related to maps. See Table \ref{custom.map}.
 
 \end{itemize}
 
@@ -631,14 +631,14 @@ cm$cross$map$`map-[2002, 2008, 2009]`
 
 \item Custom arguments
 
-Arguments can be customed related to barplots (Table \ref{custom.barplot}) or maps (Table \ref{custom.map}).
+Arguments can be customized related to barplots (Table \ref{custom.barplot}) or maps (Table \ref{custom.map}).
 
 \end{itemize}
 
 \subsubsection{Others \texttt{ggplot.type}}
 
-For the others \texttt{ggplot.type}, as it is exactly the same types of plots than for
-\texttt{ggplot.type = "network-reproduction-harvested"}, no examples are displayed in this vignette.
+For the other \texttt{ggplot.type}, as it is exactly the same type of plots than for
+\texttt{ggplot.type = "network-reproduction-harvested"}, no example is displayed in this vignette.
 
 The following table describe the different \texttt{ggplot.type}:
 
@@ -656,9 +656,9 @@ It corresponds to negative inter selection. \\
 
 \texttt{"network-diffusion-sent"} & seed-lots that have been sent to another location. \\
 
-\texttt{"network-diffusion-received"} & seed-lots that have been received to a given location. \\
+\texttt{"network-diffusion-received"} & seed-lots that have been received in a given location. \\
 
-\texttt{"network-mixture"} & seed-lots that have been mixted into a mixture. Note that mixture of replications are not counted here. \\
+\texttt{"network-mixture"} & seed-lots that have been mixed into a mixture. Note that mixtures of replications are not counted here. \\
 
 \texttt{"network-positive-intra-selected"} & seed-lots where intra germplasm selection have been done.
 It corresponds to mass selection. \\
