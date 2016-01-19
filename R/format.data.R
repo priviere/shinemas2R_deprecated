@@ -7,7 +7,7 @@
 #' 
 #' @param fuse_g_and_s Fuse germplasm and selection name information in a column named germplasm
 #' 
-#' @param correlated.variables If TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables
+#' @param correlated_group Name of the group of correlation in data. NULL by default.
 #' 
 #' @param format the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are severals format within a package. Possible values are "PPBstats".
 #' 
@@ -19,7 +19,7 @@ format.data = function(
 data,
 data.on = "son",
 fuse_g_and_s = FALSE,
-correlated.variables = TRUE,
+correlated_group = NULL,
 format = "PPBstats"
 )
 	# lets go !!! ----------
@@ -39,9 +39,15 @@ format = "PPBstats"
 										"data-SR-seed-lots")) 
 	) { stop(mess) }  
 	
-	if( correlated.variables ) { 
-		data = data$datasets.with.correlated.variables 
-	} else { data = data$datasets.with.non.correlated.variables }
+
+if( is.null(correlated_group) ) {
+	data = data$data	
+	} else { 
+		data_tmp = data$data.with.correlated.variables
+		if(is.element(correlated_group, names(d))) {
+			data = data_tmp[[correlated_group]]
+		} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
+	}
 	
 	
 if( format == "PPBstats" ) {
