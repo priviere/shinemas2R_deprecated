@@ -38,15 +38,16 @@ Possibles values are
 
 The function returns a list with
 \begin{itemize}
-\item the data set with correlated variables
-\item the data set with non correlated variables
+\item a data frame with the data set
+\item a list with data set with individuals that are correlated for a set of variables
 \item the description of methods used for each variable in with its description and units
 \end{itemize}
 
 Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. 
-Therefore the element of the list for non correlated data is always NULL.
+Therefore the element of the list for correlated data is always NULL.
 For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
 
+A data set with only correlated variables for each individual is useful when doing multivariate analysis such as PCA.
 
 The name of the variables are under the form \texttt{variable\_name---methods}.
 
@@ -84,20 +85,26 @@ vec_variables = c("plant_height", "spike_lenght", "spike_weight")
 load("./data/data_classic.RData")
 
 names(data_classic$data)
-colnames(data_classic$data$datasets.with.correlated.variables)
+colnames(data_classic$data$data)
 
 head(data_classic$methods)
 
 @
 
+The data with correlated variables :
 
-\subsubsection{Selection differentia (\texttt{query.type = "data-S"}), response to selection (\texttt{query.type = "data-SR"}) and heritability}
+<<message=TRUE,cache=FALSE>>=
+colnames(data_classic$data$data.with.correlated.variables)
+@
+
+
+\subsubsection{Selection differential (\texttt{query.type = "data-S"}), response to selection (\texttt{query.type = "data-SR"}) and heritability}
 \label{data-S-and-SR}
 
-For a given trait, selection differentia corresponds to the difference between mean of selected spikes and mean of bulk (i.e. spikes that have not been selected).
+For a given trait, selection differential corresponds to the difference between mean of selected spikes and mean of bulk (i.e. spikes that have not been selected).
 Response to selection correponds to the difference between mean of spikes coming from the selected spikes and the spikes coming from the bulk (Figure \ref{SandR}).
 
-Selection differentia ($S$) and response to selection ($R$) are linked with the realized heritability ($h_{r}^2$):
+Selection differential ($S$) and response to selection ($R$) are linked with the realized heritability ($h_{r}^2$):
 
 \begin{displaymath}
 R = h_{r}^2 \times S
@@ -108,7 +115,7 @@ See appendix \ref{text_SandR} for more details on the theroy behind this.
 \begin{figure}[H]
 \begin{center}
 \includegraphics[page=8, width=.8\textwidth]{SandR_EN.pdf}
-\caption{Seletion differentia ($S$) in 2014-2015 and response to selection ($R$) in 2015-2016. Circles and arrows in gray represent the seed-lots that have been sown in 2015 after harvest in 2015.}
+\caption{Seletion differential ($S$) in 2014-2015 and response to selection ($R$) in 2015-2016. Circles and arrows in gray represent the seed-lots that have been sown in 2015 after harvest in 2015.}
 \label{SandR}
 \end{center}
 \end{figure}
@@ -143,7 +150,7 @@ The data frame returned has a column \texttt{"expe"} which corresponds to an id 
 
 
 load("./data/data_S.RData")
-colnames(data_S$data$datasets.with.correlated.variables)
+colnames(data_S$data$data)
 @
 
 
@@ -178,7 +185,7 @@ The query takes into account when selection have been done in a seed lot, that t
 
 load("./data/data_SR.RData")
 
-colnames(data_SR$data$datasets.with.correlated.variables)
+colnames(data_SR$data$data)
 @
 
 
@@ -351,6 +358,19 @@ description &
 \rotatebox{90}{\texttt{data-interaction}} & 
 \rotatebox{90}{\texttt{data-radar}} & 
 \rotatebox{90}{\texttt{data-biplot}} \\
+\hline
+
+
+#' @param ggplot.on For "data-" type. 
+
+\texttt{ggplot.on} & 
+\texttt{"son"} & 
+\texttt{"father"} or \texttt{"son"} depending on which seed-lot you want to plot.. &
+X &
+X &
+X &
+X &
+X \\
 \hline
 
 \texttt{x.axis} & 
@@ -539,10 +559,10 @@ names(pm$`data-pie.on.map`)
 You can get the default ggplot (\texttt{p}) or customized it (\texttt{p\_bis}):
 
 <<message=TRUE,cache=FALSE,out.width=".8\\textwidth">>=
-p = pm$`data-pie.on.map`$`spike_weight---spike_weight`$`map-[2013]`
+p = pm$`data-pie.on.map`$`spike_weight---spike_weight`$`map-[2011]`
 
 p_bis = p + 
-	ggtitle("spike_weight in 2013") + # change the title
+	ggtitle("spike_weight in 2011") + # change the title
 	theme(legend.title=element_blank()) # delete the name of the legend
 @
 
