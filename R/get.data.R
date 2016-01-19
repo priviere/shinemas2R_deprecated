@@ -1701,7 +1701,7 @@ filter_V = V.sql(variable.in)
 				d1 = lapply(out_corr, arrange.data, data.type)
 				d2 = lapply(out_d, arrange.data, data.type)
 				
-				out.d = list("data" = d2, "data.with.correlated.variables" = d1)
+				out.d = list("data" = d2[[1]], "data.with.correlated.variables" = d1)
 				
 				# description of methods
 				filter_V = V.sql(vec_variable)
