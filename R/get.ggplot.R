@@ -6,7 +6,7 @@
 #'
 #' @param data output from get.data with query.type = "network" or query.type = "data-...".
 #' 
-#' @param correlated.variables if TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables
+#' @param correlated_group Name of the group of correlation in data. NULL by default.
 #' 
 #' @param fuse_g_and_s Fuse germplasm and selection name information in a column named germplasm
 #' 
@@ -119,7 +119,7 @@
 #' 
 get.ggplot <- function(
 	data,
-	correlated.variables = TRUE,
+	correlated_group = NULL,
 	fuse_g_and_s = FALSE,
 	ggplot.type = NULL,
 	ggplot.display = NULL,
@@ -149,12 +149,6 @@ data = data$data
 
 # 1. Check parameters and assign automatic parameters ########## ----------
 # 1.1. data -----------
-if( 
-	is.null(data$datasets.with.correlated.variables) & 
-	is.null(data$datasets.with.non.correlated.variables) & 
-	is.null(data$network)
-	) { message("data is NULL: nothing is done !"); return(NULL) }
-
 
 shinemas2R.object = attributes(data)$shinemas2R.object
 
@@ -163,6 +157,23 @@ test2 = length(grep("data", shinemas2R.object)) > 0
 test = unique(c(test1, test2))
 test = length(test) == 1 & test[1]
 if( test ){ stop("data must come from shinemas2R::get.data") }
+
+
+if( 
+	is.null(data$data) & 
+	is.null(data$data.with.correlated.variables) & 
+	is.null(data$network)
+) { message("data is NULL: nothing is done !"); return(NULL) }
+
+if( is.null(correlated_group) ) {
+	data = data$data	
+} else { 
+	data_tmp = data$data.with.correlated.variables
+	if(is.element(correlated_group, names(d))) {
+		data = data_tmp[[correlated_group]]
+	} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
+}
+
 
 if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-S-relation" | shinemas2R.object == "data-SR-seed-lots" | shinemas2R.object == "data-SR-relation" ) {
 	ggplot.type.dataS.dataSR = TRUE
@@ -386,11 +397,6 @@ if( length(vec_variables) > 0 & length(grep("network", shinemas2R.object)) > 0 )
 
 
 if( test2 ){
-	
-	if( correlated.variables ) { 
-		data = data$datasets.with.correlated.variables 
-	} else { data = data$datasets.with.non.correlated.variables }
-
 	
 	if( fuse_g_and_s ) { 
 		data$son_germplasm = sapply(as.character(data$son), function(x){unlist(strsplit(x,"_"))[1]}) 
