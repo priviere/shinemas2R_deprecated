@@ -10,7 +10,7 @@ From 2014 to today, farmers organisations' facilitators informed on  their speci
 
 \BD~stores information related to (Figure \ref{relation_SL}):
 \begin{itemize}
-\item network relation betweens \sl
+\item network relations between \sl
 \item data linked to the \sl~and to the relations between \sl
 \end{itemize}
 
@@ -18,7 +18,7 @@ From 2014 to today, farmers organisations' facilitators informed on  their speci
 \begin{center}
 \includegraphics[width=.8\textwidth]{relation_SL_EN}
 \caption{
-Seed-lots relation in \BD. 
+Seed-lots relations in \BD. 
 The \sl~are represented by a circle.
 The color represents a germplasm (i.e. a variety).
 The arrows represent the relations between \sl~(diffusion, mixture, reproduction, crosses and selection).
@@ -28,10 +28,10 @@ Data are linked to the \sl~and to the relations between \sl.
 \end{center}
 \end{figure}
 
-\BD~can be download \href{http://moulon.inra.fr/index.php/en/tranverse-team/atelier-de-bioinformatique/projects/181}{here}.
+\BD~can be downloaded \href{http://moulon.inra.fr/index.php/en/tranverse-team/atelier-de-bioinformatique/projects/181}{here}.
 More information on the history of \BD~and its uses with tutorials can be found on the \href{http://moulon.inra.fr/index.php/en/tranverse-team/atelier-de-bioinformatique/projects/181}{website} \citep{deoliveira_shinemas_2015}.\\
 
-\pack~is an \R~package that analyses outputs from \BD.
+\pack~is an \R~package that analyzes outputs from \BD.
 It does descriptive analysis, formats data for existing \R~packages to perform statistical analysis as well as compiles results in pdf.
 
 
@@ -43,14 +43,14 @@ It does descriptive analysis, formats data for existing \R~packages to perform s
 \item Get the data from \BD~with \texttt{get.data}. You may encrypt the data with \texttt{encrypt.data} or translate it with \texttt{translate.data}.
 There are two types of data:
 \begin{itemize}
-\item network relation betweens \sl~(section \ref{network})
+\item network relations between \sl~(section \ref{network})
 \item data linked to the \sl~and to the relations between \sl~(section \ref{data})
 \end{itemize}
 
 \item From the data,
 	\begin{enumerate}
 	\item Get descriptive outputs from the data: plots with \texttt{get.ggplot} or tables with \texttt{get.table}
-	\item Get statistical outputs by formating the data with \texttt{format.data} in order to use an existing \R~package~(Up to now the following packages can be used: \texttt{PPBstats})
+	\item Get statistical outputs by formating the data with \texttt{format.data} in order to use an existing \R~package~(up to now the following package can be used: \texttt{PPBstats})
 	\end{enumerate}
 \item Get a pdf that compiles the outputs in a pdf document with \texttt{get.pdf} (section \ref{pdf})
 \end{enumerate}
@@ -108,5 +108,5 @@ and then \texttt{load()} it.
 Nevertheless, it may be useful to install \BD~in order to test the \texttt{get.data} function.
 The procedure to do so is explained in appendix \ref{install_shinemas}.
 
-For an easier visualisation, all warning messages are not representing (NAs introduced, rows deleted, etc.)
+For an easier visualization, all warning messages are not represented (NAs introduced, rows deleted, etc.)
 
