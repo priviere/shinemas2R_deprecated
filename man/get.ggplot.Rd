@@ -4,7 +4,7 @@
 \alias{get.ggplot}
 \title{Get ggplot objects from \code{get.data}}
 \usage{
-get.ggplot(data, correlated.variables = TRUE, fuse_g_and_s = FALSE,
+get.ggplot(data, correlated_group = NULL, fuse_g_and_s = FALSE,
   ggplot.type = NULL, ggplot.display = NULL, ggplot.on = "son",
   x.axis = NULL, in.col = NULL, vec_variables = NULL,
   nb_parameters_per_plot_x.axis = NULL,
@@ -17,7 +17,7 @@ get.ggplot(data, correlated.variables = TRUE, fuse_g_and_s = FALSE,
 \arguments{
 \item{data}{output from get.data with query.type = "network" or query.type = "data-...".}
 
-\item{correlated.variables}{if TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables}
+\item{correlated_group}{Name of the group of correlation in data. NULL by default.}
 
 \item{fuse_g_and_s}{Fuse germplasm and selection name information in a column named germplasm}
 
