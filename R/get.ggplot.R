@@ -41,7 +41,7 @@
 #' 
 #' @param ggplot.display For "network-" data: "barplot", "map". It can be a vector of several elements i.e. c("barplot", "map"). NULL by default: both are done.
 #' 
-#' @param ggplot.on For "data-" type. father" or "son" depending on which seed-lot you want to plot.
+#' @param ggplot.on For "data-" type. "father" or "son" depending on which seed-lot you want to plot.
 #' 
 #' @param x.axis factor displayed on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.
 #' 
@@ -873,10 +873,6 @@ if( check.arg("data-biplot", ggplot.type) & length(vec_variables) < 2 ) { warnin
 
 # 4.6. data-pie.on.map ----------
 if( check.arg("data-pie.on.map", ggplot.type) ) {
-
-	coord.info = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "network", germplasm.in = "Rouge-du-Roc", filter.on = "son")$data$network.info # avoir long lat, pers seule avec un ggplot.type adequate
-	print("avoir long lat, pers seule avec un ggplot.type adequate")
-	
 	colnames(data)[which(colnames(data) == x.axis)] = "x.axis"
 	vec_x.axis = sort(unique(data$x.axis))
 	
@@ -885,13 +881,20 @@ if( check.arg("data-pie.on.map", ggplot.type) ) {
 		data_var = data
 		colnames(data_var)[which(colnames(data_var) == var)] = "variable"
 		
+		if( ggplot.on == "son" ){ 
+			colnames(data_var)[which(colnames(data_var) == "son_lat")] = "lat" 
+			colnames(data_var)[which(colnames(data_var) == "son_long")] = "long" 
+			}
+		if( ggplot.on == "father" ){ 
+			colnames(data_var)[which(colnames(data_var) == "father_lat")] = "lat" 
+			colnames(data_var)[which(colnames(data_var) == "father_long")] = "long" 
+			}
+				
 		out = NULL
 
 		for(x in vec_x.axis){
-			data_tmp = filter(data_var, x.axis %in% x)
+			data.map = filter(data_var, x.axis %in% x)
 
-			data.map = join(data_tmp, unique(coord.info[,c("person", "long", "lat")]), by = "person")
-			
 			# delete if info is missing for long and lat and put a message
 			no_lat_or_long = unique(c(which(is.na(data.map$long)), which(is.na(data.map$lat))))
 			if( length(no_lat_or_long) > 0 ) {
