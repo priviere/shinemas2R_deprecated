@@ -84,8 +84,8 @@
 \newcommand{\BDfull}{Seed History and Network Management System}
 \newcommand{\BD}{SHiNeMaS}
 \newcommand{\pack}{\texttt{shinemas2R}}
-
-\newcommand{\versionnumber}{0.9}
+\newcommand{\listpackformatdata}{\texttt{PPBstats}}
+\newcommand{\versionnumber}{0.9.1}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
@@ -152,7 +152,7 @@ There are two types of data:
 \item From the data,
 	\begin{enumerate}
 	\item Get descriptive outputs from the data: plots with \texttt{get.ggplot} or tables with \texttt{get.table}
-	\item Get statistical outputs by formating the data with \texttt{format.data} in order to use an existing \R~package~(Up to now the following packages can be used: \texttt{PPBstats})
+	\item Get statistical outputs by formating the data with \texttt{format.data} in order to use an existing \R~package~(The following packages can be used: \listpackformatdata).
 	\end{enumerate}
 \item Get a pdf that compiles the outputs in a pdf document with \texttt{get.pdf} (section \ref{pdf})
 \end{enumerate}
@@ -199,9 +199,58 @@ To continue, load the package:
 \end{kframe}
 \end{knitrout}
 
-In this vignette, you can test \pack~without installing \BD.
+For an easier visualisation, all warning messages are not representing (NAs introduced, rows deleted, etc.)
 
-You can load the data-sets by downloading it:
+\subsubsection{Test with \BD~installed}
+
+It may be useful to test the \texttt{get.data} function on \BD~directly.
+Two options:
+\begin{itemize}
+\item \BD~is installed on a sever where you can have access. 
+You need to ask the admin the following information : \texttt{db\_user}, \texttt{db\_host}, \texttt{db\_name}, \texttt{db\_password}. 
+Add these information in \texttt{info\_db}, which is needed in the next steps in \texttt{get.data}.
+For example: 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{info_db} \hlkwb{=} \hlkwd{list}\hlstd{(}
+        \hlkwc{db_user} \hlstd{=} \hlstr{"toto"}\hlstd{,}
+        \hlkwc{db_host} \hlstd{=} \hlstr{"127.175.166.175"}\hlstd{,}
+        \hlkwc{db_name} \hlstd{=} \hlstr{"my_shinemas"}\hlstd{,}
+        \hlkwc{db_password} \hlstd{=} \hlstr{"secret"}
+        \hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\item install a demo of \BD.
+The procedure to do so is explained in appendix \ref{install_shinemas}.
+
+\end{itemize}
+
+As you will use \texttt{get.data}, you should set:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{use.get.data} \hlkwb{=} \hlnum{TRUE}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\subsubsection{Test without installing \BD}
+
+In this vignette, you can test \pack~without installing \BD.
+You do not use the \texttt{get.data} function:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{use.get.data} \hlkwb{=} \hlnum{FALSE}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+And you can load the data-sets by downloading it:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -213,12 +262,6 @@ You can load the data-sets by downloading it:
 \end{knitrout}
 
 and then \texttt{load()} it.
-
-
-Nevertheless, it may be useful to install \BD~in order to test the \texttt{get.data} function.
-The procedure to do so is explained in appendix \ref{install_shinemas}.
-
-For an easier visualisation, all warning messages are not representing (NAs introduced, rows deleted, etc.)
 
 
 \newpage
@@ -254,13 +297,16 @@ For example,
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# person = get.data(}
-\hlcom{#	db_user = info_db$db_user, db_host = info_db$db_host,# db infos}
-\hlcom{#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos}
-\hlcom{#	query.type = "person" # information on person present in SHiNeMaS}
-\hlcom{#	)}
+\hlkwa{if}\hlstd{(use.get.data)\{}
+        \hlstd{person} \hlkwb{=} \hlkwd{get.data}\hlstd{(}
+                \hlkwc{db_user} \hlstd{= info_db}\hlopt{$}\hlstd{db_user,} \hlkwc{db_host} \hlstd{= info_db}\hlopt{$}\hlstd{db_host,}\hlcom{# db infos}
+                \hlkwc{db_name} \hlstd{= info_db}\hlopt{$}\hlstd{db_name,} \hlkwc{db_password} \hlstd{= info_db}\hlopt{$}\hlstd{db_password,} \hlcom{# db infos}
+                \hlkwc{query.type} \hlstd{=} \hlstr{"person"} \hlcom{# information on person present in SHiNeMaS}
+        \hlstd{)}
+\hlstd{\}} \hlkwa{else} \hlstd{\{}
+                \hlkwd{load}\hlstd{(}\hlstr{"data/person.RData"}\hlstd{)}
+        \hlstd{\}}
 
-\hlkwd{load}\hlstd{(}\hlstr{"data/person.RData"}\hlstd{)}
 \hlstd{person}\hlopt{$}\hlstd{data}
 \end{alltt}
 \begin{verbatim}
@@ -323,25 +369,26 @@ It can be put in relation with genetic $F_{st}$ for example \citep{nei_analysis_
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{#data_network = get.data(}
-\hlcom{#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos}
-\hlcom{#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos}
-\hlcom{#	query.type = "network", # network query}
-\hlcom{#	germplasm.in = "Rouge-du-Roc", # germplasm to keep}
-\hlcom{#	filter.on = "father-son", # filter on father AND son}
-\hlcom{#	Mdist = TRUE}
-\hlcom{#	)}
+\hlkwa{if}\hlstd{(use.get.data)\{}
+        \hlstd{data_network} \hlkwb{=} \hlkwd{get.data}\hlstd{(}
+                \hlkwc{db_user} \hlstd{= info_db}\hlopt{$}\hlstd{db_user,} \hlkwc{db_host} \hlstd{= info_db}\hlopt{$}\hlstd{db_host,} \hlcom{# db infos}
+                \hlkwc{db_name} \hlstd{= info_db}\hlopt{$}\hlstd{db_name,} \hlkwc{db_password} \hlstd{= info_db}\hlopt{$}\hlstd{db_password,} \hlcom{# db infos}
+                \hlkwc{query.type} \hlstd{=} \hlstr{"network"}\hlstd{,} \hlcom{# network query}
+                \hlkwc{germplasm.in} \hlstd{=} \hlstr{"Rouge-du-Roc"}\hlstd{,} \hlcom{# germplasm to keep}
+                \hlkwc{filter.on} \hlstd{=} \hlstr{"father-son"}\hlstd{,} \hlcom{# filter on father AND son}
+                \hlkwc{Mdist} \hlstd{=} \hlnum{TRUE}
+                \hlstd{)}
+\hlstd{\}} \hlkwa{else} \hlstd{\{}
+        \hlcom{# 1. Query SHiNeMaS ...}
+        \hlcom{# 2. Create network matrix ...}
+        \hlcom{# 3. Link information to vertex and edges ...}
+        \hlcom{# 4. Get network information on seed-lots ...}
+        \hlcom{# 5. Get Mdist square matrix ...}
 
-\hlcom{# 1. Query SHiNeMaS ...}
-\hlcom{# 2. Create network matrix ...}
-\hlcom{# 3. Link information to vertex and edges ...}
-\hlcom{# 4. Get network information on seed-lots ...}
-\hlcom{# 5. Get Mdist square matrix ...}
-
-\hlcom{#data_network = encrypt.data(data_network)}
-\hlcom{#The key has been written in /home/pierre/key_network_Tue Nov 24 11:52:47 2015.RData}
-
-\hlkwd{load}\hlstd{(}\hlstr{"./data/data_network.RData"}\hlstd{)}
+        \hlcom{#data_network = encrypt.data(data_network)}
+        \hlcom{#The key has been written in /home/pierre/key_network_Tue Nov 24 11:52:47 2015.RData}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/data_network.RData"}\hlstd{)}
+        \hlstd{\}}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -458,23 +505,24 @@ To do so, use \texttt{fill.diffusion.gap = TRUE}.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{#data_network_JAB = get.data(}
-\hlcom{#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos}
-\hlcom{#	db_name = info_db$db_name, db_password = info_db$db_password,  # db infos}
-\hlcom{#	query.type = "network", # network query}
-\hlcom{#	person.in = "JAB", # person to keep}
-\hlcom{#	filter.on = "father-son" # filter on father AND son}
-\hlcom{#	)}
+\hlkwa{if}\hlstd{(use.get.data)\{}
+        \hlstd{data_network_JAB} \hlkwb{=} \hlkwd{get.data}\hlstd{(}
+                \hlkwc{db_user} \hlstd{= info_db}\hlopt{$}\hlstd{db_user,} \hlkwc{db_host} \hlstd{= info_db}\hlopt{$}\hlstd{db_host,} \hlcom{# db infos}
+                \hlkwc{db_name} \hlstd{= info_db}\hlopt{$}\hlstd{db_name,} \hlkwc{db_password} \hlstd{= info_db}\hlopt{$}\hlstd{db_password,}  \hlcom{# db infos}
+                \hlkwc{query.type} \hlstd{=} \hlstr{"network"}\hlstd{,} \hlcom{# network query}
+                \hlkwc{person.in} \hlstd{=} \hlstr{"JAB"}\hlstd{,} \hlcom{# person to keep}
+                \hlkwc{filter.on} \hlstd{=} \hlstr{"father-son"} \hlcom{# filter on father AND son}
+                \hlstd{)}
+\hlstd{\}} \hlkwa{else} \hlstd{\{}
+        \hlcom{# 1. Query SHiNeMaS ...}
+        \hlcom{# 2. Create network matrix ...}
+        \hlcom{# 3. Link information to vertex and edges ...}
+        \hlcom{# 4. Get network information on seed-lots ...}
 
-\hlcom{# 1. Query SHiNeMaS ...}
-\hlcom{# 2. Create network matrix ...}
-\hlcom{# 3. Link information to vertex and edges ...}
-\hlcom{# 4. Get network information on seed-lots ...}
-
-\hlcom{#data_network_JAB = encrypt.data(data_network_JAB)}
-\hlcom{# The key has been written in /home/pierre/key_network_Tue Nov 24 11:54:53 2015.RData}
-
-\hlkwd{load}\hlstd{(}\hlstr{"./data/data_network_JAB.RData"}\hlstd{)}
+        \hlcom{#data_network_JAB = encrypt.data(data_network_JAB)}
+        \hlcom{# The key has been written in /home/pierre/key_network_Tue Nov 24 11:54:53 2015.RData}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/data_network_JAB.RData"}\hlstd{)}
+        \hlstd{\}}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -482,25 +530,26 @@ To do so, use \texttt{fill.diffusion.gap = TRUE}.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{#data_network_JAB_fill_gap = get.data(}
-\hlcom{#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos}
-\hlcom{#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos}
-\hlcom{#	query.type = "network", # network query}
-\hlcom{#	person.in = "JAB", # person to keep}
-\hlcom{#	filter.on = "father-son", # filter on father AND son}
-\hlcom{#	fill.diffusion.gap = TRUE}
-\hlcom{#	)}
+\hlkwa{if}\hlstd{(use.get.data)\{}
+        \hlstd{data_network_JAB_fill_gap} \hlkwb{=} \hlkwd{get.data}\hlstd{(}
+                \hlkwc{db_user} \hlstd{= info_db}\hlopt{$}\hlstd{db_user,} \hlkwc{db_host} \hlstd{= info_db}\hlopt{$}\hlstd{db_host,} \hlcom{# db infos}
+                \hlkwc{db_name} \hlstd{= info_db}\hlopt{$}\hlstd{db_name,} \hlkwc{db_password} \hlstd{= info_db}\hlopt{$}\hlstd{db_password,} \hlcom{# db infos}
+                \hlkwc{query.type} \hlstd{=} \hlstr{"network"}\hlstd{,} \hlcom{# network query}
+                \hlkwc{person.in} \hlstd{=} \hlstr{"JAB"}\hlstd{,} \hlcom{# person to keep}
+                \hlkwc{filter.on} \hlstd{=} \hlstr{"father-son"}\hlstd{,} \hlcom{# filter on father AND son}
+                \hlkwc{fill.diffusion.gap} \hlstd{=} \hlnum{TRUE}
+                \hlstd{)}
+\hlstd{\}} \hlkwa{else} \hlstd{\{}
+        \hlcom{# 1. Query SHiNeMaS ...}
+        \hlcom{# 2. Create network matrix ...}
+        \hlcom{# 2.1. Fill diffusion gaps ...}
+        \hlcom{# 3. Link information to vertex and edges ...}
+        \hlcom{# 4. Get network information on seed-lots ...}
 
-\hlcom{# 1. Query SHiNeMaS ...}
-\hlcom{# 2. Create network matrix ...}
-\hlcom{# 2.1. Fill diffusion gaps ...}
-\hlcom{# 3. Link information to vertex and edges ...}
-\hlcom{# 4. Get network information on seed-lots ...}
-
-\hlcom{#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)}
-\hlcom{# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData}
-
-\hlkwd{load}\hlstd{(}\hlstr{"./data/data_network_JAB_fill_gap.RData"}\hlstd{)}
+        \hlcom{#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)}
+        \hlcom{# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/data_network_JAB_fill_gap.RData"}\hlstd{)}
+        \hlstd{\}}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -518,7 +567,7 @@ Once, you have got the data, you can do plots with the function \texttt{get.ggpl
 \end{alltt}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# As ggplot.type is NULL, ggplot.type is set to network-network, network-reproduction-harvested, network-reproduction-positive-inter-selected, network-reproduction-positive-inter-selected, network-reproduction-negative-inter-selected, network-reproduction-crossed, network-diffusion-sent, network-diffusion-received, network-diffusion-relation, network-mixture, network-positive-intra-selected\\\#\# As ggplot.display is NULL, ggplot.display is set to c("{}barplot"{}, "{}map"{}). Note that for ggplot.type == "{}network-diffusion-relation"{}, ggplot.display is set to "{}map"{} \\\#\# As x.axis and in.col are NULL, all the combinaisons of x.axis and in.col are done for barplot.}}\begin{verbatim}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# As ggplot.type is NULL, ggplot.type is set to network-network, network-reproduction-sown, network-reproduction-harvested, network-reproduction-positive-inter-selected, network-reproduction-positive-inter-selected, network-reproduction-negative-inter-selected, network-reproduction-crossed, network-diffusion-sent, network-diffusion-received, network-diffusion-relation, network-mixture, network-positive-intra-selected\\\#\# As ggplot.display is NULL, ggplot.display is set to c("{}barplot"{}, "{}map"{}). Note that for ggplot.type == "{}network-diffusion-relation"{}, ggplot.display is set to "{}map"{} \\\#\# As x.axis and in.col are NULL, all the combinaisons of x.axis and in.col are done for barplot.}}\begin{verbatim}
 ## [1] "A METTRE A JOUR QUAND ON AURA EVENT YEAR"
 ## [1] "A METTRE A JOUR QUAND ON AURA EVENT YEAR"
 \end{verbatim}
@@ -534,15 +583,16 @@ By default, all the possibles plots or maps are done.
 \end{alltt}
 \begin{verbatim}
 ##  [1] "network-network"                             
-##  [2] "network-reproduction-harvested"              
-##  [3] "network-reproduction-positive-inter-selected"
-##  [4] "network-reproduction-negative-inter-selected"
-##  [5] "network-diffusion-sent"                      
-##  [6] "network-diffusion-received"                  
-##  [7] "network-diffusion-relation"                  
-##  [8] "network-mixture"                             
-##  [9] "network-positive-intra-selected"             
-## [10] "network-reproduction-crossed"
+##  [2] "network-reproduction-sown"                   
+##  [3] "network-reproduction-harvested"              
+##  [4] "network-reproduction-positive-inter-selected"
+##  [5] "network-reproduction-negative-inter-selected"
+##  [6] "network-diffusion-sent"                      
+##  [7] "network-diffusion-received"                  
+##  [8] "network-diffusion-relation"                  
+##  [9] "network-mixture"                             
+## [10] "network-positive-intra-selected"             
+## [11] "network-reproduction-crossed"
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -564,7 +614,7 @@ By default, the following network is display:
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-20-1} 
+{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-23-1} 
 
 }
 
@@ -603,7 +653,7 @@ We can see that extra information are added to know from where come the seed-lot
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.5\textwidth]{figures/shinemas2R_unnamed-chunk-22-1} 
+{\centering \includegraphics[width=.5\textwidth]{figures/shinemas2R_unnamed-chunk-25-1} 
 
 }
 
@@ -614,7 +664,7 @@ We can see that extra information are added to know from where come the seed-lot
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.5\textwidth]{figures/shinemas2R_unnamed-chunk-23-1} 
+{\centering \includegraphics[width=.5\textwidth]{figures/shinemas2R_unnamed-chunk-26-1} 
 
 }
 
@@ -687,7 +737,7 @@ For example,
 \end{kframe}
 
 
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-24-1} 
+{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-27-1} 
 
 }
 
@@ -766,7 +816,7 @@ plot & \texttt{x.axis} & \texttt{in.col} \\
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-26-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-29-1} 
 
 }
 
@@ -777,7 +827,7 @@ plot & \texttt{x.axis} & \texttt{in.col} \\
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-27-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-30-1} 
 
 }
 
@@ -789,7 +839,7 @@ plot & \texttt{x.axis} & \texttt{in.col} \\
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-28-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-31-1} 
 
 }
 
@@ -800,7 +850,7 @@ plot & \texttt{x.axis} & \texttt{in.col} \\
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-29-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-32-1} 
 
 }
 
@@ -812,7 +862,7 @@ plot & \texttt{x.axis} & \texttt{in.col} \\
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-30-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-33-1} 
 
 }
 
@@ -823,7 +873,7 @@ plot & \texttt{x.axis} & \texttt{in.col} \\
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-31-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-34-1} 
 
 }
 
@@ -919,7 +969,7 @@ Note that you can easily change settings of the plot as it is a ggplot object, f
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-35-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-38-1} 
 
 }
 
@@ -930,7 +980,7 @@ Note that you can easily change settings of the plot as it is a ggplot object, f
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-36-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-39-1} 
 
 }
 
@@ -942,7 +992,7 @@ Note that you can easily change settings of the plot as it is a ggplot object, f
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-37-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-40-1} 
 
 }
 
@@ -953,7 +1003,7 @@ Note that you can easily change settings of the plot as it is a ggplot object, f
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-38-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-41-1} 
 
 }
 
@@ -965,7 +1015,7 @@ Note that you can easily change settings of the plot as it is a ggplot object, f
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-39-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-42-1} 
 
 }
 
@@ -976,7 +1026,7 @@ Note that you can easily change settings of the plot as it is a ggplot object, f
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-40-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-43-1} 
 
 }
 
@@ -1015,7 +1065,7 @@ Or for \texttt{in.col}:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-42-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-45-1} 
 
 }
 
@@ -1026,7 +1076,7 @@ Or for \texttt{in.col}:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-43-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-46-1} 
 
 }
 
@@ -1038,7 +1088,7 @@ Or for \texttt{in.col}:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-44-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-47-1} 
 
 }
 
@@ -1072,19 +1122,23 @@ The scale represent the number of seed-lots harvected.
 \hlkwd{names}\hlstd{(m_slh)}
 \end{alltt}
 \begin{verbatim}
-## [1] "map-[2002]"                                          
-## [2] "map-[2006]"                                          
-## [3] "map-[2008]"                                          
-## [4] "map-[2009]"                                          
-## [5] "map-[2010]"                                          
-## [6] "map-[2011]"                                          
-## [7] "map-[2012]"                                          
-## [8] "map-[2014]"                                          
-## [9] "map-[2002, 2006, 2008, 2009, 2010, 2011, 2012, 2014]"
+##  [1] "map-[2002]"                                                                  
+##  [2] "map-[2003]"                                                                  
+##  [3] "map-[2004]"                                                                  
+##  [4] "map-[2005]"                                                                  
+##  [5] "map-[2006]"                                                                  
+##  [6] "map-[2007]"                                                                  
+##  [7] "map-[2008]"                                                                  
+##  [8] "map-[2009]"                                                                  
+##  [9] "map-[2010]"                                                                  
+## [10] "map-[2011]"                                                                  
+## [11] "map-[2012]"                                                                  
+## [12] "map-[2014]"                                                                  
+## [13] "map-[2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2014]"
 \end{verbatim}
 \begin{alltt}
 \hlstd{m4_slh} \hlkwb{=} \hlstd{m_slh}\hlopt{$}\hlstd{`map-[2011]`}
-\hlstd{m9_slh} \hlkwb{=} \hlstd{m_slh}\hlopt{$}\hlstd{`map-[2002, 2006, 2008, 2009, 2010, 2011, 2012, 2014]`}
+\hlstd{m9_slh} \hlkwb{=} \hlstd{m_slh}\hlopt{$}\hlstd{`map-[2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2014]`}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -1095,7 +1149,7 @@ The scale represent the number of seed-lots harvected.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-46-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-49-1} 
 
 }
 
@@ -1106,7 +1160,7 @@ The scale represent the number of seed-lots harvected.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-47-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-50-1} 
 
 }
 
@@ -1163,7 +1217,7 @@ For example,
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figures/shinemas2R_unnamed-chunk-48-1} 
+{\centering \includegraphics[width=.6\textwidth]{figures/shinemas2R_unnamed-chunk-51-1} 
 
 }
 
@@ -1213,7 +1267,7 @@ The size of the arrows is proprotionnal to the number of diffusions (\texttt{nb\
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-50-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-53-1} 
 
 }
 
@@ -1224,7 +1278,7 @@ The size of the arrows is proprotionnal to the number of diffusions (\texttt{nb\
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-51-1} 
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-54-1} 
 
 }
 
@@ -1286,7 +1340,7 @@ For example:
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figures/shinemas2R_unnamed-chunk-53-1} 
+{\centering \includegraphics[width=.6\textwidth]{figures/shinemas2R_unnamed-chunk-56-1} 
 
 }
 
@@ -1301,7 +1355,7 @@ For example:
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\textwidth]{figures/shinemas2R_unnamed-chunk-54-1} 
+{\centering \includegraphics[width=.6\textwidth]{figures/shinemas2R_unnamed-chunk-57-1} 
 
 }
 
@@ -1327,6 +1381,8 @@ The following table describe the different \texttt{ggplot.type}:
 \hline
 \texttt{ggplot.type} & description \\
 \hline
+
+\texttt{"network-reproduction-sown"} & seed-lots that have been sown. \\
 
 \texttt{"network-reproduction-positive-inter-selected"} & seed-lots that have been harvested after a reproduction and have been sown the next season.
 It corresponds to positive inter selection. \\
@@ -1404,7 +1460,7 @@ values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \t
 It is important to choose if you apply the filter on the \texttt{father} or the \texttt{son} of a relation.
 This can be done with the argument \texttt{filter.on}.
 Possibles values are \texttt{"father"}, \texttt{"son"} or \texttt{"father-son"}.
-It is set by default to \texttt{"father-son"}.
+
 
 You can either query information on relation between \sl~or on \sl.
 This is set with the argument \texttt{data.type}.
@@ -1416,13 +1472,18 @@ Possibles values are
 \end{itemize}
 
 
-Each \texttt{query.type} are explained in the following sub-sections.
-For all, the function returns a list with
+The function returns a list with
 \begin{itemize}
-\item the data set with correlated variables
-\item the data set with non correlated variables
-\item the description of the methodes used for each variable
+\item a data frame with the data set
+\item a list with data set with individuals that are correlated for a set of variables
+\item the description of methods used for each variable in with its description and units
 \end{itemize}
+
+Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. 
+Therefore the element of the list for correlated data is always NULL.
+For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
+
+A data set with only correlated variables for each individual is useful when doing multivariate analysis such as PCA.
 
 The name of the variables are under the form \texttt{variable\_name---methods}.
 
@@ -1443,37 +1504,37 @@ In the following examples, three variables are studied:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{#data_classic = get.data(}
-\hlcom{#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos}
-\hlcom{#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos}
-\hlcom{#	query.type = "data-classic", # data-classic query}
-\hlcom{#	person.in = "RAB", # person to keep}
-\hlcom{#	filter.on = "father-son", # filters on father AND son}
-\hlcom{#	data.type = "relation", # data linked to relation between seed-lots}
-\hlcom{#	variable = vec_variables, # the variables to display}
-\hlcom{#	project.in = "PPB" # the project }
-\hlcom{#	)}
+\hlkwa{if}\hlstd{(use.get.data)\{}
+        \hlstd{data_classic} \hlkwb{=} \hlkwd{get.data}\hlstd{(}
+                \hlkwc{db_user} \hlstd{= info_db}\hlopt{$}\hlstd{db_user,} \hlkwc{db_host} \hlstd{= info_db}\hlopt{$}\hlstd{db_host,} \hlcom{# db infos}
+                \hlkwc{db_name} \hlstd{= info_db}\hlopt{$}\hlstd{db_name,} \hlkwc{db_password} \hlstd{= info_db}\hlopt{$}\hlstd{db_password,} \hlcom{# db infos}
+                \hlkwc{query.type} \hlstd{=} \hlstr{"data-classic"}\hlstd{,} \hlcom{# data-classic query}
+                \hlkwc{person.in} \hlstd{=} \hlstr{"RAB"}\hlstd{,} \hlcom{# person to keep}
+                \hlkwc{filter.on} \hlstd{=} \hlstr{"father-son"}\hlstd{,} \hlcom{# filters on father AND son}
+                \hlkwc{data.type} \hlstd{=} \hlstr{"relation"}\hlstd{,} \hlcom{# data linked to relation between seed-lots}
+                \hlkwc{variable} \hlstd{= vec_variables,} \hlcom{# the variables to display}
+                \hlkwc{project.in} \hlstd{=} \hlstr{"PPB"} \hlcom{# the project }
+                \hlstd{)}
+\hlstd{\}} \hlkwa{else} \hlstd{\{}
+        \hlcom{# 1. Query SHiNeMaS ...}
+        \hlcom{# 2. Set up data set ...}
+        \hlcom{# |==========================================================| 100%}
 
-\hlcom{# 1. Query SHiNeMaS ...}
-\hlcom{# 2. Set up data set ...}
-\hlcom{# |==========================================================| 100%}
-
-\hlcom{#data_classic = encrypt.data(data_classic)}
-\hlcom{#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 24 11:59:59 2015.RData}
-
-\hlcom{#data_classic = data_classic}
-
-\hlkwd{load}\hlstd{(}\hlstr{"./data/data_classic.RData"}\hlstd{)}
+        \hlcom{#data_classic = encrypt.data(data_classic)}
+        \hlcom{#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 24 11:59:59 2015.RData}
+        \hlcom{#data_classic = data_classic}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/data_classic.RData"}\hlstd{)}
+\hlstd{\}}
 
 \hlkwd{names}\hlstd{(data_classic}\hlopt{$}\hlstd{data)}
 \end{alltt}
 \begin{verbatim}
-## [1] "datasets.with.correlated.variables"    
-## [2] "datasets.with.non.correlated.variables"
+## [1] "data"                          
+## [2] "data.with.correlated.variables"
 ## [3] "methods"
 \end{verbatim}
 \begin{alltt}
-\hlkwd{colnames}\hlstd{(data_classic}\hlopt{$}\hlstd{data}\hlopt{$}\hlstd{datasets.with.correlated.variables)}
+\hlkwd{colnames}\hlstd{(data_classic}\hlopt{$}\hlstd{data}\hlopt{$}\hlstd{data)}
 \end{alltt}
 \begin{verbatim}
 ##  [1] "son"                           "son_ind"                      
@@ -1489,21 +1550,41 @@ In the following examples, three variables are studied:
 ## [21] "selection_person"              "mixture_id"                   
 ## [23] "diffusion_id"                  "X"                            
 ## [25] "Y"                             "block"                        
-## [27] "project"                       "ID"                           
-## [29] "spike_weight---spike_weight"   "plant_height---plant_height"  
-## [31] "spike_lenght---spike_length_F" "spike_lenght---spike_lenght"
+## [27] "project"                       "correlation_group"            
+## [29] "ID"                            "spike_weight---spike_weight"  
+## [31] "plant_height---plant_height"   "spike_lenght---spike_length_F"
+## [33] "spike_lenght---spike_lenght"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{head}\hlstd{(data_classic}\hlopt{$}\hlstd{methods)}
+\end{alltt}
+\begin{verbatim}
+## NULL
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The data with correlated variables :
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{colnames}\hlstd{(data_classic}\hlopt{$}\hlstd{data}\hlopt{$}\hlstd{data.with.correlated.variables)}
+\end{alltt}
+\begin{verbatim}
+## NULL
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
 
 
-\subsubsection{Selection differentia (\texttt{query.type = "data-S"}), response to selection (\texttt{query.type = "data-SR"}) and heritability}
+\subsubsection{Selection differential (\texttt{query.type = "data-S"}), response to selection (\texttt{query.type = "data-SR"}) and heritability}
 \label{data-S-and-SR}
 
-For a given trait, selection differentia corresponds to the difference between mean of selected spikes and mean of bulk (i.e. spikes that have not been selected).
+For a given trait, selection differential corresponds to the difference between mean of selected spikes and mean of bulk (i.e. spikes that have not been selected).
 Response to selection correponds to the difference between mean of spikes coming from the selected spikes and the spikes coming from the bulk (Figure \ref{SandR}).
 
-Selection differentia ($S$) and response to selection ($R$) are linked with the realized heritability ($h_{r}^2$):
+Selection differential ($S$) and response to selection ($R$) are linked with the realized heritability ($h_{r}^2$):
 
 \begin{displaymath}
 R = h_{r}^2 \times S
@@ -1514,7 +1595,7 @@ See appendix \ref{text_SandR} for more details on the theroy behind this.
 \begin{figure}[H]
 \begin{center}
 \includegraphics[page=8, width=.8\textwidth]{SandR_EN.pdf}
-\caption{Seletion differentia ($S$) in 2014-2015 and response to selection ($R$) in 2015-2016. Circles and arrows in gray represent the seed-lots that have been sown in 2015 after harvest in 2015.}
+\caption{Seletion differential ($S$) in 2014-2015 and response to selection ($R$) in 2015-2016. Circles and arrows in gray represent the seed-lots that have been sown in 2015 after harvest in 2015.}
 \label{SandR}
 \end{center}
 \end{figure}
@@ -1528,30 +1609,28 @@ The data frame returned has a column \texttt{"expe"} which corresponds to an id 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{#data_S = get.data(}
-\hlcom{#	db_user = info_db$db_user, db_host = info_db$db_host,}
-\hlcom{#	db_name = info_db$db_name, db_password = info_db$db_password,}
-\hlcom{#	query.type = "data-S",}
-\hlcom{#	person.in = "RAB",}
-\hlcom{#	filter.on = "father-son",}
-\hlcom{#	data.type = "relation",}
-\hlcom{#	variable = vec_variables,}
-\hlcom{#	project.in = "PPB"}
-\hlcom{#	)}
+\hlkwa{if}\hlstd{(use.get.data)\{}
+        \hlstd{data_S} \hlkwb{=} \hlkwd{get.data}\hlstd{(}
+                \hlkwc{db_user} \hlstd{= info_db}\hlopt{$}\hlstd{db_user,} \hlkwc{db_host} \hlstd{= info_db}\hlopt{$}\hlstd{db_host,}
+                \hlkwc{db_name} \hlstd{= info_db}\hlopt{$}\hlstd{db_name,} \hlkwc{db_password} \hlstd{= info_db}\hlopt{$}\hlstd{db_password,}
+                \hlkwc{query.type} \hlstd{=} \hlstr{"data-S"}\hlstd{,}
+                \hlkwc{person.in} \hlstd{=} \hlstr{"RAB"}\hlstd{,}
+                \hlkwc{filter.on} \hlstd{=} \hlstr{"father-son"}\hlstd{,}
+                \hlkwc{data.type} \hlstd{=} \hlstr{"relation"}\hlstd{,}
+                \hlkwc{variable} \hlstd{= vec_variables,}
+                \hlkwc{project.in} \hlstd{=} \hlstr{"PPB"}
+                \hlstd{)}
+\hlstd{\}} \hlkwa{else} \hlstd{\{}
+        \hlcom{# 1. Query SHiNeMaS ...}
+        \hlcom{# 2. Set up data set ...}
+        \hlcom{# |==========================================================| 100%}
 
-\hlcom{# 1. Query SHiNeMaS ...}
-\hlcom{# 2. Set up data set ...}
-\hlcom{# |==========================================================| 100%}
+        \hlcom{#data_S = encrypt.data(data_S)}
+        \hlcom{#The key has been written in /home/pierre/key_data-S-relation_Tue Nov 24 12:01:25 2015.RData}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/data_S.RData"}\hlstd{)}
+\hlstd{\}}
 
-
-\hlcom{#data_S = encrypt.data(data_S)}
-\hlcom{#The key has been written in /home/pierre/key_data-S-relation_Tue Nov 24 12:01:25 2015.RData}
-
-\hlcom{#data_S = data_S}
-
-
-\hlkwd{load}\hlstd{(}\hlstr{"./data/data_S.RData"}\hlstd{)}
-\hlkwd{colnames}\hlstd{(data_S}\hlopt{$}\hlstd{data}\hlopt{$}\hlstd{datasets.with.correlated.variables)}
+\hlkwd{colnames}\hlstd{(data_S}\hlopt{$}\hlstd{data}\hlopt{$}\hlstd{data)}
 \end{alltt}
 \begin{verbatim}
 ##  [1] "son"                           "expe"                         
@@ -1569,9 +1648,10 @@ The data frame returned has a column \texttt{"expe"} which corresponds to an id 
 ## [25] "selection_person"              "mixture_id"                   
 ## [27] "diffusion_id"                  "X"                            
 ## [29] "Y"                             "block"                        
-## [31] "project"                       "ID"                           
-## [33] "plant_height---plant_height"   "spike_weight---spike_weight"  
-## [35] "spike_lenght---spike_lenght"   "spike_lenght---spike_length_F"
+## [31] "project"                       "correlation_group"            
+## [33] "ID"                            "plant_height---plant_height"  
+## [35] "spike_weight---spike_weight"   "spike_lenght---spike_lenght"  
+## [37] "spike_lenght---spike_length_F"
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1587,30 +1667,28 @@ The query takes into account when selection have been done in a seed lot, that t
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{#data_SR = get.data(}
-\hlcom{#	db_user = info_db$db_user, db_host = info_db$db_host,}
-\hlcom{#	db_name = info_db$db_name, db_password = info_db$db_password,}
-\hlcom{#	query.type = "data-SR",}
-\hlcom{#	person.in = "RAB",}
-\hlcom{#	filter.on = "father-son",}
-\hlcom{#	data.type = "relation",}
-\hlcom{#	variable = vec_variables,}
-\hlcom{#	project.in = "PPB"}
-\hlcom{#	)}
+\hlkwa{if}\hlstd{(use.get.data)\{}
+        \hlstd{data_SR} \hlkwb{=} \hlkwd{get.data}\hlstd{(}
+                \hlkwc{db_user} \hlstd{= info_db}\hlopt{$}\hlstd{db_user,} \hlkwc{db_host} \hlstd{= info_db}\hlopt{$}\hlstd{db_host,}
+                \hlkwc{db_name} \hlstd{= info_db}\hlopt{$}\hlstd{db_name,} \hlkwc{db_password} \hlstd{= info_db}\hlopt{$}\hlstd{db_password,}
+                \hlkwc{query.type} \hlstd{=} \hlstr{"data-SR"}\hlstd{,}
+                \hlkwc{person.in} \hlstd{=} \hlstr{"RAB"}\hlstd{,}
+                \hlkwc{filter.on} \hlstd{=} \hlstr{"father-son"}\hlstd{,}
+                \hlkwc{data.type} \hlstd{=} \hlstr{"relation"}\hlstd{,}
+                \hlkwc{variable} \hlstd{= vec_variables,}
+                \hlkwc{project.in} \hlstd{=} \hlstr{"PPB"}
+                \hlstd{)}
+\hlstd{\}} \hlkwa{else} \hlstd{\{}
+        \hlcom{# 1. Query SHiNeMaS ...}
+        \hlcom{# 2. Set up data set ...}
+        \hlcom{# |==========================================================| 100%}
 
-\hlcom{# 1. Query SHiNeMaS ...}
-\hlcom{# 2. Set up data set ...}
-\hlcom{# |==========================================================| 100%}
+        \hlcom{#data_SR = encrypt.data(data_SR)}
+        \hlcom{#The key has been written in /home/pierre/key_data-SR-relation_Tue Nov 24 12:02:25 2015.RData}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/data_SR.RData"}\hlstd{)}
+\hlstd{\}}
 
-
-\hlcom{#data_SR = encrypt.data(data_SR)}
-\hlcom{#The key has been written in /home/pierre/key_data-SR-relation_Tue Nov 24 12:02:25 2015.RData}
-
-\hlcom{#data_SR = data_SR}
-
-\hlkwd{load}\hlstd{(}\hlstr{"./data/data_SR.RData"}\hlstd{)}
-
-\hlkwd{colnames}\hlstd{(data_SR}\hlopt{$}\hlstd{data}\hlopt{$}\hlstd{datasets.with.correlated.variables)}
+\hlkwd{colnames}\hlstd{(data_SR}\hlopt{$}\hlstd{data}\hlopt{$}\hlstd{data)}
 \end{alltt}
 \begin{verbatim}
 ##  [1] "son"                           "expe"                         
@@ -1628,9 +1706,10 @@ The query takes into account when selection have been done in a seed lot, that t
 ## [25] "selection_person"              "mixture_id"                   
 ## [27] "diffusion_id"                  "X"                            
 ## [29] "Y"                             "block"                        
-## [31] "project"                       "ID"                           
-## [33] "plant_height---plant_height"   "spike_weight---spike_weight"  
-## [35] "spike_lenght---spike_lenght"   "spike_lenght---spike_length_F"
+## [31] "project"                       "correlation_group"            
+## [33] "ID"                            "plant_height---plant_height"  
+## [35] "spike_weight---spike_weight"   "spike_lenght---spike_lenght"  
+## [37] "spike_lenght---spike_length_F"
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1735,57 +1814,82 @@ The name of the plot is under the form \texttt{x.axis}-\texttt{in.col}.
 \end{knitrout}
 
 Knowing a combinaison of \texttt{x.axis} and \texttt{in.col}, choose the variable you want to get.
-For example,
+For example:
+
+\begin{itemize}
+\item For barplot:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{p_cal_ph_bar_all} \hlkwb{=} \hlstd{default_data_classic_ggplot}\hlopt{$}\hlstd{`data-barplot`}\hlopt{$}\hlstd{`germplasm-year`}
 \hlstd{p_cal_ph_bar} \hlkwb{=} \hlstd{p_cal_ph_bar_all}\hlopt{$}\hlstd{`plant_height---plant_height`}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_cal_ph_bar}
 \end{alltt}
 \end{kframe}
-
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-64-1} 
-
-}
-
-
-
 \end{knitrout}
 
+\item For bolxplot:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{p_cal_ph_box_all} \hlkwb{=} \hlstd{default_data_classic_ggplot}\hlopt{$}\hlstd{`data-boxplot`}\hlopt{$}\hlstd{`germplasm-year`}
 \hlstd{p_cal_ph_box} \hlkwb{=} \hlstd{p_cal_ph_box_all}\hlopt{$}\hlstd{`plant_height---plant_height`}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_cal_ph_box}
 \end{alltt}
 \end{kframe}
-
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-65-1} 
-
-}
-
-
-
 \end{knitrout}
 
+\item For interaction plot:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{p_cal_ph_int_all} \hlkwb{=} \hlstd{default_data_classic_ggplot}\hlopt{$}\hlstd{`data-interaction`}\hlopt{$}\hlstd{`year-germplasm`}
 \hlstd{p_cal_ph_int} \hlkwb{=} \hlstd{p_cal_ph_int_all}\hlopt{$}\hlstd{`plant_height---plant_height`}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_cal_ph_int}
 \end{alltt}
 \end{kframe}
+\end{knitrout}
+\end{itemize}
 
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-66-1} 
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p\_cal\_ph\_bar} & \texttt{p\_cal\_ph\_box} \\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-71-1} 
 
 }
 
 
 
 \end{knitrout}
+&
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-72-1} 
+
+}
+
+
+
+\end{knitrout}
+\\
+\texttt{p\_cal\_ph\_int} & \\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-73-1} 
+
+}
+
+
+
+\end{knitrout}
+&
+\\
+\end{tabular}
+\end{center}
+
 
 
 For \texttt{ggplot.type = } \texttt{data-radar}, \texttt{data-biplot}, you may chose what you want in color (\texttt{in.col} argument).
@@ -1802,23 +1906,14 @@ The possible values for \texttt{in.col} are: \texttt{germplasm}, \texttt{year} a
 \end{kframe}
 \end{knitrout}
 
-
 For example,
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{p_cal_rad_all} \hlkwb{=} \hlstd{default_data_classic_ggplot}\hlopt{$}\hlstd{`data-radar`}
 \hlstd{p_cal_rad} \hlkwb{=} \hlstd{p_cal_rad_all}\hlopt{$}\hlstd{`NA-germplasm`}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_cal_rad}
 \end{alltt}
 \end{kframe}
-
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-68-1} 
-
-}
-
-
-
 \end{knitrout}
 
 For biplot, you must choose the pair of variables you wish, for example,
@@ -1829,17 +1924,38 @@ For biplot, you must choose the pair of variables you wish, for example,
 \hlstd{p_cal_ph_sl_bip} \hlkwb{=} \hlstd{p_cal_ph_sl_bip_all}\hlopt{$}\hlstd{`NA-year`}
 \hlstd{p_cal_ph_sl_bip} \hlkwb{=} \hlstd{p_cal_ph_sl_bip}\hlopt{$}\hlstd{`plant_height---plant_height - spike_lenght---spike_length_F`}
 \hlstd{p_cal_ph_sl_bip} \hlkwb{=} \hlstd{p_cal_ph_sl_bip}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_cal_ph_sl_bip}
 \end{alltt}
 \end{kframe}
+\end{knitrout}
 
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-69-1} 
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p\_cal\_rad} & \texttt{p\_cal\_ph\_sl\_bip} \\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-77-1} 
 
 }
 
 
 
 \end{knitrout}
+&
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-78-1} 
+
+}
+
+
+
+\end{knitrout}
+\\
+\end{tabular}
+\end{center}
+
 
 \item Custom arguments 
 
@@ -1863,6 +1979,16 @@ description &
 \rotatebox{90}{\texttt{data-interaction}} & 
 \rotatebox{90}{\texttt{data-radar}} & 
 \rotatebox{90}{\texttt{data-biplot}} \\
+\hline
+
+\texttt{ggplot.on} & 
+\texttt{"son"} & 
+\texttt{"father"} or \texttt{"son"} depending on which seed-lot you want to plot.. &
+X &
+X &
+X &
+X &
+X \\
 \hline
 
 \texttt{x.axis} & 
@@ -1946,37 +2072,43 @@ Indeed, the pies are drawn with a polygon which need lots of points that take me
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{#data_classic_bis = get.data(}
-\hlcom{#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos}
-\hlcom{#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos}
-\hlcom{#	query.type = "data-classic", # data-classic query}
-\hlcom{#	person.in = "LUD", # person to keep}
-\hlcom{#	year.in = 2011, # year to kepp}
-\hlcom{#	filter.on = "father-son", # filters on father AND son}
-\hlcom{#	data.type = "relation", # data linked to relation between seed-lots}
-\hlcom{#	variable = vec_variables, # the variables to display}
-\hlcom{#	project.in = "PPB" # the project }
-\hlcom{#)}
+\hlkwa{if}\hlstd{(use.get.data)\{}
+        \hlstd{data_classic_bis} \hlkwb{=} \hlkwd{get.data}\hlstd{(}
+                \hlkwc{db_user} \hlstd{= info_db}\hlopt{$}\hlstd{db_user,} \hlkwc{db_host} \hlstd{= info_db}\hlopt{$}\hlstd{db_host,} \hlcom{# db infos}
+                \hlkwc{db_name} \hlstd{= info_db}\hlopt{$}\hlstd{db_name,} \hlkwc{db_password} \hlstd{= info_db}\hlopt{$}\hlstd{db_password,} \hlcom{# db infos}
+                \hlkwc{query.type} \hlstd{=} \hlstr{"data-classic"}\hlstd{,} \hlcom{# data-classic query}
+                \hlkwc{person.in} \hlstd{=} \hlstr{"LUD"}\hlstd{,} \hlcom{# person to keep}
+                \hlkwc{year.in} \hlstd{=} \hlnum{2011}\hlstd{,} \hlcom{# year to kepp}
+                \hlkwc{filter.on} \hlstd{=} \hlstr{"father-son"}\hlstd{,} \hlcom{# filters on father AND son}
+                \hlkwc{data.type} \hlstd{=} \hlstr{"relation"}\hlstd{,} \hlcom{# data linked to relation between seed-lots}
+                \hlkwc{variable} \hlstd{= vec_variables,} \hlcom{# the variables to display}
+                \hlkwc{project.in} \hlstd{=} \hlstr{"PPB"} \hlcom{# the project }
+                \hlstd{)}
 
+        \hlstd{data_classic_bis} \hlkwb{=} \hlkwd{encrypt.data}\hlstd{(data_classic_bis)}
 
-\hlcom{#data_classic_bis = encrypt.data(data_classic_bis)}
+        \hlstd{pn} \hlkwb{=} \hlkwd{get.ggplot}\hlstd{(}
+                \hlstd{data_classic_bis,}
+                \hlkwc{ggplot.type} \hlstd{=} \hlstr{"data-pie.on.network"}\hlstd{,}
+                \hlkwc{vec_variables} \hlstd{=} \hlstr{"spike_weight---spike_weight"}\hlstd{,}
+                \hlkwc{pie.size} \hlstd{=} \hlnum{.25}\hlstd{,}
+                \hlkwc{hide.labels.parts} \hlstd{=} \hlstr{"person"}
+                \hlstd{)}
 
-\hlcom{#load("./data/data_classic_bis.RData")}
+\hlstd{\}} \hlkwa{else} \hlstd{\{}
+        \hlcom{# 1. Query SHiNeMaS ...}
+        \hlcom{# 2. Set up data set ...}
+        \hlcom{# |==========================================================| 100%}
+        \hlcom{#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 25 22:29:59 2015.RData}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/data_classic_bis.RData"}\hlstd{)}
 
-\hlcom{#pn = get.ggplot(}
-\hlcom{#	data_classic_bis, }
-\hlcom{#	ggplot.type = "data-pie.on.network", }
-\hlcom{#	vec_variables = "spike_weight---spike_weight", }
-\hlcom{#	pie.size = .25, }
-\hlcom{#	hide.labels.parts = "person"}
-\hlcom{#	)}
+        \hlcom{# 1. Query SHiNeMaS ...}
+        \hlcom{# 2. Create network matrix ...}
+        \hlcom{# 3. Link information to vertex and edges ...}
+        \hlcom{# The key has been written in /home/pierre/key_network_Wed Nov 25 22:30:16 2015.RData}
 
-\hlcom{# 1. Query SHiNeMaS ...}
-\hlcom{# 2. Create network matrix ...}
-\hlcom{# 3. Link information to vertex and edges ...}
-\hlcom{# The key has been written in /home/pierre/key_network_Wed Nov 25 22:30:16 2015.RData}
-
-\hlkwd{load}\hlstd{(}\hlstr{"./data/pn.RData"}\hlstd{)}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/pn.RData"}\hlstd{)}
+        \hlstd{\}}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -2006,7 +2138,7 @@ The result id divided into two plots: the empty network and the network with the
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.6\textwidth]{figures/shinemas2R_unnamed-chunk-72-1} 
+{\centering \includegraphics[width=.6\textwidth]{figures/shinemas2R_unnamed-chunk-81-1} 
 
 }
 
@@ -2018,7 +2150,7 @@ The result id divided into two plots: the empty network and the network with the
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 
-{\centering \includegraphics[width=.8\textwidth]{figures/shinemas2R_unnamed-chunk-73-1} 
+{\centering \includegraphics[width=.8\textwidth]{figures/shinemas2R_unnamed-chunk-82-1} 
 
 }
 
@@ -2036,7 +2168,7 @@ Arguments can be customed related to network plots (Table \ref{custom.network}).
 \end{itemize}
 
 
-\item pies on network
+\item pies on map
 
 \begin{itemize}
 
@@ -2047,29 +2179,30 @@ Arguments can be customed related to network plots (Table \ref{custom.network}).
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{#data_classic_ter = get.data(}
-\hlcom{#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos}
-\hlcom{#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos}
-\hlcom{#	query.type = "data-classic", # data-classic query}
-\hlcom{#	germplasm.in = "Rouge-du-Roc", # germplasm to keep}
-\hlcom{#	person.in = c("RAB", "CHD", "JSG"), # person to keep}
-\hlcom{#	filter.on = "father-son", # filters on father AND son}
-\hlcom{#	data.type = "relation", # data linked to relation between seed-lots}
-\hlcom{#	variable = vec_variables, # the variables to display}
-\hlcom{#	project.in = "PPB" # the project }
-\hlcom{#)}
+\hlkwa{if}\hlstd{(use.get.data)\{}
+        \hlstd{data_classic_ter} \hlkwb{=} \hlkwd{get.data}\hlstd{(}
+                \hlkwc{db_user} \hlstd{= info_db}\hlopt{$}\hlstd{db_user,} \hlkwc{db_host} \hlstd{= info_db}\hlopt{$}\hlstd{db_host,} \hlcom{# db infos}
+                \hlkwc{db_name} \hlstd{= info_db}\hlopt{$}\hlstd{db_name,} \hlkwc{db_password} \hlstd{= info_db}\hlopt{$}\hlstd{db_password,} \hlcom{# db infos}
+                \hlkwc{query.type} \hlstd{=} \hlstr{"data-classic"}\hlstd{,} \hlcom{# data-classic query}
+                \hlkwc{germplasm.in} \hlstd{=} \hlstr{"Rouge-du-Roc"}\hlstd{,} \hlcom{# germplasm to keep}
+                \hlkwc{person.in} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"RAB"}\hlstd{,} \hlstr{"CHD"}\hlstd{,} \hlstr{"JSG"}\hlstd{),} \hlcom{# person to keep}
+                \hlkwc{filter.on} \hlstd{=} \hlstr{"father-son"}\hlstd{,} \hlcom{# filters on father AND son}
+                \hlkwc{data.type} \hlstd{=} \hlstr{"relation"}\hlstd{,} \hlcom{# data linked to relation between seed-lots}
+                \hlkwc{variable} \hlstd{= vec_variables,} \hlcom{# the variables to display}
+                \hlkwc{project.in} \hlstd{=} \hlstr{"PPB"} \hlcom{# the project}
+                \hlstd{)}
 
-\hlcom{#data_classic_ter = encrypt.data(data_classic_ter)}
+        \hlstd{data_classic_ter} \hlkwb{=} \hlkwd{encrypt.data}\hlstd{(data_classic_ter)}
 
-\hlcom{#load("./data/data_classic_ter.RData")}
-
-\hlcom{#pm = get.ggplot(}
-\hlcom{#	data_classic_ter, }
-\hlcom{#	ggplot.type = "data-pie.on.map", }
-\hlcom{#	vec_variables = "spike_weight---spike_weight"}
-\hlcom{#	)}
-
-\hlkwd{load}\hlstd{(}\hlstr{"./data/pm.RData"}\hlstd{)}
+        \hlstd{pm} \hlkwb{=} \hlkwd{get.ggplot}\hlstd{(}
+                \hlstd{data_classic_ter,}
+                \hlkwc{ggplot.type} \hlstd{=} \hlstr{"data-pie.on.map"}\hlstd{,}
+                \hlkwc{vec_variables} \hlstd{=} \hlstr{"spike_weight---spike_weight"}
+                \hlstd{)}
+\hlstd{\}} \hlkwa{else} \hlstd{\{}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/data_classic_ter.RData"}\hlstd{)}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/pm.RData"}\hlstd{)}
+        \hlstd{\}}
 
 \hlkwd{names}\hlstd{(pm}\hlopt{$}\hlstd{`data-pie.on.map`)}
 \end{alltt}
@@ -2079,20 +2212,48 @@ Arguments can be customed related to network plots (Table \ref{custom.network}).
 \end{kframe}
 \end{knitrout}
 
+You can get the default ggplot (\texttt{p}) or customized it (\texttt{p\_bis}):
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{pm}\hlopt{$}\hlstd{`data-pie.on.map`}\hlopt{$}\hlstd{`spike_weight---spike_weight`}\hlopt{$}\hlstd{`map-[2013]`}
+\hlstd{p} \hlkwb{=} \hlstd{pm}\hlopt{$}\hlstd{`data-pie.on.map`}\hlopt{$}\hlstd{`spike_weight---spike_weight`}\hlopt{$}\hlstd{`map-[2011]`}
+
+\hlstd{p_bis} \hlkwb{=} \hlstd{p} \hlopt{+}
+        \hlkwd{ggtitle}\hlstd{(}\hlstr{"spike_weight in 2011"}\hlstd{)} \hlopt{+} \hlcom{# change the title}
+        \hlkwd{theme}\hlstd{(}\hlkwc{legend.title}\hlstd{=}\hlkwd{element_blank}\hlstd{())} \hlcom{# delete the name of the legend}
 \end{alltt}
 \end{kframe}
+\end{knitrout}
 
-{\centering \includegraphics[width=.8\textwidth]{figures/shinemas2R_unnamed-chunk-75-1} 
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p} & \texttt{p\_bis} \\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-85-1} 
 
 }
 
 
 
 \end{knitrout}
+&
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-86-1} 
+
+}
+
+
+
+\end{knitrout}
+\\
+\end{tabular}
+\end{center}
+
 
 \item Custom arguments
 
@@ -2142,58 +2303,82 @@ By default, the following plots are done with \texttt{x.axis} and \texttt{in.col
 
 which correpond to ggplot.type arguments as explained in the previous section.
 
+\begin{itemize}
+
+\item For barplot:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{p_S_sw_bar_all} \hlkwb{=} \hlstd{default_data_S_ggplot}\hlopt{$}\hlstd{`data-barplot`}
 \hlstd{p_S_sw_bar} \hlkwb{=} \hlstd{p_S_sw_bar_all}\hlopt{$}\hlstd{`spike_weight---spike_weight`}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_S_sw_bar}
 \end{alltt}
 \end{kframe}
-
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-78-1} 
-
-}
-
-
-
 \end{knitrout}
 
-
+\item For boxplot:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{p_S_sw_box_all} \hlkwb{=} \hlstd{default_data_S_ggplot}\hlopt{$}\hlstd{`data-boxplot`}
 \hlstd{p_S_sw_box} \hlkwb{=} \hlstd{p_S_sw_box_all}\hlopt{$}\hlstd{`spike_weight---spike_weight`}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_S_sw_box}
 \end{alltt}
 \end{kframe}
-
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-79-1} 
-
-}
-
-
-
 \end{knitrout}
 
-
+\item For interaction plot:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{p_S_sw_int_all} \hlkwb{=} \hlstd{default_data_S_ggplot}\hlopt{$}\hlstd{`data-interaction`}
 \hlstd{p_S_sw_int} \hlkwb{=} \hlstd{p_S_sw_int_all}\hlopt{$}\hlstd{`spike_weight---spike_weight`}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_S_sw_int}
 \end{alltt}
 \end{kframe}
+\end{knitrout}
 
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-80-1} 
+\end{itemize}
+
+
+
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p\_S\_sw\_bar} & \texttt{p\_S\_sw\_box} \\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-92-1} 
 
 }
 
 
 
 \end{knitrout}
+&
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-93-1} 
+
+}
+
+
+
+\end{knitrout}
+\\
+\texttt{p\_S\_sw\_int} & \\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-94-1} 
+
+}
+
+
+
+\end{knitrout}
+&
+\\
+\end{tabular}
+\end{center}
 
 It is possible to customize the plots as presented in Table \ref{custom.plot}.
 
@@ -2233,58 +2418,78 @@ By default, the following plots are done with \texttt{x.axis} and \texttt{in.col
 
 which correpond to ggplot.type arguments as explained in the previsou section.
 
+\begin{itemize}
+\item For barplot:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{p_SR_sw_bar_all} \hlkwb{=} \hlstd{default_data_S_ggplot}\hlopt{$}\hlstd{`data-barplot`}
 \hlstd{p_SR_sw_bar} \hlkwb{=} \hlstd{p_SR_sw_bar_all}\hlopt{$}\hlstd{`spike_weight---spike_weight`}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_SR_sw_bar}
 \end{alltt}
 \end{kframe}
-
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-83-1} 
-
-}
-
-
-
 \end{knitrout}
 
-
+\item For boxplot:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{p_SR_sw_box_all} \hlkwb{=} \hlstd{default_data_S_ggplot}\hlopt{$}\hlstd{`data-boxplot`}
 \hlstd{p_SR_sw_box} \hlkwb{=} \hlstd{p_SR_sw_box_all}\hlopt{$}\hlstd{`spike_weight---spike_weight`}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_SR_sw_box}
 \end{alltt}
 \end{kframe}
-
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-84-1} 
-
-}
-
-
-
 \end{knitrout}
 
-
+\item For interaction plot:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{p_SR_sw_int_all} \hlkwb{=} \hlstd{default_data_S_ggplot}\hlopt{$}\hlstd{`data-interaction`}
 \hlstd{p_SR_sw_int} \hlkwb{=} \hlstd{p_SR_sw_int_all}\hlopt{$}\hlstd{`spike_weight---spike_weight`}\hlopt{$}\hlstd{`x.axis-1|in.col-1`}
-\hlstd{p_SR_sw_int}
 \end{alltt}
 \end{kframe}
+\end{knitrout}
 
-{\centering \includegraphics[width=\maxwidth]{figures/shinemas2R_unnamed-chunk-85-1} 
+\begin{center}
+\begin{tabular}{cc}
+\texttt{p\_SR\_sw\_bar} & \texttt{p\_SR\_sw\_box} \\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-100-1} 
 
 }
 
 
 
 \end{knitrout}
+&
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-101-1} 
+
+}
+
+
+
+\end{knitrout}
+\\
+\texttt{p\_SR\_sw\_int} & \\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=.4\textwidth]{figures/shinemas2R_unnamed-chunk-102-1} 
+
+}
+
+
+
+\end{knitrout}
+&
+\\
+\end{tabular}
+\end{center}
+
 
 It is possible to customize the plots as presented in Table \ref{custom.plot}.
 
@@ -2374,20 +2579,22 @@ An example with duplicated information:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{#data_classic_4 = get.data(}
-\hlcom{#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos}
-\hlcom{#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos}
-\hlcom{#	query.type = "data-classic", # data-classic query}
-\hlcom{#	person.in = "RAB", # person to keep}
-\hlcom{#	filter.on = "father-son", # filters on father AND son}
-\hlcom{#	data.type = "relation", # data linked to relation between seed-lots}
-\hlcom{#	variable = "sowing_practices", # the variables to display}
-\hlcom{#	project.in = "PPB" # the project}
-\hlcom{#	)}
+\hlkwa{if}\hlstd{(use.get.data)\{}
+        \hlstd{data_classic_4} \hlkwb{=} \hlkwd{get.data}\hlstd{(}
+                \hlkwc{db_user} \hlstd{= info_db}\hlopt{$}\hlstd{db_user,} \hlkwc{db_host} \hlstd{= info_db}\hlopt{$}\hlstd{db_host,} \hlcom{# db infos}
+                \hlkwc{db_name} \hlstd{= info_db}\hlopt{$}\hlstd{db_name,} \hlkwc{db_password} \hlstd{= info_db}\hlopt{$}\hlstd{db_password,} \hlcom{# db infos}
+                \hlkwc{query.type} \hlstd{=} \hlstr{"data-classic"}\hlstd{,} \hlcom{# data-classic query}
+                \hlkwc{person.in} \hlstd{=} \hlstr{"RAB"}\hlstd{,} \hlcom{# person to keep}
+                \hlkwc{filter.on} \hlstd{=} \hlstr{"father-son"}\hlstd{,} \hlcom{# filters on father AND son}
+                \hlkwc{data.type} \hlstd{=} \hlstr{"relation"}\hlstd{,} \hlcom{# data linked to relation between seed-lots}
+                \hlkwc{variable} \hlstd{=} \hlstr{"sowing_practices"}\hlstd{,} \hlcom{# the variables to display}
+                \hlkwc{project.in} \hlstd{=} \hlstr{"PPB"} \hlcom{# the project}
+                \hlstd{)}
 
-\hlcom{# data_classic_4 = encrypt.data(data_classic_4)}
-
-\hlkwd{load}\hlstd{(}\hlstr{"./data/data_classic_4.RData"}\hlstd{)}
+        \hlstd{data_classic_4} \hlkwb{=} \hlkwd{encrypt.data}\hlstd{(data_classic_4)}
+\hlstd{\}} \hlkwa{else} \hlstd{\{}
+        \hlkwd{load}\hlstd{(}\hlstr{"./data/data_classic_4.RData"}\hlstd{)}
+        \hlstd{\}}
 
 \hlstd{tab_class_4} \hlkwb{=} \hlkwd{get.table}\hlstd{(}
         \hlstd{data_classic_4,}
@@ -2405,7 +2612,7 @@ The information is divided in two:
 \hlkwd{names}\hlstd{(tab_class_4}\hlopt{$}\hlstd{duplicated_infos}\hlopt{$}\hlstd{`set-1`)}
 \end{alltt}
 \begin{verbatim}
-## [1] "duplicated_infos_seed-lots" "duplicated_infos_variables"
+## NULL
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2419,8 +2626,7 @@ By default \texttt{col\_to\_display = c("person", "germplasm", "year", "block", 
 \hlstd{tab_class_4}\hlopt{$}\hlstd{duplicated_infos}\hlopt{$}\hlstd{`set-1`}\hlopt{$}\hlstd{`duplicated_infos_seed-lots`}
 \end{alltt}
 \begin{verbatim}
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       seed-lots
-## 1 person-106-germplasm-337-2010-1-A-13, person-106-germplasm-337-2011-2-B-8, person-106-germplasm-337-2011-2-B-9, person-106-germplasm-337-2008-1-NA-NA, person-106-germplasm-337-2009-2-NA-NA, person-106-germplasm-337-2009-1-NA-1, person-106-germplasm-337-2009-1-NA-2, person-106-germplasm-337-2010-2-A-2, person-106-germplasm-337-2010-1-A-12, person-106-germplasm-337-2011-1-C-2, person-106-germplasm-337-2011-2-B-7, person-106-germplasm-352-2011-1-E-1, person-106-germplasm-356-2011-1-E-5, person-106-germplasm-360-2011-2-C-9, person-106-germplasm-398-2009-3-NA-NA, person-106-germplasm-399-2009-3-NA-NA, person-106-germplasm-400-2009-3-NA-NA, person-106-germplasm-401-2009-3-NA-NA, person-106-germplasm-397-2011-2-B-6, person-106-germplasm-403-2009-3-NA-NA, person-106-germplasm-404-2009-3-NA-NA, person-106-germplasm-405-2009-3-NA-NA, person-106-germplasm-402-2011-1-E-4, person-106-germplasm-407-2009-3-NA-NA, person-106-germplasm-408-2009-3-NA-NA, person-106-germplasm-406-2011-1-B-1, person-106-germplasm-410-2009-3-NA-NA, person-106-germplasm-411-2009-3-NA-NA, person-106-germplasm-409-2011-1-C-1, person-106-germplasm-413-2009-3-NA-NA, person-106-germplasm-414-2009-3-NA-NA, person-106-germplasm-415-2009-3-NA-NA, person-106-germplasm-412-2011-2-A-6, person-106-germplasm-417-2009-3-NA-NA, person-106-germplasm-418-2009-3-NA-NA, person-106-germplasm-419-2009-3-NA-NA, person-106-germplasm-416-2011-1-A-2, person-106-germplasm-217-2010-1-A-19, person-106-germplasm-217-2011-2-C-7, person-106-germplasm-217-2011-2-C-8, person-106-germplasm-217-2008-1-NA-NA, person-106-germplasm-217-2009-1-NA-NA, person-106-germplasm-217-2010-1-A-16, person-106-germplasm-217-2011-2-E-7, person-106-germplasm-432-2010-1-A-20, person-106-germplasm-432-2011-2-D-6, person-106-germplasm-432-2009-2-NA-1, person-106-germplasm-432-2009-2-NA-2, person-106-germplasm-432-2009-1-NA-NA, person-106-germplasm-432-2010-2-A-3, person-106-germplasm-432-2010-1-A-17, person-106-germplasm-432-2011-1-D-5, person-106-germplasm-432-2011-2-A-9, person-106-germplasm-432-2009-2-NA-NA, person-106-germplasm-432-2010-2-A-1, person-106-germplasm-432-2011-1-C-3, person-106-germplasm-432-2011-2-D-7, person-106-germplasm-452-2011-2-E-9, person-106-germplasm-452-2010-1-A-25, person-106-germplasm-452-2011-2-E-8, person-106-germplasm-459-2010-1-A-15, person-106-germplasm-459-2011-2-A-7, person-106-germplasm-459-2011-2-A-8, person-106-germplasm-459-2008-1-NA-NA, person-106-germplasm-459-2009-2-NA-NA, person-106-germplasm-459-2010-2-A-11, person-106-germplasm-459-2011-2-C-10, person-106-germplasm-466-2011-1-D-4, person-106-germplasm-467-2008-1-NA-NA, person-106-germplasm-467-2009-2-NA-NA, person-106-germplasm-480-2010-2-A-6, person-106-germplasm-480-2011-1-C-4, person-106-germplasm-480-2011-1-C-5, person-106-germplasm-480-2008-1-NA-NA, person-106-germplasm-480-2009-1-NA-NA, person-106-germplasm-480-2010-2-A-4, person-106-germplasm-480-2011-2-D-10, person-106-germplasm-498-2011-1-A-5, person-106-germplasm-498-2008-1-NA-NA, person-106-germplasm-498-2009-2-NA-NA, person-106-germplasm-498-2010-1-A-23, person-106-germplasm-498-2011-1-A-4, person-106-germplasm-504-2008-1-NA-NA, person-106-germplasm-504-2009-1-NA-NA, person-106-germplasm-504-2010-1-A-22, person-106-germplasm-504-2011-1-A-3, person-106-germplasm-497-2008-1-NA-NA, person-106-germplasm-497-2009-2-NA-NA, person-106-germplasm-497-2010-1-A-14, person-106-germplasm-497-2011-1-B-5, person-106-germplasm-510-2010-2-A-8, person-106-germplasm-510-2011-1-B-2, person-106-germplasm-510-2011-1-B-3, person-106-germplasm-510-2008-1-NA-NA, person-106-germplasm-510-2009-1-NA-NA, person-106-germplasm-510-2010-2-A-5, person-106-germplasm-510-2011-2-B-10, person-106-germplasm-530-2011-2-D-9, person-106-germplasm-646-2011-1-B-4, person-106-germplasm-646-2011-2-D-8, person-106-germplasm-740-2010-2-A-10, person-106-germplasm-740-2011-1-E-2, person-106-germplasm-842-2009-2-NA-NA, person-106-germplasm-842-2009-1-NA-NA, person-106-germplasm-842-2010-2-A-9, person-106-germplasm-842-2010-1-A-24, person-106-germplasm-842-2011-1-E-3, person-106-germplasm-842-2011-2-C-6, person-106-germplasm-879-2011-1-D-1, person-106-germplasm-879-2011-2-E-6, person-106-germplasm-879-2011-2-A-10, person-106-germplasm-882-2011-1-D-2, person-106-germplasm-882-2011-1-D-3, person-106-germplasm-882-2008-1-NA-1, person-106-germplasm-882-2008-1-NA-2, person-106-germplasm-882-2008-1-NA-3, person-106-germplasm-882-2009-2-NA-NA, person-106-germplasm-882-2009-1-NA-NA, person-106-germplasm-882-2010-2-A-7, person-106-germplasm-882-2010-1-A-18, person-106-germplasm-882-2011-1-A-1, person-106-germplasm-882-2011-2-E-10
+## NULL
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2432,8 +2638,7 @@ And the data linked to these seed lots:
 \hlstd{tab_class_4}\hlopt{$}\hlstd{duplicated_infos}\hlopt{$}\hlstd{`set-1`}\hlopt{$}\hlstd{`duplicated_infos_variables`}
 \end{alltt}
 \begin{verbatim}
-##   sowing_practices---sowing_notice_sowing_practices
-## 1                                             volée
+## NULL
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2446,7 +2651,7 @@ And the data linked to these seed lots:
 \hlkwd{dim}\hlstd{(tab_class}\hlopt{$}\hlstd{not_duplicated_infos}\hlopt{$}\hlstd{`set-1`)}
 \end{alltt}
 \begin{verbatim}
-## [1] 3244   10
+## [1] 3269   11
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2479,24 +2684,27 @@ Instead of raw information, some statistics may be useful, for example,
 ##  [4] "block"                             
 ##  [5] "X"                                 
 ##  [6] "Y"                                 
-##  [7] "spike_weight---spike_weight mean"  
-##  [8] "spike_weight---spike_weight sd"    
-##  [9] "spike_weight---spike_weight cv"    
-## [10] "plant_height---plant_height mean"  
-## [11] "plant_height---plant_height sd"    
-## [12] "plant_height---plant_height cv"    
-## [13] "spike_lenght---spike_length_F mean"
-## [14] "spike_lenght---spike_length_F sd"  
-## [15] "spike_lenght---spike_length_F cv"  
-## [16] "spike_lenght---spike_lenght mean"  
-## [17] "spike_lenght---spike_lenght sd"    
-## [18] "spike_lenght---spike_lenght cv"
+##  [7] "ID mean"                           
+##  [8] "ID sd"                             
+##  [9] "ID cv"                             
+## [10] "spike_weight---spike_weight mean"  
+## [11] "spike_weight---spike_weight sd"    
+## [12] "spike_weight---spike_weight cv"    
+## [13] "plant_height---plant_height mean"  
+## [14] "plant_height---plant_height sd"    
+## [15] "plant_height---plant_height cv"    
+## [16] "spike_lenght---spike_length_F mean"
+## [17] "spike_lenght---spike_length_F sd"  
+## [18] "spike_lenght---spike_length_F cv"  
+## [19] "spike_lenght---spike_lenght mean"  
+## [20] "spike_lenght---spike_lenght sd"    
+## [21] "spike_lenght---spike_lenght cv"
 \end{verbatim}
 \begin{alltt}
 \hlkwd{dim}\hlstd{(tab_class}\hlopt{$}\hlstd{not_duplicated_infos}\hlopt{$}\hlstd{`set-1`)}
 \end{alltt}
 \begin{verbatim}
-## [1] 111  18
+## [1] 111  21
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2566,7 +2774,7 @@ The information is split into several tables with at least 30 rows.
 \hlkwd{dim}\hlstd{(tab_class}\hlopt{$}\hlstd{not_duplicated_infos}\hlopt{$}\hlstd{`set-1`)}
 \end{alltt}
 \begin{verbatim}
-## [1] 30 18
+## [1] 30 21
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2607,6 +2815,62 @@ For example,
 
 It is possible to customize the tables as presented in Table \ref{custom.table}.
 
+\subsection{Format the data for existing \R~packages}
+
+It is often useful to go beyond descriptive analysis and apply statistical tests to your data.
+To do so, you need to use existing \R~packages to perform such analysis.
+
+You need to format your data in order to use these packages. 
+This is done with \texttt{format.data} which format your data for the following packages: \listpackformatdata.
+
+For example, if you want to use the \texttt{PPBstats} package:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data_for_PPBstats} \hlkwb{=} \hlkwd{format.data}\hlstd{(}
+        \hlstd{data_classic,}
+        \hlkwc{format} \hlstd{=} \hlstr{"PPBstats"}
+\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "Importance d'avoir le meme nombre de colonnes dans toutes les sorties de data ou alors avec un attributes ?!!!"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{head}\hlstd{(data_for_PPBstats)}
+\end{alltt}
+\begin{verbatim}
+##      year   location     germplasm block    X    Y
+## 7702 2009 person-106 germplasm-337     2 <NA> <NA>
+## 6415 2009 person-106 germplasm-337     2 <NA> <NA>
+## 1529 2009 person-106 germplasm-337     2 <NA> <NA>
+## 8908 2009 person-106 germplasm-337     2 <NA> <NA>
+## 2718 2009 person-106 germplasm-337     2 <NA> <NA>
+## 7703 2009 person-106 germplasm-337     2 <NA> <NA>
+##                                             ID
+## 7702 ~C14#H_RAB_2011_0001~1~~C14_RAB_2010_0001
+## 6415 ~C14#H_RAB_2011_0001~2~~C14_RAB_2010_0001
+## 1529 ~C14#H_RAB_2011_0001~3~~C14_RAB_2010_0001
+## 8908 ~C14#H_RAB_2011_0001~4~~C14_RAB_2010_0001
+## 2718 ~C14#H_RAB_2011_0001~5~~C14_RAB_2010_0001
+## 7703 ~C14#H_RAB_2011_0001~6~~C14_RAB_2010_0001
+##      spike_weight---spike_weight plant_height---plant_height
+## 7702                        2.98                        <NA>
+## 6415                        2.73                        <NA>
+## 1529                        1.82                        <NA>
+## 8908                        3.78                        <NA>
+## 2718                        4.01                        <NA>
+## 7703                        3.58                        <NA>
+##      spike_lenght---spike_length_F spike_lenght---spike_lenght
+## 7702                          <NA>                        <NA>
+## 6415                          <NA>                        <NA>
+## 1529                          <NA>                        <NA>
+## 8908                          <NA>                        <NA>
+## 2718                          <NA>                        <NA>
+## 7703                          <NA>                        <NA>
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 %\section{Set of \sl}
 
@@ -2614,10 +2878,8 @@ It is possible to customize the tables as presented in Table \ref{custom.table}.
 
 %\subsection{\texttt{query.type = "cross"}}
 
-
 % parler de fuse g s et correlated var pour plot et table
 
-% Faire des exemples avec PPBstats, FactoMineR, etc ? A faire plutôt dans PPBformations ?!?
 
 \newpage
 
@@ -2891,7 +3153,7 @@ It is possible to custom the color of the rows of tables with \texttt{color1} (c
 \end{alltt}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in get.pdf(dir = dir, form.name = form.name, LaTeX\_head = NULL, : The folder my\_first\_pdf already exists ! Delete the folder my\_first\_pdf or find a new name.}}\end{kframe}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# 1. Get LaTeX head ...\\\#\# 2. Get LaTeX body ...\\\#\# 3. Compilation of .tex ...\\\#\# /home/pierre/my\_first\_pdf.pdf has been compiled.}}\end{kframe}
 \end{knitrout}
 
 
@@ -2918,7 +3180,7 @@ To cite this package and or this vignette:
 ##   Pierre Riviere (2015). shinemas2R: An R package to
 ##   visualize outputs from the data base Seed History and
 ##   Network Management System (SHiNeMaS). R package version
-##   0.9.
+##   0.9. http://github.com/priviere/shinemas2R
 ## 
 ## A BibTeX entry for LaTeX users is
 ## 
@@ -2927,6 +3189,7 @@ To cite this package and or this vignette:
 ##     author = {Pierre Riviere},
 ##     year = {2015},
 ##     note = {R package version 0.9},
+##     url = {http://github.com/priviere/shinemas2R},
 ##   }
 \end{verbatim}
 \end{kframe}
@@ -2943,8 +3206,6 @@ To cite this package and or this vignette:
 
 \section{Install \BD~on localhost}
 \label{install_shinemas}
-
-
 
 \subsection{Install PostgreSQL and \BD}
 
