@@ -526,7 +526,7 @@ if( check.arg("network-network", ggplot.type) ) {
 if( check.arg("network-reproduction-harvested", ggplot.type) ) {
 
 		if( check.arg("barplot", ggplot.display) ) { 
-		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "reproduction", relation.type = gettext("harvest"), name = gettext("harvested seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "reproduction", relation.type = c(gettext("harvest"), gettext("harvest-sow")), name = gettext("harvested seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
 	} else { out_barplot = NULL }
 
 	if( check.arg("map", ggplot.display) ) {
