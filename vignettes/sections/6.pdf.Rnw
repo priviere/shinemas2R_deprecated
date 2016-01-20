@@ -22,7 +22,7 @@ The idea of \texttt{get.pdf} is to create a list (\texttt{LaTeX\_body} argument)
 	\item \texttt{"date"} : the date of the document. Nothing by default.
 	\end{itemize}
 
-\item \texttt{"tableofcontents"} : if \texttt{TRUE}, a table of content is display.
+\item \texttt{"tableofcontents"} : if \texttt{TRUE}, a table of content is displayed.
 
 \item \texttt{"chapter"} : name of a chapter
 
@@ -93,12 +93,12 @@ See appendix \ref{getpdf_examples} for some examples.
 \subsection{Examples}
 
 \subsubsection{First Information}
-First, set the directory where you want the pdf to be store:
+First, set the directory where you want the pdf to be stored:
 <<message=TRUE,cache=FALSE>>=
 dir = "/home/pierre/"
 @
 
-Then, choose a name for you pdf (as well as folder that contain all the raw information to create the pdf) 
+Then, choose a name for your pdf (as well as a folder that contain all the raw information to create the pdf) 
 <<message=TRUE,cache=FALSE>>=
 form.name = "my_first_pdf"
 @
