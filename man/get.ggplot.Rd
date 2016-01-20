@@ -27,6 +27,7 @@ The possibilites are:
 \itemize{
 \item for "network-":
 "network-network",
+"network-reproduction-sown",
 "network-reproduction-harvested",
 "network-reproduction-positive-inter-selected",
 "network-reproduction-negative-inter-selected",
@@ -100,6 +101,7 @@ The function returns a list with several ggplot objects according to the data an
 
 	\item a series of ggplots for reproduction:
 		\itemize{
+		\item sown seed-lots (ggplot.type = "network-reproduction-sown")
 		\item harvested seed-lots (ggplot.type = "network-reproduction-harvested")
 		\item positive inter selected seed-lots (ggplot.type = "network-reproduction-positive-inter-selected")
 		\item negative inter selected seed-lots (ggplot.type = "network-reproduction-negative-inter-selected")
@@ -117,7 +119,6 @@ The function returns a list with several ggplot objects according to the data an
 
 \item a series of ggplots for selection (ggplot.type = "network-positive-intra-selected")
 
-\item, If Mdist is not NULL, draw ??? Cf ma thèse !!!0
 }
 
 \item For "data-" type, plots are displayed for each variable of vec_variables for "data-barplot", "data-boxplot", "data-interation". It is all possibles pairs for "data-biplot". It is all the variables for "data-radar".
