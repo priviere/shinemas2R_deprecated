@@ -494,7 +494,7 @@ m_slh = default_network_ggplot$`network-reproduction-harvested`$map
 names(m_slh)
 
 m4_slh = m_slh$`map-[2011]`
-m9_slh = m_slh$`map-[2002, 2006, 2008, 2009, 2010, 2011, 2012, 2014]`
+m9_slh = m_slh$`map-[2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2014]`
 @
 
 \begin{center}
@@ -647,6 +647,8 @@ The following table describe the different \texttt{ggplot.type}:
 \hline
 \texttt{ggplot.type} & description \\
 \hline
+
+\texttt{"network-reproduction-sown"} & seed-lots that have been sown. \\
 
 \texttt{"network-reproduction-positive-inter-selected"} & seed-lots that have been harvested after a reproduction and have been sown the next season.
 It corresponds to positive inter selection. \\
