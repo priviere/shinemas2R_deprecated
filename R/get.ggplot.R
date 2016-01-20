@@ -522,6 +522,21 @@ if( check.arg("network-network", ggplot.type) ) {
 	LIST.PLOTS = c(LIST.PLOTS, list("network-network" = p_network))
 }
 
+# 3.2. network-reproduction-sown ----------
+if( check.arg("network-reproduction-sown", ggplot.type) ) {
+	
+	if( check.arg("barplot", ggplot.display) ) { 
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "reproduction", relation.type = c(gettext("sown"), gettext("harvest-sow")), name = gettext("sown seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+	} else { out_barplot = NULL }
+	
+	if( check.arg("map", ggplot.display) ) {
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "reproduction", relation.type = c(gettext("sown"), gettext("harvest-sow")), name = gettext("sown seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+	} else { out_map = NULL }
+	
+	out = list("network-reproduction-sown" = c(out_barplot, out_map))	
+	LIST.PLOTS = c(LIST.PLOTS, out)	
+}
+
 # 3.2. network-reproduction-harvested ----------
 if( check.arg("network-reproduction-harvested", ggplot.type) ) {
 
@@ -530,7 +545,7 @@ if( check.arg("network-reproduction-harvested", ggplot.type) ) {
 	} else { out_barplot = NULL }
 
 	if( check.arg("map", ggplot.display) ) {
-	out_map = get.ggplot_network.relation.map(map, data = data, relation = "reproduction", relation.type = gettext("harvest"), name = gettext("harvested seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+	out_map = get.ggplot_network.relation.map(map, data = data, relation = "reproduction", relation.type = c(gettext("harvest"), gettext("harvest-sow")), name = gettext("harvested seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 	} else { out_map = NULL }
 	
 	out = list("network-reproduction-harvested" = c(out_barplot, out_map))	
@@ -577,7 +592,7 @@ if( check.arg("network-diffusion-sent", ggplot.type) ) {
 	} else { out_barplot = NULL }
 	
 	if( check.arg("map", ggplot.display) ) {
-		out_map = get.ggplot_network.relation.map(map, data = data, relation = "diffusion", relation.type = c(gettext("give"), gettext("receive")), name = gettext("diffusion-sent seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "diffusion", relation.type = c(gettext("give"), gettext("give-receive")), name = gettext("diffusion-sent seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 	} else { out_map = NULL }
 	
 	out = list("network-diffusion-sent" = c(out_barplot, out_map))	
@@ -588,11 +603,11 @@ if( check.arg("network-diffusion-sent", ggplot.type) ) {
 if( check.arg("network-diffusion-received", ggplot.type) ) {
 	
 	if( check.arg("barplot", ggplot.display) ) { 
-		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "diffusion", relation.type = gettext("receive"), name = gettext("diffusion-received seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "diffusion", relation.type = c(gettext("receive"), gettext("give-receive")), name = gettext("diffusion-received seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
 	} else { out_barplot = NULL }
 	
 	if( check.arg("map", ggplot.display) ) {
-		out_map = get.ggplot_network.relation.map(map, data = data, relation = "diffusion", relation.type = gettext("receive"), name = gettext("diffusion-received seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "diffusion", relation.type = c(gettext("receive"), gettext("give-receive")), name = gettext("diffusion-received seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 	} else { out_map = NULL }
 	
 	out = list("network-diffusion-received" = c(out_barplot, out_map))	
