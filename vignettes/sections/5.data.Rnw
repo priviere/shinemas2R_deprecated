@@ -360,9 +360,6 @@ description &
 \rotatebox{90}{\texttt{data-biplot}} \\
 \hline
 
-
-#' @param ggplot.on For "data-" type. 
-
 \texttt{ggplot.on} & 
 \texttt{"son"} & 
 \texttt{"father"} or \texttt{"son"} depending on which seed-lot you want to plot.. &
