@@ -3,7 +3,7 @@
 
 Severals information are stored in \BD.
 To get information on raw information and levels and variable, you must use the argument \texttt{query.type} in \texttt{get.data}.
-The following table summarizes the different possibilities:
+The following table summarize the different possibilities:
 
 \begin{center}
 \begin{tabular}{ll}
@@ -13,7 +13,7 @@ The following table summarizes the different possibilities:
 "variable" & variable \\
 "person" & person \\
 "year" & year \\
-"project" & project \\
+"project" & projet \\
 "seed.lot" & seed-lots \\
 "selection.person" & persons that did intra-varietal mass selection \\
 "reproduction.type" & reproduction type \\
