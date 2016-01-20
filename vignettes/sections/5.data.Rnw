@@ -62,27 +62,27 @@ vec_variables = c("plant_height", "spike_lenght", "spike_weight")
 \subsubsection{\texttt{query.type = "data-classic"}}
 \label{data-classic}
 <<message=TRUE,cache=FALSE>>=
-#data_classic = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
-#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
-#	query.type = "data-classic", # data-classic query
-#	person.in = "RAB", # person to keep
-#	filter.on = "father-son", # filters on father AND son
-#	data.type = "relation", # data linked to relation between seed-lots
-#	variable = vec_variables, # the variables to display
-#	project.in = "PPB" # the project 
-#	)
-
-# 1. Query SHiNeMaS ...
-# 2. Set up data set ...
-# |==========================================================| 100%
-
-#data_classic = encrypt.data(data_classic)
-#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 24 11:59:59 2015.RData
-
-#data_classic = data_classic
-
-load("./data/data_classic.RData")
+if(use.get.data){
+	data_classic = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+		query.type = "data-classic", # data-classic query
+		person.in = "RAB", # person to keep
+		filter.on = "father-son", # filters on father AND son
+		data.type = "relation", # data linked to relation between seed-lots
+		variable = vec_variables, # the variables to display
+		project.in = "PPB" # the project 
+		)
+} else {
+	# 1. Query SHiNeMaS ...
+	# 2. Set up data set ...
+	# |==========================================================| 100%
+	
+	#data_classic = encrypt.data(data_classic)
+	#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 24 11:59:59 2015.RData
+	#data_classic = data_classic
+	load("./data/data_classic.RData")
+}
 
 names(data_classic$data)
 colnames(data_classic$data$data)
@@ -127,29 +127,27 @@ See appendix \ref{text_SandR} for more details on the theroy behind this.
 The data frame returned has a column \texttt{"expe"} which corresponds to an id of one selection differential
 
 <<message=TRUE,cache=FALSE>>=
-#data_S = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host,
-#	db_name = info_db$db_name, db_password = info_db$db_password,
-#	query.type = "data-S",
-#	person.in = "RAB",
-#	filter.on = "father-son",
-#	data.type = "relation",
-#	variable = vec_variables,
-#	project.in = "PPB"
-#	)
+if(use.get.data){
+	data_S = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host,
+		db_name = info_db$db_name, db_password = info_db$db_password,
+		query.type = "data-S",
+		person.in = "RAB",
+		filter.on = "father-son",
+		data.type = "relation",
+		variable = vec_variables,
+		project.in = "PPB"
+		)
+} else {
+	# 1. Query SHiNeMaS ...
+	# 2. Set up data set ...
+	# |==========================================================| 100%
+	
+	#data_S = encrypt.data(data_S)
+	#The key has been written in /home/pierre/key_data-S-relation_Tue Nov 24 12:01:25 2015.RData
+	load("./data/data_S.RData")
+}
 
-# 1. Query SHiNeMaS ...
-# 2. Set up data set ...
-# |==========================================================| 100%
-
-
-#data_S = encrypt.data(data_S)
-#The key has been written in /home/pierre/key_data-S-relation_Tue Nov 24 12:01:25 2015.RData
-
-#data_S = data_S
-
-
-load("./data/data_S.RData")
 colnames(data_S$data$data)
 @
 
@@ -162,28 +160,26 @@ The data frame returned has a column \texttt{"expe"} which corresponds to an id 
 The query takes into account when selection have been done in a seed lot, that this seed lot have been merged and then have been sown. It is the case when selection have been carried out in a replication that have been merge after. Even if this case should not arrise, it may happen.
 
 <<message=TRUE,cache=FALSE>>=
-#data_SR = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host,
-#	db_name = info_db$db_name, db_password = info_db$db_password,
-#	query.type = "data-SR",
-#	person.in = "RAB",
-#	filter.on = "father-son",
-#	data.type = "relation",
-#	variable = vec_variables,
-#	project.in = "PPB"
-#	)
-
-# 1. Query SHiNeMaS ...
-# 2. Set up data set ...
-# |==========================================================| 100%
-
-
-#data_SR = encrypt.data(data_SR)
-#The key has been written in /home/pierre/key_data-SR-relation_Tue Nov 24 12:02:25 2015.RData
-
-#data_SR = data_SR
-
-load("./data/data_SR.RData")
+if(use.get.data){
+	data_SR = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host,
+		db_name = info_db$db_name, db_password = info_db$db_password,
+		query.type = "data-SR",
+		person.in = "RAB",
+		filter.on = "father-son",
+		data.type = "relation",
+		variable = vec_variables,
+		project.in = "PPB"
+		)
+} else {
+	# 1. Query SHiNeMaS ...
+	# 2. Set up data set ...
+	# |==========================================================| 100%
+	
+	#data_SR = encrypt.data(data_SR)
+	#The key has been written in /home/pierre/key_data-SR-relation_Tue Nov 24 12:02:25 2015.RData
+	load("./data/data_SR.RData")
+}
 
 colnames(data_SR$data$data)
 @
@@ -449,38 +445,43 @@ Note that this example is done on a little data set.
 Indeed, the pies are drawn with a polygon which need lots of points that take memory.
 
 <<message=TRUE,cache=FALSE>>=
+if(use.get.data){
+	data_classic_bis = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+		query.type = "data-classic", # data-classic query
+		person.in = "LUD", # person to keep
+		year.in = 2011, # year to kepp
+		filter.on = "father-son", # filters on father AND son
+		data.type = "relation", # data linked to relation between seed-lots
+		variable = vec_variables, # the variables to display
+		project.in = "PPB" # the project 
+		)
+	
+	data_classic_bis = encrypt.data(data_classic_bis)
+	
+	pn = get.ggplot(
+		data_classic_bis, 
+		ggplot.type = "data-pie.on.network", 
+		vec_variables = "spike_weight---spike_weight", 
+		pie.size = .25, 
+		hide.labels.parts = "person"
+		)
 
-#data_classic_bis = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
-#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
-#	query.type = "data-classic", # data-classic query
-#	person.in = "LUD", # person to keep
-#	year.in = 2011, # year to kepp
-#	filter.on = "father-son", # filters on father AND son
-#	data.type = "relation", # data linked to relation between seed-lots
-#	variable = vec_variables, # the variables to display
-#	project.in = "PPB" # the project 
-#)
+} else { 
+	# 1. Query SHiNeMaS ...
+	# 2. Set up data set ...
+	# |==========================================================| 100%
+	#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 25 22:29:59 2015.RData
+	load("./data/data_classic_bis.RData")
+	
+	# 1. Query SHiNeMaS ...
+	# 2. Create network matrix ...
+	# 3. Link information to vertex and edges ...
+	# The key has been written in /home/pierre/key_network_Wed Nov 25 22:30:16 2015.RData
 
-
-#data_classic_bis = encrypt.data(data_classic_bis)
-
-#load("./data/data_classic_bis.RData")
-
-#pn = get.ggplot(
-#	data_classic_bis, 
-#	ggplot.type = "data-pie.on.network", 
-#	vec_variables = "spike_weight---spike_weight", 
-#	pie.size = .25, 
-#	hide.labels.parts = "person"
-#	)
-
-# 1. Query SHiNeMaS ...
-# 2. Create network matrix ...
-# 3. Link information to vertex and edges ...
-# The key has been written in /home/pierre/key_network_Wed Nov 25 22:30:16 2015.RData
-
-load("./data/pn.RData")
+	load("./data/pn.RData")
+	}
 @
 
 As we're working for one person, we set \texttt{hide.labels.parts = "person"}.
@@ -525,30 +526,30 @@ Arguments can be customed related to network plots (Table \ref{custom.network}).
 \texttt{get.data} is called to get the coordinates data.
 
 <<message=TRUE,cache=FALSE>>=
-
-#data_classic_ter = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
-#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
-#	query.type = "data-classic", # data-classic query
-#	germplasm.in = "Rouge-du-Roc", # germplasm to keep
-#	person.in = c("RAB", "CHD", "JSG"), # person to keep
-#	filter.on = "father-son", # filters on father AND son
-#	data.type = "relation", # data linked to relation between seed-lots
-#	variable = vec_variables, # the variables to display
-#	project.in = "PPB" # the project 
-#)
-
-#data_classic_ter = encrypt.data(data_classic_ter)
-
-#load("./data/data_classic_ter.RData")
-
-#pm = get.ggplot(
-#	data_classic_ter, 
-#	ggplot.type = "data-pie.on.map", 
-#	vec_variables = "spike_weight---spike_weight"
-#	)
-
-load("./data/pm.RData")
+if(use.get.data){
+	data_classic_ter = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+		query.type = "data-classic", # data-classic query
+		germplasm.in = "Rouge-du-Roc", # germplasm to keep
+		person.in = c("RAB", "CHD", "JSG"), # person to keep
+		filter.on = "father-son", # filters on father AND son
+		data.type = "relation", # data linked to relation between seed-lots
+		variable = vec_variables, # the variables to display
+		project.in = "PPB" # the project
+		)
+	
+	data_classic_ter = encrypt.data(data_classic_ter)
+	
+	pm = get.ggplot(
+		data_classic_ter, 
+		ggplot.type = "data-pie.on.map", 
+		vec_variables = "spike_weight---spike_weight"
+		)
+} else { 
+	load("./data/data_classic_ter.RData")
+	load("./data/pm.RData")
+	}
 
 names(pm$`data-pie.on.map`)
 @
@@ -780,21 +781,23 @@ It is \texttt{NULL} as there are no duplicated information here.
 An example with duplicated information:
 
 <<message=TRUE,cache=FALSE>>=
-#data_classic_4 = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
-#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
-#	query.type = "data-classic", # data-classic query
-#	person.in = "RAB", # person to keep
-#	filter.on = "father-son", # filters on father AND son
-#	data.type = "relation", # data linked to relation between seed-lots
-#	variable = "sowing_practices", # the variables to display
-#	project.in = "PPB" # the project
-#	)
-
-# data_classic_4 = encrypt.data(data_classic_4)
-
-load("./data/data_classic_4.RData")
-
+if(use.get.data){
+	data_classic_4 = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+		query.type = "data-classic", # data-classic query
+		person.in = "RAB", # person to keep
+		filter.on = "father-son", # filters on father AND son
+		data.type = "relation", # data linked to relation between seed-lots
+		variable = "sowing_practices", # the variables to display
+		project.in = "PPB" # the project
+		)
+	
+	data_classic_4 = encrypt.data(data_classic_4)
+} else { 
+	load("./data/data_classic_4.RData")
+	}
+	
 tab_class_4 = get.table(
 	data_classic_4, 
 	table.type = "raw", 

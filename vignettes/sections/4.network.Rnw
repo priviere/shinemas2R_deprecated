@@ -26,25 +26,26 @@ It can be put in relation with genetic $F_{st}$ for example \citep{nei_analysis_
 
 
 <<message=TRUE,cache=FALSE>>=
-#data_network = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
-#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
-#	query.type = "network", # network query
-#	germplasm.in = "Rouge-du-Roc", # germplasm to keep
-#	filter.on = "father-son", # filter on father AND son
-#	Mdist = TRUE
-#	)
-
-# 1. Query SHiNeMaS ...
-# 2. Create network matrix ...
-# 3. Link information to vertex and edges ...
-# 4. Get network information on seed-lots ...
-# 5. Get Mdist square matrix ...
-
-#data_network = encrypt.data(data_network)
-#The key has been written in /home/pierre/key_network_Tue Nov 24 11:52:47 2015.RData
-
-load("./data/data_network.RData")
+if(use.get.data){
+	data_network = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+		query.type = "network", # network query
+		germplasm.in = "Rouge-du-Roc", # germplasm to keep
+		filter.on = "father-son", # filter on father AND son
+		Mdist = TRUE
+		)
+} else { 
+	# 1. Query SHiNeMaS ...
+	# 2. Create network matrix ...
+	# 3. Link information to vertex and edges ...
+	# 4. Get network information on seed-lots ...
+	# 5. Get Mdist square matrix ...
+	
+	#data_network = encrypt.data(data_network)
+	#The key has been written in /home/pierre/key_network_Tue Nov 24 11:52:47 2015.RData
+	load("./data/data_network.RData")
+	}
 @
 
 The function returns a list with:
@@ -83,45 +84,48 @@ This may be usefull, regarding a network on one person, to know where do the see
 To do so, use \texttt{fill.diffusion.gap = TRUE}.
 
 <<message=TRUE,cache=FALSE>>=
-#data_network_JAB = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
-#	db_name = info_db$db_name, db_password = info_db$db_password,  # db infos
-#	query.type = "network", # network query
-#	person.in = "JAB", # person to keep
-#	filter.on = "father-son" # filter on father AND son
-#	)
-
-# 1. Query SHiNeMaS ...
-# 2. Create network matrix ...
-# 3. Link information to vertex and edges ...
-# 4. Get network information on seed-lots ...
-
-#data_network_JAB = encrypt.data(data_network_JAB)
-# The key has been written in /home/pierre/key_network_Tue Nov 24 11:54:53 2015.RData
-
-load("./data/data_network_JAB.RData")
+if(use.get.data){
+	data_network_JAB = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+		db_name = info_db$db_name, db_password = info_db$db_password,  # db infos
+		query.type = "network", # network query
+		person.in = "JAB", # person to keep
+		filter.on = "father-son" # filter on father AND son
+		)
+} else {
+	# 1. Query SHiNeMaS ...
+	# 2. Create network matrix ...
+	# 3. Link information to vertex and edges ...
+	# 4. Get network information on seed-lots ...
+	
+	#data_network_JAB = encrypt.data(data_network_JAB)
+	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:54:53 2015.RData
+	load("./data/data_network_JAB.RData")
+	}
 @
 
 <<message=TRUE,cache=FALSE>>=
-#data_network_JAB_fill_gap = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
-#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
-#	query.type = "network", # network query
-#	person.in = "JAB", # person to keep
-#	filter.on = "father-son", # filter on father AND son
-#	fill.diffusion.gap = TRUE
-#	)
+if(use.get.data){
+	data_network_JAB_fill_gap = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+		query.type = "network", # network query
+		person.in = "JAB", # person to keep
+		filter.on = "father-son", # filter on father AND son
+		fill.diffusion.gap = TRUE
+		)
+} else {
+	# 1. Query SHiNeMaS ...
+	# 2. Create network matrix ...
+	# 2.1. Fill diffusion gaps ...
+	# 3. Link information to vertex and edges ...
+	# 4. Get network information on seed-lots ...
+	
+	#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)
+	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData
+	load("./data/data_network_JAB_fill_gap.RData")
+	}
 
-# 1. Query SHiNeMaS ...
-# 2. Create network matrix ...
-# 2.1. Fill diffusion gaps ...
-# 3. Link information to vertex and edges ...
-# 4. Get network information on seed-lots ...
-
-#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)
-# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData
-
-load("./data/data_network_JAB_fill_gap.RData")
 @
 
 

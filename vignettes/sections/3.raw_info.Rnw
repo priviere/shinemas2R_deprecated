@@ -26,13 +26,16 @@ The following table summarize the different possibilities:
 For example,
 
 <<message=TRUE,cache=FALSE,warning=FALSE>>=
-# person = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host,# db infos
-#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
-#	query.type = "person" # information on person present in SHiNeMaS
-#	)
+if(use.get.data){
+	person = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host,# db infos
+		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+		query.type = "person" # information on person present in SHiNeMaS
+	)
+} else { 
+		load("data/person.RData") 
+	}
 
-load("data/person.RData")
 person$data
 @
 

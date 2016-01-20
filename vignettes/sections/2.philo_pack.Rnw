@@ -93,20 +93,11 @@ To continue, load the package:
 library(shinemas2R)
 @
 
-In this vignette, you can test \pack~without installing \BD.
+For an easier visualisation, all warning messages are not representing (NAs introduced, rows deleted, etc.)
 
-You can load the data-sets by downloading it:
+\subsubsection{Test with \BD~installed}
 
-<<message=TRUE,cache=FALSE>>=
-system("mkdir data")
-system("cp -r /home/pierre/Documents/geek/R-stats/Rdev/R_package_shinemas2R/shinemas2R_data/*RData ./data")
-@
-
-and then \texttt{load()} it.
-
-
-Nevertheless, it may be useful to test the \texttt{get.data} function on \BD~directly.
-
+It may be useful to test the \texttt{get.data} function on \BD~directly.
 Two options:
 \begin{itemize}
 \item \BD~is installed on a sever where you can have access. 
@@ -128,5 +119,25 @@ The procedure to do so is explained in appendix \ref{install_shinemas}.
 
 \end{itemize}
 
-For an easier visualisation, all warning messages are not representing (NAs introduced, rows deleted, etc.)
+As you will use \texttt{get.data}, you should set:
+<<message=TRUE,cache=FALSE>>=
+use.get.data = TRUE
+@
+
+\subsubsection{Test without installing \BD}
+
+In this vignette, you can test \pack~without installing \BD.
+You do not use the \texttt{get.data} function:
+<<message=TRUE,cache=FALSE>>=
+use.get.data = FALSE
+@
+
+And you can load the data-sets by downloading it:
+
+<<message=TRUE,cache=FALSE>>=
+system("mkdir data")
+system("cp -r /home/pierre/Documents/geek/R-stats/Rdev/R_package_shinemas2R/shinemas2R_data/*RData ./data")
+@
+
+and then \texttt{load()} it.
 
