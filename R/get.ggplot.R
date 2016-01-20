@@ -16,6 +16,7 @@
 #' \itemize{
 #' \item for "network-": 
 #' "network-network",
+#' "network-reproduction-sown",
 #' "network-reproduction-harvested",
 #' "network-reproduction-positive-inter-selected",
 #' "network-reproduction-negative-inter-selected",
@@ -89,6 +90,7 @@
 #' 
 #' 	\item a series of ggplots for reproduction:
 #' 		\itemize{
+#' 		\item sown seed-lots (ggplot.type = "network-reproduction-sown")
 #' 		\item harvested seed-lots (ggplot.type = "network-reproduction-harvested")
 #' 		\item positive inter selected seed-lots (ggplot.type = "network-reproduction-positive-inter-selected")
 #' 		\item negative inter selected seed-lots (ggplot.type = "network-reproduction-negative-inter-selected")
@@ -106,7 +108,6 @@
 #' 
 #' \item a series of ggplots for selection (ggplot.type = "network-positive-intra-selected") 
 #' 
-#' \item, If Mdist is not NULL, draw ??? Cf ma thèse !!!0
 #' }
 #' 
 #' \item For "data-" type, plots are displayed for each variable of vec_variables for "data-barplot", "data-boxplot", "data-interation". It is all possibles pairs for "data-biplot". It is all the variables for "data-radar".
@@ -188,6 +189,7 @@ if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-S-relat
 test = is.element(ggplot.type, c(
 	# network-
 	"network-network",
+	"network-reproduction-sown",
 	"network-reproduction-harvested",
 	"network-reproduction-positive-inter-selected",
 	"network-reproduction-positive-inter-selected",
@@ -211,34 +213,36 @@ test = is.element(ggplot.type, c(
 not_in_data = ggplot.type[!test]
 if( length(not_in_data) > 0 ) { stop("ggplot.type ", paste(not_in_data, collapse = ", "), " are not possible.
 																		 
-																		 ggplot.type must be 
+ggplot.type must be 
+
+netwok- type:
+\"network-network\",
+\"network-reproduction-sown\",
+\"network-reproduction-harvested\",
+\"network-reproduction-positive-inter-selected\",
+\"network-reproduction-positive-inter-selected\",
+\"network-reproduction-negative-inter-selected\",
+\"network-reproduction-crossed\",
+\"network-diffusion-sent\",
+\"network-diffusion-received\",
+\"network-diffusion-relation\",
+\"network-mixture\",
+\"network-positive-intra-selected\"
 																		 
-																		 netwok- type:
-																		 \"network-network\",
-																		 \"network-reproduction-harvested\",
-																		 \"network-reproduction-positive-inter-selected\",
-																		 \"network-reproduction-positive-inter-selected\",
-																		 \"network-reproduction-negative-inter-selected\",
-																		 \"network-reproduction-crossed\",
-																		 \"network-diffusion-sent\",
-																		 \"network-diffusion-received\",
-																		 \"network-diffusion-relation\",
-																		 \"network-mixture\",
-																		 \"network-positive-intra-selected\"
-																		 
-																		 or data- type:
-																		 \"data-barplot\", 
-																		 \"data-boxplot\", 
-																		 \"data-interaction\", 
-																		 \"data-radar\", 
-																		 \"data-biplot\", 
-																		 \"data-pie.on.map\",
-																		 \"data-pie.on.network\".") 
+or data- type:
+\"data-barplot\", 
+\"data-boxplot\", 
+\"data-interaction\", 
+\"data-radar\", 
+\"data-biplot\", 
+\"data-pie.on.map\",
+\"data-pie.on.network\".") 
 }
 
 
 # 1.2.1. network ----------
 vec_all_ggplot_network = 	c("network-network",
+														"network-reproduction-sown",
 														"network-reproduction-harvested",
 														"network-reproduction-positive-inter-selected",
 														"network-reproduction-positive-inter-selected",
