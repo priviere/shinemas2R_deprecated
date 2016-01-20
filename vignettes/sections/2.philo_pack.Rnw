@@ -110,8 +110,8 @@ Nevertheless, it may be useful to test the \texttt{get.data} function on \BD~dir
 Two options:
 \begin{itemize}
 \item \BD~is installed on a sever where you can have access. 
-You need to ask the admin the following informations : \texttt{db\_user}, \texttt{db\_host}, \texttt{db\_name}, \texttt{db\_password}. 
-Add these informations in \texttt{info\_db}, which is needed in the next steps in get.data.
+You need to ask the admin the following information : \texttt{db\_user}, \texttt{db\_host}, \texttt{db\_name}, \texttt{db\_password}. 
+Add these information in \texttt{info\_db}, which is needed in the next steps in get.data.
 For example: 
 
 <<message=TRUE,cache=FALSE>>=
