@@ -1,5 +1,4 @@
 # shinemas2R
-## version 0.9.1
 
 `shinemas2R` is an R package that analyses outputs from the data base [SHiNeMaS (Seeds History and Network Management System)](http://moulon.inra.fr/index.php/en/tranverse-team/atelier-de-bioinformatique/projects/181). 
 
@@ -10,6 +9,9 @@ More informations about this licence [here](http://creativecommons.org/licenses/
 
 The copyright of the R code and the vignette are owned by Réseau Semences Paysannes and Institut National de la Recherche Agronomique
 
+## Version
+`shinemas2R` is now at version 0.9.1.
+See NEWS [here](https://github.com/priviere/shinemas2R/blob/master/NEWS) to know the main changes.
 
 ## Participate to development
 
