@@ -53,7 +53,7 @@
 #' 
 #' @param data.type For queries in "data-", type of data: "relation" for data linked to relation between seed lots and "seed-lots" for data linked to seed lots
 #' 
-#' @param filter.on This argument is needed for filters for queries in "network", data-" and "data.type" = data.relation. It chooses on which seed-lots the filters is applied: "son", "father" or "father-son".
+#' @param filter.on This argument is needed for filters for queries in "network", data-" and "data.type" = data.relation. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son".
 #' 
 #' @param germplasm.in Filter: vector with germplasms to keep. By default, all the germplasms are in.
 #' @param germplasm.out Filter: vector with germplasms to discard. By default, no germplasms are out.
