@@ -1,4 +1,5 @@
-# shinemas2R version 0.9.1
+# shinemas2R
+## version 0.9.1
 
 `shinemas2R` is an R package that analyses outputs from the data base [SHiNeMaS (Seeds History and Network Management System)](http://moulon.inra.fr/index.php/en/tranverse-team/atelier-de-bioinformatique/projects/181). 
 
