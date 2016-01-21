@@ -7,7 +7,7 @@
 #' @param data output from \code{get.data}
 #' 
 #' @details
-#' The following information are encrypt : 
+#' The following information is encrypted: 
 #' person,
 #' year (from 2000),
 #' project,
@@ -19,7 +19,7 @@
 #' 
 #' The key is written in .RData format. To use it you should type load("key.RData").
 #' 
-#' @return The function returns the data frame encrypt and write in the work directory a file.txt with the key
+#' @return The function returns the data frame encrypted and writes in the work directory a file.txt with the key
 #' 
 #' @author Pierre Rivière 
 #' 
