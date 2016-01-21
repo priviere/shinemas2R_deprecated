@@ -4,7 +4,7 @@
 \alias{get.table}
 \title{Get table from \code{get.data}}
 \usage{
-get.table(data, correlated.variables = TRUE, fuse_g_and_s = FALSE,
+get.table(data, correlated_group = NULL, fuse_g_and_s = FALSE,
   table.type = NULL, table.on = "son", vec_variables = NULL,
   nb_row = NULL, nb_col = NULL, nb_duplicated_rows = 10,
   col_to_display = c("person", "germplasm", "year", "block", "X", "Y"),
@@ -13,7 +13,7 @@ get.table(data, correlated.variables = TRUE, fuse_g_and_s = FALSE,
 \arguments{
 \item{data}{It can be either output from \code{get.data} or ggplot.object from \code{get.ggplot}.}
 
-\item{correlated.variables}{For data from \code{get.data}. If TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables}
+\item{correlated_group}{Name of the group of correlation in data. NULL by default.}
 
 \item{fuse_g_and_s}{Fuse germplasm and selection name information in a column named germplasm}
 

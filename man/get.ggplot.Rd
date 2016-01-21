@@ -4,7 +4,7 @@
 \alias{get.ggplot}
 \title{Get ggplot objects from \code{get.data}}
 \usage{
-get.ggplot(data, correlated.variables = TRUE, fuse_g_and_s = FALSE,
+get.ggplot(data, correlated_group = NULL, fuse_g_and_s = FALSE,
   ggplot.type = NULL, ggplot.display = NULL, ggplot.on = "son",
   x.axis = NULL, in.col = NULL, vec_variables = NULL,
   nb_parameters_per_plot_x.axis = NULL,
@@ -17,7 +17,7 @@ get.ggplot(data, correlated.variables = TRUE, fuse_g_and_s = FALSE,
 \arguments{
 \item{data}{output from get.data with query.type = "network" or query.type = "data-...".}
 
-\item{correlated.variables}{if TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables}
+\item{correlated_group}{Name of the group of correlation in data. NULL by default.}
 
 \item{fuse_g_and_s}{Fuse germplasm and selection name information in a column named germplasm}
 
@@ -27,6 +27,7 @@ The possibilites are:
 \itemize{
 \item for "network-":
 "network-network",
+"network-reproduction-sown",
 "network-reproduction-harvested",
 "network-reproduction-positive-inter-selected",
 "network-reproduction-negative-inter-selected",
@@ -52,11 +53,11 @@ The possibilites are:
 
 \item{ggplot.display}{For "network-" data: "barplot", "map". It can be a vector of several elements i.e. c("barplot", "map"). NULL by default: both are done.}
 
-\item{ggplot.on}{For "data-" type. father" or "son" depending on which seed-lot you want to plot.}
+\item{ggplot.on}{For "data-" type. "father" or "son" depending on which seed-lot you want to plot.}
 
-\item{x.axis}{factor display on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.}
+\item{x.axis}{factor displayed on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.}
 
-\item{in.col}{factor display in color of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, in.col is not displayed. Note it is compulsory for data-biplot and data-radar as in these cases x.axis is not used.}
+\item{in.col}{factor displayed in color of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, in.col is not displayed. Note it is compulsory for data-biplot and data-radar as in these cases x.axis is not used.}
 
 \item{vec_variables}{For "data-" type : a vector of variables displayed.}
 
@@ -100,6 +101,7 @@ The function returns a list with several ggplot objects according to the data an
 
 	\item a series of ggplots for reproduction:
 		\itemize{
+		\item sown seed-lots (ggplot.type = "network-reproduction-sown")
 		\item harvested seed-lots (ggplot.type = "network-reproduction-harvested")
 		\item positive inter selected seed-lots (ggplot.type = "network-reproduction-positive-inter-selected")
 		\item negative inter selected seed-lots (ggplot.type = "network-reproduction-negative-inter-selected")
@@ -117,7 +119,6 @@ The function returns a list with several ggplot objects according to the data an
 
 \item a series of ggplots for selection (ggplot.type = "network-positive-intra-selected")
 
-\item, If Mdist is not NULL, draw ??? Cf ma thèse !!!0
 }
 
 \item For "data-" type, plots are displayed for each variable of vec_variables for "data-barplot", "data-boxplot", "data-interation". It is all possibles pairs for "data-biplot". It is all the variables for "data-radar".

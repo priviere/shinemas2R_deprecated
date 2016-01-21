@@ -35,8 +35,8 @@
 \newcommand{\BDfull}{Seed History and Network Management System}
 \newcommand{\BD}{SHiNeMaS}
 \newcommand{\pack}{\texttt{shinemas2R}}
-
-\newcommand{\versionnumber}{0.9}
+\newcommand{\listpackformatdata}{\texttt{PPBstats}}
+\newcommand{\versionnumber}{0.9.1}
 
 \begin{document}
 

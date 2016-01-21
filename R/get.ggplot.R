@@ -6,7 +6,7 @@
 #'
 #' @param data output from get.data with query.type = "network" or query.type = "data-...".
 #' 
-#' @param correlated.variables if TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables
+#' @param correlated_group Name of the group of correlation in data. NULL by default.
 #' 
 #' @param fuse_g_and_s Fuse germplasm and selection name information in a column named germplasm
 #' 
@@ -16,6 +16,7 @@
 #' \itemize{
 #' \item for "network-": 
 #' "network-network",
+#' "network-reproduction-sown",
 #' "network-reproduction-harvested",
 #' "network-reproduction-positive-inter-selected",
 #' "network-reproduction-negative-inter-selected",
@@ -41,11 +42,11 @@
 #' 
 #' @param ggplot.display For "network-" data: "barplot", "map". It can be a vector of several elements i.e. c("barplot", "map"). NULL by default: both are done.
 #' 
-#' @param ggplot.on For "data-" type. father" or "son" depending on which seed-lot you want to plot.
+#' @param ggplot.on For "data-" type. "father" or "son" depending on which seed-lot you want to plot.
 #' 
-#' @param x.axis factor display on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.
+#' @param x.axis factor displayed on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.
 #' 
-#' @param in.col factor display in color of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, in.col is not displayed. Note it is compulsory for data-biplot and data-radar as in these cases x.axis is not used.
+#' @param in.col factor displayed in color of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, in.col is not displayed. Note it is compulsory for data-biplot and data-radar as in these cases x.axis is not used.
 #' 
 #' @param vec_variables For "data-" type : a vector of variables displayed.
 #' 
@@ -89,6 +90,7 @@
 #' 
 #' 	\item a series of ggplots for reproduction:
 #' 		\itemize{
+#' 		\item sown seed-lots (ggplot.type = "network-reproduction-sown")
 #' 		\item harvested seed-lots (ggplot.type = "network-reproduction-harvested")
 #' 		\item positive inter selected seed-lots (ggplot.type = "network-reproduction-positive-inter-selected")
 #' 		\item negative inter selected seed-lots (ggplot.type = "network-reproduction-negative-inter-selected")
@@ -106,7 +108,6 @@
 #' 
 #' \item a series of ggplots for selection (ggplot.type = "network-positive-intra-selected") 
 #' 
-#' \item, If Mdist is not NULL, draw ??? Cf ma thèse !!!0
 #' }
 #' 
 #' \item For "data-" type, plots are displayed for each variable of vec_variables for "data-barplot", "data-boxplot", "data-interation". It is all possibles pairs for "data-biplot". It is all the variables for "data-radar".
@@ -119,7 +120,7 @@
 #' 
 get.ggplot <- function(
 	data,
-	correlated.variables = TRUE,
+	correlated_group = NULL,
 	fuse_g_and_s = FALSE,
 	ggplot.type = NULL,
 	ggplot.display = NULL,
@@ -149,12 +150,6 @@ data = data$data
 
 # 1. Check parameters and assign automatic parameters ########## ----------
 # 1.1. data -----------
-if( 
-	is.null(data$datasets.with.correlated.variables) & 
-	is.null(data$datasets.with.non.correlated.variables) & 
-	is.null(data$network)
-	) { message("data is NULL: nothing is done !"); return(NULL) }
-
 
 shinemas2R.object = attributes(data)$shinemas2R.object
 
@@ -163,6 +158,26 @@ test2 = length(grep("data", shinemas2R.object)) > 0
 test = unique(c(test1, test2))
 test = length(test) == 1 & test[1]
 if( test ){ stop("data must come from shinemas2R::get.data") }
+
+
+if( 
+	is.null(data$data) & 
+	is.null(data$data.with.correlated.variables) & 
+	is.null(data$network)
+) { message("data is NULL: nothing is done !"); return(NULL) }
+
+
+if( test2 ){
+	if( is.null(correlated_group) ) {
+		data = data$data	
+	} else { 
+		data_tmp = data$data.with.correlated.variables
+		if(is.element(correlated_group, names(d))) {
+			data = data_tmp[[correlated_group]]
+		} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
+	}
+}
+
 
 if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-S-relation" | shinemas2R.object == "data-SR-seed-lots" | shinemas2R.object == "data-SR-relation" ) {
 	ggplot.type.dataS.dataSR = TRUE
@@ -174,6 +189,7 @@ if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-S-relat
 test = is.element(ggplot.type, c(
 	# network-
 	"network-network",
+	"network-reproduction-sown",
 	"network-reproduction-harvested",
 	"network-reproduction-positive-inter-selected",
 	"network-reproduction-positive-inter-selected",
@@ -197,34 +213,36 @@ test = is.element(ggplot.type, c(
 not_in_data = ggplot.type[!test]
 if( length(not_in_data) > 0 ) { stop("ggplot.type ", paste(not_in_data, collapse = ", "), " are not possible.
 																		 
-																		 ggplot.type must be 
+ggplot.type must be 
+
+netwok- type:
+\"network-network\",
+\"network-reproduction-sown\",
+\"network-reproduction-harvested\",
+\"network-reproduction-positive-inter-selected\",
+\"network-reproduction-positive-inter-selected\",
+\"network-reproduction-negative-inter-selected\",
+\"network-reproduction-crossed\",
+\"network-diffusion-sent\",
+\"network-diffusion-received\",
+\"network-diffusion-relation\",
+\"network-mixture\",
+\"network-positive-intra-selected\"
 																		 
-																		 netwok- type:
-																		 \"network-network\",
-																		 \"network-reproduction-harvested\",
-																		 \"network-reproduction-positive-inter-selected\",
-																		 \"network-reproduction-positive-inter-selected\",
-																		 \"network-reproduction-negative-inter-selected\",
-																		 \"network-reproduction-crossed\",
-																		 \"network-diffusion-sent\",
-																		 \"network-diffusion-received\",
-																		 \"network-diffusion-relation\",
-																		 \"network-mixture\",
-																		 \"network-positive-intra-selected\"
-																		 
-																		 or data- type:
-																		 \"data-barplot\", 
-																		 \"data-boxplot\", 
-																		 \"data-interaction\", 
-																		 \"data-radar\", 
-																		 \"data-biplot\", 
-																		 \"data-pie.on.map\",
-																		 \"data-pie.on.network\".") 
+or data- type:
+\"data-barplot\", 
+\"data-boxplot\", 
+\"data-interaction\", 
+\"data-radar\", 
+\"data-biplot\", 
+\"data-pie.on.map\",
+\"data-pie.on.network\".") 
 }
 
 
 # 1.2.1. network ----------
 vec_all_ggplot_network = 	c("network-network",
+														"network-reproduction-sown",
 														"network-reproduction-harvested",
 														"network-reproduction-positive-inter-selected",
 														"network-reproduction-positive-inter-selected",
@@ -387,11 +405,6 @@ if( length(vec_variables) > 0 & length(grep("network", shinemas2R.object)) > 0 )
 
 if( test2 ){
 	
-	if( correlated.variables ) { 
-		data = data$datasets.with.correlated.variables 
-	} else { data = data$datasets.with.non.correlated.variables }
-
-	
 	if( fuse_g_and_s ) { 
 		data$son_germplasm = sapply(as.character(data$son), function(x){unlist(strsplit(x,"_"))[1]}) 
 		data$father_germplasm = sapply(as.character(data$father), function(x){unlist(strsplit(x,"_"))[1]}) 
@@ -513,15 +526,30 @@ if( check.arg("network-network", ggplot.type) ) {
 	LIST.PLOTS = c(LIST.PLOTS, list("network-network" = p_network))
 }
 
+# 3.2. network-reproduction-sown ----------
+if( check.arg("network-reproduction-sown", ggplot.type) ) {
+	
+	if( check.arg("barplot", ggplot.display) ) { 
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "reproduction", relation.type = c(gettext("sown"), gettext("harvest-sow")), name = gettext("sown seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+	} else { out_barplot = NULL }
+	
+	if( check.arg("map", ggplot.display) ) {
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "reproduction", relation.type = c(gettext("sown"), gettext("harvest-sow")), name = gettext("sown seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+	} else { out_map = NULL }
+	
+	out = list("network-reproduction-sown" = c(out_barplot, out_map))	
+	LIST.PLOTS = c(LIST.PLOTS, out)	
+}
+
 # 3.2. network-reproduction-harvested ----------
 if( check.arg("network-reproduction-harvested", ggplot.type) ) {
 
 		if( check.arg("barplot", ggplot.display) ) { 
-		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "reproduction", relation.type = gettext("harvest"), name = gettext("harvested seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "reproduction", relation.type = c(gettext("harvest"), gettext("harvest-sow")), name = gettext("harvested seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
 	} else { out_barplot = NULL }
 
 	if( check.arg("map", ggplot.display) ) {
-	out_map = get.ggplot_network.relation.map(map, data = data, relation = "reproduction", relation.type = gettext("harvest"), name = gettext("harvested seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+	out_map = get.ggplot_network.relation.map(map, data = data, relation = "reproduction", relation.type = c(gettext("harvest"), gettext("harvest-sow")), name = gettext("harvested seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 	} else { out_map = NULL }
 	
 	out = list("network-reproduction-harvested" = c(out_barplot, out_map))	
@@ -568,7 +596,7 @@ if( check.arg("network-diffusion-sent", ggplot.type) ) {
 	} else { out_barplot = NULL }
 	
 	if( check.arg("map", ggplot.display) ) {
-		out_map = get.ggplot_network.relation.map(map, data = data, relation = "diffusion", relation.type = c(gettext("give"), gettext("receive")), name = gettext("diffusion-sent seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "diffusion", relation.type = c(gettext("give"), gettext("give-receive")), name = gettext("diffusion-sent seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 	} else { out_map = NULL }
 	
 	out = list("network-diffusion-sent" = c(out_barplot, out_map))	
@@ -579,11 +607,11 @@ if( check.arg("network-diffusion-sent", ggplot.type) ) {
 if( check.arg("network-diffusion-received", ggplot.type) ) {
 	
 	if( check.arg("barplot", ggplot.display) ) { 
-		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "diffusion", relation.type = gettext("receive"), name = gettext("diffusion-received seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "diffusion", relation.type = c(gettext("receive"), gettext("give-receive")), name = gettext("diffusion-received seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
 	} else { out_barplot = NULL }
 	
 	if( check.arg("map", ggplot.display) ) {
-		out_map = get.ggplot_network.relation.map(map, data = data, relation = "diffusion", relation.type = gettext("receive"), name = gettext("diffusion-received seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "diffusion", relation.type = c(gettext("receive"), gettext("give-receive")), name = gettext("diffusion-received seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 	} else { out_map = NULL }
 	
 	out = list("network-diffusion-received" = c(out_barplot, out_map))	
@@ -864,10 +892,6 @@ if( check.arg("data-biplot", ggplot.type) & length(vec_variables) < 2 ) { warnin
 
 # 4.6. data-pie.on.map ----------
 if( check.arg("data-pie.on.map", ggplot.type) ) {
-
-	coord.info = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "network", germplasm.in = "Rouge-du-Roc", filter.on = "son")$data$network.info # avoir long lat, pers seule avec un ggplot.type adequate
-	print("avoir long lat, pers seule avec un ggplot.type adequate")
-	
 	colnames(data)[which(colnames(data) == x.axis)] = "x.axis"
 	vec_x.axis = sort(unique(data$x.axis))
 	
@@ -876,13 +900,20 @@ if( check.arg("data-pie.on.map", ggplot.type) ) {
 		data_var = data
 		colnames(data_var)[which(colnames(data_var) == var)] = "variable"
 		
+		if( ggplot.on == "son" ){ 
+			colnames(data_var)[which(colnames(data_var) == "son_lat")] = "lat" 
+			colnames(data_var)[which(colnames(data_var) == "son_long")] = "long" 
+			}
+		if( ggplot.on == "father" ){ 
+			colnames(data_var)[which(colnames(data_var) == "father_lat")] = "lat" 
+			colnames(data_var)[which(colnames(data_var) == "father_long")] = "long" 
+			}
+				
 		out = NULL
 
 		for(x in vec_x.axis){
-			data_tmp = filter(data_var, x.axis %in% x)
+			data.map = filter(data_var, x.axis %in% x)
 
-			data.map = join(data_tmp, unique(coord.info[,c("person", "long", "lat")]), by = "person")
-			
 			# delete if info is missing for long and lat and put a message
 			no_lat_or_long = unique(c(which(is.na(data.map$long)), which(is.na(data.map$lat))))
 			if( length(no_lat_or_long) > 0 ) {

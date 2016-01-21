@@ -1,8 +1,6 @@
 \section{Install \BD~on localhost}
 \label{install_shinemas}
 
-
-
 \subsection{Install PostgreSQL and \BD}
 
 With Linux,

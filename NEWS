@@ -1,3 +1,37 @@
+shinemas2R 0.9.1 ------------------------------------
+-----------------------------------------------------
+* Correct bugs in the code
+
+* vignette:
+	- update connexion to SHiNeMaS
+	- add "use.get.data" argument
+	- add network-reproduction-sown to the table regarding ggplot.type for "network-" ggplot.type
+	- add ggplot.on to the table regarding ggplot.type for "data-" ggplot.type
+	- add example of format.data
+	- update code and text regarding correlation group
+
+* get.data.R:
+	- add query.type = methods
+	- update query.type = seed-lots
+	- update correlation group and output for "data-" type
+	- add ggplot.type = "network-reproduction-sown"
+
+* get.ggplot.R:
+	- correlated_group argument replaces correlated.variables argument
+	- add ggplot.type = "network-reproduction-sown"
+	- correct bugs on "network-" ggplot.type
+	
+* get.table.R:
+	- correlated_group argument replaces correlated.variables argument
+
+* encrypt.data.R:
+	- correlated_group argument replaces correlated.variables argument
+
+* format.data.R:
+	- correlated_group argument replaces correlated.variables argument
+
+
 shinemas2R 0.9 --------------------------------------
 -----------------------------------------------------
 * first version put on Github
+

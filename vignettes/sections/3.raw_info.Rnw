@@ -3,7 +3,7 @@
 
 Severals information are stored in \BD.
 To get information on raw information and levels and variable, you must use the argument \texttt{query.type} in \texttt{get.data}.
-The following table summarizes the different possibilities:
+The following table summarize the different possibilities:
 
 \begin{center}
 \begin{tabular}{ll}
@@ -26,13 +26,16 @@ The following table summarizes the different possibilities:
 For example,
 
 <<message=TRUE,cache=FALSE,warning=FALSE>>=
-# person = get.data(
-#	db_user = info_db$db_user, db_host = info_db$db_host,# db infos
-#	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
-#	query.type = "person" # information on person present in SHiNeMaS
-#	)
+if(use.get.data){
+	person = get.data(
+		db_user = info_db$db_user, db_host = info_db$db_host,# db infos
+		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+		query.type = "person" # information on person present in SHiNeMaS
+	)
+} else { 
+		load("data/person.RData") 
+	}
 
-load("data/person.RData")
 person$data
 @
 

@@ -55,7 +55,7 @@ if( !is.element(shinemas2R.object, c(
 	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "person")$data
 	vec = paste("person-", c(1:length(v)), sep = ""); names(vec) = v
 	vec_person = vec
-	
+
 	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "year")$data
 	vec = c(2000:(2000+length(v))); names(vec) = v
 	vec_year = vec
@@ -168,8 +168,10 @@ if( !is.element(shinemas2R.object, c(
 			d$project = factor(vec_project[as.character(d$project)])
 			return(d)
 		}
-		data$data$datasets.with.correlated.variables = toto(data$data$datasets.with.correlated.variables, vec_germplasm, vec_person, vec_year)
-		data$data$datasets.with.non.correlated.variables = toto(data$data$datasets.with.non.correlated.variables, vec_germplasm, vec_person, vec_year)
+		data$data$data = toto(data$data$data, vec_germplasm, vec_person, vec_year)
+		for(i in 1:length(data$data$data.with.correlated.variables)) {
+			data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
+		}
 	}
 	
 	
@@ -196,9 +198,10 @@ if( !is.element(shinemas2R.object, c(
 			d$selection_person = factor(vec_selection_person[as.character(d$selection_person)])
 			return(d)
 		}
-		data$data$datasets.with.correlated.variables = toto(data$data$datasets.with.correlated.variables, vec_germplasm, vec_person, vec_year)
-		data$data$datasets.with.non.correlated.variables = toto(data$data$datasets.with.non.correlated.variables, vec_germplasm, vec_person, vec_year)
-		
+		data$data$data = toto(data$data$data, vec_germplasm, vec_person, vec_year)
+		for(i in 1:length(data$data$data.with.correlated.variables)) {
+			data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
+		}
 	}
 	
 	

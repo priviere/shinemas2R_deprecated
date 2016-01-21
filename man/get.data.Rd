@@ -52,6 +52,8 @@ get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
 \item "data-SR": seed-lots pairs of selection differential for year n-1 and response to selection for year n.
 }
 
+\item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. Filters can be applied on variables.
+
 }}
 
 \item{fill.diffusion.gap}{For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)}
@@ -114,11 +116,10 @@ The function returns a list with
 
 \item For data with variable on specific seed-lots it returns a list with
 \itemize{
-		\item the data set with correlated variables
-		\item the data set with non correlated variables
-		\item the description of the methodes used for each variable
+		\item a data frame with the data set
+		\item a list with data set with individuals that are correlated for a set of variables
+		\item the description of methods used for each variable in with its description and units
 		}
-
 }
 
 \item information to connect to SHiNeMaS
@@ -149,6 +150,11 @@ The query "data-SR" takes into account when selection have been done in a seed l
 \item Query "network"
 
 The Mdist square matrix can be compared to a differenciation distance. It can be put in relation with genetic Fst for example.
+
+\item Correlated data or not
+Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot.
+Therefore the element of the list for non correlated data is always NULL.
+For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
 }
 }
 \author{
