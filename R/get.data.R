@@ -2,13 +2,13 @@
 #' Query SHiNeMaS and return the datasets
 #'
 #' @description
-#' \code{get.data} queries SHiNeMaS and return the data-sets.
+#' \code{get.data} queries SHiNeMaS and returns the data-sets.
 #'
 #' @param db_user user name of SHiNeMaS
 #' 
-#' @param db_host IP adress of the computer where SHiNeMaS is!, If local host db_host = "127.0.0.1"
+#' @param db_host IP address of the computer where SHiNeMaS is. If local host db_host = "127.0.0.1"
 #' 
-#' @param db_name name fo the data base
+#' @param db_name name of the data base
 #' 
 #' @param db_password your password to login. If no password is needed, put ""
 #'
@@ -17,18 +17,18 @@
 #' 
 #' \item "network": network relations between seed-lots
 #' 
-#' \item "SL.mix": seed-lots merged from replications and not from 'real' mixture
+#' \item "SL.mix": seed-lots merged from replications and not from 'real' mixtures
 #' 
 #' \item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross.
 #' 
-#' \item raw information on levels and variables present in SHiNeMaS :
+#' \item raw information on levels and variables contained in SHiNeMaS :
 #' \itemize{
 #' \item "variable"
 #' \item "person"
 #' \item "year"
 #' \item "project"
 #' \item "seed.lot"
-#' \item "selection.person": persons that did intra-varietal mass selection
+#' \item "selection.person": persons that performed intra-varietal mass selection
 #' \item "reproduction.type"
 #' \item "germplasm.type"
 #' \item "germplasm"
@@ -47,31 +47,31 @@
 #' 
 #' @param fill.diffusion.gap For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)
 #' 
-#' @param network.info For query.type = "network", if TRUE, aggregate information on relation and seed-lots on the network.
+#' @param network.info For query.type = "network". If TRUE, aggregates information on relations and seed-lots on the network.
 #' 
-#' @param Mdist For query.type = "network", if TRUE, compute the Mdist matrix. See details.
+#' @param Mdist For query.type = "network". If TRUE, computes the Mdist matrix. See details.
 #' 
-#' @param data.type For queries in "data-", type of data: "relation" for data linked to relation between seed lots and "seed-lots" for data linked to seed lots
+#' @param data.type For queries in "data-". Type of data: "relation" for data linked to relation between seed lots and "seed-lots" for data linked to seed lots
 #' 
-#' @param filter.on This argument is needed for filters for queries in "network", data-" and "data.type" = data.relation. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son".
+#' @param filter.on This argument is needed for filters for queries in "network", "data-" and "data.type" = data.relation. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son".
 #' 
 #' @param germplasm.in Filter: vector with germplasms to keep. By default, all the germplasms are in.
-#' @param germplasm.out Filter: vector with germplasms to discard. By default, no germplasms are out.
+#' @param germplasm.out Filter: vector with germplasms to discard. By default, no germplasm is out.
 #' 
 #' @param germplasm.type.in Filter: vector with germplasms to keep. By default, all the germplasm types are in.
-#' @param germplasm.type.out Filter: vector with germplasms to discard. By default, no germplasm types are out.
+#' @param germplasm.type.out Filter: vector with germplasms to discard. By default, no germplasm type is out.
 #' 
 #' @param year.in Filter: vector with years to keep. By default, all the years are in.
-#' @param year.out Filter: vector with years to discard. By default, no years are out.
+#' @param year.out Filter: vector with years to discard. By default, no year is out.
 #' 
 #' @param project.in Filter: vector of projects to keep. By default, all the projects are in.
-#' @param project.out Filter: vector of projects to discard. By default, no projects are out.
+#' @param project.out Filter: vector of projects to discard. By default, no project is out.
 #' 
 #' @param person.in Filter: vector of persons to keep. By default, all the persons are in.
-#' @param person.out Filter: vector of persons to discard.  By default, no persons are out.
+#' @param person.out Filter: vector of persons to discard.  By default, no person is out.
 #' 
 #' @param seed.lot.in Filter: vector of seed-lots to keep. By default, all the seed-lots are in.
-#' @param seed.lot.out Filter: vector of seed-lots to discard. By default, on seed-lots are out.
+#' @param seed.lot.out Filter: vector of seed-lots to discard. By default, no seed-lot is out.
 #' 
 #' @param relation.in Filter on a relation to keep: "reproduction", "mixture", "selection" or "diffusion". By default, all relations are in.
 #' 
@@ -96,12 +96,12 @@
 #' 
 #' The data frame returned has a column "expe" which corresponds to an id of one selection differential and the corresponding response to selection
 #' 
-#' The query "data-SR" takes into account when selection have been done in a seed lot, that this seed lot have been merged and then have been sown. It is the case when selection have been carried out in a replication that have been merge after. Even if this case should not arrise, it may happen.
+#' The query "data-SR" takes into account when selection has been done to get a seed lot, that this seed lot has been merged and then has been sown. It is the case when selection has been carried out in a replication that has been merged afterwards. Even if this case should not arrise, it might happen.
 #' 
 #' 
 #' \item Query "network"
 #' 
-#' The Mdist square matrix can be compared to a differenciation distance. It can be put in relation with genetic Fst for example.
+#' The Mdist square matrix can be compared to a differentiation distance. It can be put in relation with genetic Fst for example.
 #' 
 #' \item Correlated data or not
 #' Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. 
@@ -118,8 +118,8 @@
 #' 
 #' \item For network it returns a list with
 #' \itemize{
-#' \item the netwok object
-#' \item the network.info matrix with information on relation in the network
+#' \item the network object
+#' \item the network.info matrix with information on relations in the network
 #' \item the Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
 #' }
 #' 
@@ -127,11 +127,11 @@
 #' 
 #' \item For raw information on levels and variables present in SHiNeMaS it returns a vector
 #' 
-#' \item For data with variable on specific seed-lots it returns a list with
+#' \item For data with variables on specific seed-lots it returns a list with
 #' \itemize{
 #' 		\item a data frame with the data set 
 #' 		\item a list with data set with individuals that are correlated for a set of variables
-#' 		\item the description of methods used for each variable in with its description and units
+#' 		\item the description of methods used for each variable with its description and units
 #' 		}
 #' }
 #' 
