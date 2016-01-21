@@ -1,3 +1,4 @@
+# version 0.9.1
 \section{Raw information on levels and variables}
 \label{raw}
 
