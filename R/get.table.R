@@ -6,7 +6,7 @@
 #'
 #' @param data It can be either output from \code{get.data} or ggplot.object from \code{get.ggplot}.
 #' 
-#' @param correlated.variables For data from \code{get.data}. If TRUE, get datasets.with.correlated.variables. If FALSE, get datasets.with.non.correlated.variables
+#' @param correlated_group Name of the group of correlation in data. NULL by default.
 #' 
 #' @param fuse_g_and_s Fuse germplasm and selection name information in a column named germplasm
 #' 
@@ -47,7 +47,7 @@
 #'
 get.table <- function(
 	data,
-	correlated.variables = TRUE,
+	correlated_group = NULL,
 	fuse_g_and_s = FALSE,
 	table.type = NULL,
 	table.on = "son",
@@ -88,8 +88,19 @@ get.table <- function(
 		) { stop(mess) }  
 		
 		
-		if( is.null(data$datasets.with.correlated.variables) & is.null(data$datasets.with.non.correlated.variables) ) { warning("data is NULL: nothing is done !"); return(NULL) }
+		if( 
+			is.null(data$data) & 
+			is.null(data$data.with.correlated.variables)
+		) { message("data is NULL: nothing is done !"); return(NULL) }
 		
+		if( is.null(correlated_group) ) {
+			data = data$data	
+		} else { 
+			data_tmp = data$data.with.correlated.variables
+			if(is.element(correlated_group, names(d))) {
+				data = data_tmp[[correlated_group]]
+			} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
+		}
 		
 		if( !is.null(col_to_display) ) {
 			test = is.element(col_to_display, c("person", "germplasm", "year", "block", "X", "Y"))
@@ -101,12 +112,8 @@ get.table <- function(
 		if( !is.null(col_to_display) & table.type == "summary" ) { stop("With table.type = \"summary\", col_to_display must not be NULL.") }
 		
 		
-		# 2. correlated variables, germplasm column and update vec_variables ----------
-		if( correlated.variables ) { 
-			data = data$datasets.with.correlated.variables 
-		} else { data = data$datasets.with.non.correlated.variables }
-		
-		
+		# 2. germplasm column and update vec_variables ----------
+
 		if( fuse_g_and_s ) { 
 			data$son_germplasm = sapply(as.character(data$son), function(x){unlist(strsplit(x,"_"))[1]}) 
 			data$father_germplasm = sapply(as.character(data$father), function(x){unlist(strsplit(x,"_"))[1]}) 

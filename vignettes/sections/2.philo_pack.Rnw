@@ -10,7 +10,7 @@ From 2014 to today, farmers organisations' facilitators informed on  their speci
 
 \BD~stores information related to (Figure \ref{relation_SL}):
 \begin{itemize}
-\item network relations between \sl
+\item network relation between \sl
 \item data linked to the \sl~and to the relations between \sl
 \end{itemize}
 
@@ -31,7 +31,7 @@ Data are linked to the \sl~and to the relations between \sl.
 \BD~can be downloaded \href{http://moulon.inra.fr/index.php/en/tranverse-team/atelier-de-bioinformatique/projects/181}{here}.
 More information on the history of \BD~and its uses with tutorials can be found on the \href{http://moulon.inra.fr/index.php/en/tranverse-team/atelier-de-bioinformatique/projects/181}{website} \citep{deoliveira_shinemas_2015}.\\
 
-\pack~is an \R~package that analyzes outputs from \BD.
+\pack~is an \R~package that analyses outputs from \BD.
 It does descriptive analysis, formats data for existing \R~packages to perform statistical analysis as well as compiles results in pdf.
 
 
@@ -43,14 +43,14 @@ It does descriptive analysis, formats data for existing \R~packages to perform s
 \item Get the data from \BD~with \texttt{get.data}. You may encrypt the data with \texttt{encrypt.data} or translate it with \texttt{translate.data}.
 There are two types of data:
 \begin{itemize}
-\item network relations between \sl~(section \ref{network})
+\item network relation between \sl~(section \ref{network})
 \item data linked to the \sl~and to the relations between \sl~(section \ref{data})
 \end{itemize}
 
 \item From the data,
 	\begin{enumerate}
 	\item Get descriptive outputs from the data: plots with \texttt{get.ggplot} or tables with \texttt{get.table}
-	\item Get statistical outputs by formating the data with \texttt{format.data} in order to use an existing \R~package~(up to now the following package can be used: \texttt{PPBstats})
+	\item Get statistical outputs by formating the data with \texttt{format.data} in order to use an existing \R~package~(The following packages can be used: \listpackformatdata).
 	\end{enumerate}
 \item Get a pdf that compiles the outputs in a pdf document with \texttt{get.pdf} (section \ref{pdf})
 \end{enumerate}
@@ -93,9 +93,46 @@ To continue, load the package:
 library(shinemas2R)
 @
 
-In this vignette, you can test \pack~without installing \BD.
+For an easier visualisation, all warning messages are not represented (NAs introduced, rows deleted, etc.)
 
-You can load the data-sets by downloading it:
+\subsubsection{Test with \BD~installed}
+
+It may be useful to test the \texttt{get.data} function on \BD~directly.
+Two options:
+\begin{itemize}
+\item \BD~is installed on a sever where you can have access. 
+You need to ask the admin the following information : \texttt{db\_user}, \texttt{db\_host}, \texttt{db\_name}, \texttt{db\_password}. 
+Add these information in \texttt{info\_db}, which is needed in the next steps in \texttt{get.data}.
+For example: 
+
+<<message=TRUE,cache=FALSE>>=
+info_db = list(
+	db_user = "toto",
+	db_host = "127.175.166.175", 
+	db_name = "my_shinemas",
+	db_password = "secret"
+	)
+@
+
+\item install a demo of \BD.
+The procedure to do so is explained in appendix \ref{install_shinemas}.
+
+\end{itemize}
+
+As you will use \texttt{get.data}, you should set:
+<<message=TRUE,cache=FALSE>>=
+use.get.data = TRUE
+@
+
+\subsubsection{Test without installing \BD}
+
+In this vignette, you can test \pack~without installing \BD.
+You do not use the \texttt{get.data} function:
+<<message=TRUE,cache=FALSE>>=
+use.get.data = FALSE
+@
+
+And you can load the data-sets by downloading it:
 
 <<message=TRUE,cache=FALSE>>=
 system("mkdir data")
@@ -103,10 +140,4 @@ system("cp -r /home/pierre/Documents/geek/R-stats/Rdev/R_package_shinemas2R/shin
 @
 
 and then \texttt{load()} it.
-
-
-Nevertheless, it may be useful to install \BD~in order to test the \texttt{get.data} function.
-The procedure to do so is explained in appendix \ref{install_shinemas}.
-
-For an easier visualization, all warning messages are not represented (NAs introduced, rows deleted, etc.)
 
