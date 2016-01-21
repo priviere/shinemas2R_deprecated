@@ -1,8 +1,8 @@
 \section{Raw information on levels and variables}
 \label{raw}
 
-Severals information are stored in \BD.
-To get information on raw information and levels and variable, you must use the argument \texttt{query.type} in \texttt{get.data}.
+Several information are stored in \BD.
+To get information on raw information, levels and variable, you must use the argument \texttt{query.type} in \texttt{get.data}.
 The following table summarize the different possibilities:
 
 \begin{center}
