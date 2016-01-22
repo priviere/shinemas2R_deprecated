@@ -5,7 +5,7 @@
 The R code is under licence GPL-3.
 
 The vignette of this package is under licence creative commons BY-NC-SA 4.0. 
-More informations about this licence [here](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+More information about this licence [here](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 The copyright of the R code and the vignette are owned by Réseau Semences Paysannes and Institut National de la Recherche Agronomique
 
