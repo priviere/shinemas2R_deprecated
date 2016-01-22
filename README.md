@@ -11,7 +11,7 @@ The copyright of the R code and the vignette are owned by Réseau Semences Paysa
 
 ## Version
 `shinemas2R` is now at version 0.9.1.
-See NEWS [here](https://github.com/priviere/shinemas2R/blob/master/NEWS) to know the main changes.
+See NEWS [here](https://github.com/priviere/shinemas2R/blob/master/NEWS) to know the evolution of the codes.
 
 ## Participate to development
 
@@ -20,6 +20,9 @@ You can participate in three ways:
 1. test this development version and reports bugs
 2. help to make translation of the package
 3. update functions to answer your specific needs
+
+If you update the code, please do it in on the [branch v0.9.2](https://github.com/priviere/shinemas2R/tree/v0.9.2) so that the master branch remains unchanged for tests.
+Anyhow, send me an email if you participate in order to coordinate our efforts!
 
 ### 1. Test and report bugs
 
