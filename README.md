@@ -17,12 +17,12 @@ See NEWS [here](https://github.com/priviere/shinemas2R/blob/master/NEWS) to know
 
 You can participate in three ways:
 
-1. test this development version and reports bugs
+1. test this development version and report bugs
 2. help to make translation of the package
 3. update functions to answer your specific needs
 
 If you update the code, please do it in on the [branch v0.9.2](https://github.com/priviere/shinemas2R/tree/v0.9.2) so that the master branch remains unchanged for tests.
-Anyhow, send me an email if you participate in order to coordinate our efforts!
+Anyhow, send me an email if you wish to participate in order to coordinate our efforts!
 
 ### 1. Test and report bugs
 
@@ -53,6 +53,4 @@ You may want new query types (`get.data` [here](https://github.com/priviere/shin
 new plots (`get.ggplot` [here](https://github.com/priviere/shinemas2R/blob/master/R/get.ggplot.R)) or 
 new tables (`get.table` [here](https://github.com/priviere/shinemas2R/blob/master/R/get.table.R)) 
 to answer your specific needs.
-
-If so, send me an email and we'll see how we can work together!
 
