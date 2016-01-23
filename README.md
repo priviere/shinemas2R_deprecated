@@ -18,7 +18,7 @@ See NEWS [here](https://github.com/priviere/shinemas2R/blob/master/NEWS) to know
 You can participate in three ways:
 
 1. test this development version and report bugs
-2. help to make translation of the package
+2. translate the package
 3. update functions to answer your specific needs
 
 If you update the code, please do it in on the [branch v0.9.2](https://github.com/priviere/shinemas2R/tree/v0.9.2) so that the master branch remains unchanged for tests.
