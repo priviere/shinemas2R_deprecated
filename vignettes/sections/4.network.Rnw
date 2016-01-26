@@ -274,7 +274,7 @@ It can be a vector of several elements i.e. \texttt{c("barplot", "map")}.
 
 \paragraph{\texttt{ggplot.display = barplot}}
 
-For \texttt{ggplot.display = "barplot"}, you may chose what you want in the x axis (\texttt{x.axis} argument) and in color (\texttt{in.col} argument).
+For \texttt{ggplot.display = "barplot"}, you may choose what you want in the x axis (\texttt{x.axis} argument) and in color (\texttt{in.col} argument).
 The possible values for \texttt{x.axis} and \texttt{in.col} are: \texttt{germplasm}, \texttt{year}, \texttt{person}.
 By default all combinaisons of \texttt{x.axis} and \texttt{in.col} are done with default argument settings.
 The name of the plot is under the form \texttt{x.axis}-\texttt{in.col}.
@@ -434,7 +434,7 @@ p14_slh
 \texttt{p15\_slh} & \texttt{p15\_slh\_bw}  \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
 p15_slh
-@	# 1. Query SHiNeMaS ...
+	# 1. Query SHiNeMaS ...
 	# 2. Create network matrix ...
 	# 2.1. Fill diffusion gaps ...
 	# 3. Link information to vertex and edges ...
@@ -442,8 +442,8 @@ p15_slh
 	
 	#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)
 	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData
-&
-<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>
 p15_slh_bw
 @
 \\
