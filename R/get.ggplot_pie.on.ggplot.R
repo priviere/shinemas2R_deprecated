@@ -2,27 +2,27 @@
 #' Display pies on ggplot object such as network or map within \code{get.ggplot}
 #'
 #' @description
-#' \code{get.ggplot_pie.on.ggplot} display pies on ggplot object such as network or map
+#' \code{get.ggplot_pie.on.ggplot} displays pies on ggplot object such as network or map
 #'
-#' @param ggplot a ggplot object on wich put the pies
+#' @param ggplot a ggplot object on which to put the pies
 #' 
-#' @param data A data set with at least four columns: the variable, the factor, the X and Y coordinates for the pie.
+#' @param data a data set with at least four columns: the variable, the factor, the X and Y coordinates for the pie.
 #' 
-#' @param variable Name of the column of data with the variable
+#' @param variable name of the column of data with the variable
 #'
-#' @param factor Name of the column of data with the factor. factor is a location.
+#' @param factor name of the column of data with the factor. factor is a location.
 #'
 #' @param x.origin the x origin of the pie
 #' 
 #' @param y.origin the y origin of the pie
 #' 
-#' @param r the radius of the pie. If the radius is too big and the pie do not fit on the ggplot object, an error is returned.
+#' @param r the radius of the pie. If the radius is too big and the pie does not fit on the ggplot object, an error is returned.
 #' 
 #' @param hide.labels.parts see hide.labels.parts argument in \code{get.ggplot}
 #' 
-#' @param label.size Size of the label. label correspond to factor
+#' @param label.size size of the label. label corresponds to factor
 #' 
-#' @param precision The precision in the drawing of the pie. The higher the better.
+#' @param precision the precision in the drawing of the pie. The higher the better.
 #' 
 #' @return The function returns a ggplot with pies on it 
 #' 
