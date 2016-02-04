@@ -2,6 +2,10 @@ shinemas2R 0.9.2 ------------------------------------
 -----------------------------------------------------
 * vignette
 	- orthograph corrections
+	
+* new function added: 
+	- is.get.data.output.R
+	
 
 
 shinemas2R 0.9.1 ------------------------------------
