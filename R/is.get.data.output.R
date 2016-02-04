@@ -24,7 +24,12 @@
 #' 	 \item "network" It must be a list of three elements: "network", "network.info" and "Mdist" (see \code{get.data} for more details) with the followinf format:
 #' 	 \itemize{
 #' 	 	\item "network" must be a network object. It can be NULL. Vertex attributes can be put on "year", "person", "germplasm", germplasm.type" and "sex". Edge attributes can be put on "relation" and "generation"
-#' 	 	\item "network.info" must be a dataframe. It can be NULL. It has the following columns: sl, which is a character; alt, long and lat which are numerci; diffusion, id.diff, reproduction, mixture, cross.info, germplasm, person and year, which are factor.
+#' 	 	\item "network.info" must be a dataframe. It can be NULL. It has the following columns: sl, which is a character; alt, long and lat which are numeric; diffusion, id.diff, reproduction, mixture, cross.info, germplasm, person and year, which are factor.
+#' 	 	Possible values for diffusion are for EN: "give", "receive", "give-receive" or "".
+#' 	 	Possible values for reproduction are for EN: "sow", "harvest", "harvest-sow" or "".
+#' 	 	Possible values for selection are for EN: selection or "".
+#' 	 	Possible values for mixture are for EN: mixture or "".
+#' 	 	
 #' 	 	\item "Mdist" must be a square matrix with the same columns and rows names.
 #' 	 	}
 #' 	 	
@@ -115,8 +120,18 @@ is.get.data.output = function(
 		if( !is.factor(ni$person) ) { stop("The data fame must have a column \"person\" as factor") }
 		if( !is.factor(ni$year) ) { stop("The data fame must have a column \"year\" as factor") }
 			
+		test = setdiff(ni$diffusion, c(gettext("give"), gettext("receive"), gettext("give-receive"), ""))
+		if( length(test) > 0 ) { stop("For column diffusion, the possible values are: \"", gettext("give"), "\" ,\"", gettext("receive"), "\" ,\"", gettext("give-receive"), "\", or \"\".") }
 
-			
+		test = setdiff(ni$reproduction, c(gettext("sow"), gettext("harvest"), gettext("harvest-sow"), ""))
+		if( length(test) > 0 ) { stop("For column reproduction, the possible values are: \"", gettext("sow"), "\" ,\"", gettext("harvest"), "\" ,\"", gettext("harvest-sow"), "\", or \"\".") }
+
+		test = setdiff(ni$selection, c("selection", ""))
+		if( length(test) > 0 ) { stop("For column selection, the possible values are: \"selection\", or \"\".") }
+
+		test = setdiff(ni$mixture, c("mixture", ""))
+		if( length(test) > 0 ) { stop("For column mixture, the possible values are: \"mixture\", or \"\".") }
+		
 		}
 		
 
