@@ -30,13 +30,9 @@ is.get.data.output = function(
 	# lets go !!! ----------
 {
 	# 1. Error messages ----------
-	shinemas2R.object = "network"
-	shinemas2R.object = "data-classic-seed-lots"
-	shinemas2R.object = "data-classic-relation"
-	shinemas2R.object = "data-S-seed-lots"
-	shinemas2R.object = "data-S-relation"
-	shinemas2R.object = "data-SR-seed-lots"
-	shinemas2R.object = "data-SR-relation"
+	vec_shinemas2R.object = c("network", "data-classic-seed-lots", "data-classic-relation", "data-S-seed-lots", "data-S-relation", "data-SR-seed-lots", "data-SR-relation")
+	if(!is.element(shinemas2R.object, vec_shinemas2R.object)) { stop("shinemas2R.object must be: ", paste(vec_shinemas2R.object, collapse = ", ")) }
+
 	
 	}
 
