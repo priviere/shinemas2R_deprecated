@@ -1,10 +1,11 @@
 # 0. help -----------------------------------------------------------------
-#' Get a pdf by concatene outputs from \code{get.ggplot} and \code{get.table}
+#' Check if data set can be used as entry for \code{get.ggplot} and \code{get.table}
 #'
 #' @description
-#' \code{is.get.data.output} check if data set can be used as entry for \code{get.ggplot} and \code{get.table}
+#' \code{is.get.data.output} check if data set can be used as entry for \code{get.ggplot} and \code{get.table}.
+#' This is useful when the user do not have SHiNeMaS but wish to use the other functions of the packages: \code{get.ggplot}, \code{get.table} and \code{get.pdf}.
 #'
-#' @param data dthe date set to check
+#' @param data the date set to check
 #'
 #' @param shinemas2R.object The type of shinemas2R.object to check. Possible values are:
 #' \itemize{
