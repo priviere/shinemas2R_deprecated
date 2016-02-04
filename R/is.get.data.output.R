@@ -94,7 +94,18 @@ is.get.data.output = function(
 		
 
 		# 2.3. "Mdist"
+		Md = data[[3]]
 		
+		if( !is.null(Md) ) {
+			mess = "Mdist msut be a square matric with the same names in columns and in rows."
+			if( ncol(Md) != nrow(Md) ) { stop(mess) }
+			test = unique(colnames(Md) == rownames(Md))
+			test = length(test) == 1 & test[1]
+			if( !test ) { stop(mess) }
+			}
+		
+		data = list("data" = data, "info_db" = NULL)
+		attributes(data)$shinemas2R.object = "network"
 		}
 
 	if( shinemas2R.object == "data-classic-seed-lots") { }
