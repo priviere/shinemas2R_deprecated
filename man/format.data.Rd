@@ -16,7 +16,7 @@
 
 \item{correlated_group}{Name of the group of correlation in data. NULL by default.}
 
-\item{format}{the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are severals format within a package. Possible values are "PPBstats".}
+\item{format}{the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are several formats within a package. Possible values are "PPBstats".}
 }
 \value{
 The data set with the right format for the R package
