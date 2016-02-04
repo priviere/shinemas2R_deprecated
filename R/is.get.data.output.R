@@ -18,6 +18,30 @@
 #' 	\item "data-SR-relation"
 #' 	}
 #' 	
+#' 	@details 
+#' 	Format of the different shinemas2R.object
+#' 	\itemize{
+#' 	 \item "network" It must be a list of three elements: "network", "network.info" and "Mdist" (see \code{get.data} for more details) with the followinf format:
+#' 	 \itemize{
+#' 	 	\item "network" must be a network object. It can be NULL. Vertex attributes can be put on "year", "person", "germplasm", germplasm.type" and "sex". Edge attributes can be put on "relation" and "generation"
+#' 	 	\item "network.info" must be a dataframe. It can be NULL. It has the following columns: sl, which is a character; alt, long and lat which are numerci; diffusion, id.diff, reproduction, mixture, cross.info, germplasm, person and year, which are factor.
+#' 	 	\item "Mdist" must be a square matrix with the same columns and rows names.
+#' 	 	}
+#' 	 	
+#' 	 \item "data-classic-seed-lots"
+#' 	 
+#' 	 \item "data-classic-relation"
+#' 	 
+#' 	 \item "data-S-seed-lots"
+#' 	 
+#' 	 \item "data-S-relation"
+#' 	 
+#' 	 \item "data-SR-seed-lots"
+#' 	 
+#' 	 \item "data-SR-relation"
+#' 	 
+#' 	}
+#' 	
 #' @return The function returns a data set with the corresponding shinemas2R.object attributes or an error.
 #' 
 #' @author Pierre Riviere
@@ -90,6 +114,9 @@ is.get.data.output = function(
 		if( !is.factor(ni$germplasm) ) { stop("The data fame must have a column \"germplasm\" as factor") }
 		if( !is.factor(ni$person) ) { stop("The data fame must have a column \"person\" as factor") }
 		if( !is.factor(ni$year) ) { stop("The data fame must have a column \"year\" as factor") }
+			
+
+			
 		}
 		
 
