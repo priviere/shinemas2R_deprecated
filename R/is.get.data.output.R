@@ -46,32 +46,53 @@ is.get.data.output = function(
 		# 2.1. "network"
 		if( !is.null(data[[1]]) ) {
 			if( !is.network(data[[1]]) ) { stop("The first element of data must be NULL or a network object.") }
+			update.vertex.attributes = function(n = data, v.att = "year"){
+				test = get.vertex.attribute(n, v.att)
+				if( length(is.na(test)) == length(test) ) { 
+					set.vertex.attribute(n, v.att, value = NULL)	
+					message("vertex attributes \",", v.att,",\" has been set to NULL.")
+				}			
+			}
+			update.vertex.attributes(n = data[[1]], v.att = "year")
+			update.vertex.attributes(n = data[[1]], v.att = "person")
+			update.vertex.attributes(n = data[[1]], v.att = "germplasm")
+			update.vertex.attributes(n = data[[1]], v.att = "germplasm.type")
+			update.vertex.attributes(n = data[[1]], v.att = "sex")
+			
+			update.edge.attributes = function(n = data, e.att = "relation"){
+				test = get.edge.attribute(n, v.att)
+				if( length(is.na(test)) == length(test) ) { 
+					set.edge.value(n, e.att, value = NULL)	
+					message("edge attributes \",", e.att,",\" has been set to NULL.")
+				}			
+			}
+			update.edge.attributes(n = data[[1]], e.att = "relation")
+			update.edge.attributes(n = data[[1]], e.att = "generation")
 		}
 		
-		update.vertex.attributes = function(n = data, v.att = "year"){
-			test = get.vertex.attribute(n, v.att)
-			if( length(is.na(test)) == length(test) ) { 
-				set.vertex.attribute(n, v.att, value = NULL)	
-				message("vertex attributes \",", v.att,",\" has been set to NULL.")
-			}			
-		}
-		update.vertex.attributes(n = data[[1]], v.att = "year")
-		update.vertex.attributes(n = data[[1]], v.att = "person")
-		update.vertex.attributes(n = data[[1]], v.att = "germplasm")
-		update.vertex.attributes(n = data[[1]], v.att = "germplasm.type")
-		update.vertex.attributes(n = data[[1]], v.att = "sex")
-		
-		update.edge.attributes = function(n = data, e.att = "relation"){
-			test = get.edge.attribute(n, v.att)
-			if( length(is.na(test)) == length(test) ) { 
-				set.edge.value(n, e.att, value = NULL)	
-				message("edge attributes \",", e.att,",\" has been set to NULL.")
-			}			
-		}
-		update.edge.attributes(n = data[[1]], e.att = "relation")
-		update.edge.attributes(n = data[[1]], e.att = "generation")
 		
 		# 2.2. "network.info"
+		ni = data[[2]]
+		
+		if( !is.null(ni) ) {
+			if( !is.data.frame(ni) ) { stop("The first second of data must be NULL or a data frame.") }
+
+			if( !is.character(ni$sl) ) { stop("The data fame must have a column \"sl\" as character") } 
+		if( !is.numeric(ni$alt) ) { stop("The data fame must have a column \"alt\" as numeric") }
+		if( !is.numeric(ni$long) ) { stop("The data fame must have a column \"long\" as numeric") }
+		if( !is.numeric(ni$lat) ) { stop("The data fame must have a column \"lat\" as numeric") }
+		if( !is.factor(ni$diffusion) ) { stop("The data fame must have a column \"diffusion\" as factor") }
+		if( !is.factor(ni$id.diff) ) { stop("The data fame must have a column \"id.diff\" as factor") }
+		if( !is.factor(ni$reproduction) ) { stop("The data fame must have a column \"reproduction\" as factor") }
+		if( !is.factor(ni$mixture) ) { stop("The data fame must have a column \"mixture\" as factor") }
+		if( !is.factor(ni$selection) ) { stop("The data fame must have a column \"selection\" as factor") }
+		if( !is.factor(ni$cross.info) ) { stop("The data fame must have a column \"cross.info\" as factor") }
+		if( !is.factor(ni$germplasm) ) { stop("The data fame must have a column \"germplasm\" as factor") }
+		if( !is.factor(ni$person) ) { stop("The data fame must have a column \"person\" as factor") }
+		if( !is.factor(ni$year) ) { stop("The data fame must have a column \"year\" as factor") }
+		}
+		
+
 		# 2.3. "Mdist"
 		
 		}
