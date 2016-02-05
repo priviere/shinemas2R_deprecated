@@ -25,7 +25,7 @@ The function returns a data set with the corresponding shinemas2R.object attribu
 }
 \description{
 \code{is.get.data.output} check if data set can be used as entry for \code{get.ggplot} and \code{get.table}.
-This is useful when the user do not have SHiNeMaS but wish to use the other functions of the packages: \code{get.ggplot}, \code{get.table} and \code{get.pdf}.
+This is useful when the user do not have SHiNeMaS but wish to use the other functions of the package.
 }
 \details{
 Format of the different shinemas2R.object
@@ -34,10 +34,10 @@ Format of the different shinemas2R.object
 	 \itemize{
 	 	\item "network" must be a network object. It can be NULL. Vertex attributes can be put on "year", "person", "germplasm", germplasm.type" and "sex". Edge attributes can be put on "relation" and "generation"
 	 	\item "network.info" must be a dataframe. It can be NULL. It has the following columns: sl, which is a character; alt, long and lat which are numeric; diffusion, id.diff, reproduction, mixture, cross.info, germplasm, person and year, which are factor.
-	 	Possible values for diffusion are for EN: "give", "receive", "give-receive" or "".
-	 	Possible values for reproduction are for EN: "sow", "harvest", "harvest-sow" or "".
-	 	Possible values for selection are for EN: selection or "".
-	 	Possible values for mixture are for EN: mixture or "".
+	 	Possible values for diffusion are for EN: "give", "receive", "give-receive" or NA.
+	 	Possible values for reproduction are for EN: "sow", "harvest", "harvest-sow" or NA.
+	 	Possible values for selection are for EN: selection or NA.
+	 	Possible values for mixture are for EN: mixture or NA.
 
 	 	\item "Mdist" must be a square matrix with the same columns and rows names.
 	 	}
@@ -60,6 +60,6 @@ Format of the different shinemas2R.object
 Pierre Riviere
 }
 \seealso{
-\code{\link{get.ggplot}}, \code{\link{get.table}}
+\code{\link{encrypt.data}}, \code{\link{translate.data}},, \code{\link{format.data}}, \code{\link{get.ggplot}}, \code{\link{get.table}}
 }
 

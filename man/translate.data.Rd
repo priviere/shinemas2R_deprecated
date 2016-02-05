@@ -18,6 +18,6 @@ The data with translated variables
 Translate variables present in data coming from \code{get.data}
 }
 \seealso{
-\code{\link{get.data}}
+\code{\link{get.data}}, \code{\link{is.get.data.output}}
 }
 
