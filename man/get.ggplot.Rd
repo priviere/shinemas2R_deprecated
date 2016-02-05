@@ -85,7 +85,7 @@ Note that with ggplot.type "network-" and ggplot.display = "map", hide.labels.pa
 
 \item{labels.size}{Size of the labels}
 
-\item{location.map}{Location of the map. See \code{?map} for more details.}
+\item{location.map}{Location of the map. See \code{?map_data}, argument \code{map}, for more details.}
 
 \item{pie.size}{Size of the pie when using pies}
 }
