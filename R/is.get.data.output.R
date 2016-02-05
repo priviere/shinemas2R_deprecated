@@ -63,7 +63,7 @@ is.get.data.output = function(
 	vec_shinemas2R.object = c("network", "data-classic-seed-lots", "data-classic-relation", "data-S-seed-lots", "data-S-relation", "data-SR-seed-lots", "data-SR-relation")
 	if(!is.element(shinemas2R.object, vec_shinemas2R.object)) { stop("shinemas2R.object must be: ", paste(vec_shinemas2R.object, collapse = ", ")) }
 
-	# 2. shinemas2R.object == "network"
+	# 2. shinemas2R.object == "network" ----------
 	if( shinemas2R.object == "network") { 
 		
 		mess = "With shinemas2R.object == \"network\", data must be a list with the following three elements: \"network\", \"network.info\", \"Mdist\"." 
@@ -75,7 +75,7 @@ is.get.data.output = function(
 		if( names(data)[2] != "network.info" ) { stop(mess) }
 		if( names(data)[3] != "Mdist" ) { stop(mess) }
 		
-		# 2.1. "network"
+		# 2.1. "network" ----------
 		if( !is.null(data[[1]]) ) {
 			if( !is.network(data[[1]]) ) { stop("The first element of data must be NULL or a network object.") }
 			update.vertex.attributes = function(n = data, v.att = "year"){
@@ -103,7 +103,7 @@ is.get.data.output = function(
 		}
 		
 		
-		# 2.2. "network.info"
+		# 2.2. "network.info" ----------
 		ni = data[[2]]
 		
 		if( !is.null(ni) ) {
@@ -142,7 +142,7 @@ is.get.data.output = function(
 		}
 		
 
-		# 2.3. "Mdist"
+		# 2.3. "Mdist" ----------
 		Md = data[[3]]
 		
 		if( !is.null(Md) ) {
@@ -157,8 +157,10 @@ is.get.data.output = function(
 		data = list("data" = data, "info_db" = NULL)
 		}
 
+	# 3. shinemas2R.object == "data-classic-seed-lots" ----------
 	if( shinemas2R.object == "data-classic-seed-lots") { }
 
+	# 4. shinemas2R.object == "data-classic-relation" ----------
 	if( shinemas2R.object == "data-classic-relation") {
 		
 		mess = "With shinemas2R.object == \"data-classic-relation\", data must be a list with the following three elements: \"data\", \"data.with.correlated.variables\", \"methods\"." 
@@ -175,7 +177,7 @@ is.get.data.output = function(
 				if( !is.data.frame(d) ) { stop("The first element of data must be NULL or a data frame.") }
 				
 				col_to_have = c("son", "son_ind", "son_year", "son_germplasm", "son_germplasm_type", "son_person", "son_alt", "son_long", "son_lat", "father", "father_year", "father_germplasm", "father_germplasm_type", "father_person", "father_alt", "father_long", "father_lat", "reproduction_id", "reproduction_type", "selection_id", "selection_person", "mixture_id", "diffusion_id", "X", "Y", "block", "project")
-				test = setdiff(colnames(d), c(col_to_have))
+				test = setdiff(col_to_have, colnames(d)
 				if( length(test) > 0 ) { stop("The first element of data (i.e. data) must have the following columns: ", paste(col_to_have, collapse = ", ")) }
 				
 				if( !is.character(d$son) ) { stop("The data fame must have a column \"son\" as character") } 
