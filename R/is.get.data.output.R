@@ -123,16 +123,16 @@ is.get.data.output = function(
 		if( !is.factor(ni$person) ) { stop("The data fame must have a column \"person\" as factor") }
 		if( !is.factor(ni$year) ) { stop("The data fame must have a column \"year\" as factor") }
 			
-		test = setdiff(ni$diffusion, c(gettext("give"), gettext("receive"), gettext("give-receive"), NA))
+		test = setdiff(as.character(ni$diffusion), c(gettext("give"), gettext("receive"), gettext("give-receive"), NA))
 		if( length(test) > 0 ) { stop("For column diffusion, the possible values are: \"", gettext("give"), "\" ,\"", gettext("receive"), "\" ,\"", gettext("give-receive"), "\", or NA.") }
 
-		test = setdiff(ni$reproduction, c(gettext("sow"), gettext("harvest"), gettext("harvest-sow"), NA))
+		test = setdiff(as.character(ni$reproduction), c(gettext("sow"), gettext("harvest"), gettext("harvest-sow"), NA))
 		if( length(test) > 0 ) { stop("For column reproduction, the possible values are: \"", gettext("sow"), "\" ,\"", gettext("harvest"), "\" ,\"", gettext("harvest-sow"), "\", or NA.") }
 
-		test = setdiff(ni$selection, c("selection", NA))
+		test = setdiff(as.character(ni$selection), c("selection", NA))
 		if( length(test) > 0 ) { stop("For column selection, the possible values are: \"selection\", or \"\".") }
 
-		test = setdiff(ni$mixture, c("mixture", NA))
+		test = setdiff(as.character(ni$mixture), c("mixture", NA))
 		if( length(test) > 0 ) { stop("For column mixture, the possible values are: \"mixture\", or \"\".") }
 		
 		}
