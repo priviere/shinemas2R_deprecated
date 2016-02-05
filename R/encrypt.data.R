@@ -1,8 +1,8 @@
 # 0. help -----------------------------------------------------------------
-#' Encrypt data from \code{get.data}
+#' Encrypt data from \code{get.data} or \code{is.get.fata.output}
 #'
 #' @description
-#' \code{encrypt.data} encrypts data from \code{get.data}
+#' \code{encrypt.data} encrypts data from \code{get.data} or \code{is.get.fata.output}
 #'
 #' @param data output from \code{get.data}
 #' 
