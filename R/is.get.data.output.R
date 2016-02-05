@@ -177,7 +177,7 @@ is.get.data.output = function(
 				if( !is.data.frame(d) ) { stop("The first element of data must be NULL or a data frame.") }
 				
 				col_to_have = c("son", "son_ind", "son_year", "son_germplasm", "son_germplasm_type", "son_person", "son_alt", "son_long", "son_lat", "father", "father_year", "father_germplasm", "father_germplasm_type", "father_person", "father_alt", "father_long", "father_lat", "reproduction_id", "reproduction_type", "selection_id", "selection_person", "mixture_id", "diffusion_id", "X", "Y", "block", "project")
-				test = setdiff(col_to_have, colnames(d)
+				test = setdiff(col_to_have, colnames(d))
 				if( length(test) > 0 ) { stop("The first element of data (i.e. data) must have the following columns: ", paste(col_to_have, collapse = ", ")) }
 				
 				if( !is.character(d$son) ) { stop("The data fame must have a column \"son\" as character") } 
