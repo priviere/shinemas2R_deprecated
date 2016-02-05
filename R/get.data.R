@@ -141,7 +141,7 @@
 #' 
 #' @author Pierre Riviere for R code and Yannick de Oliveira for SQL code 
 #' 
-#' @seealso \code{\link{encrypt.data}}, \code{\link{translate.data}},, \code{\link{get.ggplot}}, \code{\link{get.table}}
+#' @seealso \code{\link{encrypt.data}}, \code{\link{translate.data}},, \code{\link{format.data}}, \code{\link{get.ggplot}}, \code{\link{get.table}}
 #' 
 #' 
 get.data <- function(
