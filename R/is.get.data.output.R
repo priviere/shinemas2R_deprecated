@@ -165,6 +165,7 @@ is.get.data.output = function(
 	
 	if( shinemas2R.object == "data-SR-relation") { }
 		
+	message("The data has been sucessfully update with shinemas2R.object = \"", shinemas2R.object, "\".")
 	return(data)
 	}
 
