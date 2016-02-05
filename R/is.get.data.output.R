@@ -3,7 +3,7 @@
 #'
 #' @description
 #' \code{is.get.data.output} check if data set can be used as entry for \code{get.ggplot} and \code{get.table}.
-#' This is useful when the user do not have SHiNeMaS but wish to use the other functions of the packages: \code{get.ggplot}, \code{get.table} and \code{get.pdf}.
+#' This is useful when the user do not have SHiNeMaS but wish to use the other functions of the packages.
 #'
 #' @param data the date set to check
 #'
@@ -51,7 +51,7 @@
 #' 
 #' @author Pierre Riviere
 #' 
-#' @seealso \code{\link{get.ggplot}}, \code{\link{get.table}}
+#' @seealso \code{\link{encrypt.data}}, \code{\link{translate.data}},, \code{\link{format.data}}, \code{\link{get.ggplot}}, \code{\link{get.table}}
 #' 
 is.get.data.output = function(
 	data, 
