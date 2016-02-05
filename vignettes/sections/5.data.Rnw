@@ -46,7 +46,7 @@ The function returns a list with
 
 Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. 
 Therefore the element of the list for correlated data is always NULL.
-For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
+For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on the same individual) or not.
 
 A data set with only correlated variables for each individual is useful when doing multivariate analysis such as PCA.
 
@@ -74,10 +74,11 @@ if(use.get.data){
 		variable = vec_variables, # the variables to display
 		project.in = "PPB" # the project 
 		)
-} else {
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
+	
+} else {
 	
 	#data_classic = encrypt.data(data_classic)
 	#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 24 11:59:59 2015.RData
@@ -139,10 +140,12 @@ if(use.get.data){
 		variable = vec_variables,
 		project.in = "PPB"
 		)
-} else {
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
+	
+} else {
+
 	
 	#data_S = encrypt.data(data_S)
 	#The key has been written in /home/pierre/key_data-S-relation_Tue Nov 24 12:01:25 2015.RData

@@ -16,7 +16,7 @@ You can set filters to the query with the following argument :
 values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation} or \texttt{reproduction type}.
 
 
-It is important to choose if you apply the filter on the \texttt{father} or the \texttt{son} of a relation.
+It is important to choose whether to apply the filter to the \texttt{father} or to the \texttt{son} of a relation.
 This can be done with the argument \texttt{filter.on}.
 Possibles values are \texttt{"father"}, \texttt{"son"} or \texttt{"father-son"}.
 It is set by default to \texttt{"father-son"}.
@@ -36,15 +36,15 @@ if(use.get.data){
 		filter.on = "father-son", # filter on father AND son
 		Mdist = TRUE
 		)
-} else { 
-	# 1. Query SHiNeMaS ...
+		# 1. Query SHiNeMaS ...
 	# 2. Create network matrix ...
 	# 3. Link information to vertex and edges ...
 	# 4. Get network information on seed-lots ...
 	# 5. Get Mdist square matrix ...
-	
 	#data_network = encrypt.data(data_network)
 	#The key has been written in /home/pierre/key_network_Tue Nov 24 11:52:47 2015.RData
+	
+} else { 
 	load("./data/data_network.RData")
 	}
 @
@@ -67,7 +67,7 @@ n_igraph
 @
 
 
-\item the network.info matrix with information on relation in the network.
+\item the network.info matrix with information on relations in the network.
 <<message=TRUE,cache=FALSE>>=
 head(data_network$data$network.info)
 @
@@ -93,7 +93,6 @@ if(use.get.data){
 		person.in = "JAB", # person to keep
 		filter.on = "father-son" # filter on father AND son
 		)
-} else {
 	# 1. Query SHiNeMaS ...
 	# 2. Create network matrix ...
 	# 3. Link information to vertex and edges ...
@@ -101,6 +100,8 @@ if(use.get.data){
 	
 	#data_network_JAB = encrypt.data(data_network_JAB)
 	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:54:53 2015.RData
+	
+} else {
 	load("./data/data_network_JAB.RData")
 	}
 @
@@ -115,7 +116,6 @@ if(use.get.data){
 		filter.on = "father-son", # filter on father AND son
 		fill.diffusion.gap = TRUE
 		)
-} else {
 	# 1. Query SHiNeMaS ...
 	# 2. Create network matrix ...
 	# 2.1. Fill diffusion gaps ...
@@ -124,6 +124,8 @@ if(use.get.data){
 	
 	#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)
 	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData
+	
+} else {
 	load("./data/data_network_JAB_fill_gap.RData")
 	}
 
@@ -132,7 +134,7 @@ if(use.get.data){
 
 \subsection{Get the ggplots}
 
-Once, you have got the data, you can create plots with the function \texttt{get.ggplot}.
+Once you have acquired the data, you can create plots with the function \texttt{get.ggplot}.
 
 
 <<message=TRUE,cache=FALSE>>=
@@ -146,7 +148,7 @@ names(default_network_ggplot)
 @
 
 It is possible to get only one plot by choosing one of the above names with the argument \texttt{ggplot.type}.
-Each \texttt{ggplot.type} with default and custom arguments are explained in the following sub-sections.
+Each \texttt{ggplot.type} with default and customized arguments are explained in the following sub-sections.
 
 \subsubsection{\texttt{ggplot.type = "network-network"}}
 
@@ -178,7 +180,7 @@ p_JAB_fill_gap = get.ggplot(
 p_JAB_fill_gap = p_JAB_fill_gap$`network-network`
 @
 
-We can see that extra information are added to know from where the seed-lots come from.
+We can see that extra information is added to know where the seed-lots come from.
 
 \begin{center}
 \begin{tabular}{cc}
@@ -221,17 +223,17 @@ If \texttt{NULL}, it is in black. \\
 \texttt{hide.labels.parts} & \texttt{"all"} & parts of the label hidden: \texttt{"germplasm"}, \texttt{"person"}, \texttt{"year"}, \texttt{"person:germplasm"}, \texttt{"year:germplasm"}, \texttt{"person:year"}, \texttt{"all"}. 
 \texttt{"all"} means that no label is dispayed. 
 If \texttt{NULL} labels are displayed. Labels are based on seed-lots names under the form \texttt{germplasm\_year\_person\_digit}.
-For easier visualisation, digit is never display unless you choose \texttt{NULL}.
+For easier visualization, digit is never displayed unless you choose \texttt{NULL}.
 \\
 
-\texttt{labels.sex} & \texttt{TRUE} & if \texttt{TRUE}, display the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = \texttt{"all"}. \\
+\texttt{display.labels.sex} & \texttt{TRUE} & if \texttt{TRUE}, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = \texttt{"all"}. \\
 
-\texttt{labels.generation} & \texttt{TRUE} & if TRUE, display generation for each reproduction. \\
+\texttt{labels.generation} & \texttt{TRUE} & if TRUE, displays generation for each reproduction. \\
 
 \texttt{labels.size} & \texttt{3} & size of the labels \\
 \hline
 \end{tabular}
-\caption{Possible arguments to custom arguments regarding network.}
+\caption{Possible arguments to customize regarding network.}
 \label{custom.network}
 \end{table}
 \end{center}
@@ -272,7 +274,7 @@ It can be a vector of several elements i.e. \texttt{c("barplot", "map")}.
 
 \paragraph{\texttt{ggplot.display = barplot}}
 
-For \texttt{ggplot.display = "barplot"}, you may chose what you want in the x axis (\texttt{x.axis} argument) and in color (\texttt{in.col} argument).
+For \texttt{ggplot.display = "barplot"}, you may choose what you want in the x axis (\texttt{x.axis} argument) and in color (\texttt{in.col} argument).
 The possible values for \texttt{x.axis} and \texttt{in.col} are: \texttt{germplasm}, \texttt{year}, \texttt{person}.
 By default all combinaisons of \texttt{x.axis} and \texttt{in.col} are done with default argument settings.
 The name of the plot is under the form \texttt{x.axis}-\texttt{in.col}.
@@ -432,9 +434,16 @@ p14_slh
 \texttt{p15\_slh} & \texttt{p15\_slh\_bw}  \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
 p15_slh
-@
-&
-<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
+	# 1. Query SHiNeMaS ...
+	# 2. Create network matrix ...
+	# 2.1. Fill diffusion gaps ...
+	# 3. Link information to vertex and edges ...
+	# 4. Get network information on seed-lots ...
+	
+	#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)
+	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData
+
+<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>
 p15_slh_bw
 @
 \\

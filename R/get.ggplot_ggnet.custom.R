@@ -16,9 +16,9 @@
 #' 
 #' @param names a character vector of two elements to use as legend titles for the node groups and node weights. Defaults to empty strings.
 #' 
-#' @param node.group a vector of character strings to label the nodes with, of the same length and order as the vertex names. Factors are converted to strings prior to plotting.
+#' @param node.group a vector of character strings to label the nodes, of the same length and order as the vertex names. Factors are converted to strings prior to plotting.
 #' 
-#' @param node.color a vector of character strings to color the nodes with, holding as many colors as there are levels in \code{node.group}. Tries to default to \code{"Set1"} if missing.
+#' @param node.color a vector of character strings to color the nodes, holding as many colors as there are levels in \code{node.group}. Tries to default to \code{"Set1"} if missing.
 #' 
 #' @param node.alpha transparency of the nodes. Inherits from \code{alpha}.
 #' 
@@ -32,15 +32,15 @@
 #' 
 #' @param arrow.size size of the vertex arrows for directed network plotting, in centimeters. Defaults to 0.
 #' 
-#' @param label.nodes label nodes with their vertex names attribute. If set to \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.
+#' @param label.nodes label nodes with their vertex names attribute. If \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.
 #' 
 #' @param top8.nodes use the top 8 nodes as node groups, colored with \code{"Set1"}. The rest of the network will be plotted as the ninth (grey) group. Experimental.
 #' 
 #' @param trim.labels removes '@@', 'http://', 'www.' and the ending '/' from vertex names. Cleans up labels for website and Twitter networks. Defaults to \code{TRUE}.
 #' 
-#' @param quantize.weights break node weights to quartiles. Fails when quartiles do not uniquely identify nodes.
+#' @param quantize.weights breaks node weights to quartiles. Fails when quartiles do not uniquely identify nodes.
 #' 
-#' @param subset.threshold delete nodes prior to plotting, based on \code{weight.method} < \code{subset.threshold}. If \code{weight.method} is unspecified, total degree (Freeman's measure) is used. Defaults to 0 (no subsetting).
+#' @param subset.threshold deletes nodes prior to plotting, based on \code{weight.method} < \code{subset.threshold}. If \code{weight.method} is unspecified, total degree (Freeman's measure) is used. Defaults to 0 (no subsetting).
 #' 
 #' @param geo.outliers when \code{mode} is set to \code{"geo"}, trim geographic outliers (10% of most distant nodes). Defaults to \code{TRUE}.
 #' 
@@ -53,7 +53,7 @@
 #' @author Moritz Marbach and Francois Briatte for the core function. Pierre Rivière for the little changes in the output.
 #' 
 #' @details 
-#' ggnet.custom is based on GGally::gget and return two objects: the network and the matrix with the coordinates of each edge of the network.
+#' ggnet.custom is based on GGally::gget and returns two objects: the network and the matrix with the coordinates of each edge of the network.
 #' This funtion, used in get.plot, is based on ggnet function from Gapply package coded by Moritz Marbach and Francois Briatte
 #' for details see https://github.com/briatte/ggnet/blob/master/ggnet.R
 #' 
