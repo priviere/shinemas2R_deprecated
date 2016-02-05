@@ -7,7 +7,7 @@
 #' 
 #' @return The data with translated variables
 #' 
-#' @seealso \code{\link{get.data}} 
+#' @seealso \code{\link{get.data}}, \code{\link{is.get.data.output}}
 #' 
 
 translate.data = function(
@@ -17,9 +17,10 @@ list_translation
 	# lets go !!! ----------
 
 {
+	data = data$data
 	shinemas2R.object = attributes(data)$shinemas2R.object
 	
-	mess = "data must come from shinemas2R::get.data"
+	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output"
 	if( is.null(shinemas2R.object) ) { stop(mess) }
 	if( !is.element(shinemas2R.object, 
 									c("data-classic-relation", 

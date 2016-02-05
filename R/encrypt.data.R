@@ -23,7 +23,7 @@
 #' 
 #' @author Pierre Rivière 
 #' 
-#' @seealso \code{\link{get.data}}
+#' @seealso \code{\link{get.data}}, \code{\link{is.get.data.output}}
 #' 
 #' 
 encrypt.data <- function(
@@ -32,22 +32,20 @@ data
 # lets go !!! ----
 {
 # 1. Check parameters ----------
-shinemas2R.object = attributes(data$data)$shinemas2R.object
-
-if( !is.element(shinemas2R.object, c(
-	"network",
-	"SL.mix",
-	"cross",
-	"data-classic-seed-lots",
-	"data-classic-relation",
-	"data-S-seed-lots",
-	"data-S-relation",
-	"data-SR-seed-lots",
-	"data-SR-relation")
-) ) {
-	stop("data must come from shinemas2R::get.data.")
-}
-
+	data = data$data
+	shinemas2R.object = attributes(data)$shinemas2R.object
+	
+	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output"
+	if( is.null(shinemas2R.object) ) { stop(mess) }
+	if( !is.element(shinemas2R.object, 
+									c("data-classic-relation", 
+										"data-S-relation", 
+										"data-SR-relation", 
+										"data-classic-seed-lots",
+										"data-S-seed-lots", 
+										"data-SR-seed-lots")) 
+	) { stop(mess) }  
+	
 # 2. Encrypt data ----------
 
 	info_db = data$info_db
