@@ -25,6 +25,6 @@ The data set with the right format for the R package
 Format data from \code{get.data} to be used by several R packages
 }
 \seealso{
-\code{\link{get.data}}
+\code{\link{get.data}}, \code{\link{is.get.data.output}}
 }
 
