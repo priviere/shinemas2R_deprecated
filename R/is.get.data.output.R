@@ -3,7 +3,7 @@
 #'
 #' @description
 #' \code{is.get.data.output} check if data set can be used as entry for \code{get.ggplot} and \code{get.table}.
-#' This is useful when the user do not have SHiNeMaS but wish to use the other functions of the packages.
+#' This is useful when the user do not have SHiNeMaS but wish to use the other functions of the package.
 #'
 #' @param data the date set to check
 #'
