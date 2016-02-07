@@ -5,6 +5,9 @@ shinemas2R 0.9.2 ------------------------------------
 
 * update functions regarding is.get.data.output.R
 
+* Debug some functions
+	- get.pdf.R
+
 * vignette
 	- orthograph corrections
 	- update for is.get.data.output.R
