@@ -255,7 +255,6 @@ get.pdf = function(
 		return(list.tex)
 	}
 	
-	
 	# 4. Open connection to write the .tex ---------- 
 	sink(paste("./tex.files/", form.name,".tex", sep = ""))
 	
@@ -294,15 +293,14 @@ get.pdf = function(
 		cat(to.put.in.LaTeX.head)
 		to.add.in.LaTeX_head = NULL
 		}	else { 
-		LaTeX_head = scan(paste("../", LaTeX_head, sep = ""), "caracter", sep = "\n", quiet = TRUE) 
+		LaTeX_head = scan(paste(we_are_here, "/", LaTeX_head, sep = ""), "caracter", sep = "\n", quiet = TRUE) 
 		
 		# To add in LaTeX.head because it is compulsory
 		
 		test = function(to.add, x.check, x.toadd, LaTeX_head){ 
-			a= NULL
-			for(i in 1:length(x.check)) { a = c(a, grep(x.check[i], LaTeX_head)) }; a = unique(a)
-			if( length(a) == length(x.check) ) { go = FALSE } else { go = TRUE }
-			if( go ) { 
+			a = NULL
+			for(i in 1:length(x.check)) { a = c(a, grep(x.check[i], LaTeX_head)) }
+			if( length(a) == 0 ) { 
 				to.add = c(to.add, x.toadd); message(x.toadd, " has been added to LaTeX head.")
 			} 
 			return(to.add) 
@@ -333,7 +331,7 @@ get.pdf = function(
 		if( !is.null(to.add) ) { 
 			cat(to.add, sep = "\n")
 			cat(LaTeX_head, sep = "\n") 
-		}
+		} else { cat(LaTeX_head, sep = "\n") }
 		
 		to.add = NULL
 		to.add = test(to.add, "document}", "\\begin{document}", LaTeX_head)
