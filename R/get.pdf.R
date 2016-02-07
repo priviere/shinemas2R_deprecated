@@ -221,13 +221,13 @@ get.pdf = function(
 		if( n == "includepdf" ) { 
 			if(!is.null(names(d[[1]]))) { stop("Elements of includepdf must be a character") } 
 			if(!is.character(d[[1]])) { stop("Elements of includepdf must be a character") } 
-			a = scan(is.character(d[[1]]), what = "character", quiet = TRUE) # Error message if the file does not exist
+			a = scan(d[[1]], what = "character", quiet = TRUE) # Error message if the file does not exist
 		}
 		
 	if( n == "input" ) { 
 			if(!is.null(names(d[[1]]))) { stop("Elements of input must be a character") } 
 			if(!is.character(d[[1]])) { stop("Elements of input must be a character") } 
-		a = scan(is.character(d[[1]]), what = "character", quiet = TRUE) # Error message if the file does not exist		
+		a = scan(d[[1]], what = "character", quiet = TRUE) # Error message if the file does not exist		
 		}
 		
 	}
@@ -237,7 +237,7 @@ get.pdf = function(
 	we_are_here = getwd()
 	setwd(dir)
 	if( is.element(form.name, dir()) ) { stop("The folder ",form.name, " already exists ! Delete the folder ", form.name," or find a new name.") }
-	system(paste("mkdir ", form.name, sep="")) # attention, quand il n'y a pas assez de mémoire, ça bug !!!
+	system(paste("mkdir ", form.name, sep="")) # bug when there is not enought memory !!!
 	setwd(form.name)
 	system("mkdir tex.files")
 	system("mkdir figures")
@@ -389,9 +389,9 @@ get.pdf = function(
 		if(n == "subsection") { cat("\\subsection{",text.to.tex(d[[1]]),"} \n \n") }
 		if(n == "subsubsection") { cat("\\subsubsection{",text.to.tex(d[[1]]),"} \n \n") }
 		if(n == "text") { cat(text.to.tex(d[[1]]),"\n \n") }
-		if(n == "includepdf") { cat("\\includepdf[]{",d[["includepdf"]] , "} \n \n", sep="") }
-		if(n == "input") { cat("\\input{../../", d[["input"]], "} \n \n", sep="") }
-		
+		if(n == "includepdf") { cat("\\includepdf[]{", we_are_here ,"/", d[["includepdf"]] , "} \n \n", sep = "") }
+		if(n == "input") { cat("\\input{", we_are_here ,"/", d[["input"]], "} \n \n", sep = "") }
+
 		if(n == "table") {
 			
 			tex.tab = function(d, tab, lab.tab){
