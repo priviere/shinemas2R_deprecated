@@ -19,7 +19,7 @@
 #' 	}
 #' 	
 #' 	@details 
-#' 	Format of the different shinemas2R.object
+#' 	Formats of the different shinemas2R.object:
 #' 	\itemize{
 #' 	 \item "network" It must be a list of three elements: "network", "network.info" and "Mdist" (see \code{get.data} for more details) with the followinf format:
 #' 	 \itemize{
@@ -48,6 +48,9 @@
 #' 	}
 #' 	
 #' @return The function returns a data set with the corresponding shinemas2R.object attributes or an error.
+#' 
+#' @example 
+#' See the vignette
 #' 
 #' @author Pierre Riviere
 #' 

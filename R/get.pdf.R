@@ -79,6 +79,9 @@
 #' 
 #' @author Pierre Riviere
 #' 
+#' @example 
+#' See the vignette
+#' 
 #' @seealso \code{\link{get.ggplot}}, \code{\link{get.table}}
 #' 
 get.pdf = function(

@@ -13,6 +13,9 @@
 #' 
 #' @return The data set with the right format for the R package
 #' 
+#' @example 
+#' See the vignette
+#' 
 #' @seealso \code{\link{get.data}}, \code{\link{is.get.data.output}}
 #' 
 format.data = function(
