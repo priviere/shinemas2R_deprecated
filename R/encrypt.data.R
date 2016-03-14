@@ -22,7 +22,7 @@
 #' @return The function returns the data frame encrypted and writes in the work directory a file.txt with the key
 #' 
 #' @example 
-#' See the vignette
+#' # See the vignette
 #' 
 #' @author Pierre Rivière 
 #' 

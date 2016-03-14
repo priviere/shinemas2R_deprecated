@@ -115,7 +115,7 @@
 #' }
 #' 
 #' @example 
-#' See the vignette
+#' # See the vignette
 #' 
 #' @author Pierre Riviere
 #' 
