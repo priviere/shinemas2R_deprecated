@@ -28,6 +28,9 @@ seed-lots
 
 The key is written in .RData format. To use it you should type load("key.RData").
 }
+\examples{
+# See the vignette
+}
 \author{
 Pierre Rivière
 }

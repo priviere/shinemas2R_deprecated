@@ -157,6 +157,9 @@ Therefore the element of the list for non correlated data is always NULL.
 For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
 }
 }
+\examples{
+# See the vignette
+}
 \author{
 Pierre Riviere for R code and Yannick de Oliveira for SQL code
 }
