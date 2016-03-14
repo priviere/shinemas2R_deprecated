@@ -42,7 +42,7 @@
 #' 
 #' @author Pierre Riviere
 #' 
-#' @example 
+#' @examples 
 #' # See the vignette
 #' 
 #' @seealso \code{\link{get.data}}, \code{\link{get.ggplot}}

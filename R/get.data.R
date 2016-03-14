@@ -138,7 +138,7 @@
 #' \item information to connect to SHiNeMaS
 #' }
 #' 
-#' @example 
+#' @examples
 #' # See the vignette
 #' 
 #' @author Pierre Riviere for R code and Yannick de Oliveira for SQL code 

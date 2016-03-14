@@ -79,7 +79,7 @@
 #' 
 #' @author Pierre Riviere
 #' 
-#' @example 
+#' @examples 
 #' # See the vignette
 #' 
 #' @seealso \code{\link{get.ggplot}}, \code{\link{get.table}}
