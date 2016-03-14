@@ -218,7 +218,7 @@ if(!is.null(data.type)){
 
 if( data.type == "relation" & is.null(filter.on) ){ stop("filter.on must be set: either \"son\" \"father\" or \"father-son\"") }
 
-if( data.type == "seed-lots" & is.null(filter.on)){ filter.on = "son" } # To be ok with filters
+if( data.type == "seed-lots" ) { filter.on = "son" ; message("With data.type == \"seed-lots\", \"filter.on\" is not use.") } # To be ok with filters
 }
 
 if(!is.null(filter.on)){
