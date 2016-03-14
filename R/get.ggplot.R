@@ -114,6 +114,9 @@
 #' 
 #' }
 #' 
+#' @example 
+#' See the vignette
+#' 
 #' @author Pierre Riviere
 #' 
 #' @seealso \code{\link{get.data}}

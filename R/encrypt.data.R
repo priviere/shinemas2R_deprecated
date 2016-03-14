@@ -21,6 +21,9 @@
 #' 
 #' @return The function returns the data frame encrypted and writes in the work directory a file.txt with the key
 #' 
+#' @example 
+#' See the vignette
+#' 
 #' @author Pierre Rivière 
 #' 
 #' @seealso \code{\link{get.data}}, \code{\link{is.get.data.output}}
