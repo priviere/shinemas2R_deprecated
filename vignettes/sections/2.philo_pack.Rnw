@@ -142,8 +142,14 @@ system("mkdir data")
 system("cp -r /home/pierre/Documents/geek/R-stats/Rdev/R_package_shinemas2R/shinemas2R_data/*RData ./data")
 @
 
-and then \texttt{load()} it.
+and then \texttt{load()} it.\\
 
+~\\
 
 In this vignette, there are no examples with \texttt{is.get.data.output}.
-Refer to the help of the function (\texttt{?is.get.data.output}) to know the format that must have the data to be used in the other functions of the package.
+Refer to appendix \ref{examples_is_get_data_output} to know the format that must have the data to be used in the other functions of the package (i.e. \texttt{get.ggplot} and \texttt{get.table} followed by \texttt{get.pdf}).
+
+
+
+
+
