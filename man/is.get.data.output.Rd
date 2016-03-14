@@ -28,7 +28,7 @@ The function returns a data set with the corresponding shinemas2R.object attribu
 This is useful when the user do not have SHiNeMaS but wish to use the other functions of the package.
 }
 \details{
-Format of the different shinemas2R.object
+Formats of the different shinemas2R.object:
 	\itemize{
 	 \item "network" It must be a list of three elements: "network", "network.info" and "Mdist" (see \code{get.data} for more details) with the followinf format:
 	 \itemize{
@@ -55,6 +55,9 @@ Format of the different shinemas2R.object
 	 \item "data-SR-relation"
 
 	}
+}
+\examples{
+# See the vignette
 }
 \author{
 Pierre Riviere

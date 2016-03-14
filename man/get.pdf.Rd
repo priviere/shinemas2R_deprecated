@@ -84,6 +84,9 @@ Note that the argument [H] from the package float is used by default for figures
 
 If you use LaTeX macro, do not forget to use escape mode, for example \code{\\textbf{}}.
 }
+\examples{
+# See the vignette
+}
 \author{
 Pierre Riviere
 }

@@ -51,6 +51,9 @@ The function returns a list with two elements
 \description{
 \code{get.table} generates tables object from \code{get.data} data-set or ggplot.objet from \code{get.ggplot}.
 }
+\examples{
+# See the vignette
+}
 \author{
 Pierre Riviere
 }

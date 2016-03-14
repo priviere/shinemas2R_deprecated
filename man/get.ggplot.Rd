@@ -128,6 +128,9 @@ The function returns a list with several ggplot objects according to the data an
 \description{
 \code{get.ggplot} generates ggplot objects from \code{get.data} data-set
 }
+\examples{
+# See the vignette
+}
 \author{
 Pierre Riviere
 }
