@@ -139,7 +139,7 @@
 #' }
 #' 
 #' @example 
-#' See the vignette
+#' # See the vignette
 #' 
 #' @author Pierre Riviere for R code and Yannick de Oliveira for SQL code 
 #' 

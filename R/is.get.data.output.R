@@ -50,7 +50,7 @@
 #' @return The function returns a data set with the corresponding shinemas2R.object attributes or an error.
 #' 
 #' @example 
-#' See the vignette
+#' # See the vignette
 #' 
 #' @author Pierre Riviere
 #' 
