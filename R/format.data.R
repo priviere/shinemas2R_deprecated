@@ -13,7 +13,7 @@
 #' 
 #' @return The data set with the right format for the R package
 #' 
-#' @example 
+#' @examples
 #' # See the vignette
 #' 
 #' @seealso \code{\link{get.data}}, \code{\link{is.get.data.output}}

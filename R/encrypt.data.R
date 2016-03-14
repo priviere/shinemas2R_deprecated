@@ -21,7 +21,7 @@
 #' 
 #' @return The function returns the data frame encrypted and writes in the work directory a file.txt with the key
 #' 
-#' @example 
+#' @examples 
 #' # See the vignette
 #' 
 #' @author Pierre Rivière 
