@@ -48,7 +48,7 @@ info_db = list(
 	)
 @
 
-\texttt{db\_info} is use in \texttt{get.data} funtion.
+\texttt{db\_info} is use in \texttt{get.data} function.
 
 
 
