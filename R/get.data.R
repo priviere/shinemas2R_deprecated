@@ -255,7 +255,7 @@ get.d = function(requete, info_db) {
 # 3. Queries ----------
 
 query.variable = function(){
-	d = get.d("SELECT DISTINCT name FROM eppdata_env_pra_phe_variable", info_db)
+	d = get.d("SELECT DISTINCT name FROM eppdata_variable", info_db)
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)
 }
@@ -397,10 +397,10 @@ paste("
 SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, gpt1.germplasm_type AS germplasm_type, p1.short_name AS person,v1.name AS variable_name,rd.raw_data, met.method_name, met.quali_quanti_notes, pro1.project_name AS project
 
 FROM entities_seed_lot sl1 
-LEFT OUTER JOIN eppdata_env_pra_phe_raw_data_seed_lot dr ON sl1.id = dr.seed_lot_id 
-LEFT OUTER JOIN eppdata_env_pra_phe_raw_data rd ON dr.env_pra_phe_raw_data_id = rd.id 
-LEFT OUTER JOIN eppdata_env_pra_phe_method met ON rd.method_id=met.id
-LEFT OUTER JOIN eppdata_env_pra_phe_variable v1 ON rd.variable_id = v1.id
+LEFT OUTER JOIN eppdata_raw_data_seed_lot dr ON sl1.id = dr.seed_lot_id 
+LEFT OUTER JOIN eppdata_raw_data rd ON dr.env_pra_phe_raw_data_id = rd.id 
+LEFT OUTER JOIN eppdata_method met ON rd.method_id=met.id
+LEFT OUTER JOIN eppdata_variable v1 ON rd.variable_id = v1.id
 LEFT OUTER JOIN entities_seed_lot_project eslp ON sl1.id = eslp.seed_lot_id 
 LEFT OUTER JOIN actors_project pro1 ON eslp.project_id = pro1.id
 LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
@@ -469,10 +469,10 @@ LEFT OUTER JOIN entities_seed_lot slf ON relfat.seed_lot_father_id = slf.id
 LEFT OUTER JOIN entities_germplasm gpf ON slf.germplasm_id = gpf.id
 LEFT OUTER JOIN actors_person pf ON slf.person_id = pf.id
 
-LEFT OUTER JOIN eppdata_env_pra_phe_raw_data_relation dr1 ON nr.id = dr1.relation_id
-LEFT OUTER JOIN eppdata_env_pra_phe_raw_data rd1 ON dr1.env_pra_phe_raw_data_id = rd1.id
-LEFT OUTER JOIN eppdata_env_pra_phe_variable v1 ON rd1.variable_id = v1.id
-LEFT OUTER JOIN eppdata_env_pra_phe_method met1 ON rd1.method_id=met1.id
+LEFT OUTER JOIN eppdata_raw_data_relation dr1 ON nr.id = dr1.relation_id
+LEFT OUTER JOIN eppdata_raw_data rd1 ON dr1.env_pra_phe_raw_data_id = rd1.id
+LEFT OUTER JOIN eppdata_variable v1 ON rd1.variable_id = v1.id
+LEFT OUTER JOIN eppdata_method met1 ON rd1.method_id=met1.id
 		
 LEFT OUTER JOIN entities_seed_lot_project eslp1 ON sl1.id = eslp1.seed_lot_id
 LEFT OUTER JOIN actors_project pro1 ON eslp1.project_id = pro1.id ",
@@ -981,9 +981,9 @@ if( !is.null (V) ) { w = " WHERE" } else { w = NULL }
 
 query = paste(
 "SELECT DISTINCT m.method_name AS method_name, v1.name AS variable_name, m.method_description ,m.unit 
-FROM eppdata_env_pra_phe_raw_data d 
-INNER JOIN eppdata_env_pra_phe_method m ON d.method_id=m.id 
-INNER JOIN eppdata_env_pra_phe_variable v1 ON d.variable_id=v1.id",
+FROM eppdata_raw_data d 
+INNER JOIN eppdata_method m ON d.method_id=m.id 
+INNER JOIN eppdata_variable v1 ON d.variable_id=v1.id",
 
 w,
 V, sep = "")
