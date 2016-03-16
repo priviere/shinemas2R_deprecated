@@ -376,87 +376,47 @@ Proj, sep = "")
 d = get.d(query, info_db)
 
 if(nrow(d) > 0) {
-	son_species = as.factor(d$son_species)
-	son_project = as.factor(d$son_project)
-	son = as.factor(d$son)
-	son_germplasm = as.factor(d$son_germplasm)
-	son_person = as.factor(d$son_person)
-	son_year = as.factor(d$son_year)
-	son_germplasm_type = as.factor(d$son_germplasm_type)
-	son_alt = as.numeric(as.character(d$son_alt))
-	son_long = as.numeric(as.character(d$son_long))
-	son_lat = as.numeric(as.character(d$son_lat))
-	son_total_generation_nb = as.numeric(as.character(d$son_total_generation_nb))
-	son_local_generation_nb = as.numeric(as.character(d$son_local_generation_nb))
-	son_generation_confidence = as.character(d$son_generation_confidence)
-	son_comments = as.character(d$comments)
-	
-	father_species = as.factor(d$father_species)
-	father_project = as.factor(d$father_project)
-	father = as.factor(d$father)
-	father_germplasm = as.factor(d$father_germplasm)
-	father_person = as.factor(d$father_person)
-	father_year = as.factor(d$father_year)
-	father_germplasm_type = as.factor(d$father_germplasm_type)
-	father_alt = as.numeric(as.character(d$father_alt))
-	father_long = as.numeric(as.character(d$father_long))
-	father_lat = as.numeric(as.character(d$father_lat))
-	father_total_generation_nb = as.numeric(as.character(d$father_total_generation_nb))
-	father_local_generation_nb = as.numeric(as.character(d$father_local_generation_nb))
-	father_generation_confidence = as.character(d$father_generation_confidence)
-	father_comments = as.character(d$comments)
-
-	reproduction_id = as.character(d$reproduction_id)
-	reproduction_method_name = as.factor(d$reproduction_method_name)
-	is_male = as.factor(d$is_male)
-	block = as.factor(d$block)
-	
-	selection_id = as.character(d$selection_id)
-	selection_person = as.factor(d$selection_person)
-	mixture_id = as.character(d$mixture_id)
-	diffusion_id = as.character(d$diffusion_id)	
-	event_year = as.factor(d$event_year)
-	
-	d = data.frame(	
-		son_species, 
-		son_project, 
-		son, 
-		son_germplasm, 
-		son_person, 
-		son_year, 
-		son_germplasm_type,
-		son_alt, 
-		son_long, 
-		son_lat, 
-		son_total_generation_nb, 
-		son_local_generation_nb, 
-		son_generation_confidence, 
-		son_comments,
-									
-		father_species, 
-		father_project, 
-		father, 
-		father_germplasm, 
-		father_person, 
-		father_year, 
-		father_germplasm_type, 
-		father_alt, 
-		father_long, 
-		father_lat, 
-		father_total_generation_nb, 
-		father_local_generation_nb, 
-		father_generation_confidence, 
-		father_comments,
-									
-		reproduction_id, 
-		reproduction_method_name, 
-		is_male, 
-		block, 
-		selection_id, 
-		selection_person, 
-		mixture_id, 
-		diffusion_id, 
-		event_year
+	d = data.frame(
+		son_species = as.factor(d$son_species),
+		son_project = as.factor(d$son_project),
+		son = as.factor(d$son),
+		son_germplasm = as.factor(d$son_germplasm),
+		son_person = as.factor(d$son_person),
+		son_year = as.factor(d$son_year),
+		son_germplasm_type = as.factor(d$son_germplasm_type),
+		son_alt = as.numeric(as.character(d$son_alt)),
+		son_long = as.numeric(as.character(d$son_long)),
+		son_lat = as.numeric(as.character(d$son_lat)),
+		son_total_generation_nb = as.numeric(as.character(d$son_total_generation_nb)),
+		son_local_generation_nb = as.numeric(as.character(d$son_local_generation_nb)),
+		son_generation_confidence = as.character(d$son_generation_confidence),
+		son_comments = as.character(d$comments),
+		
+		father_species = as.factor(d$father_species),
+		father_project = as.factor(d$father_project),
+		father = as.factor(d$father),
+		father_germplasm = as.factor(d$father_germplasm),
+		father_person = as.factor(d$father_person),
+		father_year = as.factor(d$father_year),
+		father_germplasm_type = as.factor(d$father_germplasm_type),
+		father_alt = as.numeric(as.character(d$father_alt)),
+		father_long = as.numeric(as.character(d$father_long)),
+		father_lat = as.numeric(as.character(d$father_lat)),
+		father_total_generation_nb = as.numeric(as.character(d$father_total_generation_nb)),
+		father_local_generation_nb = as.numeric(as.character(d$father_local_generation_nb)),
+		father_generation_confidence = as.character(d$father_generation_confidence),
+		father_comments = as.character(d$comments),
+		
+		reproduction_id = as.character(d$reproduction_id),
+		reproduction_method_name = as.factor(d$reproduction_method_name),
+		is_male = as.factor(d$is_male),
+		block = as.factor(d$block),
+		
+		selection_id = as.character(d$selection_id),
+		selection_person = as.factor(d$selection_person),
+		mixture_id = as.character(d$mixture_id),
+		diffusion_id = as.character(d$diffusion_id),
+		event_year = as.factor(d$event_year)
 	)
 	
 	} else { d = NULL }
@@ -502,42 +462,25 @@ Proj, sep = "")
 d = get.d(query, info_db)
 
 if(nrow(d) > 0) {
-	species = as.factor(d$species)
-	project = as.factor(d$project) # projet à vérifier
-	sl = as.factor(d$sl)
-	germplasm = as.factor(d$germplasm)
-	person = as.factor(d$person)
-	year = as.factor(d$year)
-	variable_name = as.character(d$variable_name)
-	raw_data = as.character(d$raw_data)
-	raw_data_date = as.character(d$raw_data_date)
-	method_name = as.factor(d$met.method_name)
-	lat = as.numeric(d$lat)
-	long = as.numeric(d$long) 
-	alt = as.numeric(d$alt)
-	total_generation_nb = as.numeric(as.character(d$total_generation_nb))
-	local_generation_nb = as.numeric(as.character(d$local_generation_nb))
-	generation_confidence = as.character(d$generation_confidence)
-	sl_comments = as.character(d$sl_comments)
-	
 	d = data.frame(
-		species, 
-		project, 
-		sl, 
-		germplasm, 
-		person, 
-		year, 
-		variable_name, 
-		raw_data, 
-		raw_data_date, 
-		method_name, 
-		lat, 
-		long, 
-		alt, 
-		total_generation_nb, 
-		local_generation_nb, 
-		generation_confidence, 
-		sl_comments)
+		species = as.factor(d$species),
+		project = as.factor(d$project), # projet à vérifier
+		sl = as.factor(d$sl),
+		germplasm = as.factor(d$germplasm),
+		person = as.factor(d$person),
+		year = as.factor(d$year),
+		variable_name = as.character(d$variable_name),
+		raw_data = as.character(d$raw_data),
+		raw_data_date = as.character(d$raw_data_date),
+		method_name = as.factor(d$met.method_name),
+		lat = as.numeric(d$lat),
+		long = as.numeric(d$long), 
+		alt = as.numeric(d$alt),
+		total_generation_nb = as.numeric(as.character(d$total_generation_nb)),
+		local_generation_nb = as.numeric(as.character(d$local_generation_nb)),
+		generation_confidence = as.character(d$generation_confidence),
+		sl_comments = as.character(d$sl_comments)
+	)
 	
 		} else { d = NULL }
 
@@ -606,104 +549,57 @@ Proj, sep = "")
 d = get.d(query, info_db)
 
 if( nrow(d) > 0 ) {
+	d = data.frame(
+		son_species = as.factor(d$son_species),
+		son_project = as.factor(d$project), # a vérifier
+		son = as.factor(d$son),
+		son_ind = as.factor(d$son_ind),
+		son_year = as.factor(d$son_year),
+		son_germplasm = as.factor(d$son_germplasm),
+		son_germplasm_type = as.factor(d$son_germplasm_type),
+		son_person = as.factor(d$son_person),
+		son_alt = as.numeric(d$son_alt),
+		son_long = as.numeric(d$son_long),
+		son_lat = as.numeric(d$son_lat),
+		son_total_generation_nb = as.numeric(as.character(son_total_generation_nb)),
+		son_local_generation_nb = as.numeric(as.character(son_local_generation_nb)),
+		son_generation_confidence = as.character(son_generation_confidence),
+		son_comments = as.character(d$son_comments),
+		
+		father_species = as.factor(d$father_species),
+		father_project = as.factor(d$project), # a vérifier
+		father = as.factor(d$father),
+		father_year = as.factor(d$father_year),
+		father_germplasm = as.factor(d$father_germplasm),
+		father_germplasm_type = as.factor(d$father_germplasm_type),
+		father_person = as.factor(d$father_person),
+		father_alt = as.numeric(d$father_alt),
+		father_long = as.numeric(d$father_long),
+		father_lat = as.numeric(d$father_lat),
+		father_total_generation_nb = as.numeric(as.character(d$father_total_generation_nb)),
+		father_local_generation_nb = as.numeric(as.character(d$father_local_generation_nb)),
+		father_generation_confidence = as.character(d$father_generation_confidence),
+		father_comments = as.character(d$father_comments),
+		
+		variable_name = as.character(d$variable_name),
+		raw_data = as.character(d$raw_data),
+		raw_data_date = as.character(d$raw_data_date),
+		correlation_group = as.character(d$correlation_group),
+		method_name = as.factor(d$method_name),
+		
+		reproduction_id = as.character(d$reproduction_id),
+		reproduction_methode_name = as.factor(d$reproduction_methode_name),
+		selection_id = as.character(d$selection_id),
+		selection_person = as.factor(d$selection_person),
+		mixture_id = as.character(d$mixture_id),
+		diffusion_id = as.character(d$diffusion_id),
+		event_year = as.factor(d$event_year),
+		
+		X = as.factor(d$X),
+		Y = as.factor(d$Y),
+		block = as.factor(d$block)
+	)
 
-son_species = as.factor(d$son_species)
-son_project = as.factor(d$project) # a vérifier
-son = as.factor(d$son)
-son_ind = as.factor(d$son_ind)
-son_year = as.factor(d$son_year)
-son_germplasm = as.factor(d$son_germplasm)
-son_germplasm_type = as.factor(d$son_germplasm_type)
-son_person = as.factor(d$son_person)
-son_alt = as.numeric(d$son_alt)
-son_long = as.numeric(d$son_long)
-son_lat = as.numeric(d$son_lat)
-son_total_generation_nb = as.numeric(as.character(son_total_generation_nb))
-son_local_generation_nb = as.numeric(as.character(son_local_generation_nb))
-son_generation_confidence = as.character(son_generation_confidence)
-son_comments = as.character(d$son_comments)
-
-father_species = as.factor(d$father_species)
-father_project = as.factor(d$project) # a vérifier
-father = as.factor(d$father)
-father_year = as.factor(d$father_year)
-father_germplasm = as.factor(d$father_germplasm)
-father_germplasm_type = as.factor(d$father_germplasm_type)
-father_person = as.factor(d$father_person)
-father_alt = as.numeric(d$father_alt)
-father_long = as.numeric(d$father_long)
-father_lat = as.numeric(d$father_lat)
-father_total_generation_nb = as.numeric(as.character(d$father_total_generation_nb))
-father_local_generation_nb = as.numeric(as.character(d$father_local_generation_nb))
-father_generation_confidence = as.character(d$father_generation_confidence)
-father_comments = as.character(d$father_comments)
-
-variable_name = as.character(d$variable_name)
-raw_data = as.character(d$raw_data)
-raw_data_date = as.character(d$raw_data_date)
-correlation_group = as.character(d$correlation_group)
-method_name = as.factor(d$method_name)
-
-reproduction_id = as.character(d$reproduction_id)
-reproduction_methode_name = as.factor(d$reproduction_methode_name)
-selection_id = as.character(d$selection_id)
-selection_person = as.factor(d$selection_person)
-mixture_id = as.character(d$mixture_id)
-diffusion_id = as.character(d$diffusion_id)
-event_year = as.factor(d$event_year)
-
-X = as.factor(d$X)
-Y = as.factor(d$Y)
-block = as.factor(d$block)
-
-d = data.frame(
-	son_species, 
-	son_project, 
-	son, 
-	son_ind, 
-	son_person, 
-	son_germplasm, 
-	son_year, 
-	son_germplasm_type, 
-	son_alt, 
-	son_long, 
-	son_lat, 
-	son_total_generation_nb, 
-	son_local_generation_nb, 
-	son_generation_confidence, 
-	son_comments,
-	
-	father_species, 
-	father_project, 
-	father, 
-	father_person, 
-	father_germplasm, 
-	father_year, 
-	father_germplasm_type, 
-	father_alt, 
-	father_long, 
-	father_lat, 
-	father_total_generation_nb, 
-	father_local_generation_nb, 
-	father_generation_confidence, 
-	father_comments,
-	
-	variable_name, 
-	raw_data, 
-	raw_data_date, 
-	correlation_group, 
-	method_name, 
-	reproduction_id, 
-	reproduction_methode_name, 
-	selection_id, 
-	selection_person, 
-	mixture_id, 
-	diffusion_id, 
-	event_year, 
-	X, 
-	Y, 
-	block
-)
 
 d = d[order(d$son, d$son_ind), ] 
 
@@ -933,7 +829,7 @@ Y, sep = "")
 
 d1 = get.d(query, info_db)
 
-# special query when selection have been done in a seed-lot that have been merged after ...
+# special query when selection have been done in a seed-lot that have been merged after
 query = paste("
 SELECT sl1.name AS vrac_S, sl2.name AS bouquet_S, sl3.name AS vrac_R, sl4.name AS bouquet_R, nr1.block AS bloc_vrac, nr1.\"X\" AS X_vrac, nr1.\"Y\" AS Y_vrac, nr2.block AS bloc_bouquet, nr2.\"X\" AS X_bouquet, nr2.\"Y\" AS Y_bouquet
 
@@ -991,15 +887,6 @@ for(bouquet in liste_bouquet_r) {
 		
 		if(testa) {line = rownames(db)[1]}
 		if(testb) {line = rownames(db)[2]}
-		
-		# 2eme vérif : si dans le meme bloc : coordonnées la plus proche : lettre la plus proche et chiffre le plus proche = chemin le plus court
-		
-
-# !!!!! gérer si X et Y sont des lettres ou des chiffres !!!! tran --------
-# transférer tt en lettres. Du coup X et Y ne peuvent etre que de slettres ou des chiffres. *
-
-# cf avec les histoires de X et Y avec SandR : c'est ok dans notre cas mais pas générique ... le virer ?!? faire un truc + souple ?
-
 		
 		if(testa & testb) {
 			a.Xvrac = db[1,"x_vrac"]
@@ -1136,19 +1023,23 @@ Proj, sep = "")
 d = get.d(query, info_db)
 
 if( nrow(d) > 0 ) {
-d$son = as.factor(d$son)
-d$son_germplasm = as.factor(d$son_germplasm)
-d$son_germplasm_type = as.factor(d$son_germplasm_type)
-d$son_person = as.factor(d$son_person)
-d$son_year = as.factor(d$son_year)
-d$son_project = as.factor(d$son_project)
 
-d$father = as.factor(d$son)
-d$father_germplasm = as.factor(d$father_germplasm)
-d$father_germplasm_type = as.factor(d$father_germplasm_type)
-d$father_person = as.factor(d$father_person)
-d$father_year = as.factor(d$father_year)
-d$father_project = as.factor(d$father_project)
+d = data.frame(
+	son_project = as.factor(d$son_project),
+	son = as.factor(d$son),
+	son_person = as.factor(d$son_person),
+	son_germplasm = as.factor(d$son_germplasm),
+	son_year = as.factor(d$son_year),
+	son_germplasm_type = as.factor(d$son_germplasm_type),
+	
+	father_project = as.factor(d$father_project),
+	father = as.factor(d$father),
+	father_germplasm = as.factor(d$father_germplasm),
+	father_person = as.factor(d$father_person),
+	father_year = as.factor(d$father_year),
+	father_germplasm_type = as.factor(d$father_germplasm_type)
+)
+
 }
 
 return(d)
@@ -1222,103 +1113,57 @@ Proj, sep = "")
 d = get.d(query, info_db)
 
 if( nrow(d) > 0 ) {
-	son_species = as.factor(d$son_species)
-	son_project = as.factor(d$son_project)
-	son = as.factor(d$son)
-	son_germplasm = as.factor(d$son_germplasm)
-	son_person = as.factor(d$son_person)
-	son_year = as.factor(d$son_year)
-	son_germplasm_type = as.factor(d$son_germplasm_type)
-	son_alt = as.numerci(as.character(d$son_alt))
-	son_long = as.numerci(as.character(d$son_long))
-	son_lat = as.numerci(as.character(d$son_lat))
-	son_total_generation_nb = as.numerci(as.character(d$son_total_generation_nb))
-	son_local_generation_nb = as.numerci(as.character(d$son_local_generation_nb))
-	son_generation_confidence = as.character(d$son_generation_confidence)
-	son_comments = as.character(d$son_comments)
-	
-	father_species = as.factor(d$father_species)
-	father_project = as.factor(d$father_project)
-	father = as.factor(d$father)
-	father_germplasm = as.factor(d$father_germplasm)
-	father_person = as.factor(d$father_person)
-	father_year = as.factor(d$father_year)
-	father_germplasm_type = as.factor(d$father_germplasm_type)
-	father_alt = as.numerci(as.character(d$father_alt))
-	father_long = as.numerci(as.character(d$father_long))
-	father_lat = as.numerci(as.character(d$father_lat))
-	father_total_generation_nb = as.numerci(as.character(d$father_total_generation_nb))
-	father_local_generation_nb = as.numerci(as.character(d$father_local_generation_nb))
-	father_generation_confidence = as.character(d$father_generation_confidence)
-	father_comments = as.character(d$father_comments)
-	
-	relation_father_son_year = as.factor(relation_father_son_year)
-	
-	grandfather_species = as.factor(d$grandfather_species)
-	grandfather_project = as.factor(d$grandfather_project)
-	grandfather = as.factor(d$grandfather)
-	grandfather_germplasm = as.factor(d$grandfather_germplasm)
-	grandfather_person = as.factor(d$grandfather_person)
-	grandfather_year = as.factor(d$grandfather_year)
-	grandfather_germplasm_type = as.factor(d$grandfather_germplasm_type)
-	grandfather_alt = as.numerci(as.character(d$grandfather_alt))
-	grandfather_long = as.numerci(as.character(d$grandfather_long))
-	grandfather_lat = as.numerci(as.character(d$grandfather_lat))
-	grandfather_total_generation_nb = as.numerci(as.character(d$grandfather_total_generation_nb))
-	grandfather_local_generation_nb = as.numerci(as.character(d$grandfather_local_generation_nb))
-	grandfather_generation_confidence = as.character(d$grandfather_generation_confidence)
-	grandfather_comments = as.character(d$grandfather_comments)
-	
-	relation_father_grandfather_year = as.factor(relation_father_grandfather_year)
-	
-	d = data.frame(	son_species,
-									son_project,
-									son,
-									son_germplasm,
-									son_person,
-									son_year,
-									son_germplasm_type,
-									son_alt,
-									son_long,
-									son_lat,
-									son_total_generation_nb,
-									son_local_generation_nb,
-									son_generation_confidence,
-									
-									father_species,
-									father_project,
-									father,
-									father_germplasm,
-									father_person,
-									father_year,
-									father_germplasm_type,
-									father_alt,
-									father_long,
-									father_lat,
-									father_total_generation_nb,
-									father_local_generation_nb,
-									father_generation_confidence,
-									father_comments,
-									
-									relation_father_son_year,
-									
-									grandfather_species,
-									grandfather,
-									grandfather_germplasm,
-									grandfather_person,
-									grandfather_year,
-									grandfather_germplasm_type,
-									grandfather_alt,
-									grandfather_long,
-									grandfather_lat,
-									grandfather_total_generation_nb,
-									grandfather_local_generation_nb,
-									grandfather_generation_confidence,
-									grandfather_comments,
-									
-									relation_father_grandfather_year
+	d = data.frame(
+		son_species = as.factor(d$son_species),
+		son_project = as.factor(d$son_project),
+		son = as.factor(d$son),
+		son_germplasm = as.factor(d$son_germplasm),
+		son_person = as.factor(d$son_person),
+		son_year = as.factor(d$son_year),
+		son_germplasm_type = as.factor(d$son_germplasm_type),
+		son_alt = as.numerci(as.character(d$son_alt)),
+		son_long = as.numerci(as.character(d$son_long)),
+		son_lat = as.numerci(as.character(d$son_lat)),
+		son_total_generation_nb = as.numerci(as.character(d$son_total_generation_nb)),
+		son_local_generation_nb = as.numerci(as.character(d$son_local_generation_nb)),
+		son_generation_confidence = as.character(d$son_generation_confidence),
+		son_comments = as.character(d$son_comments),
+		
+		father_species = as.factor(d$father_species),
+		father_project = as.factor(d$father_project),
+		father = as.factor(d$father),
+		father_germplasm = as.factor(d$father_germplasm),
+		father_person = as.factor(d$father_person),
+		father_year = as.factor(d$father_year),
+		father_germplasm_type = as.factor(d$father_germplasm_type),
+		father_alt = as.numerci(as.character(d$father_alt)),
+		father_long = as.numerci(as.character(d$father_long)),
+		father_lat = as.numerci(as.character(d$father_lat)),
+		father_total_generation_nb = as.numerci(as.character(d$father_total_generation_nb)),
+		father_local_generation_nb = as.numerci(as.character(d$father_local_generation_nb)),
+		father_generation_confidence = as.character(d$father_generation_confidence),
+		father_comments = as.character(d$father_comments),
+		
+		relation_father_son_year = as.factor(relation_father_son_year),
+		
+		grandfather_species = as.factor(d$grandfather_species),
+		grandfather_project = as.factor(d$grandfather_project),
+		grandfather = as.factor(d$grandfather),
+		grandfather_germplasm = as.factor(d$grandfather_germplasm),
+		grandfather_person = as.factor(d$grandfather_person),
+		grandfather_year = as.factor(d$grandfather_year),
+		grandfather_germplasm_type = as.factor(d$grandfather_germplasm_type),
+		grandfather_alt = as.numerci(as.character(d$grandfather_alt)),
+		grandfather_long = as.numerci(as.character(d$grandfather_long)),
+		grandfather_lat = as.numerci(as.character(d$grandfather_lat)),
+		grandfather_total_generation_nb = as.numerci(as.character(d$grandfather_total_generation_nb)),
+		grandfather_local_generation_nb = as.numerci(as.character(d$grandfather_local_generation_nb)),
+		grandfather_generation_confidence = as.character(d$grandfather_generation_confidence),
+		grandfather_comments = as.character(d$grandfather_comments),
+		
+		relation_father_grandfather_year = as.factor(relation_father_grandfather_year)
 	)
-	
+
 }
 
 }
@@ -1359,21 +1204,21 @@ P, sep = "")
 d = get.d(query, info_db)
 
 if( nrow(d) > 0 ) {
-	first_name = as.factor(d$first_name)
-	last_name = as.factor(d$last_name)
-	short_name = as.factor(d$short_name)
-	email = as.character(d$email)
-	phone1 = as.character(d$phone1)
-	fax = as.character(d$fax)
-	address = as.character(d$adress)
-	post_code = as.character(d$post_code)
-	country = as.character(d$country)
-	alt = as.numeric(d$alt)
-	lat = as.numeric(d$lat)
-	long = as.numeric(d$long)
-	
-	d = data.frame(first_name, last_name, short_name, email, phone1, fax, address, post_code, country, alt, lat, long)
-	
+	d = data.frame(
+		first_name = as.factor(d$first_name),
+		last_name = as.factor(d$last_name),
+		short_name = as.factor(d$short_name),
+		email = as.character(d$email),
+		phone1 = as.character(d$phone1),
+		fax = as.character(d$fax),
+		address = as.character(d$adress),
+		post_code = as.character(d$post_code),
+		country = as.character(d$country),
+		alt = as.numeric(d$alt),
+		lat = as.numeric(d$lat),
+		long = as.numeric(d$long)
+	)
+
 }
 
 return(d)
