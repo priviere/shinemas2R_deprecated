@@ -2048,7 +2048,7 @@ if(query.type == "grandfather") {
 	attributes(d)$shinemas2R.object = "grandfather"
 }
 
-
+# 6. Return results ----------
 d = list("data" = d, "info_db" = info_db)
 return(d)
 }
