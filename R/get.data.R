@@ -445,45 +445,51 @@ if( !is.null (c(G,Y,P,R,V,SL,Proj)[1]) ) { w = " WHERE" } else { w = NULL }
 if( !is.null(R[1]) ) { if(length(grep("nr.reproduction_id", R[1]))) { w = " WHERE nr.selection_id IS NULL "} }
 
 query = paste("	
-SELECT sl1.name AS son,rd1.individual AS son_ind, sl1.date AS son_year, gp1.germplasm_name AS son_germplasm, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person, l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat,
-		
-sl2.name AS father, sl2.date AS father_year, gp2.germplasm_name AS father_germplasm, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat,
 
-v1.name AS variable_name,rd1.raw_data, met1.method_name, met1.quali_quanti_notes,
+SELECT 
+sl1.name AS son,rd1.individual AS son_ind, sl1.date AS son_year, gp1.germplasm_name AS son_germplasm, sp1.species AS son_species, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person, l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, sl1.generation AS son_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_confidence, sl1.comments AS son_comments, string_agg(DISTINCT pro1.project_name,','),
+
+sl2.name AS father, sl2.date AS father_year, gp2.germplasm_name AS father_germplasm, sp2.species AS father_species, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat, sl2.generation AS father_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_confidence, sl2.comments AS father_comments, string_agg(DISTINCT pro2.project_name,',')
+							
+v1.name AS variable_name, rd1.raw_data, rd1.group AS correlation_group, rd1.date, met1.method_name, rep1.date,
 nr.reproduction_id AS reproduction_id, nrm1.reproduction_methode_name AS reproduction_type, nr.selection_id AS selection_id, psel1.short_name AS selection_person, nr.mixture_id AS mixture_id, nr.diffusion_id AS diffusion_id, 
 nr.\"X\", nr.\"Y\", nr.block, 
-pro1.project_name AS project
-		
+pro1.project_name 
+							
 FROM network_relation nr
 LEFT OUTER JOIN network_selection sel1 ON nr.selection_id = sel1.id
 LEFT OUTER JOIN actors_person psel1 ON sel1.person_id = psel1.id 
 LEFT OUTER JOIN network_reproduction rep1 ON nr.reproduction_id = rep1.id	
 LEFT OUTER JOIN network_reproduction_method nrm1 ON rep1.reproduction_method_id = nrm1.id
-		
+							
 LEFT OUTER JOIN entities_seed_lot sl1 ON nr.seed_lot_son_id=sl1.id
 LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
+LEFT OUTER JOIN entities_species sp1 ON sp1.id = gp1.species_id
 LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id = gpt1.id
 LEFT OUTER JOIN actors_person p1 ON sl1.person_id=p1.id
 LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id
-
+							
 LEFT OUTER JOIN entities_seed_lot sl2 ON nr.seed_lot_father_id=sl2.id
 LEFT OUTER JOIN entities_germplasm gp2 ON sl2.germplasm_id = gp2.id
+LEFT OUTER JOIN entities_species sp2 ON sp2.id = gp2.species_id
 LEFT OUTER JOIN entities_germplasm_type gpt2 ON gp2.germplasm_type_id = gpt2.id
 LEFT OUTER JOIN actors_person p2 ON sl2.person_id=p2.id
 LEFT OUTER JOIN actors_location l2 ON p2.location_id = l2.id
-		
+							
 LEFT OUTER JOIN network_relation relfat ON nr.seed_lot_father_id = relfat.seed_lot_son_id
 LEFT OUTER JOIN entities_seed_lot slf ON relfat.seed_lot_father_id = slf.id
 LEFT OUTER JOIN entities_germplasm gpf ON slf.germplasm_id = gpf.id
 LEFT OUTER JOIN actors_person pf ON slf.person_id = pf.id
-
+							
 LEFT OUTER JOIN eppdata_raw_data_relation dr1 ON nr.id = dr1.relation_id
 LEFT OUTER JOIN eppdata_raw_data rd1 ON dr1.env_pra_phe_raw_data_id = rd1.id
 LEFT OUTER JOIN eppdata_variable v1 ON rd1.variable_id = v1.id
 LEFT OUTER JOIN eppdata_method met1 ON rd1.method_id=met1.id
-		
-LEFT OUTER JOIN entities_seed_lot_project eslp1 ON sl1.id = eslp1.seed_lot_id
-LEFT OUTER JOIN actors_project pro1 ON eslp1.project_id = pro1.id ",
+							
+LEFT OUTER JOIN network_relation_project rp1 ON rp1.relation_id = nr.id
+LEFT OUTER JOIN actors_project pro1 ON pro1.id = rp1.project_id
+LEFT OUTER JOIN network_relation_project rp2 ON rp2.relation_id = nr.id
+LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 		
 w,
 G,
