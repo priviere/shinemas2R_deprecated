@@ -320,7 +320,7 @@ query.germplasm.type = function(){
 
 
 query.network = function( P = NULL, G = NULL, GT = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL) {
-if( !is.null ( c(G, Y, P, R, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL }
+if( !is.null ( c(P, G, GT, Y, P, R, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL }
 if( !is.null(R[1]) ) { if(length(grep("nr.reproduction_id", R[1])) == 1) { w = " WHERE nr.selection_id IS NULL "} }
 
 query = 
@@ -497,7 +497,7 @@ return(d)
 
 
 query.data.relation = function(G = NULL, GT = NULL, Y = NULL, P = NULL, R = NULL, V = NULL, SL = NULL, Proj = NULL) {
-if( !is.null (c(G,Y,P,R,V,SL,Proj)[1]) ) { w = " WHERE" } else { w = NULL }
+if( !is.null (c(G, GT, Y, P, R, V, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL }
 if( !is.null(R[1]) ) { if(length(grep("nr.reproduction_id", R[1]))) { w = " WHERE nr.selection_id IS NULL "} }
 
 query = paste("	
@@ -1252,6 +1252,7 @@ d = get.d(query, info_db)
 return(d)
 }
 
+
 query.person.info = function(P = NULL){
 
 if( !is.null (P) ) { w = " WHERE" } else { w = NULL }
@@ -1289,7 +1290,6 @@ return(d)
 
 }
 
-	
 
 # 4. Filters --------------------------------------------------------------
 
