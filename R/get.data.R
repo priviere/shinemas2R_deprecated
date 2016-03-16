@@ -1873,6 +1873,7 @@ filter_V = V.sql(variable.in)
  
  			# 4.2. For each pair of seed-lots, find the last diffusion in common and calculate the distance
 			M_dist = matrix(NA, ncol = length(point), nrow = length(point))
+			diag(M_dist) = 1
  			colnames(M_dist) = rownames(M_dist) = point
  			
  			liste_combi = combn(rownames(M_dist), 2)
