@@ -159,7 +159,7 @@ query.type = "person",
 fill.diffusion.gap = FALSE,
 network.info = TRUE,
 Mdist = FALSE,
-data.type = NULL,
+data.type = "son",
 filter.on = NULL,
 germplasm.in = NULL,
 germplasm.out = NULL,
@@ -226,7 +226,7 @@ if( data.type == "seed-lots" ) { filter.on = "son" ; message("With data.type == 
 
 
 if( query.type == "person-info" | query.type == "methods" ) { filter.on = "son" ; message("With query.type == \"", query.type, "\", \"filter.on\" is not use.") } # To be ok with filters
-
+}
 
 if(!is.null(filter.on)){
 if(!is.element(filter.on, c("son", "father", "father-son")))  { stop("filter.on must be \"son\", \"father\" or \"father-son\".") }
@@ -1903,7 +1903,6 @@ filter_V = V.sql(variable.in)
  
 			
  			# A CONTINUER, OK A PRIORI => A VERIFIER AVEC LES GRAPHS !!! ---------------------
- 		
 # 		cat("ajouter reproduction_type \n Puis dans analyse.network.relation")
 # 	if(FALSE)
 # 	{
