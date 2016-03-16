@@ -45,6 +45,8 @@
 #' 
 #' \item "person-info": information regarding persons stored in the SHiNeMaS
 #' 
+#' \item "grandfather": information on son, father and grandfather
+#' 
 #' }
 #' 
 #' @param fill.diffusion.gap For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)
@@ -185,7 +187,7 @@ variable.in = NULL
 	
 # 1. Check parameters ----------
 
-if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person-info")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\" or \"person-info\".") }
+if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person-info")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\", \"person-info\" or \"grandfather\".") }
 
 test = c(germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in, variable.in)
 if(is.element(query.type, c( "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm")) & !is.null(test)) { stop("You can not use a filter on raw information on levels and variables.") }
@@ -1063,9 +1065,173 @@ return(d)
 }
 
 
-query.grandparents = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj = NULL) { # A AJOUTER
+query.grand.father = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj = NULL) {
 
-	}
+if( !is.null (c(G, GT, Y, P, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL }
+
+query = paste(
+"
+SELECT 
+
+sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, p1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type, 
+l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, 
+sl1.generation AS son_total_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_generation_confidence, 
+sl1.comments AS son_comments, string_agg(DISTINCT pro1.project_name,','),
+
+sp2.species AS father_species, sl2.name AS father, gp2.germplasm_name AS father_germplasm, p2.short_name AS father_person, sl2.date AS father_year, gpt2.germplasm_type AS father_germplasm_type,
+l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat, 
+sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence, 
+sl2.comments AS father_comments, string_agg(DISTINCT pro2.project_name,',')
+
+rep1.date AS relation_father_son_year,
+
+??? AS grandfather_species, slf.name AS grandfather, gpf.germplasm_name AS grandfather_germplasm, pf.short_name AS grandfather_person, slf.date AS grandfather_year, ??? AS grandfather_germplasm_type,
+??? AS grandfather_alt, ??? AS grandfather_long, ??? AS grandfather_lat, 
+??? AS grandfather_total_generation_nb, ??? AS grandfather_local_generation_nb, ??? AS grandfather_generation_confidence, 
+??? AS grandfather_comments, string_agg(DISTINCT pro2.project_name,',')
+
+??? AS relation_father_grandfather_year,
+
+FROM network_relation nr
+LEFT OUTER JOIN network_selection sel1 ON nr.selection_id = sel1.id
+LEFT OUTER JOIN actors_person psel1 ON sel1.person_id = psel1.id 
+LEFT OUTER JOIN network_reproduction rep1 ON nr.reproduction_id = rep1.id	
+LEFT OUTER JOIN network_reproduction_method nrm1 ON rep1.reproduction_method_id = nrm1.id
+
+LEFT OUTER JOIN entities_seed_lot sl1 ON nr.seed_lot_son_id=sl1.id
+LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
+LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id = gpt1.id
+LEFT OUTER JOIN actors_person p1 ON sl1.person_id=p1.id
+LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id
+LEFT OUTER JOIN entities_species sp1 ON gp1.species_id = sp1.id
+
+LEFT OUTER JOIN entities_seed_lot sl2 ON nr.seed_lot_father_id=sl2.id
+LEFT OUTER JOIN entities_germplasm gp2 ON sl2.germplasm_id = gp2.id
+LEFT OUTER JOIN entities_germplasm_type gpt2 ON gp2.germplasm_type_id = gpt2.id
+LEFT OUTER JOIN actors_person p2 ON sl2.person_id=p2.id
+LEFT OUTER JOIN actors_location l2 ON p2.location_id = l2.id
+LEFT OUTER JOIN entities_species sp2 ON gp2.species_id = sp2.id
+
+LEFT OUTER JOIN network_relation relfat ON nr.seed_lot_father_id = relfat.seed_lot_son_id
+LEFT OUTER JOIN entities_seed_lot slf ON relfat.seed_lot_father_id = slf.id
+LEFT OUTER JOIN entities_germplasm gpf ON slf.germplasm_id = gpf.id
+LEFT OUTER JOIN actors_person pf ON slf.person_id = pf.id
+
+LEFT OUTER JOIN network_relation_project rp1 ON rp1.relation_id = nr.id
+LEFT OUTER JOIN actors_project pro1 ON pro1.id = rp1.project_id
+LEFT OUTER JOIN network_relation_project rp2 ON rp2.relation_id = nr.id
+LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
+
+w,
+G,
+Y,
+P,
+SL,
+Proj, sep = "")
+
+d = get.d(query, info_db)
+
+if( nrow(d) > 0 ) {
+	son_species = as.factor(d$son_species)
+	son_project = as.factor(d$son_project)
+	son = as.factor(d$son)
+	son_germplasm = as.factor(d$son_germplasm)
+	son_person = as.factor(d$son_person)
+	son_year = as.factor(d$son_year)
+	son_germplasm_type = as.factor(d$son_germplasm_type)
+	son_alt = as.numerci(as.character(d$son_alt))
+	son_long = as.numerci(as.character(d$son_long))
+	son_lat = as.numerci(as.character(d$son_lat))
+	son_total_generation_nb = as.numerci(as.character(d$son_total_generation_nb))
+	son_local_generation_nb = as.numerci(as.character(d$son_local_generation_nb))
+	son_generation_confidence = as.character(d$son_generation_confidence)
+	son_comments = as.character(d$son_comments)
+	
+	father_species = as.factor(d$father_species)
+	father_project = as.factor(d$father_project)
+	father = as.factor(d$father)
+	father_germplasm = as.factor(d$father_germplasm)
+	father_person = as.factor(d$father_person)
+	father_year = as.factor(d$father_year)
+	father_germplasm_type = as.factor(d$father_germplasm_type)
+	father_alt = as.numerci(as.character(d$father_alt))
+	father_long = as.numerci(as.character(d$father_long))
+	father_lat = as.numerci(as.character(d$father_lat))
+	father_total_generation_nb = as.numerci(as.character(d$father_total_generation_nb))
+	father_local_generation_nb = as.numerci(as.character(d$father_local_generation_nb))
+	father_generation_confidence = as.character(d$father_generation_confidence)
+	father_comments = as.character(d$father_comments)
+	
+	relation_father_son_year = as.factor(relation_father_son_year)
+	
+	grandfather_species = as.factor(d$grandfather_species)
+	grandfather_project = as.factor(d$grandfather_project)
+	grandfather = as.factor(d$grandfather)
+	grandfather_germplasm = as.factor(d$grandfather_germplasm)
+	grandfather_person = as.factor(d$grandfather_person)
+	grandfather_year = as.factor(d$grandfather_year)
+	grandfather_germplasm_type = as.factor(d$grandfather_germplasm_type)
+	grandfather_alt = as.numerci(as.character(d$grandfather_alt))
+	grandfather_long = as.numerci(as.character(d$grandfather_long))
+	grandfather_lat = as.numerci(as.character(d$grandfather_lat))
+	grandfather_total_generation_nb = as.numerci(as.character(d$grandfather_total_generation_nb))
+	grandfather_local_generation_nb = as.numerci(as.character(d$grandfather_local_generation_nb))
+	grandfather_generation_confidence = as.character(d$grandfather_generation_confidence)
+	grandfather_comments = as.character(d$grandfather_comments)
+	
+	relation_father_grandfather_year = as.factor(relation_father_grandfather_year)
+	
+	d = data.frame(	son_species,
+									son_project,
+									son,
+									son_germplasm,
+									son_person,
+									son_year,
+									son_germplasm_type,
+									son_alt,
+									son_long,
+									son_lat,
+									son_total_generation_nb,
+									son_local_generation_nb,
+									son_generation_confidence,
+									
+									father_species,
+									father_project,
+									father,
+									father_germplasm,
+									father_person,
+									father_year,
+									father_germplasm_type,
+									father_alt,
+									father_long,
+									father_lat,
+									father_total_generation_nb,
+									father_local_generation_nb,
+									father_generation_confidence,
+									father_comments,
+									
+									relation_father_son_year,
+									
+									grandfather_species,
+									grandfather,
+									grandfather_germplasm,
+									grandfather_person,
+									grandfather_year,
+									grandfather_germplasm_type,
+									grandfather_alt,
+									grandfather_long,
+									grandfather_lat,
+									grandfather_total_generation_nb,
+									grandfather_local_generation_nb,
+									grandfather_generation_confidence,
+									grandfather_comments,
+									
+									relation_father_grandfather_year
+	)
+	
+}
+
+}
 
 
 query.methods = function(V = NULL){
@@ -1082,7 +1248,6 @@ w,
 V, sep = "")
 
 d = get.d(query, info_db)
-
 
 return(d)
 }
@@ -1869,11 +2034,18 @@ if(query.type == "methods") {
 	attributes(d)$shinemas2R.object = "methods"
 	}
 
-# 5.7. query.person.info
+# 5.7. query.person.info ----------
 if(query.type == "person-info") {
 	message("1. Query SHiNeMaS ...")
 	d = query.methods(filter_P)
 	attributes(d)$shinemas2R.object = "person-info"
+}
+
+# 5.8. query.grand.father ----------
+if(query.type == "grandfather") {
+	message("1. Query SHiNeMaS ...")
+	d = query.methods(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj)
+	attributes(d)$shinemas2R.object = "grandfather"
 }
 
 
