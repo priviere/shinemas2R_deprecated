@@ -417,14 +417,46 @@ if(nrow(d) > 0) {
 	diffusion_id = as.character(d$diffusion_id)	
 	event_year = as.factor(d$event_year)
 	
-	d = data.frame(	son_species, son_project, son, son_germplasm, son_person, son_year, son_germplasm_type, son_alt, son_long, son_lat, 
-									son_total_generation_nb, son_local_generation_nb, son_generation_confidence, son_comments,
+	d = data.frame(	
+		son_species, 
+		son_project, 
+		son, 
+		son_germplasm, 
+		son_person, 
+		son_year, 
+		son_germplasm_type,
+		son_alt, 
+		son_long, 
+		son_lat, 
+		son_total_generation_nb, 
+		son_local_generation_nb, 
+		son_generation_confidence, 
+		son_comments,
 									
-									father_species, father_project, father, father_germplasm, father_person, father_year, father_germplasm_type, father_alt, father_long, father_lat, 
-									father_total_generation_nb, father_local_generation_nb, father_generation_confidence, father_comments,
+		father_species, 
+		father_project, 
+		father, 
+		father_germplasm, 
+		father_person, 
+		father_year, 
+		father_germplasm_type, 
+		father_alt, 
+		father_long, 
+		father_lat, 
+		father_total_generation_nb, 
+		father_local_generation_nb, 
+		father_generation_confidence, 
+		father_comments,
 									
-									reproduction_id, reproduction_method_name, is_male, block, 
-									selection_id, selection_person, mixture_id, diffusion_id, event_year
+		reproduction_id, 
+		reproduction_method_name, 
+		is_male, 
+		block, 
+		selection_id, 
+		selection_person, 
+		mixture_id, 
+		diffusion_id, 
+		event_year
 	)
 	
 	} else { d = NULL }
@@ -488,7 +520,24 @@ if(nrow(d) > 0) {
 	generation_confidence = as.character(d$generation_confidence)
 	sl_comments = as.character(d$sl_comments)
 	
-	d = data.frame(species, project, sl, germplasm, person, year, variable_name, raw_data, raw_data_date, method_name, lat, long, alt, total_generation_nb, local_generation_nb, generation_confidence, sl_comments)
+	d = data.frame(
+		species, 
+		project, 
+		sl, 
+		germplasm, 
+		person, 
+		year, 
+		variable_name, 
+		raw_data, 
+		raw_data_date, 
+		method_name, 
+		lat, 
+		long, 
+		alt, 
+		total_generation_nb, 
+		local_generation_nb, 
+		generation_confidence, 
+		sl_comments)
 	
 		} else { d = NULL }
 
@@ -608,11 +657,52 @@ Y = as.factor(d$Y)
 block = as.factor(d$block)
 
 d = data.frame(
-	son_species, son_project, son, son_ind, son_person, son_germplasm, son_year, son_germplasm_type, son_alt, son_long, son_lat, son_total_generation_nb, son_local_generation_nb, son_generation_confidence, son_comments,
+	son_species, 
+	son_project, 
+	son, 
+	son_ind, 
+	son_person, 
+	son_germplasm, 
+	son_year, 
+	son_germplasm_type, 
+	son_alt, 
+	son_long, 
+	son_lat, 
+	son_total_generation_nb, 
+	son_local_generation_nb, 
+	son_generation_confidence, 
+	son_comments,
 	
-	father_species, father_project, father, father_person, father_germplasm, father_year, father_germplasm_type, father_alt, father_long, father_lat, father_total_generation_nb, father_local_generation_nb, father_generation_confidence, father_comments,
+	father_species, 
+	father_project, 
+	father, 
+	father_person, 
+	father_germplasm, 
+	father_year, 
+	father_germplasm_type, 
+	father_alt, 
+	father_long, 
+	father_lat, 
+	father_total_generation_nb, 
+	father_local_generation_nb, 
+	father_generation_confidence, 
+	father_comments,
 	
-	variable_name, raw_data, raw_data_date, correlation_group, method_name, reproduction_id, reproduction_methode_name, selection_id, selection_person, mixture_id, diffusion_id, event_year, X, Y, block
+	variable_name, 
+	raw_data, 
+	raw_data_date, 
+	correlation_group, 
+	method_name, 
+	reproduction_id, 
+	reproduction_methode_name, 
+	selection_id, 
+	selection_person, 
+	mixture_id, 
+	diffusion_id, 
+	event_year, 
+	X, 
+	Y, 
+	block
 )
 
 d = d[order(d$son, d$son_ind), ] 
