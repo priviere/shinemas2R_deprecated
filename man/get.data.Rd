@@ -4,11 +4,11 @@
 \alias{get.data}
 \title{Query SHiNeMaS and return the datasets}
 \usage{
-get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
-  db_password = "pierre", query.type = "person",
-  fill.diffusion.gap = FALSE, network.info = TRUE, Mdist = FALSE,
-  data.type = NULL, filter.on = NULL, germplasm.in = NULL,
-  germplasm.out = NULL, germplasm.type.in = NULL,
+get.data(db_user = "pierre", db_host = "127.0.0.1",
+  db_name = "shinemas_tuto", db_password = "pierre",
+  query.type = "person", fill.diffusion.gap = FALSE, network.info = TRUE,
+  Mdist = FALSE, data.type = "son", filter.on = NULL,
+  germplasm.in = NULL, germplasm.out = NULL, germplasm.type.in = NULL,
   germplasm.type.out = NULL, year.in = NULL, year.out = NULL,
   project.in = NULL, project.out = NULL, person.in = NULL,
   person.out = NULL, seed.lot.in = NULL, seed.lot.out = NULL,
@@ -53,6 +53,10 @@ get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
 }
 
 \item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. Filters can be applied on variables.
+
+\item "person-info": information regarding persons stored in the SHiNeMaS
+
+\item "grandfather": information on son, father and grandfather
 
 }}
 
