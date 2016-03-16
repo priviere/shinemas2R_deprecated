@@ -29,9 +29,9 @@ get.ggplot_ggnet.custom(net, mode = "fruchtermanreingold",
 
 \item{names}{a character vector of two elements to use as legend titles for the node groups and node weights. Defaults to empty strings.}
 
-\item{node.group}{a vector of character strings to label the nodes with, of the same length and order as the vertex names. Factors are converted to strings prior to plotting.}
+\item{node.group}{a vector of character strings to label the nodes, of the same length and order as the vertex names. Factors are converted to strings prior to plotting.}
 
-\item{node.color}{a vector of character strings to color the nodes with, holding as many colors as there are levels in \code{node.group}. Tries to default to \code{"Set1"} if missing.}
+\item{node.color}{a vector of character strings to color the nodes, holding as many colors as there are levels in \code{node.group}. Tries to default to \code{"Set1"} if missing.}
 
 \item{node.alpha}{transparency of the nodes. Inherits from \code{alpha}.}
 
@@ -45,15 +45,15 @@ get.ggplot_ggnet.custom(net, mode = "fruchtermanreingold",
 
 \item{arrow.size}{size of the vertex arrows for directed network plotting, in centimeters. Defaults to 0.}
 
-\item{label.nodes}{label nodes with their vertex names attribute. If set to \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.}
+\item{label.nodes}{label nodes with their vertex names attribute. If \code{TRUE}, all nodes are labelled. Also accepts a vector of character strings to match with vertex names.}
 
 \item{top8.nodes}{use the top 8 nodes as node groups, colored with \code{"Set1"}. The rest of the network will be plotted as the ninth (grey) group. Experimental.}
 
 \item{trim.labels}{removes '@', 'http://', 'www.' and the ending '/' from vertex names. Cleans up labels for website and Twitter networks. Defaults to \code{TRUE}.}
 
-\item{quantize.weights}{break node weights to quartiles. Fails when quartiles do not uniquely identify nodes.}
+\item{quantize.weights}{breaks node weights to quartiles. Fails when quartiles do not uniquely identify nodes.}
 
-\item{subset.threshold}{delete nodes prior to plotting, based on \code{weight.method} < \code{subset.threshold}. If \code{weight.method} is unspecified, total degree (Freeman's measure) is used. Defaults to 0 (no subsetting).}
+\item{subset.threshold}{deletes nodes prior to plotting, based on \code{weight.method} < \code{subset.threshold}. If \code{weight.method} is unspecified, total degree (Freeman's measure) is used. Defaults to 0 (no subsetting).}
 
 \item{legend.position}{location of the captions for node colors and weights. Accepts all positions supported by ggplot2 themes. Defaults to "right".}
 
@@ -65,7 +65,7 @@ get.ggplot_ggnet.custom(net, mode = "fruchtermanreingold",
 Plot a network with ggplot2 based on GGally::ggnet
 }
 \details{
-ggnet.custom is based on GGally::gget and return two objects: the network and the matrix with the coordinates of each edge of the network.
+ggnet.custom is based on GGally::gget and returns two objects: the network and the matrix with the coordinates of each edge of the network.
 This funtion, used in get.plot, is based on ggnet function from Gapply package coded by Moritz Marbach and Francois Briatte
 for details see https://github.com/briatte/ggnet/blob/master/ggnet.R
 
