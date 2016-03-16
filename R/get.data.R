@@ -394,7 +394,7 @@ if( !is.null (c(G, GT, Y, P, V, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL
 
 query = 
 paste("
-SELECT sl1.name AS sl_name, sl1.date AS year, gp1.germplasm_name AS germplasm, sp1.species, p1.short_name AS person, v1.name AS variable_name,rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude, string_agg(DISTINCT pro1.project_name,',')|| ', ' || string_agg(DISTINCT pro2.project_name,','), sl1.generation AS generation_nb, sl1.lgeneration AS local_generation_nb, sl1.confidence AS confidence, sl1.comments AS comments
+SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, sp1.species, p1.short_name AS person, v1.name AS variable_name,rd.raw_data, rd.date AS raw_data_date, met.method_name, l1.lat, l1.long, l1.alt, string_agg(DISTINCT pro1.project_name,',')|| ', ' || string_agg(DISTINCT pro2.project_name,','), sl1.generation AS total_generation_nb, sl1.lgeneration AS local_generation_nb, sl1.confidence AS generation_confidence, sl1.comments AS sl_comments
 
 FROM entities_seed_lot sl1 
 LEFT OUTER JOIN eppdata_raw_data_seed_lot dr ON sl1.id = dr.seed_lot_id 
@@ -424,17 +424,29 @@ SL,
 Proj, sep = "")
 
 d = get.d(query, info_db)
+
 if(nrow(d) > 0) {
-	d$sl = as.factor(d$sl)
-	d$year = as.factor(d$year)
-	d$germplasm = as.factor(d$germplasm)
-	d$person = as.factor(d$person)
-	d$variable_name = as.character(d$variable_name)
-	d$raw_data = as.character(d$raw_data)
-	d$method_name = as.factor(d$method_name)
-	d$quali_quanti_notes = as.factor(d$quali_quanti_notes)
-	d$project = as.factor(d$project)
-	} else { d = NULL }
+	species = as.factor(d$species)
+	project = as.factor(d$project) # projet à vérifier
+	sl = as.factor(d$sl)
+	germplasm = as.factor(d$germplasm)
+	person = as.factor(d$person)
+	year = as.factor(d$year)
+	variable_name = as.character(d$variable_name)
+	raw_data = as.character(d$raw_data)
+	raw_data_date = as.character(d$raw_data_date)
+	method_name = as.factor(d$met.method_name)
+	lat = as.numeric(d$lat)
+	long = as.numeric(d$long) 
+	alt = as.numeric(d$alt)
+	total_generation_nb = as.numeric(d$total_generation_nb)
+	local_generation_nb = as.numeric(d$local_generation_nb)
+	generation_confidence = as.numeric(d$generation_confidence)
+	sl_comments = as.character(d$sl_comments)
+	
+	d = data.frame(species, project, sl, germplasm, person, year, variable_name, raw_data, raw_data_date, method_name, lat, long, alt, total_generation_nb, local_generation_nb, generation_confidence, sl_comments)
+	
+		} else { d = NULL }
 
 return(d)
 }
@@ -445,16 +457,14 @@ if( !is.null (c(G,Y,P,R,V,SL,Proj)[1]) ) { w = " WHERE" } else { w = NULL }
 if( !is.null(R[1]) ) { if(length(grep("nr.reproduction_id", R[1]))) { w = " WHERE nr.selection_id IS NULL "} }
 
 query = paste("	
-
 SELECT 
-sl1.name AS son,rd1.individual AS son_ind, sl1.date AS son_year, gp1.germplasm_name AS son_germplasm, sp1.species AS son_species, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person, l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, sl1.generation AS son_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_confidence, sl1.comments AS son_comments, string_agg(DISTINCT pro1.project_name,','),
+sl1.name AS son,rd1.individual AS son_ind, sl1.date AS son_year, gp1.germplasm_name AS son_germplasm, sp1.species AS son_species, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person, l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, sl1.generation AS son_total__generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.generation_confidence AS son_confidence, sl1.generation_comments AS son_comments, string_agg(DISTINCT pro1.project_name,','),
 
-sl2.name AS father, sl2.date AS father_year, gp2.germplasm_name AS father_germplasm, sp2.species AS father_species, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat, sl2.generation AS father_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_confidence, sl2.comments AS father_comments, string_agg(DISTINCT pro2.project_name,',')
+sl2.name AS father, sl2.date AS father_year, gp2.germplasm_name AS father_germplasm, sp2.species AS father_species, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat, sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence, sl2.comments AS father_comments, string_agg(DISTINCT pro2.project_name,',')
 							
-v1.name AS variable_name, rd1.raw_data, rd1.group AS correlation_group, rd1.date, met1.method_name, rep1.date,
+v1.name AS variable_name, rd1.raw_data, rd1.group AS correlation_group, rd1.date AS raw_data_name, met1.method_name, rep1.date AS event_year,
 nr.reproduction_id AS reproduction_id, nrm1.reproduction_methode_name AS reproduction_type, nr.selection_id AS selection_id, psel1.short_name AS selection_person, nr.mixture_id AS mixture_id, nr.diffusion_id AS diffusion_id, 
 nr.\"X\", nr.\"Y\", nr.block, 
-pro1.project_name 
 							
 FROM network_relation nr
 LEFT OUTER JOIN network_selection sel1 ON nr.selection_id = sel1.id
@@ -503,40 +513,67 @@ Proj, sep = "")
 d = get.d(query, info_db)
 
 if( nrow(d) > 0 ) {
-	d$son = as.factor(d$son)
-	d$son_ind = as.factor(d$son_ind)
-	d$son_year = as.factor(d$son_year)
-	d$son_germplasm = as.factor(d$son_germplasm)
-	d$son_germplasm_type = as.factor(d$son_germplasm_type)
-	d$son_person = as.factor(d$son_person)
-	d$son_alt = as.numeric(d$son_alt)
-	d$son_long = as.numeric(d$son_long)
-	d$son_lat = as.numeric(d$son_lat)
-	d$father = as.factor(d$father)
-	d$father_year = as.factor(d$father_year)
-	d$father_germplasm = as.factor(d$father_germplasm)
-	d$father_germplasm_type = as.factor(d$father_germplasm_type)
-	d$father_person = as.factor(d$father_person)
-	d$father_alt = as.numeric(d$father_alt)
-	d$father_long = as.numeric(d$father_long)
-	d$father_lat = as.numeric(d$father_lat)
-	d$variable_name = as.character(d$variable_name)
-	d$raw_data = as.character(d$raw_data)
-	d$method_name = as.factor(d$method_name)
-	d$quali_quanti_notes = as.factor(d$quali_quanti_notes)
-	d$reproduction_id = as.character(d$reproduction_id)
-	d$reproduction_type = as.factor(d$reproduction_type)
-	d$selection_id = as.character(d$selection_id)
-	d$selection_person = as.factor(d$selection_person)
-	d$mixture_id = as.character(d$mixture_id)
-	d$diffusion_id = as.character(d$diffusion_id)
-	d$X = as.factor(d$X)
-	d$Y = as.factor(d$Y)
-	d$block = as.factor(d$block)
-	d$project  = as.factor(d$project)
+
+son_species = as.factor(d$son_species)
+son_project = as.factor(d$project) # a vérifier
+son = as.factor(d$son)
+son_ind = as.factor(d$son_ind)
+son_year = as.factor(d$son_year)
+son_germplasm = as.factor(d$son_germplasm)
+son_germplasm_type = as.factor(d$son_germplasm_type)
+son_person = as.factor(d$son_person)
+son_alt = as.numeric(d$son_alt)
+son_long = as.numeric(d$son_long)
+son_lat = as.numeric(d$son_lat)
+son_total_generation_nb = as.numeric(son_total_generation_nb)
+son_local_generation_nb = as.numeric(son_local_generation_nb)
+son_generation_confidence = as.character(son_generation_confidence)
+son_comments = as.character(d$son_comments)
+
+father_species = as.factor(d$father_species)
+father_project = as.factor(d$project) # a vérifier
+father = as.factor(d$father)
+father_year = as.factor(d$father_year)
+father_germplasm = as.factor(d$father_germplasm)
+father_germplasm_type = as.factor(d$father_germplasm_type)
+father_person = as.factor(d$father_person)
+father_alt = as.numeric(d$father_alt)
+father_long = as.numeric(d$father_long)
+father_lat = as.numeric(d$father_lat)
+father_total_generation_nb = as.numeric(d$father_total_generation_nb)
+father_local_generation_nb = as.numeric(d$father_local_generation_nb)
+father_generation_confidence = as.character(d$father_generation_confidence)
+father_comments = as.character(d$father_comments)
+
+variable_name = as.character(d$variable_name)
+raw_data = as.character(d$raw_data)
+raw_data_date = as.character(d$raw_data_date)
+correlation_group = as.character(d$correlation_group)
+method_name = as.factor(d$method_name)
+
+reproduction_id = as.character(d$reproduction_id)
+reproduction_methode_name = as.factor(d$reproduction_methode_name)
+selection_id = as.character(d$selection_id)
+selection_person = as.factor(d$selection_person)
+mixture_id = as.character(d$mixture_id)
+diffusion_id = as.character(d$diffusion_id)
+event_year = as.character(d$event_year)
+
+X = as.factor(d$X)
+Y = as.factor(d$Y)
+block = as.factor(d$block)
+
+d = data.frame(
+	son_species, son_project, son, son_ind, son_person, son_germplasm, son_year, son_germplasm_type, son_alt, son_long, son_lat, son_total_generation_nb, son_local_generation_nb, son_generation_confidence, son_comments,
 	
-	d = d[order(d$son, d$son_ind), ] 
-	} else { d = NULL }
+	father_species, father_project, father, father_person, father_germplasm, father_year, father_germplasm_type, father_alt, father_long, father_lat, father_total_generation_nb, father_local_generation_nb, father_generation_confidence, father_comments,
+	
+	variable_name, raw_data, raw_data_date, correlation_group, method_name, reproduction_id, reproduction_methode_name, selection_id, selection_person, mixture_id, diffusion_id, event_year, X, Y, block
+)
+
+d = d[order(d$son, d$son_ind), ] 
+
+} else { d = NULL }
 
 return(d)
 }
