@@ -43,6 +43,8 @@
 #' 
 #' \item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. Filters can be applied on variables.
 #' 
+#' \item "person-info": information regarding persons stored in the SHiNeMaS
+#' 
 #' }
 #' 
 #' @param fill.diffusion.gap For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)
@@ -149,7 +151,7 @@
 get.data <- function(
 db_user = "pierre",
 db_host = "127.0.0.1",
-db_name = "shinemas",
+db_name = "shinemas_tuto",
 db_password = "pierre",
 query.type = "person",
 fill.diffusion.gap = FALSE,
@@ -183,7 +185,7 @@ variable.in = NULL
 	
 # 1. Check parameters ----------
 
-if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\" or \"methods\".") }
+if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person-info")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\" or \"person-info\".") }
 
 test = c(germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in, variable.in)
 if(is.element(query.type, c( "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm")) & !is.null(test)) { stop("You can not use a filter on raw information on levels and variables.") }
@@ -205,7 +207,7 @@ test = c(germplasm.in,
 				 reproduction.type.in,
 				 variable.in)
 
-if( !is.null(test[1]) & is.null(filter.on) & query.type != "methods") { stop("With a filter, you must set filter.on: \"son\", \"father\" or \"father-son\".") }
+if( !is.null(test[1]) & is.null(filter.on) & query.type != "methods" & query.type != "person-info") { stop("With a filter, you must set filter.on: \"son\", \"father\" or \"father-son\".") }
 
 
 if( is.null(data.type) & length(grep("data-", query.type)) > 0 ) { stop("With query.type in \"data-\", data.type must not be NULL. data.type can be \"relation\" or \"seed-lots\".")
@@ -219,7 +221,10 @@ if(!is.null(data.type)){
 if( data.type == "relation" & is.null(filter.on) ){ stop("filter.on must be set: either \"son\" \"father\" or \"father-son\"") }
 
 if( data.type == "seed-lots" ) { filter.on = "son" ; message("With data.type == \"seed-lots\", \"filter.on\" is not use.") } # To be ok with filters
-}
+
+
+if( query.type == "person-info" | query.type == "methods" ) { filter.on = "son" ; message("With query.type == \"", query.type, "\", \"filter.on\" is not use.") } # To be ok with filters
+
 
 if(!is.null(filter.on)){
 if(!is.element(filter.on, c("son", "father", "father-son")))  { stop("filter.on must be \"son\", \"father\" or \"father-son\".") }
@@ -238,7 +243,7 @@ get.d = function(requete, info_db) {
 	# call driver which handle the connexion
 	drv = dbDriver("PostgreSQL") 
 	
-	# create the connexion
+	# get the connexion
 	con = dbConnect(drv, user = info_db$db_user, host = info_db$db_host, dbname = info_db$db_name, password = info_db$db_password) 	
 	
 	# clean the query when there are filters
@@ -1041,9 +1046,48 @@ V, sep = "")
 
 d = get.d(query, info_db)
 
+
 return(d)
 }
 
+query.person.info = function(P = NULL){
+
+if( !is.null (P) ) { w = " WHERE" } else { w = NULL }
+	
+query = paste("
+SELECT p1.first_name, p1.last_name, p1.short_name, p1.email, p1.phone1, p1.fax, l1.address, l1.post_code, l1.country, l1.altitude AS alt, l1.latitude AS lat, l1.longitude AS long,
+
+FROM actors_person p1
+LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id",
+							
+w,
+P, sep = "")
+
+d = get.d(query, info_db)
+
+if( nrow(d) > 0 ) {
+	first_name = as.factor(d$first_name)
+	last_name = as.factor(d$last_name)
+	short_name = as.factor(d$short_name)
+	email = as.character(d$email)
+	phone1 = as.character(d$phone1)
+	fax = as.character(d$fax)
+	address = as.character(d$adress)
+	post_code = as.character(d$post_code)
+	country = as.character(d$country)
+	alt = as.numeric(d$alt)
+	lat = as.numeric(d$lat)
+	long = as.numeric(d$long)
+	
+	d = data.frame(first_name, last_name, short_name, email, phone1, fax, address, post_code, country, alt, lat, long)
+	
+}
+
+return(d)
+
+}
+
+	
 
 # 4. Filters --------------------------------------------------------------
 
@@ -1787,6 +1831,13 @@ if(query.type == "methods") {
 	d = query.methods(filter_V)
 	attributes(d)$shinemas2R.object = "methods"
 	}
+
+# 5.7. query.person.info
+if(query.type == "person-info") {
+	message("1. Query SHiNeMaS ...")
+	d = query.methods(filter_P)
+	attributes(d)$shinemas2R.object = "person-info"
+}
 
 
 d = list("data" = d, "info_db" = info_db)
