@@ -2,60 +2,60 @@
 % Please edit documentation in R/get.pdf.R
 \name{get.pdf}
 \alias{get.pdf}
-\title{Get a pdf by concatene outputs from \code{get.ggplot} and \code{get.table}}
+\title{Get a pdf by concatenating outputs from \code{get.ggplot} and \code{get.table}}
 \usage{
 get.pdf(dir = "./", form.name, LaTeX_head = NULL, LaTeX_body,
   compile.tex = TRUE, color1 = "white", color2 = "white")
 }
 \arguments{
-\item{dir}{directory where the pdf should be created}
+\item{dir}{Directory where the pdf should be created}
 
 \item{form.name}{Name of the pdf file and the folder that contains all the raw information. See details.}
 
-\item{LaTeX_head}{Path of tex file with head of the LaTeX document. It contains the packages and macros used in LaTeX_body. If NULL, a default LaTeX head is generated.}
+\item{LaTeX_head}{Path of tex file containing the head of the LaTeX document. It contains the packages and macros used in LaTeX_body. If NULL, a default LaTeX head is generated.}
 
 \item{LaTeX_body}{A list that contains the elements to be displayed in the pdf.
-This list must contains the following elements:
+This list must contain the following elements:
 
 \itemize{
-    \item "titlepage" : a list containing the following elements :
+    \item "titlepage": a list containing the following elements:
     \itemize{
-        \item "title" : the title of the document. Nothing by default.
-        \item "authors" : the authors of the document. Nothing by default.
-        \item "email" : the corresponding email. Nothing by default.
-        \item "date" : the date of the document. Nothing by default.
+        \item "title": the title of the document. Nothing by default.
+        \item "authors": the authors of the document. Nothing by default.
+        \item "email": the corresponding email. Nothing by default.
+        \item "date": the date of the document. Nothing by default.
     }
 
-    \item "tableofcontents" : if TRUE, a table of content is display.
+    \item "tableofcontents": if TRUE, a table of content is displayed.
 
-    \item "chapter" : name of a chapter
+    \item "chapter": name of a chapter
 
-    \item "section" : name of a section
+    \item "section": name of a section
 
-    \item "subsection" : name of a subsection
+    \item "subsection": name of a subsection
 
-    \item "subsubsection" : name of a subsubsection
+    \item "subsubsection": name of a subsubsection
 
-    \item "text" : text to add
+    \item "text": text to add
 
-    \item "includepdf" : path of a .pdf to include
+    \item "includepdf": path of a .pdf to include
 
-    \item "input" : path of a .tex to insert
+    \item "input": path of a .tex to insert
 
-    \item "table" : a list containing the following elements :
+    \item "table": a list containing the following elements:
     \itemize{
-        \item "content" : output from \code{get.table}
-        \item "caption" : caption of the table
-        \item "landscape" : If TRUE, the table is in landscape. FALSE by default.
-        \item "display.rownames" : If TRUE, display the row names of the table. FALSE by default.
+        \item "content": output from \code{get.table}
+        \item "caption": caption of the table
+        \item "landscape": If TRUE, the table is in landscape. FALSE by default.
+        \item "display.rownames": If TRUE, displays the row names of the table. FALSE by default.
     }
 
-    \item "figure" : a list containing the following elements :
+    \item "figure": a list containing the following elements:
     \itemize{
         \item "content" : output from \code{get.ggplot}
         \item "caption" : caption of the figure
         \item "layout" : the layout of the plots. It is a matrix under the form layout = matrix(c(1:4), ncol = 2, nrow = 2). It is layout = matrix(1, ncol = 1, nrow= 1) by default.
-        \item "width" : width of the figure in textwidth unit. 1 means as width as the text. It is 1 by default.
+        \item "width" : width of the figure in textwidth unit. 1 means the same width as the text. It is 1 by default.
         \item "landscape" : If TRUE, the figure is in landscape. FALSE by default.
     }
     }}
@@ -70,7 +70,7 @@ This list must contains the following elements:
 The function returns a pdf which is the result of the concatenation as well as folders with raw data (see Details).
 }
 \description{
-\code{get.pdf} generates a pdf file by using LaTeX
+\code{get.pdf} generates a pdf file using LaTeX
 }
 \details{
 The function creates one folder named "form.name" (first argument of the function).
