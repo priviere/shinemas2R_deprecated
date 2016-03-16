@@ -1902,52 +1902,6 @@ filter_V = V.sql(variable.in)
  			}
  			} else { M_dist = NULL }
  
-			
- 			# A CONTINUER, OK A PRIORI => A VERIFIER AVEC LES GRAPHS !!! ---------------------
-# 		cat("ajouter reproduction_type \n Puis dans analyse.network.relation")
-# 	if(FALSE)
-# 	{
-# 		if(relation=="reproduction" & repro.type=="cross") # cas particulier
-# 		{
-# 			liste_year = unique(y)
-# 			liste_germplasm = unique(g)
-# 			liste_person = unique(p)
-# 			
-# 			out = get.data(requete.type="cross",year.in=liste_year,germplasm.in=liste_germplasm,person.in=liste_person, return.data = TRUE)[["data"]]
-# 			
-# 			if(!is.null(out))
-# 			{
-# 				out = subset(out, cross_germplasm %in% liste_germplasm) # pour ne pas avoir les parents en plus
-# 				
-# 				liste_ferme = rep(NA,times=nrow(out))
-# 				
-# 				# liste des fermes qui ont envoyé leur lot de graine à croiser
-# 				liste_ferme[which(is.na(out$diffusion_father))] = as.character(out$cross_location[which(is.na(out$diffusion_father))])
-# 				
-# 				# liste des fermes qui ont fait leur croisement tout seul
-# 				liste_ferme[which(!is.na(out$diffusion_father))] = as.character(out$grandfather_person[which(!is.na(out$diffusion_father))])
-# 				out$liste_ferme = liste_ferme
-# 				
-# 				outb = out[,c("father" ,"mother", "cross_name", "liste_ferme", "cross_year", "cross_germplasm" )]
-# 				
-# 				# On enelve les germplasm qui ont des -1, -2 ou -3, ... car ils seront mélangés ensuite. On ne garde que la racine, qui correspond au nom du germplasm
-# 				a = as.character(outb$cross_germplasm)
-# 				a = sapply(a,function(x){unlist(strsplit(x,"-"))[1]})
-# 				outb$cross_germplasm = a	
-# 				
-# 				outb = unique(outb) # car après on mélange les différents grains issus des croisements      
-# 				outb$germplasm_type = "cross"
-# 				colnames(outb) = c("father", "mother", "SL",  "p", "y", "g", "gp")
-# 				
-# 				name = outb$SL
-# 				
-# 				a = as.data.frame(table(name, rep("cross", length(name)), outb$g, outb$gp, outb$y, outb$p))
-# 				colnames(a) = c("SL", "relation", "g", "gt", "y", "p", "Freq")
-# 				a=subset(a,Freq!=0)
-# 			} else {a = NULL}
-# 		}
-# 	}	
-# 		
  	d = list("network" = n, "network.info" = Minfo, "Mdist" = M_dist)
  	attributes(d)$shinemas2R.object = "network"
  	}
