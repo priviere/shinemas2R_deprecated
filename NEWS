@@ -8,7 +8,8 @@ shinemas2R 0.9.2 ------------------------------------
 * Debug some functions:
 	- get.pdf.R
 	- get.data.R: 
-		. cf issues #12 (à vérifier par Gaelle)
+		. cf issue #8
+		. cf issue #12
 		. update the queries regarding evolution of SHiNeMaS structure
 		. add query.type = "person-info"
 		. add query.type = "grand-father"
