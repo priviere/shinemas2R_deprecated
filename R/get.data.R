@@ -394,19 +394,27 @@ if( !is.null (c(G, GT, Y, P, V, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL
 
 query = 
 paste("
-SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, gpt1.germplasm_type AS germplasm_type, p1.short_name AS person,v1.name AS variable_name,rd.raw_data, met.method_name, met.quali_quanti_notes, pro1.project_name AS project
+SELECT sl1.name AS sl_name, sl1.date AS year, gp1.germplasm_name AS germplasm, sp1.species, p1.short_name AS person, v1.name AS variable_name,rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude, string_agg(DISTINCT pro1.project_name,',')|| ', ' || string_agg(DISTINCT pro2.project_name,','), sl1.generation AS generation_nb, sl1.lgeneration AS local_generation_nb, sl1.confidence AS confidence, sl1.comments AS comments
 
 FROM entities_seed_lot sl1 
 LEFT OUTER JOIN eppdata_raw_data_seed_lot dr ON sl1.id = dr.seed_lot_id 
 LEFT OUTER JOIN eppdata_raw_data rd ON dr.env_pra_phe_raw_data_id = rd.id 
 LEFT OUTER JOIN eppdata_method met ON rd.method_id=met.id
 LEFT OUTER JOIN eppdata_variable v1 ON rd.variable_id = v1.id
-LEFT OUTER JOIN entities_seed_lot_project eslp ON sl1.id = eslp.seed_lot_id 
-LEFT OUTER JOIN actors_project pro1 ON eslp.project_id = pro1.id
 LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
-LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id=gpt1.id
-LEFT OUTER JOIN actors_person p1 ON sl1.person_id=p1.id",
-
+LEFT OUTER JOIN entities_species sp1 ON sp1.id = gp1.species_id
+LEFT OUTER JOIN actors_person p1 ON sl1.person_id=p1.id
+LEFT OUTER JOIN actors_location l1 ON l1.id = p1.location_id
+			
+LEFT OUTER JOIN network_relation r1 ON r1.seed_lot_father_id=sl1.id
+LEFT OUTER JOIN network_relation_project rp1 ON rp1.relation_id = r1.id
+LEFT OUTER JOIN actors_project pro1 ON pro1.id = rp1.project_id
+LEFT OUTER JOIN network_relation r2 ON r2.seed_lot_son_id=sl1.id
+LEFT OUTER JOIN network_relation_project rp2 ON rp2.relation_id = r2.id
+LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id
+	
+GROUP BY sl1.name, sl1.date, gp1.germplasm_name, sp1.species, p1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude",
+			
 w,
 G,
 Y,
