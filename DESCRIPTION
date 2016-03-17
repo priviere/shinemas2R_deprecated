@@ -34,6 +34,7 @@ Suggests:
     agricolae,
     intergraph,
     igraph,
+    adegenet,
     knitr
 SystemRequirements: LaTeX with packages longtable, lscape, graphicx, pdfpages,
     float, hyperref and fancyhdr
