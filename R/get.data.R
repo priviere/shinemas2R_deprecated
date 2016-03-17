@@ -1791,7 +1791,7 @@ filter_V = V.sql(variable.in)
  }
  	
 
-	# 5.5. data with variable on specific seed-lots ----------	
+	# 5.5. data with variable on specific relation or seed-lots ----------	
 	if(query.type == "data-classic") {
 		if(data.type == "seed-lots") { message("1. Query SHiNeMaS ..."); d = query.data.seed_lots(filter_G, filter_GT, filter_Y, filter_P, filter_V, filter_SL, filter_Proj) }
 		if(data.type == "relation") { message("1. Query SHiNeMaS ..."); d = query.data.relation(filter_G, filter_GT, filter_Y, filter_P, filter_R, filter_V, filter_SL, filter_Proj) }	
