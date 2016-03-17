@@ -19,7 +19,7 @@ You can set filters to the query with the following argument :
 \item \texttt{filter.out} to choose everything except \texttt{filter.out}
 \end{itemize}
 
-values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation}, \texttt{reproduction type} or \texttt{variable}.
+values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation}, \texttt{reproduction.type} or \texttt{variable}.
 
 
 It is important to choose if you apply the filter on the \texttt{father} or the \texttt{son} of a relation.
@@ -942,11 +942,4 @@ data_for_PPBstats = format.data(
 head(data_for_PPBstats)
 @
 
-%\section{Set of \sl}
-
-%\subsection{\texttt{query.type = "SL.mix"}}
-
-%\subsection{\texttt{query.type = "cross"}}
-
-% parler de fuse g s et correlated var pour plot et table
 
