@@ -49,15 +49,7 @@
 #' 
 #' }
 #' 
-#' @param fill.diffusion.gap For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)
-#' 
-#' @param network.info For query.type = "network". If TRUE, aggregates information on relations and seed-lots on the network.
-#' 
-#' @param Mdist For query.type = "network". If TRUE, computes the Mdist matrix. See details.
-#' 
-#' @param data.type For queries in "data-". Type of data: "relation" for data linked to relation between seed lots and "seed-lots" for data linked to seed lots
-#' 
-#' @param filter.on This argument is needed for filters for queries in "network", "data-" and "data.type" = data.relation. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son".
+#' @param filter.on This argument is needed for filters for query.type "SL.mix", "network", "data-" and "data.type" = data.relation. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son".
 #' 
 #' @param germplasm.in Filter: vector with germplasms to keep. By default, all the germplasms are in.
 #' @param germplasm.out Filter: vector with germplasms to discard. By default, no germplasm is out.
@@ -83,6 +75,13 @@
 #' 
 #' @param variable.in Filter: vector with variables to keep. If NULL, all variables in SHiNeMaS are displayed.
 #' 
+#' @param data.type For queries in "data-". Type of data: "relation" for data linked to relation between seed lots and "seed-lots" for data linked to seed lots
+#' 
+#' @param network.info For query.type = "network". If TRUE, aggregates information on relations and seed-lots on the network and return it in the results.
+#' 
+#' @param Mdist For query.type = "network". If TRUE, computes the Mdist matrix and return it in the results. See details.
+#' 
+#' @param fill.diffusion.gap For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)
 #' 
 #' @details
 #' \itemize{
@@ -108,9 +107,11 @@
 #' The Mdist square matrix can be compared to a differentiation distance. It can be put in relation with genetic Fst for example.
 #' 
 #' \item Correlated data or not
+#' 
 #' Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. 
 #' Therefore the element of the list for non correlated data is always NULL.
-#' For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
+#' 
+#' For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on the same individual) or not.
 #' }
 #' 
 #' 
@@ -156,10 +157,6 @@ db_host = "127.0.0.1",
 db_name = "shinemas_tuto",
 db_password = "pierre",
 query.type = "person",
-fill.diffusion.gap = FALSE,
-network.info = TRUE,
-Mdist = FALSE,
-data.type = "son",
 filter.on = NULL,
 germplasm.in = NULL,
 germplasm.out = NULL,
@@ -175,7 +172,11 @@ seed.lot.in = NULL,
 seed.lot.out = NULL,
 relation.in = NULL,
 reproduction.type.in = NULL,
-variable.in = NULL
+variable.in = NULL,
+data.type = NULL,
+network.info = TRUE,
+Mdist = FALSE,
+fill.diffusion.gap = FALSE
 )
 
 # lets go !!! ----
@@ -218,15 +219,14 @@ if( is.null(data.type) & length(grep("data-", query.type)) > 0 ) { stop("With qu
 
 if(!is.null(data.type)){
 
-	if(!is.element(data.type, c("relation", "seed-lots"))) { 	stop("data.type must be \"relation\" or \"seed-lots\"") }	
+if(!is.element(data.type, c("relation", "seed-lots"))) { 	stop("data.type must be \"relation\" or \"seed-lots\"") }	
 
 if( data.type == "relation" & is.null(filter.on) ){ stop("filter.on must be set: either \"son\" \"father\" or \"father-son\"") }
 
 if( data.type == "seed-lots" ) { filter.on = "son" ; message("With data.type == \"seed-lots\", \"filter.on\" is not use.") } # To be ok with filters
-
+}
 
 if( query.type == "person-info" | query.type == "methods" ) { filter.on = "son" ; message("With query.type == \"", query.type, "\", \"filter.on\" is not use.") } # To be ok with filters
-}
 
 if(!is.null(filter.on)){
 if(!is.element(filter.on, c("son", "father", "father-son")))  { stop("filter.on must be \"son\", \"father\" or \"father-son\".") }
@@ -235,6 +235,7 @@ if(!is.element(filter.on, c("son", "father", "father-son")))  { stop("filter.on 
 if(!is.null(relation.in)){
 if( !is.element(relation.in, c("reproduction", "mixture", "selection", "diffusion")) )  { stop("relation.in must be \"reproduction\", \"mixture\", \"selection\" or \"diffusion\".") }
 }
+
 
 
 # 2. Connection to SHiNeMaS ----------
