@@ -5,18 +5,24 @@ shinemas2R 0.9.2 ------------------------------------
 
 * update functions regarding is.get.data.output.R
 
-* Debug some functions:
+* debug some functions:
 	- get.pdf.R
 	- get.data.R: 
 		. cf issue #8
 		. cf issue #12
+
+* improve some functions:
+	- get.data.R:
 		. update the queries regarding evolution of SHiNeMaS structure
 		. add query.type = "person-info"
 		. add query.type = "grand-father"
+		. change order of the arguments
+		. add error messages and update Rd for filters allowed for each query.type
 		
 * vignette:
 	- orthograph corrections
 	- update for is.get.data.output.R
+	- add section "Other information in SHiNeMaS""
 
 
 shinemas2R 0.9.1 ------------------------------------
