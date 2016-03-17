@@ -1052,31 +1052,31 @@ if( !is.null (c(G, GT, Y, P, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL }
 
 query = paste(
 "
-SELECT 
+SELECT
 
-sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, p1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type, 
-l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, 
-sl1.generation AS son_total_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_generation_confidence, 
+sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, p1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type,
+l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat,
+sl1.generation AS son_total_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_generation_confidence,
 sl1.comments AS son_comments, string_agg(DISTINCT pro1.project_name,','),
 
 sp2.species AS father_species, sl2.name AS father, gp2.germplasm_name AS father_germplasm, p2.short_name AS father_person, sl2.date AS father_year, gpt2.germplasm_type AS father_germplasm_type,
-l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat, 
-sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence, 
-sl2.comments AS father_comments, string_agg(DISTINCT pro2.project_name,',')
+l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat,
+sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence,
+sl2.comments AS father_comments, string_agg(DISTINCT pro2.project_name,','),
 
 rep1.date AS relation_father_son_year,
 
-??? AS grandfather_species, slf.name AS grandfather, gpf.germplasm_name AS grandfather_germplasm, pf.short_name AS grandfather_person, slf.date AS grandfather_year, ??? AS grandfather_germplasm_type,
-??? AS grandfather_alt, ??? AS grandfather_long, ??? AS grandfather_lat, 
-??? AS grandfather_total_generation_nb, ??? AS grandfather_local_generation_nb, ??? AS grandfather_generation_confidence, 
-??? AS grandfather_comments, string_agg(DISTINCT pro2.project_name,',')
+spf.species AS grandfather_species, slf.name AS grandfather, gpf.germplasm_name AS grandfather_germplasm, pf.short_name AS grandfather_person, slf.date AS grandfather_year, gptf.germplasm_type AS grandfather_germplasm_type,
+lf.altitude AS grandfather_alt, lf.longitude AS grandfather_long, lf.latitude AS grandfather_lat,
+slf.generation AS grandfather_total_generation_nb, slf.lgeneration AS grandfather_local_generation_nb, slf.confidence AS grandfather_generation_confidence,
+slf.comments AS grandfather_comments, string_agg(DISTINCT pro2.project_name,','),
 
-??? AS relation_father_grandfather_year,
+repf.date AS relation_father_grandfather_year
 
 FROM network_relation nr
 LEFT OUTER JOIN network_selection sel1 ON nr.selection_id = sel1.id
-LEFT OUTER JOIN actors_person psel1 ON sel1.person_id = psel1.id 
-LEFT OUTER JOIN network_reproduction rep1 ON nr.reproduction_id = rep1.id	
+LEFT OUTER JOIN actors_person psel1 ON sel1.person_id = psel1.id
+LEFT OUTER JOIN network_reproduction rep1 ON nr.reproduction_id = rep1.id
 LEFT OUTER JOIN network_reproduction_method nrm1 ON rep1.reproduction_method_id = nrm1.id
 
 LEFT OUTER JOIN entities_seed_lot sl1 ON nr.seed_lot_son_id=sl1.id
@@ -1097,6 +1097,10 @@ LEFT OUTER JOIN network_relation relfat ON nr.seed_lot_father_id = relfat.seed_l
 LEFT OUTER JOIN entities_seed_lot slf ON relfat.seed_lot_father_id = slf.id
 LEFT OUTER JOIN entities_germplasm gpf ON slf.germplasm_id = gpf.id
 LEFT OUTER JOIN actors_person pf ON slf.person_id = pf.id
+LEFT OUTER JOIN entities_species spf ON gpf.species_id=spf.id
+LEFT OUTER JOIN entities_germplasm_type gptf ON gpf.germplasm_type_id=gptf.id
+LEFT OUTER JOIN actors_location lf ON pf.location_id=lf.id
+LEFT OUTER JOIN network_reproduction repf ON relfat.reproduction_id=repf.id
 
 LEFT OUTER JOIN network_relation_project rp1 ON rp1.relation_id = nr.id
 LEFT OUTER JOIN actors_project pro1 ON pro1.id = rp1.project_id
