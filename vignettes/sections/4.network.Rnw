@@ -13,7 +13,7 @@ You can set filters to the query with the following argument :
 \item \texttt{filter.out} to choose everything except \texttt{filter.out}
 \end{itemize}
 
-values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation} or \texttt{reproduction type}.
+values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation} or \texttt{reproduction.type}.
 
 
 It is important to choose if you apply the filter on the \texttt{father} or the \texttt{son} of a relation.
