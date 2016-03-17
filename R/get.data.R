@@ -17,7 +17,7 @@
 #' 
 #' \item "network": network relations between seed-lots. All filters are possible.
 #' 
-#' \item "SL.mix": seed-lots merged from replications and not from 'real' mixtures. All filters are possible except relation.in
+#' \item "SL.mix": seed-lots merged from replications and not from 'real' mixtures. All filters are possible except relation.in and variable.in.
 #' 
 #' \item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variables.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in
 #' 
@@ -41,11 +41,11 @@
 #' \item "data-SR": seed-lots pairs of selection differential for year n-1 and response to selection for year n.
 #' }
 #' 
-#' \item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. Filters can be applied on variables. Possible filter is variable.in
+#' \item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. Filters can be applied on variables. Possible filter is variable.in.
 #' 
-#' \item "person-info": information regarding persons stored in the SHiNeMaS. Possible filters are person.in and person.out
+#' \item "person-info": information regarding persons stored in the SHiNeMaS. Possible filters are person.in and person.out and variable.in
 #' 
-#' \item "grandfather": information on son, father and grandfather. All filters are possible except relation.in
+#' \item "grandfather": information on son, father and grandfather. All filters are possible except relation.in and variable.in
 #' 
 #' }
 #' 
@@ -198,8 +198,8 @@ if(!is.null(relation.in)){
 	if( !is.element(relation.in, c("reproduction", "mixture", "selection", "diffusion")) )  { stop("relation.in must be \"reproduction\", \"mixture\", \"selection\" or \"diffusion\".") }
 }
 
-# 1.2. Possible filters regarding query.types ----------
-if( query.type == "SL.mix" & !is.null(relation.in) ) { warning("With query.type == \"SL.mix\", relation.in is not used.") }
+# 1.2. Possible filters regarding query.types or data.type ----------
+if( query.type == "SL.mix" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"SL.mix\", relation.in is not used.") }
 
 if( query.type == "cross" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"cross\", relation.in and variables.in are not used.") }
 
@@ -238,8 +238,10 @@ if( query.type == "person-info" & (
 ) ) { warning("With query.type == \"person-info\", germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in and variables.in are not used.") }
 
 
-if( query.type == "grandfather" & !is.null(relation.in) ) { warning("With query.type == \"grandfather\", relation.in is not used.") }
+if( query.type == "grandfather" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"grandfather\", relation.in is not used.") }
 
+if( data.type == "seed-lots" & !is.null(relation.in)) { warning("With data.type == \"seed-lots\", relation.in is not used.") } # To be ok with filters
+}
 
 # 1.3. Possible values of data.type ----------
 if( is.null(data.type) & length(grep("data-", query.type)) > 0 ) { stop("With query.type in \"data-\", data.type must not be NULL. data.type can be \"relation\" or \"seed-lots\".")
@@ -254,10 +256,10 @@ if(!is.element(data.type, c("relation", "seed-lots"))) { 	stop("data.type must b
 	
 if( data.type == "relation" & !is.null(test[1]) & is.null(filter.on) ){ stop("filter.on must be set: either \"son\" \"father\" or \"father-son\"") }
 
-if( data.type == "seed-lots" ) { filter.on = "son" ; message("With data.type == \"seed-lots\", \"filter.on\" is not use.") } # To be ok with filters
+if( data.type == "seed-lots" ) { filter.on = "son" ; message("With data.type == \"seed-lots\", \"filter.on\" is not used.") } # To be ok with filters
 }
 
-if( query.type == "person-info" | query.type == "methods" ) { filter.on = "son" ; message("With query.type == \"", query.type, "\", \"filter.on\" is not use.") } # To be ok with filters
+if( query.type == "person-info" | query.type == "methods" ) { filter.on = "son" ; message("With query.type == \"", query.type, "\", \"filter.on\" is not used.") } # To be ok with filters
 
 if(!is.null(filter.on)){
 if(!is.element(filter.on, c("son", "father", "father-son")))  { stop("filter.on must be \"son\", \"father\" or \"father-son\".") }
