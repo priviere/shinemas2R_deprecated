@@ -36,7 +36,7 @@
 \newcommand{\BD}{SHiNeMaS}
 \newcommand{\pack}{\texttt{shinemas2R}}
 \newcommand{\listpackformatdata}{\texttt{PPBstats}}
-\newcommand{\versionnumber}{0.9.1}
+\newcommand{\versionnumber}{0.9.2}
 
 \begin{document}
 
@@ -81,12 +81,17 @@ if (before && options$fig.show!='none') par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axi
 
 \newpage
 
-<<child='sections/6.pdf.Rnw'>>=
+<<child='sections/6.sl.Rnw'>>=
 @
 
 \newpage
 
-\input{./sections/7.use_rights}
+<<child='sections/7.pdf.Rnw'>>=
+@
+
+\newpage
+
+\input{./sections/8.use_rights}
 
 \newpage
 
@@ -100,7 +105,7 @@ citation("shinemas2R")
 
 \newpage
 
-\input{./sections/8.tail}
+\input{./sections/9.tail}
 
 \newpage
 
@@ -116,6 +121,11 @@ citation("shinemas2R")
 \newpage
 
 \input{./sections/a3.getpdf_examples}
+
+\newpage
+
+
+\input{./sections/a4.exemples_is_get_data_output}
 
 \newpage
 
