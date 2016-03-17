@@ -7,7 +7,7 @@ This is particularly useful in participatory research to give feedback to stackh
 
 \texttt{get.pdf} creates a \texttt{.tex} file that is compiled into a \texttt{.pdf} file.
 You need to install \LaTeX~and the following packages : \texttt{longtable}, \texttt{lscape}, \texttt{graphicx}, \texttt{pdfpages}, \texttt{float}, \texttt{hyperref} and \texttt{fancyhdr}. 
-To download LaTeX, go to \url{http://latex-project.org/ftp.html}.
+To download LaTeX, go to \url{latex-project.org/ftp.html}.
 
 
 \subsection{Philosophy of \texttt{get.pdf} }
@@ -87,7 +87,7 @@ macro & description \\
 \end{table}
 
 
-Tutorials on \LaTeX~can be found here: \url{https://en.wikibooks.org/wiki/LaTeX}.
+Tutorials on \LaTeX~can be found here: \url{en.wikibooks.org/wiki/LaTeX}.
 
 See appendix \ref{getpdf_examples} for some examples.
 
