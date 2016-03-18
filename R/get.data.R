@@ -49,7 +49,7 @@
 #' 
 #' }
 #' 
-#' @param filter.on This argument is needed for filters for query.type "SL.mix", "network", "data-" and "data.type" = data.relation. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son".
+#' @param filter.on This argument is needed if you want to use filters. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son". Filter.on is not used for data.type = "seed-lots" and query.type = "methods"
 #' 
 #' @param germplasm.in Filter: vector with germplasms to keep. By default, all the germplasms are in.
 #' @param germplasm.out Filter: vector with germplasms to discard. By default, no germplasm is out.
