@@ -69,7 +69,7 @@
 #' For an easier visualization, digit is never displayed unless you choose NULL.
 #' Note that with ggplot.type "network-" and ggplot.display = "map", hide.labels.part can be NULL or "all" as only person can be displayed.
 #' 
-#' @param display.labels.sex For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".
+#' @param labels.sex For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".
 #' 
 #' @param labels.generation For ggplot.type = "network-network". If TRUE, displays generation for each reproduction
 #' 
@@ -138,7 +138,7 @@ get.ggplot <- function(
 	organise.sl = FALSE,
 	labels.on = "son",
 	hide.labels.parts = "all", 
-	display.labels.sex = TRUE, 
+	labels.sex = TRUE, 
 	labels.generation = TRUE,
 	labels.size = 3,
 	location.map = "france", 
@@ -534,7 +534,7 @@ if( check.arg("map", ggplot.display) ) {
 if( check.arg("network-network", ggplot.type) ) {
 
 	if(( !is.null(data$network))){
-		p_network = get.ggplot_plot.network(data, vertex.color, vertex.size, hide.labels.parts, display.labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)$pnet
+		p_network = get.ggplot_plot.network(data, vertex.color, vertex.size, hide.labels.parts, labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)$pnet
 	} else { p_network = NULL }
 	
 	LIST.PLOTS = c(LIST.PLOTS, list("network-network" = p_network))
@@ -1010,7 +1010,7 @@ if( check.arg("data-pie.on.network", ggplot.type) ) {
 		
 		n = n$data
 		
-		p = get.ggplot_plot.network(n, vertex.color, vertex.size, hide.labels.parts, display.labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)
+		p = get.ggplot_plot.network(n, vertex.color, vertex.size, hide.labels.parts, labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)
 		p_net = p$pnet
 		plotcoord = p$plotcoord
 		colnames(plotcoord)[which(colnames(plotcoord) == "id")] = "sl"
