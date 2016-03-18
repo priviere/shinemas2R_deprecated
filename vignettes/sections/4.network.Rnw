@@ -208,8 +208,6 @@ It is possible to tune the following arguments (Table \ref{custom.network}):
 \texttt{argument} & \texttt{default value} & description \\
 \hline
 
-\texttt{filter.on} & \texttt{"father-son"} & it chooses on which seed-lots the filters are applied: \texttt{"son"}, \texttt{"father"} or \texttt{"father-son"}. \\
-
 \texttt{vertex.size} & \texttt{3} &  size of the vertex \\
 
 \texttt{vertex.color} & \texttt{"year"} & color of the vertex. 
