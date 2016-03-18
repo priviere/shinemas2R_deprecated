@@ -49,7 +49,7 @@
 #' 
 #' }
 #' 
-#' @param filter.on This argument is needed if you want to use filters. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son". Filter.on is not used for data.type = "seed-lots" and query.type = "methods"
+#' @param filter.on This argument is needed if you want to use filters. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son". Filter.on is not used for data.type = "seed-lots", query.type = "methods" and query.type = "person-info"
 #' 
 #' @param germplasm.in Filter: vector with germplasms to keep. By default, all the germplasms are in.
 #' @param germplasm.out Filter: vector with germplasms to discard. By default, no germplasm is out.
@@ -189,7 +189,7 @@ fill.diffusion.gap = FALSE
 # 1. Check parameters ----------
 
 # 1.1. Possibles values of arguments ----------
-if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person-info")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\", \"person-info\" or \"grandfather\".") }
+if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person-info", "grandfather")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\", \"person-info\" or \"grandfather\".") }
 
 test = c(germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in, variable.in)
 if(is.element(query.type, c( "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm")) & !is.null(test)) { stop("You can not use a filter on raw information on levels and variables.") }
@@ -199,9 +199,9 @@ if(!is.null(relation.in)){
 }
 
 # 1.2. Possible filters regarding query.types or data.type ----------
-if( query.type == "SL.mix" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"SL.mix\", relation.in is not used.") }
+if( query.type == "SL.mix" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"SL.mix\", filter relation.in is not used.") }
 
-if( query.type == "cross" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"cross\", relation.in and variables.in are not used.") }
+if( query.type == "cross" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"cross\", filter relation.in and variables.in are not used.") }
 
 if( query.type == "methods" & (
 	!is.null(germplasm.in) | 
@@ -218,7 +218,7 @@ if( query.type == "methods" & (
 	!is.null(seed.lot.out) | 
 	!is.null(relation.in) | 
 	!is.null(reproduction.type.in)
-) ) { warning("With query.type == \"cross\", germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in and reproduction.type.in are not used.") }
+) ) { warning("With query.type == \"cross\", filters germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in and reproduction.type.in are not used.") }
 
 
 if( query.type == "person-info" & (
@@ -235,12 +235,11 @@ if( query.type == "person-info" & (
 	!is.null(relation.in) | 
 	!is.null(reproduction.type.in) |
 	!is.null(variables.in)
-) ) { warning("With query.type == \"person-info\", germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in and variables.in are not used.") }
+) ) { warning("With query.type == \"person-info\", filters germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in and variables.in are not used.") }
 
+if( query.type == "grandfather" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"grandfather\", filter relation.in is not used.") }
 
-if( query.type == "grandfather" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"grandfather\", relation.in is not used.") }
-
-if( data.type == "seed-lots" & !is.null(relation.in)) { warning("With data.type == \"seed-lots\", relation.in is not used.") }
+if( data.type == "seed-lots" & !is.null(relation.in)) { warning("With data.type == \"seed-lots\", filter relation.in is not used.") }
 
 # 1.3. Possible values of data.type ----------
 if( is.null(data.type) & length(grep("data-", query.type)) > 0 ) { stop("With query.type in \"data-\", data.type must not be NULL. data.type can be \"relation\" or \"seed-lots\".")
@@ -252,8 +251,6 @@ if(!is.null(data.type)){
 if(!is.element(data.type, c("relation", "seed-lots"))) { 	stop("data.type must be \"relation\" or \"seed-lots\"") }	
 
 # 1.4. Possible values of filter.on regarding query.types ----------
-	
-if( data.type == "relation" & !is.null(test[1]) & is.null(filter.on) ){ stop("filter.on must be set: either \"son\" \"father\" or \"father-son\"") }
 
 if( data.type == "seed-lots" ) { filter.on = "son" ; message("With data.type == \"seed-lots\", \"filter.on\" is not used.") } # To be ok with filters
 }
@@ -264,7 +261,7 @@ if(!is.null(filter.on)){
 if(!is.element(filter.on, c("son", "father", "father-son")))  { stop("filter.on must be \"son\", \"father\" or \"father-son\".") }
 }
 
-# 1.5. Do not forget to set filter.on ----------
+# 1.5. Do not forget to set filter.on if there are filters ----------
 
 test = c(germplasm.in,
 				 germplasm.out,
