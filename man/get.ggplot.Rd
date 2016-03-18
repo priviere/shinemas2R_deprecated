@@ -10,9 +10,8 @@ get.ggplot(data, correlated_group = NULL, fuse_g_and_s = FALSE,
   nb_parameters_per_plot_x.axis = NULL,
   nb_parameters_per_plot_in.col = NULL, vertex.size = 3,
   vertex.color = "year", organise.sl = FALSE, labels.on = "son",
-  hide.labels.parts = "all", display.labels.sex = TRUE,
-  labels.generation = TRUE, labels.size = 3, location.map = "france",
-  pie.size = 0.5)
+  hide.labels.parts = "all", labels.sex = TRUE, labels.generation = TRUE,
+  labels.size = 3, location.map = "france", pie.size = 0.5)
 }
 \arguments{
 \item{data}{output from get.data with query.type = "network" or query.type = "data-...".}
@@ -79,7 +78,7 @@ For "data-biplot", the default value is NULL.
 For an easier visualization, digit is never displayed unless you choose NULL.
 Note that with ggplot.type "network-" and ggplot.display = "map", hide.labels.part can be NULL or "all" as only person can be displayed.}
 
-\item{display.labels.sex}{For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".}
+\item{labels.sex}{For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".}
 
 \item{labels.generation}{For ggplot.type = "network-network". If TRUE, displays generation for each reproduction}
 
