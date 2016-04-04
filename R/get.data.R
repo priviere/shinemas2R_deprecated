@@ -479,11 +479,14 @@ if( !is.null (c(G, GT, Y, P, V, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL
 
 query = 
 paste("
-SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, sp1.species, p1.short_name AS person, v1.name AS variable_name,rd.raw_data, rd.date AS raw_data_date, met.method_name, l1.lat, l1.long, l1.alt, string_agg(DISTINCT pro1.project_name,',')|| ', ' || string_agg(DISTINCT pro2.project_name,','), sl1.generation AS total_generation_nb, sl1.lgeneration AS local_generation_nb, sl1.confidence AS generation_confidence, sl1.comments AS sl_comments
-
+SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, sp1.species, p1.short_name AS person, v1.name AS variable_name,rd.raw_data, rd.date AS raw_data_date, met.method_name, l1.latitude AS lat, l1.longitude AS long, l1.altitude AS alt, string_agg(DISTINCT pro1.project_name,',')|| ', ' || string_agg(DISTINCT pro2.project_name,',') AS project
+ ",
+# waiting for generation and sl comments to be implemented in SHiNeMaS
+#, sl1.generation AS total_generation_nb, sl1.lgeneration AS local_generation_nb, sl1.confidence AS generation_confidence, sl1.comments AS sl_comments 
+"","
 FROM entities_seed_lot sl1 
 LEFT OUTER JOIN eppdata_raw_data_seed_lot dr ON sl1.id = dr.seed_lot_id 
-LEFT OUTER JOIN eppdata_raw_data rd ON dr.env_pra_phe_raw_data_id = rd.id 
+LEFT OUTER JOIN eppdata_raw_data rd ON dr.raw_data_id = rd.id 
 LEFT OUTER JOIN eppdata_method met ON rd.method_id=met.id
 LEFT OUTER JOIN eppdata_variable v1 ON rd.variable_id = v1.id
 LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
@@ -511,24 +514,43 @@ Proj, sep = "")
 d = get.d(query, info_db)
 
 if(nrow(d) > 0) {
+		species = as.factor(d$species)
+		project = as.factor(d$project)
+		sl = as.factor(d$sl)
+		germplasm = as.factor(d$germplasm)
+		person = as.factor(d$person)
+		year = as.factor(d$year)
+		variable_name = as.character(d$variable_name)
+		raw_data = as.character(d$raw_data)
+		raw_data_date = as.character(d$raw_data_date)
+		method_name = as.factor(d$method_name)
+		lat = as.numeric(as.character(d$lat))
+		long = as.numeric(as.character(d$long))
+		alt = as.numeric(as.character(d$alt))
+#		total_generation_nb = as.numeric(as.character(d$total_generation_nb))
+#		local_generation_nb = as.numeric(as.character(d$local_generation_nb))
+#		generation_confidence = as.character(d$generation_confidence)
+#		sl_comments = as.character(d$sl_comments)
+
+
 	d = data.frame(
-		species = as.factor(d$species),
-		project = as.factor(d$project), # projet à vérifier
-		sl = as.factor(d$sl),
-		germplasm = as.factor(d$germplasm),
-		person = as.factor(d$person),
-		year = as.factor(d$year),
-		variable_name = as.character(d$variable_name),
-		raw_data = as.character(d$raw_data),
-		raw_data_date = as.character(d$raw_data_date),
-		method_name = as.factor(d$met.method_name),
-		lat = as.numeric(d$lat),
-		long = as.numeric(d$long), 
-		alt = as.numeric(d$alt),
-		total_generation_nb = as.numeric(as.character(d$total_generation_nb)),
-		local_generation_nb = as.numeric(as.character(d$local_generation_nb)),
-		generation_confidence = as.character(d$generation_confidence),
-		sl_comments = as.character(d$sl_comments)
+		species,
+		project,
+		sl,
+		germplasm,
+		person,
+		year,
+		variable_name,
+		raw_data,
+		raw_data_date,
+		method_name,
+		lat,
+		long, 
+		alt
+		#	total_generation_nb,
+		#	local_generation_nb,
+		#	generation_confidence,
+#		sl_comments
 	)
 	
 		} else { d = NULL }
@@ -1916,7 +1938,7 @@ filter_V = V.sql(variable.in)
 						print("For redondant information, à virer quand on aura l'unicité dans la base")
 						data = unique(data)
 
-						D = select(data, -method_name, -variable_name, -raw_data, -method_name, -var_meth, -quali_quanti_notes)
+						D = select(data, -method_name, -variable_name, -raw_data, -method_name, -var_meth)
 						D = unique(D)
 						
 						D = cbind.data.frame(D, matrix(NA, ncol = length(var_meth), nrow = nrow(D)))
