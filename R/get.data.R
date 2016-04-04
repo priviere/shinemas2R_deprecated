@@ -19,7 +19,7 @@
 #' 
 #' \item "SL.mix": seed-lots merged from replications and not from 'real' mixtures. All filters are possible except relation.in and variable.in.
 #' 
-#' \item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variables.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in
+#' \item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variable.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in
 #' 
 #' \item raw information on levels and variables contained in SHiNeMaS :
 #' \itemize{
@@ -199,9 +199,9 @@ if(!is.null(relation.in)){
 }
 
 # 1.2. Possible filters regarding query.types or data.type ----------
-if( query.type == "SL.mix" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"SL.mix\", filter relation.in is not used.") }
+if( query.type == "SL.mix" & (!is.null(relation.in) | !is.null(variable.in)) ) { warning("With query.type == \"SL.mix\", filter relation.in is not used.") }
 
-if( query.type == "cross" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"cross\", filter relation.in and variables.in are not used.") }
+if( query.type == "cross" & (!is.null(relation.in) | !is.null(variable.in)) ) { warning("With query.type == \"cross\", filter relation.in and variable.in are not used.") }
 
 if( query.type == "methods" & (
 	!is.null(germplasm.in) | 
@@ -234,10 +234,10 @@ if( query.type == "person-info" & (
 	!is.null(seed.lot.out) | 
 	!is.null(relation.in) | 
 	!is.null(reproduction.type.in) |
-	!is.null(variables.in)
-) ) { warning("With query.type == \"person-info\", filters germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in and variables.in are not used.") }
+	!is.null(variable.in)
+) ) { warning("With query.type == \"person-info\", filters germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in and variable.in are not used.") }
 
-if( query.type == "grandfather" & (!is.null(relation.in) | !is.null(variables.in)) ) { warning("With query.type == \"grandfather\", filter relation.in is not used.") }
+if( query.type == "grandfather" & (!is.null(relation.in) | !is.null(variable.in)) ) { warning("With query.type == \"grandfather\", filter relation.in is not used.") }
 
 if( data.type == "seed-lots" & !is.null(relation.in)) { warning("With data.type == \"seed-lots\", filter relation.in is not used.") }
 
