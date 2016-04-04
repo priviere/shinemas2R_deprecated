@@ -445,7 +445,7 @@ The pie represent the distribution of a given variable for a given seed-lot.
 In the following example, as we're working with encrypted data, \texttt{get.ggplot} reverse the transcription to query \BD~and encrypt again.
 
 Note that this example is done on a little data set.
-Indeed, the pies are drawn with a polygon which need lots of points that take memory.
+Indeed, the pies are drawn with a polygon which needs lots of points that take memory.
 
 <<message=TRUE,cache=FALSE>>=
 if(use.get.data){
