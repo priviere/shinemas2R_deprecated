@@ -239,7 +239,11 @@ if( query.type == "person-info" & (
 
 if( query.type == "grandfather" & (!is.null(relation.in) | !is.null(variable.in)) ) { warning("With query.type == \"grandfather\", filter relation.in is not used.") }
 
-if( data.type == "seed-lots" & !is.null(relation.in)) { warning("With data.type == \"seed-lots\", filter relation.in is not used.") }
+
+if( !is.null(data.type) ) {
+	if( data.type == "seed-lots" & !is.null(relation.in)) { warning("With data.type == \"seed-lots\", filter relation.in is not used.") }
+}
+
 
 # 1.3. Possible values of data.type ----------
 if( is.null(data.type) & length(grep("data-", query.type)) > 0 ) { stop("With query.type in \"data-\", data.type must not be NULL. data.type can be \"relation\" or \"seed-lots\".")
