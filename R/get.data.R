@@ -181,11 +181,6 @@ fill.diffusion.gap = FALSE
 
 # lets go !!! ----
 {
-	
-	# !!!!!!!! En attendant que les projets soient liés aux relations -------------------	
-	if( is.null(project.in) )  { message('ATTENTION !!! en attendant que les projets soient liées aux relations, il faut bien définir un projet sinon ça le fait pas !!!')}
-	
-	
 # 1. Check parameters ----------
 
 # 1.1. Possibles values of arguments ----------
@@ -1434,6 +1429,7 @@ if( !is.null(project.out) ) { project.out = clean.ap(project.out) }
 filter_Proj = get.filters(filter.in = project.in, filter.out = project.out, filter.on, sql.son.tag = "pro1.project_name", sql.father.tag = "pro1.project_name")
 cat("ATTENTION, à changer en pro2 quand les projets seront reliés aux relations ... \n")
 
+print(filter_Proj)
 
 # 4.2.7. relation ---------------------------------------------------------
 R.sql = function(relation) {
