@@ -31,7 +31,7 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 
 \item "SL.mix": seed-lots merged from replications and not from 'real' mixtures. All filters are possible except relation.in and variable.in.
 
-\item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variables.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in
+\item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variable.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in
 
 \item raw information on levels and variables contained in SHiNeMaS :
 \itemize{
