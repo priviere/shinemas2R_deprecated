@@ -495,16 +495,19 @@ LEFT OUTER JOIN actors_project pro1 ON pro1.id = rp1.project_id
 LEFT OUTER JOIN network_relation r2 ON r2.seed_lot_son_id=sl1.id
 LEFT OUTER JOIN network_relation_project rp2 ON rp2.relation_id = r2.id
 LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id
-	
-GROUP BY sl1.name, sl1.date, gp1.germplasm_name, sp1.species, p1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude",
-			
+
+",
+
 w,
 G,
 Y,
 P,
 V,
 SL,
-Proj, sep = "")
+Proj, 
+
+"GROUP BY sl1.name, sl1.date, gp1.germplasm_name, sp1.species, p1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude",
+sep = "")
 
 d = get.d(query, info_db)
 
@@ -1363,9 +1366,9 @@ get.filters = function(filter.in, filter.out, filter.on, sql.son.tag, sql.father
 	{
 		P1 = paste(P1, collapse = " OR ")
 		P2 = paste(P2, collapse = " OR ")
-		if( filter.on == "son" ) { P = paste(" AND (", P1, ")", sep = "") }
-		if( filter.on == "father" ) { P = paste(" AND (", P2, ")", sep = "") }
-		if( filter.on == "father-son" ) {	P = paste(" AND ((", P1,") OR (", P2, "))", sep = "") }	
+		if( filter.on == "son" ) { P = paste(" (", P1, ")", sep = "") }
+		if( filter.on == "father" ) { P = paste(" (", P2, ")", sep = "") }
+		if( filter.on == "father-son" ) {	P = paste(" ((", P1,") OR (", P2, "))", sep = "") }	
 		return(P)
 	}
 
@@ -1429,7 +1432,6 @@ if( !is.null(project.out) ) { project.out = clean.ap(project.out) }
 filter_Proj = get.filters(filter.in = project.in, filter.out = project.out, filter.on, sql.son.tag = "pro1.project_name", sql.father.tag = "pro1.project_name")
 cat("ATTENTION, à changer en pro2 quand les projets seront reliés aux relations ... \n")
 
-print(filter_Proj)
 
 # 4.2.7. relation ---------------------------------------------------------
 R.sql = function(relation) {
