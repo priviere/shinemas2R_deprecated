@@ -53,11 +53,14 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 \item "data-SR": seed-lots pairs of selection differential for year n-1 and response to selection for year n.
 }
 
-\item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. Filters can be applied on variables. Possible filter is variable.in.
+\item "methods": information related to methods used for each variable in SHiNeMaS with its description and units.
+Filters can be applied on variables. Possible filter is variable.in.
 
-\item "person-info": information regarding persons stored in the SHiNeMaS. Possible filters are person.in and person.out and variable.in
+\item "person-info": information regarding persons stored in SHiNeMaS.
+Possible filters are person.in and person.out and variable.in
 
-\item "grandfather": information on son, father and grandfather. All filters are possible except relation.in and variable.in
+\item "grandfather": information on son, father and grandfather.
+All filters are possible except relation.in and variable.in
 
 }}
 
