@@ -367,43 +367,52 @@ query.germplasm.type = function(){
 
 
 query.network = function( P = NULL, G = NULL, GT = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL) {
-if( !is.null ( c(P, G, GT, Y, P, R, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL }
-if( !is.null(R[1]) ) { if(length(grep("nr.reproduction_id", R[1])) == 1) { w = " WHERE nr.selection_id IS NULL "} }
+w = NULL
+if( !is.null(R[1]) ) { 
+	if(length(grep("nr.reproduction_id", R[1])) == 1) { w = " WHERE nr.selection_id IS NULL "} 
+	if( !is.null ( c(P, G, GT, Y, P, SL, Proj)[1]) ) { w = paste(w, " AND ") } 
+	
+}
+if( !is.null ( c(P, G, GT, Y, P, SL, Proj)[1]) ) { w = " WHERE " } 
 
 query = 
 paste("
 SELECT 
 
 sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, p1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type,   
-l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, 
-sl1.generation AS son_total_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_generation_confidence, 
-sl1.comments AS son_comments, string_agg(DISTINCT pro1.project_name,','),
+l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, ",
+# waiting for generation and sl comments to be implemented in SHiNeMaS
+#sl1.generation AS son_total_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_generation_confidence, sl1.comments AS son_comments, 
+"", "
+string_agg(DISTINCT pro1.project_name,',') AS son_project,
 			
 sp2.species AS father_species, sl2.name AS father, gp2.germplasm_name AS father_germplasm, p2.short_name AS father_person, sl2.date AS father_year, gpt2.germplasm_type AS father_germplasm_type,
-l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat, 
-sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence, 
-sl2.comments AS father_comments, string_agg(DISTINCT pro2.project_name,',')
+l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat,  ",
+# waiting for generation and sl comments to be implemented in SHiNeMaS
+#sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence, sl2.comments AS father_comments,
+"", "
+string_agg(DISTINCT pro2.project_name,',') AS father_project,
 			
-nr.reproduction_id AS reproduction_id, nrm.reproduction_methode_name AS reproduction_type, nr.is_male, nr.block,
+nr.reproduction_id AS reproduction_id, nrm.reproduction_methode_name AS reproduction_method_name, nr.is_male, nr.block,
 nr.selection_id AS selection_id, psel.short_name AS selection_person, 
 nr.mixture_id AS mixture_id, nr.diffusion_id AS diffusion_id,
-rep.date AS relation_father_son_year, 
+rep.date AS relation_father_son_year
 			
 FROM network_relation nr
 LEFT OUTER JOIN network_selection sel ON nr.selection_id = sel.id 
 LEFT OUTER JOIN actors_person psel ON sel.person_id = psel.id 
 LEFT OUTER JOIN network_reproduction rep ON nr.reproduction_id = rep.id 
 LEFT OUTER JOIN network_reproduction_method nrm ON rep.reproduction_method_id = nrm.id
-LEFT OUTER JOIN entities_seed_lot sl1 ON nr.seed_lot_son_id=sl1.id 
-LEFT OUTER JOIN entities_seed_lot sl2 ON nr.seed_lot_father_id=sl2.id
-LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id=gp1.id
-LEFT OUTER JOIN entities_germplasm gp2 ON sl2.germplasm_id=gp2.id
+LEFT OUTER JOIN entities_seed_lot sl1 ON nr.seed_lot_son_id = sl1.id 
+LEFT OUTER JOIN entities_seed_lot sl2 ON nr.seed_lot_father_id = sl2.id
+LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
+LEFT OUTER JOIN entities_germplasm gp2 ON sl2.germplasm_id = gp2.id
 LEFT OUTER JOIN entities_species sp1 ON gp1.species_id = sp1.id
 LEFT OUTER JOIN entities_species sp2 ON gp2.species_id = sp2.id
-LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id=gpt1.id
-LEFT OUTER JOIN entities_germplasm_type gpt2 ON gp2.germplasm_type_id=gpt2.id
-LEFT OUTER JOIN actors_person p1 ON sl1.person_id=p1.id
-LEFT OUTER JOIN actors_person p2 ON sl2.person_id=p2.id
+LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id = gpt1.id
+LEFT OUTER JOIN entities_germplasm_type gpt2 ON gp2.germplasm_type_id = gpt2.id
+LEFT OUTER JOIN actors_person p1 ON sl1.person_id = p1.id
+LEFT OUTER JOIN actors_person p2 ON sl2.person_id = p2.id
 LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id
 LEFT OUTER JOIN actors_location l2 ON p2.location_id = l2.id
 			
@@ -418,52 +427,102 @@ Y,
 P,
 R,
 SL,
-Proj, sep = "")
+Proj, 
+
+"
+GROUP BY sp1.species, sl1.name, gp1.germplasm_name, p1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, p2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, nr.reproduction_id, nrm.reproduction_methode_name, nr.is_male, nr.block, nr.selection_id, psel.short_name, nr.mixture_id, nr.diffusion_id, rep.date
+",
+sep = "")
+
+print(query)
 
 d = get.d(query, info_db)
 
+
 if(nrow(d) > 0) {
+	son_species = as.factor(d$son_species)
+	son_project = as.factor(d$son_project)
+	son = as.factor(d$son)
+	son_germplasm = as.factor(d$son_germplasm)
+	son_person = as.factor(d$son_person)
+	son_year = as.factor(d$son_year)
+	son_germplasm_type = as.factor(d$son_germplasm_type)
+	son_alt = as.numeric(as.character(d$son_alt))
+	son_long = as.numeric(as.character(d$son_long))
+	son_lat = as.numeric(as.character(d$son_lat))
+#	son_total_generation_nb = as.numeric(as.character(d$son_total_generation_nb))
+#	son_local_generation_nb = as.numeric(as.character(d$son_local_generation_nb))
+#	son_generation_confidence = as.character(d$son_generation_confidence)
+#	son_comments = as.character(d$comments)
+	
+	father_species = as.factor(d$father_species)
+	father_project = as.factor(d$father_project)
+	father = as.factor(d$father)
+	father_germplasm = as.factor(d$father_germplasm)
+	father_person = as.factor(d$father_person)
+	father_year = as.factor(d$father_year)
+	father_germplasm_type = as.factor(d$father_germplasm_type)
+	father_alt = as.numeric(as.character(d$father_alt))
+	father_long = as.numeric(as.character(d$father_long))
+	father_lat = as.numeric(as.character(d$father_lat))
+#	father_total_generation_nb = as.numeric(as.character(d$father_total_generation_nb))
+#	father_local_generation_nb = as.numeric(as.character(d$father_local_generation_nb))
+#	father_generation_confidence = as.character(d$father_generation_confidence)
+#	father_comments = as.character(d$comments)
+	
+	reproduction_id = as.character(d$reproduction_id)
+	reproduction_method_name = as.factor(d$reproduction_method_name)
+	is_male = as.factor(d$is_male)
+	block = as.factor(d$block)
+	
+	selection_id = as.character(d$selection_id)
+	selection_person = as.factor(d$selection_person)
+	mixture_id = as.character(d$mixture_id)
+	diffusion_id = as.character(d$diffusion_id)
+	relation_father_son_year = as.factor(d$relation_father_son_year)
+	
+	
 	d = data.frame(
-		son_species = as.factor(d$son_species),
-		son_project = as.factor(d$son_project),
-		son = as.factor(d$son),
-		son_germplasm = as.factor(d$son_germplasm),
-		son_person = as.factor(d$son_person),
-		son_year = as.factor(d$son_year),
-		son_germplasm_type = as.factor(d$son_germplasm_type),
-		son_alt = as.numeric(as.character(d$son_alt)),
-		son_long = as.numeric(as.character(d$son_long)),
-		son_lat = as.numeric(as.character(d$son_lat)),
-		son_total_generation_nb = as.numeric(as.character(d$son_total_generation_nb)),
-		son_local_generation_nb = as.numeric(as.character(d$son_local_generation_nb)),
-		son_generation_confidence = as.character(d$son_generation_confidence),
-		son_comments = as.character(d$comments),
+		son_species,
+		son_project,
+		son,
+		son_germplasm,
+		son_person,
+		son_year,
+		son_germplasm_type,
+		son_alt,
+		son_long,
+		son_lat,
+#		son_total_generation_nb,
+#		son_local_generation_nb,
+#		son_generation_confidence,
+#		son_comments,
 		
-		father_species = as.factor(d$father_species),
-		father_project = as.factor(d$father_project),
-		father = as.factor(d$father),
-		father_germplasm = as.factor(d$father_germplasm),
-		father_person = as.factor(d$father_person),
-		father_year = as.factor(d$father_year),
-		father_germplasm_type = as.factor(d$father_germplasm_type),
-		father_alt = as.numeric(as.character(d$father_alt)),
-		father_long = as.numeric(as.character(d$father_long)),
-		father_lat = as.numeric(as.character(d$father_lat)),
-		father_total_generation_nb = as.numeric(as.character(d$father_total_generation_nb)),
-		father_local_generation_nb = as.numeric(as.character(d$father_local_generation_nb)),
-		father_generation_confidence = as.character(d$father_generation_confidence),
-		father_comments = as.character(d$comments),
+		father_species,
+		father_project,
+		father,
+		father_germplasm,
+		father_person,
+		father_year,
+		father_germplasm_type,
+		father_alt,
+		father_long,
+		father_lat,
+#		father_total_generation_nb,
+#		father_local_generation_nb,
+#		father_generation_confidence,
+#		father_comments,
 		
-		reproduction_id = as.character(d$reproduction_id),
-		reproduction_method_name = as.factor(d$reproduction_method_name),
-		is_male = as.factor(d$is_male),
-		block = as.factor(d$block),
+		reproduction_id,
+		reproduction_method_name,
+		is_male,
+		block,
 		
-		selection_id = as.character(d$selection_id),
-		selection_person = as.factor(d$selection_person),
-		mixture_id = as.character(d$mixture_id),
-		diffusion_id = as.character(d$diffusion_id),
-		relation_father_son_year = as.factor(d$relation_father_son_year)
+		selection_id,
+		selection_person,
+		mixture_id,
+		diffusion_id,
+		relation_father_son_year
 	)
 	
 	} else { d = NULL }
@@ -1800,7 +1859,6 @@ filter_V = V.sql(variable.in)
  			}
  		} else { Minfo = NULL }
  		
- 		
  	
  		if(Mdist) {
  			message("5. Get Mdist square matrix ...")
@@ -1975,7 +2033,6 @@ filter_V = V.sql(variable.in)
 				
 				if(data.type == "seed-lots") { out_corr = NULL }
 				
-
 				# All the data set for both data.type
 				out_d = list(d)
 				
