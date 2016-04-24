@@ -1556,8 +1556,7 @@ filter_SL = get.filters(filter.in = seed.lot.in, filter.out = seed.lot.out, filt
 if( !is.null(project.in) ) { project.in = clean.ap(project.in) }
 if( !is.null(project.out) ) { project.out = clean.ap(project.out) }
 
-filter_Proj = get.filters(filter.in = project.in, filter.out = project.out, filter.on, sql.son.tag = "pro1.project_name", sql.father.tag = "pro1.project_name")
-cat("ATTENTION, à changer en pro2 quand les projets seront reliés aux relations ... \n")
+filter_Proj = get.filters(filter.in = project.in, filter.out = project.out, filter.on, sql.son.tag = "pro1.project_name", sql.father.tag = "pro2.project_name")
 
 
 # 4.2.7. relation ---------------------------------------------------------
