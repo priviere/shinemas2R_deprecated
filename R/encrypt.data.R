@@ -186,14 +186,14 @@ data
 			d$son_germplasm_type = factor(vec_germplasm_type[as.character(d$son_germplasm_type)])
 			d$son_year = factor(vec_year[as.character(d$son_year)])
 			d$son_person = factor(vec_person[as.character(d$son_person)])
+			d$son_project = factor(vec_project[as.character(d$son_project)])
 			
 			d$father = sapply(d$father, encrypt_sl, vec_germplasm, vec_person, vec_year)
 			d$father_germplasm = factor(vec_germplasm[as.character(d$father_germplasm)])
 			d$father_germplasm_type = factor(vec_germplasm_type[as.character(d$father_germplasm_type)])
 			d$father_year = factor(vec_year[as.character(d$father_year)])
 			d$father_person = factor(vec_person[as.character(d$father_person)])
-			
-			d$project = factor(vec_project[as.character(d$project)])
+			d$father_project = factor(vec_project[as.character(d$father_project)])
 			
 			d$selection_person = factor(vec_selection_person[as.character(d$selection_person)])
 			return(d)
