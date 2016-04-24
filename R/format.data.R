@@ -74,7 +74,12 @@ if( format == "PPBstats" ) {
 	
 	out = data[,c("format_year", "format_location", "format_germplasm", "block", "X", "Y", vec_variables)]
 	colnames(out) = c("year", "location", "germplasm", "block", "X", "Y", vec_variables)
-	
+	out$year = factor(out$year)
+	out$location = factor(out$location)
+	out$germplasm = factor(out$germplasm)
+	out$block = factor(out$block)
+	out$X = factor(out$X)
+	out$Y = factor(out$Y)
 	}
 
 return(out)
