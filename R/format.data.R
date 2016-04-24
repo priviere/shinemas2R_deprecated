@@ -7,7 +7,7 @@
 #' 
 #' @param fuse_g_and_s Fuse germplasm and selection name information in a column named germplasm
 #' 
-#' @param correlated_group Name of the group of correlation in data. NULL by default.
+#' @param correlated_group Name of the group of correlation in data. NULL by default meaning that all the data are taken.
 #' 
 #' @param format the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are several formats within a package. Possible values are "PPBstats".
 #' 
