@@ -2019,11 +2019,8 @@ filter_V = V.sql(variable.in)
 											
 				# Get subset of correlated variable for data.type = relation
 				if(data.type == "relation") { 
-					d$correlation_group = rep("gp1, gp2", times = nrow(d))
-					# en attendant de pourvoir séparer (cf demande à Yannick) ----------
-					print("en attendant de pourvoir séparer (cf demande à Yannick)")
-					
-					corr_gp = c("gp1", "gp2") # unique(d$correlation_group)
+					corr_gp = unique(d$correlation_group)
+					if( length(corr_gp) == 1 & is.na(corr_gp[1]) ) { d$correlation_group = "NA"; corr_gp = "NA" } 
 					out_corr = list()
 					for(corr in corr_gp){ out_corr = c(out_corr, list(d)) }
 					names(out_corr) = corr_gp
