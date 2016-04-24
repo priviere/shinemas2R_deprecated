@@ -88,7 +88,7 @@ get.pdf = function(
 	dir = "./",
 	form.name,
 	LaTeX_head = NULL,
-	LaTeX_body, 
+	LaTeX_body,
 	compile.tex = TRUE,
 	color1 = "white",
 	color2 = "white"
