@@ -35,8 +35,7 @@ data
 # lets go !!! ----
 {
 # 1. Check parameters ----------
-	data = data$data
-	shinemas2R.object = attributes(data)$shinemas2R.object
+	shinemas2R.object = attributes(data$data)$shinemas2R.object
 	
 	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output"
 	if( is.null(shinemas2R.object) ) { stop(mess) }
