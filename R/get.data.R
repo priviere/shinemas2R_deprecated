@@ -430,10 +430,7 @@ GROUP BY sp1.species, sl1.name, gp1.germplasm_name, p1.short_name, sl1.date, gpt
 ",
 sep = "")
 
-print(query)
-
 d = get.d(query, info_db)
-
 
 if(nrow(d) > 0) {
 	son_species = as.factor(d$son_species)
@@ -2082,15 +2079,18 @@ filter_V = V.sql(variable.in)
 						for(j in 1:length(var_meth)) {
 							v = var_meth[j]
 							row = which(data$var_meth == v)
-							id = data[row, "ID"]
+							data_tmp = droplevels(data[row,])
+							id = data_tmp$ID
 							{
 							# In case there is redondant information. This is not possible with SHiNeMaS v1, but it occured in the dev version
-							raw_data = data[which(!duplicated(id)), "raw_data"]
-							id = id[which(!duplicated(id))]
+							raw_data = as.character(data_tmp$raw_data[which(!duplicated(id))])
+							id = as.character(id[which(!duplicated(id))])
 							}
+							
 							D[which(D$ID %in% id), v] = raw_data
 							setTxtProgressBar(pb, j)
 						}
+						D = select(D, -ID)
 						cat("\n")
 					} else { D = NULL }
 					return(D)
