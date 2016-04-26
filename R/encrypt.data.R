@@ -50,6 +50,8 @@ data
 	
 # 2. Encrypt data ----------
 
+	message("Prepare key for encryption ...")
+
 	info_db = data$info_db
 	
 	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "person")$data
@@ -93,6 +95,7 @@ data
 		return(sl)
 	}
 	
+	message("Encrypt data ...")
 	
 	if( shinemas2R.object == "network"){
 
