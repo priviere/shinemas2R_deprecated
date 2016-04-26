@@ -367,13 +367,14 @@ query.germplasm.type = function(){
 
 
 query.network = function( P = NULL, G = NULL, GT = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL) {
-w = NULL
-if( !is.null(R[1]) ) { 
-	if(length(grep("nr.reproduction_id", R[1])) == 1) { w = " WHERE nr.selection_id IS NULL "} 
-	if( !is.null ( c(P, G, GT, Y, P, SL, Proj)[1]) ) { w = paste(w, " AND ") } 
+	f = c( P, G, GT, Y, R, SL, Proj)
+	if( !is.null (f[1]) ) { 
+		f = f[!is.null(f)]
+		f = paste(f, collapse = " AND ")
+		filters = paste(" WHERE ", f, sep = "") 
+	} else { filters = NULL }
 	
-}
-if( !is.null ( c(P, G, GT, Y, P, SL, Proj)[1]) ) { w = " WHERE " } 
+if( !is.null(R[1]) ) { if(length(grep("nr.reproduction_id", R[1])) == 1) { filters = paste(filters, " AND nr.selection_id IS NULL ", sep = "") } }
 
 query = 
 paste("
@@ -421,13 +422,7 @@ LEFT OUTER JOIN actors_project pro1 ON pro1.id = rp1.project_id
 LEFT OUTER JOIN network_relation_project rp2 ON rp2.relation_id = nr.id
 LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 	
-w,
-G,
-Y,
-P,
-R,
-SL,
-Proj, 
+filters,
 
 "
 GROUP BY sp1.species, sl1.name, gp1.germplasm_name, p1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, p2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, nr.reproduction_id, nrm.reproduction_methode_name, nr.is_male, nr.block, nr.selection_id, psel.short_name, nr.mixture_id, nr.diffusion_id, rep.date
@@ -532,8 +527,14 @@ return(d)
 
 
 query.data.seed_lots = function(G = NULL, GT = NULL, Y = NULL, P = NULL, V = NULL, SL = NULL, Proj = NULL) {
-if( !is.null (c(G, GT, Y, P, V, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL }
 
+	f = c(G, GT, Y, P, V, SL, Proj)
+	if( !is.null (f[1]) ) { 
+		f = f[!is.null(f)]
+		f = paste(f, collapse = " AND ")
+		filters = paste(" WHERE ", f, sep = "") 
+	} else { filters = NULL }
+	
 query = 
 paste("
 SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, sp1.species, p1.short_name AS person, v1.name AS variable_name,rd.raw_data, rd.date AS raw_data_date, met.method_name, l1.latitude AS lat, l1.longitude AS long, l1.altitude AS alt, string_agg(DISTINCT pro1.project_name,',')|| ', ' || string_agg(DISTINCT pro2.project_name,',') AS project
@@ -561,15 +562,11 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id
 
 ",
 
-w,
-G,
-Y,
-P,
-V,
-SL,
-Proj, 
+filters,
 
-"GROUP BY sl1.name, sl1.date, gp1.germplasm_name, sp1.species, p1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude",
+"
+GROUP BY sl1.name, sl1.date, gp1.germplasm_name, sp1.species, p1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude
+",
 sep = "")
 
 d = get.d(query, info_db)
@@ -621,9 +618,17 @@ return(d)
 
 
 query.data.relation = function(G = NULL, GT = NULL, Y = NULL, P = NULL, R = NULL, V = NULL, SL = NULL, Proj = NULL) {
-if( !is.null (c(G, GT, Y, P, R, V, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL }
-if( !is.null(R[1]) ) { if(length(grep("nr.reproduction_id", R[1]))) { w = " WHERE nr.selection_id IS NULL "} }
+	f = c(G, GT, Y, P, R, V, SL, Proj)
+	if( !is.null (f[1]) ) { 
+		f = f[!is.null(f)]
+		f = paste(f, collapse = " AND ")
+		filters = paste(" WHERE ", f, sep = "") 
+	} else { filters = NULL }
 
+	if( !is.null(R[1]) ) { if(length(grep("nr.reproduction_id", R[1]))) { filters = paste(filters, " AND nr.selection_id IS NULL ", sep = "")} }
+
+	print(filters)
+	
 query = paste("	
 SELECT 
 sl1.name AS son, rd1.individual AS son_ind, sl1.date AS son_year, gp1.germplasm_name AS son_germplasm, sp1.species AS son_species, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person, l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, ",
@@ -677,14 +682,7 @@ LEFT OUTER JOIN actors_project pro1 ON pro1.id = rp1.project_id
 LEFT OUTER JOIN network_relation_project rp2 ON rp2.relation_id = nr.id
 LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 
-w,
-G,
-Y,
-P,
-R,
-V,
-SL,
-Proj,
+filters,
 
 "
 GROUP BY sl1.name, rd1.individual, sl1.date, gp1.germplasm_name, sp1.species, gpt1.germplasm_type, p1.short_name, l1.altitude, l1.longitude, l1.latitude, sl2.name, sl2.date, gp2.germplasm_name, sp2.species, gpt2.germplasm_type, p2.short_name, l2.altitude, l2.longitude, l2.latitude, v1.name, rd1.raw_data, rd1.group, rd1.date, met1.method_name, rep1.date, nr.reproduction_id, nrm1.reproduction_methode_name, nr.selection_id, psel1.short_name, nr.mixture_id, nr.diffusion_id, nr.\"X\", nr.\"Y\", nr.block
@@ -807,6 +805,14 @@ return(d)
 
 query.cross = function(G = NULL, GT = NULL, Y = NULL, P = NULL, Proj = NULL) {
 
+	f = c(G, GT, Y, P, Proj)
+	if( !is.null (f[1]) ) { 
+		f = f[!is.null(f)]
+		f = paste(f, collapse = " AND ")
+		filters = paste(" WHERE ", f, sep = "") 
+	} else { filters = NULL }
+	
+	
 query = paste(
 "SELECT 
 sl10.name AS father, gp10.germplasm_name AS father_germplasm, gpt10.germplasm_type AS father_germplasm_type, p10.short_name AS father_person, sl10.date AS father_year, pro10.project_name AS father_project, l10.altitude AS father_alt, l10.longitude AS father_long, l10.latitude AS father_lat, 
@@ -866,10 +872,8 @@ LEFT OUTER JOIN actors_project pro10 ON eslp.project_id = pro10.id
 
 WHERE r1.seed_lot_father_id <> r2.seed_lot_father_id AND r1.reproduction_id IS NOT NULL AND r1.is_male = 'M'",
 
-G, 
-Y, 
-P, 
-Proj,
+filters, 
+
 sep = "")
 
 d = get.d(query, info_db)
@@ -1185,7 +1189,15 @@ return(d)
 
 
 query.SL.mix = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj = NULL) {
-query = paste(
+	f = c(G, GT, Y, P, SL, Proj)
+	if( !is.null (f[1]) ) { 
+		f = f[!is.null(f)]
+		f = paste(f, collapse = " AND ")
+		filters = paste(" WHERE ", f, sep = "") 
+	} else { filters = NULL }
+	
+	
+	query = paste(
 "SELECT DISTINCT sl1.name AS son, gp1.germplasm_name AS son_germplasm, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person , sl1.date AS son_year, pro1.project_name AS son_project,
 
 sl2.name AS father, gp2.germplasm_name AS father_germplasm, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, sl2.date AS father_year, pro2.project_name AS father_project
@@ -1210,11 +1222,9 @@ WHERE
 nr1.mixture_id IS NOT NULL AND
 sl1.germplasm_id = sl2.germplasm_id",
 
-G,
-Y,
-P,
-SL,
-Proj, sep = "")
+filters,
+
+sep = "")
 
 d = get.d(query, info_db)
 
@@ -1244,8 +1254,14 @@ return(d)
 
 query.grand.father = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj = NULL) {
 
-if( !is.null (c(G, GT, Y, P, SL, Proj)[1]) ) { w = " WHERE" } else { w = NULL }
-
+	f = c(G, GT, Y, P, V, SL, Proj)
+	if( !is.null (f[1]) ) { 
+		f = f[!is.null(f)]
+		f = paste(f, collapse = " AND ")
+		filters = paste(" WHERE ", f, sep = "") 
+	} else { filters = NULL }
+	
+	
 query = paste(
 "
 SELECT
@@ -1303,12 +1319,9 @@ LEFT OUTER JOIN actors_project pro1 ON pro1.id = rp1.project_id
 LEFT OUTER JOIN network_relation_project rp2 ON rp2.relation_id = nr.id
 LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 
-w,
-G,
-Y,
-P,
-SL,
-Proj, sep = "")
+filters,
+
+sep = "")
 
 d = get.d(query, info_db)
 
@@ -1371,7 +1384,7 @@ if( nrow(d) > 0 ) {
 
 query.methods = function(V = NULL){
 
-if( !is.null (V) ) { w = " WHERE" } else { w = NULL }
+if( !is.null (V) ) { filters = paste(" WHERE", V, sep = "") } else { filters = NULL }
 
 query = paste(
 "SELECT DISTINCT m.method_name AS method_name, v1.name AS variable_name, m.method_description ,m.unit 
@@ -1379,8 +1392,9 @@ FROM eppdata_raw_data d
 INNER JOIN eppdata_method m ON d.method_id=m.id 
 INNER JOIN eppdata_variable v1 ON d.variable_id=v1.id",
 
-w,
-V, sep = "")
+filters,
+
+sep = "")
 
 d = get.d(query, info_db)
 
@@ -1390,7 +1404,7 @@ return(d)
 
 query.person.info = function(P = NULL){
 
-if( !is.null (P) ) { w = " WHERE" } else { w = NULL }
+if( !is.null (P) ) { filters = paste(" WHERE ", P, sep = "") } else { filters = NULL }
 	
 query = paste("
 SELECT p1.first_name, p1.last_name, p1.short_name, p1.email, p1.phone1, p1.fax, l1.address, l1.post_code, l1.country, l1.altitude AS alt, l1.latitude AS lat, l1.longitude AS long,
@@ -1398,8 +1412,9 @@ SELECT p1.first_name, p1.last_name, p1.short_name, p1.email, p1.phone1, p1.fax, 
 FROM actors_person p1
 LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id",
 							
-w,
-P, sep = "")
+filters, 
+
+sep = "")
 
 d = get.d(query, info_db)
 
@@ -1564,7 +1579,7 @@ R.sql = function(relation) {
 	if( !is.null(relation) ) {
 		R = paste("nr.", relation, "_id IS NOT NULL", sep = "")
 		R = paste(R, collapse = " OR ")
-		R = paste(" AND (", R, ")", sep = "")
+		R = paste(" (", R, ")", sep = "")
 	} else {R = NULL}
 	return(R)
 }
@@ -1575,7 +1590,7 @@ V.sql = function(variable) {
 	if( !is.null(variable) ) {
 		V = paste("v1.name='", variable, "'", sep = "")
 		V = paste(V, collapse = " OR ")
-		V = paste(" AND (", V, ")", sep = "")
+		V = paste(" (", V, ")", sep = "")
 	} else {V = NULL}
 	return(V)
 }
