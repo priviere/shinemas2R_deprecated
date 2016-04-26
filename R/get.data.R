@@ -398,7 +398,7 @@ string_agg(DISTINCT pro2.project_name,',') AS father_project,
 nr.reproduction_id AS reproduction_id, nrm.reproduction_methode_name AS reproduction_method_name, nr.is_male, nr.block,
 nr.selection_id AS selection_id, psel.short_name AS selection_person, 
 nr.mixture_id AS mixture_id, nr.diffusion_id AS diffusion_id,
-rep.date AS relation_father_son_year
+rep.date AS relation_year
 			
 FROM network_relation nr
 LEFT OUTER JOIN network_selection sel ON nr.selection_id = sel.id 
@@ -475,7 +475,7 @@ if(nrow(d) > 0) {
 	selection_person = as.factor(d$selection_person)
 	mixture_id = as.character(d$mixture_id)
 	diffusion_id = as.character(d$diffusion_id)
-	relation_father_son_year = as.factor(d$relation_father_son_year)
+	relation_year = as.factor(d$relation_year)
 	
 	
 	d = data.frame(
@@ -518,7 +518,7 @@ if(nrow(d) > 0) {
 		selection_person,
 		mixture_id,
 		diffusion_id,
-		relation_father_son_year
+		relation_year
 	)
 	
 	} else { d = NULL }
@@ -642,7 +642,7 @@ sl2.name AS father, sl2.date AS father_year, gp2.germplasm_name AS father_germpl
 "","
 string_agg(DISTINCT pro2.project_name,',') AS father_project,
 							
-v1.name AS variable_name, rd1.raw_data, rd1.group AS correlation_group, rd1.date AS raw_data_date, met1.method_name, rep1.date AS relation_father_son_year,
+v1.name AS variable_name, rd1.raw_data, rd1.group AS correlation_group, rd1.date AS raw_data_date, met1.method_name, rep1.date AS relation_year,
 nr.reproduction_id AS reproduction_id, nrm1.reproduction_methode_name AS reproduction_method_name, nr.selection_id AS selection_id, psel1.short_name AS selection_person, nr.mixture_id AS mixture_id, nr.diffusion_id AS diffusion_id, 
 nr.\"X\", nr.\"Y\", nr.block
 							
@@ -735,7 +735,7 @@ if( nrow(d) > 0 ) {
 	selection_person = as.factor(d$selection_person)
 	mixture_id = as.character(d$mixture_id)
 	diffusion_id = as.character(d$diffusion_id)
-	relation_father_son_year = as.factor(d$relation_father_son_year)
+	relation_year = as.factor(d$relation_year)
 	
 	X = as.factor(d$X)
 	Y = as.factor(d$Y)
@@ -786,7 +786,7 @@ if( nrow(d) > 0 ) {
 		selection_person,
 		mixture_id,
 		diffusion_id,
-		relation_father_son_year,
+		relation_year,
 		
 		X,
 		Y,
@@ -1274,7 +1274,7 @@ l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_la
 sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence,
 sl2.comments AS father_comments, string_agg(DISTINCT pro2.project_name,','),
 
-rep1.date AS relation_father_son_year,
+rep1.date AS relation_year,
 
 spf.species AS grandfather_species, slf.name AS grandfather, gpf.germplasm_name AS grandfather_germplasm, pf.short_name AS grandfather_person, slf.date AS grandfather_year, gptf.germplasm_type AS grandfather_germplasm_type,
 lf.altitude AS grandfather_alt, lf.longitude AS grandfather_long, lf.latitude AS grandfather_lat,
@@ -1355,7 +1355,7 @@ if( nrow(d) > 0 ) {
 		father_generation_confidence = as.character(d$father_generation_confidence),
 		father_comments = as.character(d$father_comments),
 		
-		relation_father_son_year = as.factor(relation_father_son_year),
+		relation_year = as.factor(relation_year),
 		
 		grandfather_species = as.factor(d$grandfather_species),
 		grandfather_project = as.factor(d$grandfather_project),
@@ -1778,7 +1778,7 @@ filter_V = V.sql(variable.in)
  				Minfo = matrix(NA, ncol = 16, nrow = nrow(reseau))
  				colnames(Minfo) = c("father", "son", "diffusion_father_info", "diffusion_son_info", "id.diff_son", "id.diff_father", "reproduction_father_info", "reproduction_son_info", "selection_info", "mixture_info", "father_alt", "father_long", "father_lat", "son_alt", "son_long", "son_lat")
  				
- 				# Faire avec relation_father_son_year!!! A Ajouter dans le data reseau ------------
+ 				# Faire avec relation_year!!! A Ajouter dans le data reseau ------------
  				# dès que c'est fait, vérifier la cohérence des graph de diffusion et de reproduction (?) ----------
  				
  				for(i in 1:nrow(reseau)) {
