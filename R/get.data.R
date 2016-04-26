@@ -2036,10 +2036,10 @@ filter_V = V.sql(variable.in)
 				# Get subset of correlated variable for data.type = relation
 				if(data.type == "relation") { 
 					corr_gp = unique(as.character(d$correlation_group))
-					if( length(corr_gp) == 1 & is.na(corr_gp[1]) ) { 
-						out_corr = NULL
-					} else {
-						corr_gp[is.na(corr_gp)] = "NA"
+					corr_gp = corr_gp[!is.na(corr_gp)]
+					corr_gp = corr_gp[which(corr_gp != "")]
+					
+					if( length(corr_gp) == 0 ) { out_corr = NULL } else {
 						out_corr = list()
 						for(corr in corr_gp){ out_corr = c(out_corr, list(NULL)) }
 						names(out_corr) = corr_gp
