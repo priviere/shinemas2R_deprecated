@@ -627,8 +627,6 @@ query.data.relation = function(G = NULL, GT = NULL, Y = NULL, P = NULL, R = NULL
 
 	if( !is.null(R[1]) ) { if(length(grep("nr.reproduction_id", R[1]))) { filters = paste(filters, " AND nr.selection_id IS NULL ", sep = "")} }
 
-	print(filters)
-	
 query = paste("	
 SELECT 
 sl1.name AS son, rd1.individual AS son_ind, sl1.date AS son_year, gp1.germplasm_name AS son_germplasm, sp1.species AS son_species, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person, l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, ",
