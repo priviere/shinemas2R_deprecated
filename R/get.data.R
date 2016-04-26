@@ -12,7 +12,8 @@
 #' 
 #' @param db_password your password to login. If no password is needed, put ""
 #'
-#' @param query.type Type of query, which will create a data set. There are five types: 
+#' @param query.type Type of query, which will create a data set. There are five types:
+#' 
 #' \enumerate{
 #' 
 #' \item "network": network relations between seed-lots. All filters are possible.
@@ -791,7 +792,6 @@ if( nrow(d) > 0 ) {
 		Y,
 		block
 	)
-
 
 d = d[order(d$son, d$son_ind), ] 
 
@@ -2028,22 +2028,27 @@ filter_V = V.sql(variable.in)
 			vec_variable = na.omit(unique(as.character(d$variable_name)))		
 			
 			if(length(vec_variable) != 0) { # If there are no variables, nothing is done
-				message("2. Set up data set ... \n")	
+				message("2. Set up data set ...")	
 											
+				# All the data set for both data.type
+				out_d = list(d)
+				
 				# Get subset of correlated variable for data.type = relation
 				if(data.type == "relation") { 
-					corr_gp = unique(d$correlation_group)
-					if( length(corr_gp) == 1 & is.na(corr_gp[1]) ) { d$correlation_group = "NA"; corr_gp = "NA" } 
-					out_corr = list()
-					for(corr in corr_gp){ out_corr = c(out_corr, list(d)) }
-					names(out_corr) = corr_gp
-					for(cg in corr_gp){	out_corr[[cg]] = d[grep(cg, d$correlation_group),] }
+					corr_gp = unique(as.character(d$correlation_group))
+					if( length(corr_gp) == 1 & is.na(corr_gp[1]) ) { 
+						out_corr = NULL
+					} else {
+						corr_gp[is.na(corr_gp)] = "NA"
+						out_corr = list()
+						for(corr in corr_gp){ out_corr = c(out_corr, list(NULL)) }
+						names(out_corr) = corr_gp
+						for(cg in corr_gp){	out_corr[[cg]] = d[grep(cg, d$correlation_group),] }
+						} 
 					}
 				
 				if(data.type == "seed-lots") { out_corr = NULL }
 				
-				# All the data set for both data.type
-				out_d = list(d)
 				
 				# Arrange datasets
 				arrange.data = function(data, data.type){
@@ -2067,11 +2072,8 @@ filter_V = V.sql(variable.in)
 							var_meth = var_meth[-which(var_meth == "NA---NA")]
 						}
 						
-						print("For redondant information, à virer quand on aura l'unicité dans la base")
-						data = unique(data)
-
-						D = select(data, -method_name, -variable_name, -raw_data, -method_name, -var_meth)
-						D = unique(D)
+						D = select(data, -method_name, -variable_name, -raw_data, -var_meth)
+						D = droplevels(D[!duplicated(D$ID),]) # In case there is redondant information. This is not possible with SHiNeMaS v1, but it occured in the dev version
 						
 						D = cbind.data.frame(D, matrix(NA, ncol = length(var_meth), nrow = nrow(D)))
 						colnames(D)[(ncol(D) - length(var_meth) + 1) : ncol(D)] = var_meth
@@ -2080,23 +2082,24 @@ filter_V = V.sql(variable.in)
 						for(j in 1:length(var_meth)) {
 							v = var_meth[j]
 							row = which(data$var_meth == v)
-							data_tmp = droplevels(data[row,])
-							print("cf pb unicité, donné différente pour un meme ID!") # Cf C14_RAB_2008_001 -> C14_RAB_2010_0001
-							data_tmp <- data_tmp[!duplicated(data_tmp$ID),]
-							id = data_tmp$ID
-							D[which(D$ID %in% id), v] = data_tmp$raw_data
+							id = data[row, "ID"]
+							{
+							# In case there is redondant information. This is not possible with SHiNeMaS v1, but it occured in the dev version
+							raw_data = data[which(!duplicated(id)), "raw_data"]
+							id = id[which(!duplicated(id))]
+							}
+							D[which(D$ID %in% id), v] = raw_data
 							setTxtProgressBar(pb, j)
 						}
 						cat("\n")
 					} else { D = NULL }
-					
 					return(D)
 				}
 				
-				d1 = lapply(out_corr, arrange.data, data.type)
-				d2 = lapply(out_d, arrange.data, data.type)
+				d1 = lapply(out_d, arrange.data, data.type)
+				d2 = lapply(out_corr, arrange.data, data.type)
 				
-				out.d = list("data" = d2[[1]], "data.with.correlated.variables" = d1)
+				out.d = list("data" = d1[[1]], "data.with.correlated.variables" = d2)
 				
 				# description of methods
 				filter_V = V.sql(vec_variable)
