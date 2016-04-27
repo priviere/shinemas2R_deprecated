@@ -25,6 +25,7 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 \item{db_password}{your password to login. If no password is needed, put ""}
 
 \item{query.type}{Type of query, which will create a data set. There are five types:
+
 \enumerate{
 
 \item "network": network relations between seed-lots. All filters are possible.
