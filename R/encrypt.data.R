@@ -19,7 +19,7 @@
 #' 
 #' The key is written in .RData format. To use it you should type load("key.RData").
 #' 
-#' @return The function returns the data frame encrypted and writes in the work directory a file.txt with the key
+#' @return The function returns the data frame encrypted and writes in the work directory a file.RData with the key
 #' 
 #' @examples 
 #' # See the vignette
