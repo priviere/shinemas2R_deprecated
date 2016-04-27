@@ -38,7 +38,7 @@ format = "PPBstats"
 										"data-S-relation", 
 										"data-SR-relation", 
 										"data-classic-seed-lots",
-										"data-S-seed-lots", 
+										"data-S-seed-lots",
 										"data-SR-seed-lots")) 
 	) { stop(mess) }  
 	
