@@ -10,7 +10,7 @@ encrypt.data(data)
 \item{data}{output from \code{get.data}}
 }
 \value{
-The function returns the data frame encrypted and writes in the work directory a file.txt with the key
+The function returns the data frame encrypted and writes in the work directory a file.RData with the key
 }
 \description{
 \code{encrypt.data} encrypts data from \code{get.data} or \code{is.get.fata.output}
