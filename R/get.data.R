@@ -443,10 +443,10 @@ if(nrow(d) > 0) {
 	son_alt = as.numeric(as.character(d$son_alt))
 	son_long = as.numeric(as.character(d$son_long))
 	son_lat = as.numeric(as.character(d$son_lat))
-#	son_total_generation_nb = as.numeric(as.character(d$son_total_generation_nb))
-#	son_local_generation_nb = as.numeric(as.character(d$son_local_generation_nb))
-#	son_generation_confidence = as.character(d$son_generation_confidence)
-#	son_comments = as.character(d$comments)
+	son_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$son_total_generation_nb))
+	son_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$son_local_generation_nb))
+	son_generation_confidence = sample( c(0,1), nrow(d), replace = TRUE) # as.character(d$son_generation_confidence)
+	son_comments = rep("blablabla", nrow(d)) # as.character(d$son_comments)
 	
 	father_species = as.factor(d$father_species)
 	father_project = as.factor(d$father_project)
@@ -458,10 +458,10 @@ if(nrow(d) > 0) {
 	father_alt = as.numeric(as.character(d$father_alt))
 	father_long = as.numeric(as.character(d$father_long))
 	father_lat = as.numeric(as.character(d$father_lat))
-#	father_total_generation_nb = as.numeric(as.character(d$father_total_generation_nb))
-#	father_local_generation_nb = as.numeric(as.character(d$father_local_generation_nb))
-#	father_generation_confidence = as.character(d$father_generation_confidence)
-#	father_comments = as.character(d$comments)
+	father_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_total_generation_nb))
+	father_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_local_generation_nb))
+	father_generation_confidence = sample( c(0,1), nrow(d), replace = TRUE) # as.character(d$father_generation_confidence)
+	father_comments = rep("blablabla", nrow(d)) # as.character(d$father_comments)
 	
 	reproduction_id = as.character(d$reproduction_id)
 	reproduction_method_name = as.factor(d$reproduction_method_name)
@@ -486,10 +486,10 @@ if(nrow(d) > 0) {
 		son_alt,
 		son_long,
 		son_lat,
-#		son_total_generation_nb,
-#		son_local_generation_nb,
-#		son_generation_confidence,
-#		son_comments,
+		son_total_generation_nb,
+		son_local_generation_nb,
+		son_generation_confidence,
+		son_comments,
 		
 		father_species,
 		father_project,
@@ -501,10 +501,10 @@ if(nrow(d) > 0) {
 		father_alt,
 		father_long,
 		father_lat,
-#		father_total_generation_nb,
-#		father_local_generation_nb,
-#		father_generation_confidence,
-#		father_comments,
+		father_total_generation_nb,
+		father_local_generation_nb,
+		father_generation_confidence,
+		father_comments,
 		
 		reproduction_id,
 		reproduction_method_name,
@@ -1598,17 +1598,14 @@ filter_V = V.sql(variable.in)
  	if(query.type == "network") {	
  		message("1. Query SHiNeMaS ...")
  		reseau = query.network(filter_P, filter_G, filter_GT, filter_Y, filter_R, filter_SL, filter_Proj)
- 		
- 		reseau$generation = sample( c(1:8), nrow(reseau), replace = TRUE) # !!!!!! Ajouter nb generation. cf yannick ---------------
- 		 		
+
  		message("2. Create network matrix ..."); {
  
  			# fill diffusion gap
  			fill.diff.gap = function(reseau){
  				message("2.1. Fill diffusion gaps ...")
  				RESEAU = query.network(P = NULL, G = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL)
- 				RESEAU$generation = sample( c(1:8), nrow(RESEAU), replace = TRUE) # !!!!!! Ajouter nb generation. cf yannick ---------------
- 				
+
  				# get seed-lots sent (=father) but never received (=son) that are not in reseau
  				f = unique(as.character(reseau$father)) # vector of seed-lots father
  				s = unique(as.character(reseau$son)) # vector of seed-lots son
@@ -1723,7 +1720,7 @@ filter_V = V.sql(variable.in)
  			
  			# number of generations
  			DD = filter(reseau, !is.na(reproduction_id))
- 			D_generation = unique(DD[,c("father", "son", "generation")])
+ 			D_generation = unique(DD[,c("father", "son", "son_total_generation_nb")])
  			D_generation$toto = paste(D_generation$father, D_generation$son, sep = ":")
  			
  			stock_type_relation = NULL
@@ -1738,16 +1735,17 @@ filter_V = V.sql(variable.in)
  				d = as.character(reseau[i, "diffusion_id"])
  				
  				generation = ""		
- 				if(!is.na(r)) {type = "reproduction"
- 											 f = D_generation[which(D_generation$toto == paste(Father, Son, sep=":")), "generation"]
- 											 f = f[1] # !!!!!!!!!!! virer quand les projets seront liés aux relations, normalement, un seul élément !				 
- 											 generation = paste("F", f, sep = "") }
+ 				if(!is.na(r)) {
+ 					type = "reproduction"
+ 					f = D_generation[which(D_generation$toto == paste(Father, Son, sep=":")), "generation"]
+ 					# f = f[1] # !!!!!!!!!!! virer quand les projets seront liés aux relations, normalement, un seul élément !				 
+ 					generation = paste("F", f, sep = "") 
+ 					}
  				if(!is.na(s)) {type = "selection"} # selection erase reproduction
  				if(!is.na(m)) {type = "mixture"}
  				if(!is.na(d)) {type = "diffusion"}
  				
 				R[Father, Son] = type
- 				
  				M_generation[Father, Son] = generation
  			}
  			
