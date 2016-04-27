@@ -31,7 +31,7 @@ format = "PPBstats"
 	data = data$data
 	shinemas2R.object = attributes(data)$shinemas2R.object
 	
-	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output"
+	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output. It must be with query.type \"data-classic\", \"data-S\" or \"data-SR\"."
 	if( is.null(shinemas2R.object) ) { stop(mess) }
 	if( !is.element(shinemas2R.object, 
 									c("data-classic-relation", 
@@ -67,8 +67,7 @@ if( format == "PPBstats" ) {
 		data$format_location = data$father_person
 	}
 	
-
-	vec_variables = colnames(data)[c(29: (ncol(data)-3))] # - 3 because of  format_germplasm format_year format_location
+	vec_variables = colnames(data)[c(33: (ncol(data)-3))] # - 3 because of  format_germplasm format_year format_location
 	# Importance d'avoir le meme nombre de colonnes dans toutes les sorties de data ou alors avec un attributes ?!!!
 	print("Importance d'avoir le meme nombre de colonnes dans toutes les sorties de data ou alors avec un attributes ?!!!")
 	
