@@ -1773,9 +1773,6 @@ filter_V = V.sql(variable.in)
  				Minfo = matrix(NA, ncol = 16, nrow = nrow(reseau))
  				colnames(Minfo) = c("father", "son", "diffusion_father_info", "diffusion_son_info", "id.diff_son", "id.diff_father", "reproduction_father_info", "reproduction_son_info", "selection_info", "mixture_info", "father_alt", "father_long", "father_lat", "son_alt", "son_long", "son_lat")
  				
- 				# Faire avec relation_year!!! A Ajouter dans le data reseau ------------
- 				# dès que c'est fait, vérifier la cohérence des graph de diffusion et de reproduction (?) ----------
- 				
  				for(i in 1:nrow(reseau)) {
  					
  					Minfo[i, "father"] = f = as.character(reseau[i, "father"])
