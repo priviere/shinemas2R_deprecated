@@ -1188,7 +1188,7 @@ query.SL.mix = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj
 	if( !is.null (f[1]) ) { 
 		f = f[!is.null(f)]
 		f = paste(f, collapse = " AND ")
-		filters = paste(" WHERE ", f, sep = "") 
+		filters = paste(" AND ", f, sep = "") 
 	} else { filters = NULL }
 	
 	
@@ -1249,34 +1249,38 @@ return(d)
 
 query.grand.father = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj = NULL) {
 
-	f = c(G, GT, Y, P, V, SL, Proj)
+	f = c(G, GT, Y, P, SL, Proj)
 	if( !is.null (f[1]) ) { 
 		f = f[!is.null(f)]
 		f = paste(f, collapse = " AND ")
 		filters = paste(" WHERE ", f, sep = "") 
 	} else { filters = NULL }
 	
-	
 query = paste(
 "
 SELECT
-
 sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, p1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type,
-l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat,
-sl1.generation AS son_total_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_generation_confidence,
-sl1.comments AS son_comments, string_agg(DISTINCT pro1.project_name,','),
+l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat,",
+# waiting for generation and sl comments to be implemented in SHiNeMaS
+#sl1.generation AS son_total_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_generation_confidence,
+#sl1.comments AS son_comments, 
+"","string_agg(DISTINCT pro1.project_name,',') AS son_project,
 
 sp2.species AS father_species, sl2.name AS father, gp2.germplasm_name AS father_germplasm, p2.short_name AS father_person, sl2.date AS father_year, gpt2.germplasm_type AS father_germplasm_type,
-l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat,
-sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence,
-sl2.comments AS father_comments, string_agg(DISTINCT pro2.project_name,','),
+l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat,",
+# waiting for generation and sl comments to be implemented in SHiNeMaS
+# sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence,
+#sl2.comments AS father_comments, 
+"", "string_agg(DISTINCT pro2.project_name,',') AS father_project,
 
 rep1.date AS relation_year,
 
 spf.species AS grandfather_species, slf.name AS grandfather, gpf.germplasm_name AS grandfather_germplasm, pf.short_name AS grandfather_person, slf.date AS grandfather_year, gptf.germplasm_type AS grandfather_germplasm_type,
-lf.altitude AS grandfather_alt, lf.longitude AS grandfather_long, lf.latitude AS grandfather_lat,
-slf.generation AS grandfather_total_generation_nb, slf.lgeneration AS grandfather_local_generation_nb, slf.confidence AS grandfather_generation_confidence,
-slf.comments AS grandfather_comments, string_agg(DISTINCT pro2.project_name,','),
+lf.altitude AS grandfather_alt, lf.longitude AS grandfather_long, lf.latitude AS grandfather_lat,",
+# waiting for generation and sl comments to be implemented in SHiNeMaS
+# slf.generation AS grandfather_total_generation_nb, slf.lgeneration AS grandfather_local_generation_nb, slf.confidence AS grandfather_generation_confidence,
+# slf.comments AS grandfather_comments, 
+"", "string_agg(DISTINCT pro2.project_name,',')  AS grandfather_project,
 
 repf.date AS relation_father_grandfather_year
 
@@ -1316,60 +1320,115 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 
 filters,
 
+"
+GROUP BY sp1.species, sl1.name, gp1.germplasm_name, p1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, p2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, rep1.date, spf.species, slf.name, gpf.germplasm_name, pf.short_name, slf.date, gptf.germplasm_type, lf.altitude, lf.longitude, lf.latitude, repf.date
+",
+
 sep = "")
 
 d = get.d(query, info_db)
 
 if( nrow(d) > 0 ) {
+	
+	son_species = as.factor(d$son_species)
+	son_project = as.factor(d$son_project)
+	son = as.factor(d$son)
+	son_germplasm = as.factor(d$son_germplasm)
+	son_person = as.factor(d$son_person)
+	son_year = as.factor(d$son_year)
+	son_germplasm_type = as.factor(d$son_germplasm_type)
+	son_alt = as.numeric(as.character(d$son_alt))
+	son_long = as.numeric(as.character(d$son_long))
+	son_lat = as.numeric(as.character(d$son_lat))
+	#son_total_generation_nb = as.numeric(as.character(d$son_total_generation_nb))
+	#son_local_generation_nb = as.numeric(as.character(d$son_local_generation_nb))
+	#son_generation_confidence = as.character(d$son_generation_confidence)
+	son_comments = as.character(d$son_comments)
+	
+	father_species = as.factor(d$father_species)
+	father_project = as.factor(d$father_project)
+	father = as.factor(d$father)
+	father_germplasm = as.factor(d$father_germplasm)
+	father_person = as.factor(d$father_person)
+	father_year = as.factor(d$father_year)
+	father_germplasm_type = as.factor(d$father_germplasm_type)
+	father_alt = as.numeric(as.character(d$father_alt))
+	father_long = as.numeric(as.character(d$father_long))
+	father_lat = as.numeric(as.character(d$father_lat))
+	#father_total_generation_nb = as.numeric(as.character(d$father_total_generation_nb))
+	#father_local_generation_nb = as.numeric(as.character(d$father_local_generation_nb))
+	#father_generation_confidence = as.character(d$father_generation_confidence)
+	father_comments = as.character(d$father_comments)
+	
+	relation_year = as.factor(d$relation_year)
+	
+	grandfather_species = as.factor(d$grandfather_species)
+	grandfather_project = as.factor(d$grandfather_project)
+	grandfather = as.factor(d$grandfather)
+	grandfather_germplasm = as.factor(d$grandfather_germplasm)
+	grandfather_person = as.factor(d$grandfather_person)
+	grandfather_year = as.factor(d$grandfather_year)
+	grandfather_germplasm_type = as.factor(d$grandfather_germplasm_type)
+	grandfather_alt = as.numeric(as.character(d$grandfather_alt))
+	grandfather_long = as.numeric(as.character(d$grandfather_long))
+	grandfather_lat = as.numeric(as.character(d$grandfather_lat))
+	#grandfather_total_generation_nb = as.numeric(as.character(d$grandfather_total_generation_nb))
+	#grandfather_local_generation_nb = as.numeric(as.character(d$grandfather_local_generation_nb))
+	#grandfather_generation_confidence = as.character(d$grandfather_generation_confidence)
+	grandfather_comments = as.character(d$grandfather_comments)
+	
+	relation_father_grandfather_year = as.factor(d$relation_father_grandfather_year)
+	
+	
 	d = data.frame(
-		son_species = as.factor(d$son_species),
-		son_project = as.factor(d$son_project),
-		son = as.factor(d$son),
-		son_germplasm = as.factor(d$son_germplasm),
-		son_person = as.factor(d$son_person),
-		son_year = as.factor(d$son_year),
-		son_germplasm_type = as.factor(d$son_germplasm_type),
-		son_alt = as.numerci(as.character(d$son_alt)),
-		son_long = as.numerci(as.character(d$son_long)),
-		son_lat = as.numerci(as.character(d$son_lat)),
-		son_total_generation_nb = as.numerci(as.character(d$son_total_generation_nb)),
-		son_local_generation_nb = as.numerci(as.character(d$son_local_generation_nb)),
-		son_generation_confidence = as.character(d$son_generation_confidence),
-		son_comments = as.character(d$son_comments),
+		son_species,
+		son_project,
+		son,
+		son_germplasm,
+		son_person,
+		son_year,
+		son_germplasm_type,
+		son_alt,
+		son_long,
+		son_lat,
+		#son_total_generation_nb,
+		#son_local_generation_nb,
+		#son_generation_confidence,
+		#son_comments,
 		
-		father_species = as.factor(d$father_species),
-		father_project = as.factor(d$father_project),
-		father = as.factor(d$father),
-		father_germplasm = as.factor(d$father_germplasm),
-		father_person = as.factor(d$father_person),
-		father_year = as.factor(d$father_year),
-		father_germplasm_type = as.factor(d$father_germplasm_type),
-		father_alt = as.numerci(as.character(d$father_alt)),
-		father_long = as.numerci(as.character(d$father_long)),
-		father_lat = as.numerci(as.character(d$father_lat)),
-		father_total_generation_nb = as.numerci(as.character(d$father_total_generation_nb)),
-		father_local_generation_nb = as.numerci(as.character(d$father_local_generation_nb)),
-		father_generation_confidence = as.character(d$father_generation_confidence),
-		father_comments = as.character(d$father_comments),
+		father_species,
+		father_project,
+		father,
+		father_germplasm,
+		father_person,
+		father_year,
+		father_germplasm_type,
+		father_alt,
+		father_long,
+		father_lat,
+		#father_total_generation_nb,
+		#father_local_generation_nb,
+		#father_generation_confidence,
+		#father_comments,
 		
-		relation_year = as.factor(relation_year),
+		relation_year,
 		
-		grandfather_species = as.factor(d$grandfather_species),
-		grandfather_project = as.factor(d$grandfather_project),
-		grandfather = as.factor(d$grandfather),
-		grandfather_germplasm = as.factor(d$grandfather_germplasm),
-		grandfather_person = as.factor(d$grandfather_person),
-		grandfather_year = as.factor(d$grandfather_year),
-		grandfather_germplasm_type = as.factor(d$grandfather_germplasm_type),
-		grandfather_alt = as.numerci(as.character(d$grandfather_alt)),
-		grandfather_long = as.numerci(as.character(d$grandfather_long)),
-		grandfather_lat = as.numerci(as.character(d$grandfather_lat)),
-		grandfather_total_generation_nb = as.numerci(as.character(d$grandfather_total_generation_nb)),
-		grandfather_local_generation_nb = as.numerci(as.character(d$grandfather_local_generation_nb)),
-		grandfather_generation_confidence = as.character(d$grandfather_generation_confidence),
-		grandfather_comments = as.character(d$grandfather_comments),
+		grandfather_species,
+		grandfather_project,
+		grandfather,
+		grandfather_germplasm,
+		grandfather_person,
+		grandfather_year,
+		grandfather_germplasm_type,
+		grandfather_alt,
+		grandfather_long,
+		grandfather_lat,
+		#grandfather_total_generation_nb,
+		#grandfather_local_generation_nb,
+		#grandfather_generation_confidence,
+		#grandfather_comments,
 		
-		relation_father_grandfather_year = as.factor(relation_father_grandfather_year)
+		relation_father_grandfather_year
 	)
 
 }
@@ -2152,7 +2211,7 @@ if(query.type == "person.info") {
 # 5.8. query.grand.father ----------
 if(query.type == "grandfather") {
 	message("1. Query SHiNeMaS ...")
-	d = query.methods(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj)
+	d = query.grand.father(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj)
 	attributes(d)$shinemas2R.object = "grandfather"
 }
 
