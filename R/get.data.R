@@ -804,7 +804,7 @@ query.cross = function(G = NULL, GT = NULL, Y = NULL, P = NULL, Proj = NULL) {
 	if( !is.null (f[1]) ) { 
 		f = f[!is.null(f)]
 		f = paste(f, collapse = " AND ")
-		filters = paste(" WHERE ", f, sep = "") 
+		filters = paste(" AND ", f, sep = "") 
 	} else { filters = NULL }
 	
 	
