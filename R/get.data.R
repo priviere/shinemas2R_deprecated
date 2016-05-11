@@ -45,7 +45,7 @@
 #' \item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. 
 #' Filters can be applied on variables. Possible filter is variable.in.
 #' 
-#' \item "person-info": information regarding persons stored in SHiNeMaS. 
+#' \item "person.info": information regarding persons stored in SHiNeMaS. 
 #' Possible filters are person.in and person.out and variable.in
 #' 
 #' \item "grandfather": information on son, father and grandfather. 
@@ -53,7 +53,7 @@
 #' 
 #' }
 #' 
-#' @param filter.on This argument is needed if you want to use filters. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son". Filter.on is not used for data.type = "seed-lots", query.type = "methods" and query.type = "person-info"
+#' @param filter.on This argument is needed if you want to use filters. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son". Filter.on is not used for data.type = "seed-lots", query.type = "methods" and query.type = "person.info"
 #' 
 #' @param germplasm.in Filter: vector with germplasms to keep. By default, all the germplasms are in.
 #' @param germplasm.out Filter: vector with germplasms to discard. By default, no germplasm is out.
@@ -188,7 +188,7 @@ fill.diffusion.gap = FALSE
 # 1. Check parameters ----------
 
 # 1.1. Possibles values of arguments ----------
-if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person-info", "grandfather")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\", \"person-info\" or \"grandfather\".") }
+if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person.info", "grandfather")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\", \"person.info\" or \"grandfather\".") }
 
 test = c(germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in, variable.in)
 if(is.element(query.type, c( "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm")) & !is.null(test)) { stop("You can not use a filter on raw information on levels and variables.") }
@@ -220,7 +220,7 @@ if( query.type == "methods" & (
 ) ) { warning("With query.type == \"cross\", filters germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in and reproduction.type.in are not used.") }
 
 
-if( query.type == "person-info" & (
+if( query.type == "person.info" & (
 	!is.null(germplasm.in) | 
 	!is.null(germplasm.out) | 
 	!is.null(germplasm.type.in) | 
@@ -234,7 +234,7 @@ if( query.type == "person-info" & (
 	!is.null(relation.in) | 
 	!is.null(reproduction.type.in) |
 	!is.null(variable.in)
-) ) { warning("With query.type == \"person-info\", filters germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in and variable.in are not used.") }
+) ) { warning("With query.type == \"person.info\", filters germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in and variable.in are not used.") }
 
 if( query.type == "grandfather" & (!is.null(relation.in) | !is.null(variable.in)) ) { warning("With query.type == \"grandfather\", filter relation.in is not used.") }
 
@@ -258,7 +258,7 @@ if(!is.element(data.type, c("relation", "seed-lots"))) { 	stop("data.type must b
 if( data.type == "seed-lots" ) { filter.on = "son" ; message("With data.type == \"seed-lots\", \"filter.on\" is not used.") } # To be ok with filters
 }
 
-if( query.type == "person-info" | query.type == "methods" ) { filter.on = "son" ; message("With query.type == \"", query.type, "\", \"filter.on\" is not used.") } # To be ok with filters
+if( query.type == "person.info" | query.type == "methods" ) { filter.on = "son" ; message("With query.type == \"", query.type, "\", \"filter.on\" is not used.") } # To be ok with filters
 
 if(!is.null(filter.on)){
 if(!is.element(filter.on, c("son", "father", "father-son")))  { stop("filter.on must be \"son\", \"father\" or \"father-son\".") }
@@ -1402,9 +1402,10 @@ query.person.info = function(P = NULL){
 if( !is.null (P) ) { filters = paste(" WHERE ", P, sep = "") } else { filters = NULL }
 	
 query = paste("
-SELECT p1.first_name, p1.last_name, p1.short_name, p1.email, p1.phone1, p1.fax, l1.address, l1.post_code, l1.country, l1.altitude AS alt, l1.latitude AS lat, l1.longitude AS long,
+SELECT p1.first_name, p1.last_name, p1.short_name, p1.email, p1.phone1, p1.fax, l1.address, l1.post_code, l1.country, l1.altitude AS alt, l1.latitude AS lat, l1.longitude AS long
 
 FROM actors_person p1
+
 LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id",
 							
 filters, 
@@ -1414,19 +1415,32 @@ sep = "")
 d = get.d(query, info_db)
 
 if( nrow(d) > 0 ) {
+	first_name = as.factor(d$first_name)
+	last_name = as.factor(d$last_name)
+	short_name = as.factor(d$short_name)
+	email = as.character(d$email)
+	phone1 = as.character(d$phone1)
+	fax = as.character(d$fax)
+	address = as.character(d$address)
+	post_code = as.character(d$post_code)
+	country = as.character(d$country)
+	alt = as.numeric(d$alt)
+	lat = as.numeric(d$lat)
+	long = as.numeric(d$long)
+	
 	d = data.frame(
-		first_name = as.factor(d$first_name),
-		last_name = as.factor(d$last_name),
-		short_name = as.factor(d$short_name),
-		email = as.character(d$email),
-		phone1 = as.character(d$phone1),
-		fax = as.character(d$fax),
-		address = as.character(d$adress),
-		post_code = as.character(d$post_code),
-		country = as.character(d$country),
-		alt = as.numeric(d$alt),
-		lat = as.numeric(d$lat),
-		long = as.numeric(d$long)
+		first_name,
+		last_name,
+		short_name,
+		email,
+		phone1,
+		fax,
+		address,
+		post_code,
+		country,
+		alt,
+		lat,
+		long
 	)
 
 }
@@ -2000,7 +2014,7 @@ filter_V = V.sql(variable.in)
 		if(query.type == "data-S") { message("1. Query SHiNeMaS ..."); tab = query.S(filter_Y) }
 		if(query.type=="data-SR") { message("1. Query SHiNeMaS ..."); tab = query.SR(year.in) }
 		
-		if(nrow(tab) > 0) {
+		if(!is.null(tab)) {
 			vec.seed_lots = tab[,"sl"]
 			# filter on year already done with the query
 			if(data.type == "seed-lots") { dv = query.data.seed_lots(filter_G, filter_GT, Y = NULL, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj) } 
@@ -2129,10 +2143,10 @@ if(query.type == "methods") {
 	}
 
 # 5.7. query.person.info ----------
-if(query.type == "person-info") {
+if(query.type == "person.info") {
 	message("1. Query SHiNeMaS ...")
-	d = query.methods(filter_P)
-	attributes(d)$shinemas2R.object = "person-info"
+	d = query.person.info(filter_P)
+	attributes(d)$shinemas2R.object = "person.info"
 }
 
 # 5.8. query.grand.father ----------
