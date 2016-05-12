@@ -583,11 +583,10 @@ if(nrow(d) > 0) {
 		lat = as.numeric(as.character(d$lat))
 		long = as.numeric(as.character(d$long))
 		alt = as.numeric(as.character(d$alt))
-#		total_generation_nb = as.numeric(as.character(d$total_generation_nb))
-#		local_generation_nb = as.numeric(as.character(d$local_generation_nb))
-#		generation_confidence = as.character(d$generation_confidence)
-#		sl_comments = as.character(d$sl_comments)
-
+		total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$total_generation_nb))
+		local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$local_generation_nb))
+		generation_confidence = sample( c(1:0), nrow(d), replace = TRUE) # as.character(d$generation_confidence)
+		sl_comments = rep("blablabla", nrow(d)) # as.character(d$sl_comments)
 
 	d = data.frame(
 		species,
@@ -602,11 +601,11 @@ if(nrow(d) > 0) {
 		method_name,
 		lat,
 		long, 
-		alt
-		#	total_generation_nb,
-		#	local_generation_nb,
-		#	generation_confidence,
-#		sl_comments
+		alt,
+		total_generation_nb,
+		local_generation_nb,
+		generation_confidence,
+		sl_comments
 	)
 	
 		} else { d = NULL }
@@ -700,10 +699,10 @@ if( nrow(d) > 0 ) {
 	son_alt = as.numeric(d$son_alt)
 	son_long = as.numeric(d$son_long)
 	son_lat = as.numeric(d$son_lat)
-	#	son_total_generation_nb = as.numeric(as.character(son_total_generation_nb)),
-	#	son_local_generation_nb = as.numeric(as.character(son_local_generation_nb)),
-	#	son_generation_confidence = as.character(son_generation_confidence),
-	#	son_comments = as.character(d$son_comments),
+	son_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(son_total_generation_nb))
+	son_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(son_local_generation_nb))
+	son_generation_confidence = sample( c(1:0), nrow(d), replace = TRUE) # as.character(son_generation_confidence)
+	son_comments = rep("blablabla", nrow(d)) # as.character(d$son_comments)
 	
 	father_species = as.factor(d$father_species)
 	father_project = as.factor(d$father_project)
@@ -715,10 +714,10 @@ if( nrow(d) > 0 ) {
 	father_alt = as.numeric(d$father_alt)
 	father_long = as.numeric(d$father_long)
 	father_lat = as.numeric(d$father_lat)
-	#	father_total_generation_nb = as.numeric(as.character(d$father_total_generation_nb))
-	#	father_local_generation_nb = as.numeric(as.character(d$father_local_generation_nb))
-	#	father_generation_confidence = as.character(d$father_generation_confidence)
-	#	father_comments = as.character(d$father_comments)
+	father_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_total_generation_nb))
+	father_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_local_generation_nb))
+	father_generation_confidence = sample( c(1:0), nrow(d), replace = TRUE) # as.character(d$father_generation_confidence)
+	father_comments = rep("blablabla", nrow(d)) # as.character(d$father_comments)
 	
 	variable_name = as.character(d$variable_name)
 	raw_data = as.character(d$raw_data)
@@ -751,10 +750,10 @@ if( nrow(d) > 0 ) {
 		son_alt,
 		son_long,
 		son_lat,
-#		son_total_generation_nb,
-#		son_local_generation_nb,
-#		son_generation_confidence,
-#		son_comments,
+		son_total_generation_nb,
+		son_local_generation_nb,
+		son_generation_confidence,
+		son_comments,
 		
 		father_species,
 		father_project,
@@ -766,10 +765,10 @@ if( nrow(d) > 0 ) {
 		father_alt,
 		father_long,
 		father_lat,
-#		father_total_generation_nb,
-#		father_local_generation_nb,
-#		father_generation_confidence,
-#		father_comments,
+		father_total_generation_nb,
+		father_local_generation_nb,
+		father_generation_confidence,
+		father_comments,
 		
 		variable_name,
 		raw_data,
@@ -1343,10 +1342,10 @@ if( nrow(d) > 0 ) {
 	son_alt = as.numeric(as.character(d$son_alt))
 	son_long = as.numeric(as.character(d$son_long))
 	son_lat = as.numeric(as.character(d$son_lat))
-	#son_total_generation_nb = as.numeric(as.character(d$son_total_generation_nb))
-	#son_local_generation_nb = as.numeric(as.character(d$son_local_generation_nb))
-	#son_generation_confidence = as.character(d$son_generation_confidence)
-	son_comments = as.character(d$son_comments)
+	son_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$son_total_generation_nb))
+	son_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$son_local_generation_nb))
+	son_generation_confidence = sample( c(1:0), nrow(d), replace = TRUE) # as.character(d$son_generation_confidence)
+	son_comments = rep("blablabla", nrow(d)) # as.character(d$son_comments)
 	
 	father_species = as.factor(d$father_species)
 	father_project = as.factor(d$father_project)
@@ -1358,11 +1357,11 @@ if( nrow(d) > 0 ) {
 	father_alt = as.numeric(as.character(d$father_alt))
 	father_long = as.numeric(as.character(d$father_long))
 	father_lat = as.numeric(as.character(d$father_lat))
-	#father_total_generation_nb = as.numeric(as.character(d$father_total_generation_nb))
-	#father_local_generation_nb = as.numeric(as.character(d$father_local_generation_nb))
-	#father_generation_confidence = as.character(d$father_generation_confidence)
-	father_comments = as.character(d$father_comments)
-	
+	father_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_total_generation_nb))
+	father_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_local_generation_nb))
+	father_generation_confidence = sample( c(1:8), nrow(d), replace = TRUE) # as.character(d$father_generation_confidence)
+	father_comments = rep("blablabla", nrow(d)) # as.character(d$father_comments)
+		
 	relation_year = as.factor(d$relation_year)
 	
 	grandfather_species = as.factor(d$grandfather_species)
@@ -1375,11 +1374,11 @@ if( nrow(d) > 0 ) {
 	grandfather_alt = as.numeric(as.character(d$grandfather_alt))
 	grandfather_long = as.numeric(as.character(d$grandfather_long))
 	grandfather_lat = as.numeric(as.character(d$grandfather_lat))
-	#grandfather_total_generation_nb = as.numeric(as.character(d$grandfather_total_generation_nb))
-	#grandfather_local_generation_nb = as.numeric(as.character(d$grandfather_local_generation_nb))
-	#grandfather_generation_confidence = as.character(d$grandfather_generation_confidence)
-	grandfather_comments = as.character(d$grandfather_comments)
-	
+	grandfather_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$grandfather_total_generation_nb))
+	grandfather_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$grandfather_local_generation_nb))
+	grandfather_generation_confidence = sample( c(1:8), nrow(d), replace = TRUE) # as.character(d$grandfather_generation_confidence)
+	grandfather_comments = rep("blablabla", nrow(d)) # as.character(d$grandfather_comments)
+		
 	relation_father_grandfather_year = as.factor(d$relation_father_grandfather_year)
 	
 	
@@ -1394,10 +1393,10 @@ if( nrow(d) > 0 ) {
 		son_alt,
 		son_long,
 		son_lat,
-		#son_total_generation_nb,
-		#son_local_generation_nb,
-		#son_generation_confidence,
-		#son_comments,
+		son_total_generation_nb,
+		son_local_generation_nb,
+		son_generation_confidence,
+		son_comments,
 		
 		father_species,
 		father_project,
@@ -1409,10 +1408,10 @@ if( nrow(d) > 0 ) {
 		father_alt,
 		father_long,
 		father_lat,
-		#father_total_generation_nb,
-		#father_local_generation_nb,
-		#father_generation_confidence,
-		#father_comments,
+		father_total_generation_nb,
+		father_local_generation_nb,
+		father_generation_confidence,
+		father_comments,
 		
 		relation_year,
 		
@@ -1426,10 +1425,10 @@ if( nrow(d) > 0 ) {
 		grandfather_alt,
 		grandfather_long,
 		grandfather_lat,
-		#grandfather_total_generation_nb,
-		#grandfather_local_generation_nb,
-		#grandfather_generation_confidence,
-		#grandfather_comments,
+		grandfather_total_generation_nb,
+		grandfather_local_generation_nb,
+		grandfather_generation_confidence,
+		grandfather_comments,
 		
 		relation_father_grandfather_year
 	)
