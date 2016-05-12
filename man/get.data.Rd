@@ -36,6 +36,7 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 
 \item raw information on levels and variables contained in SHiNeMaS :
 \itemize{
+\item "species"
 \item "variable"
 \item "person"
 \item "year"
@@ -57,7 +58,7 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 \item "methods": information related to methods used for each variable in SHiNeMaS with its description and units.
 Filters can be applied on variables. Possible filter is variable.in.
 
-\item "person-info": information regarding persons stored in SHiNeMaS.
+\item "person.info": information regarding persons stored in SHiNeMaS.
 Possible filters are person.in and person.out and variable.in
 
 \item "grandfather": information on son, father and grandfather.
@@ -65,7 +66,7 @@ All filters are possible except relation.in and variable.in
 
 }}
 
-\item{filter.on}{This argument is needed if you want to use filters. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son". Filter.on is not used for data.type = "seed-lots", query.type = "methods" and query.type = "person-info"}
+\item{filter.on}{This argument is needed if you want to use filters. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son". Filter.on is not used for data.type = "seed-lots", query.type = "methods" and query.type = "person.info"}
 
 \item{germplasm.in}{Filter: vector with germplasms to keep. By default, all the germplasms are in.}
 
