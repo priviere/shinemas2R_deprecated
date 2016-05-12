@@ -1201,9 +1201,10 @@ query.SL.mix = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj
 	
 	
 query = paste(
-"SELECT DISTINCT sl1.name AS son, gp1.germplasm_name AS son_germplasm, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person , sl1.date AS son_year, pro1.project_name AS son_project,
+"SELECT DISTINCT sl1.name AS son, gp1.germplasm_name AS son_germplasm, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person , sl1.date AS son_year,
+string_agg(DISTINCT pro1.project_name,',') AS son_project,
 
-sl2.name AS father, gp2.germplasm_name AS father_germplasm, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, sl2.date AS father_year, pro2.project_name AS father_project
+sl2.name AS father, gp2.germplasm_name AS father_germplasm, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, sl2.date AS father_year, string_agg(DISTINCT pro2.project_name,',') AS father_project
 
 FROM network_relation nr2 JOIN entities_seed_lot sl2 ON nr2.seed_lot_father_id=sl2.id
 
@@ -1228,6 +1229,10 @@ nr1.mixture_id IS NOT NULL AND
 sl1.germplasm_id = sl2.germplasm_id",
 
 filters,
+
+"
+GROUP BY sl1.name, gp1.germplasm_name, gpt1.germplasm_type, p1.short_name, sl1.date, sl2.name, gp2.germplasm_name, gpt2.germplasm_type, p2.short_name, sl2.date
+",
 
 sep = "")
 
