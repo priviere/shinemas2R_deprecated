@@ -2176,7 +2176,7 @@ filter_V = V.sql(variable.in)
 							D[which(D$ID %in% id), v] = raw_data
 							setTxtProgressBar(pb, j)
 						}
-						D = select(D, -ID)
+						D = select(D, -ID, -correlation_group)
 						cat("\n")
 					} else { D = NULL }
 					return(D)
