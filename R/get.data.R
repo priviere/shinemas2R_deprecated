@@ -1193,14 +1193,14 @@ query.SL.mix = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj
 	} else { filters = NULL }
 	
 	
-	query = paste(
+query = paste(
 "SELECT DISTINCT sl1.name AS son, gp1.germplasm_name AS son_germplasm, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person , sl1.date AS son_year, pro1.project_name AS son_project,
 
 sl2.name AS father, gp2.germplasm_name AS father_germplasm, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, sl2.date AS father_year, pro2.project_name AS father_project
 
 FROM network_relation nr2 JOIN entities_seed_lot sl2 ON nr2.seed_lot_father_id=sl2.id
 
-LEFT OUTER JOIN network_relation nr1 ON nr2.seed_lot_son_id=nr1.seed_lot_father_id		
+LEFT OUTER JOIN network_relation nr1 ON nr2.seed_lot_son_id=nr1.seed_lot_father_id
 LEFT OUTER JOIN entities_seed_lot sl1 ON nr1.seed_lot_son_id = sl1.id
 
 LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
@@ -1209,11 +1209,13 @@ LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id = gpt1.id
 LEFT OUTER JOIN entities_germplasm_type gpt2 ON gp2.germplasm_type_id = gpt2.id
 LEFT OUTER JOIN actors_person p1 ON sl1.person_id = p1.id
 LEFT OUTER JOIN actors_person p2 ON sl2.person_id = p2.id
-LEFT OUTER JOIN entities_seed_lot_project eslp1 ON sl1.id = eslp1.seed_lot_id
-LEFT OUTER JOIN actors_project pro1 ON eslp1.project_id = pro1.id
-LEFT OUTER JOIN entities_seed_lot_project eslp2 ON sl2.id = eslp2.seed_lot_id
-LEFT OUTER JOIN actors_project pro2 ON eslp2.project_id = pro2.id
-				
+
+LEFT OUTER JOIN network_relation_project nrp1 ON nrp1.relation_id = nr1.id
+LEFT OUTER JOIN actors_project pro1 ON nrp1.project_id = pro1.id
+
+LEFT OUTER JOIN network_relation_project nrp2 ON nrp2.relation_id = nr2.id
+LEFT OUTER JOIN actors_project pro2 ON nrp2.project_id = pro2.id
+
 WHERE
 nr1.mixture_id IS NOT NULL AND
 sl1.germplasm_id = sl2.germplasm_id",
