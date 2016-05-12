@@ -2191,11 +2191,6 @@ filter_V = V.sql(variable.in)
 				filter_V = V.sql(vec_variable)
 				m = query.methods(filter_V)
 				m$"variable---methods" = paste(m$variable_name, m$method_name, sep = "---")
-				var_meth_to_keep = c(colnames(out.d$datasets), 
-														 colnames(out.d$datasets.with.correlated.variables)
-				)
-				var_meth_to_keep = var_meth_to_keep[grep("---", var_meth_to_keep)]
-				m = m[is.element(m$"variable---methods", var_meth_to_keep),]
 				m = list("methods" = m)
 				
 				d = c(out.d, m)
