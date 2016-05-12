@@ -2128,7 +2128,7 @@ filter_V = V.sql(variable.in)
 						names(out_corr) = corr_gp
 						for(cg in corr_gp){	out_corr[[cg]] = d[grep(cg, d$correlation_group),] }
 						} 
-					}
+				}
 				
 				if(data.type == "seed-lots") { out_corr = NULL }
 				
@@ -2182,8 +2182,8 @@ filter_V = V.sql(variable.in)
 					return(D)
 				}
 				
-				d1 = lapply(out_d, arrange.data, data.type)
-				d2 = lapply(out_corr, arrange.data, data.type)
+				d1 = lapply(out_d, arrange.data, data.type); if(length(d1) == 0) { d1 = NULL }
+				d2 = lapply(out_corr, arrange.data, data.type); if(length(d2) == 0) { d2 = NULL }
 				
 				out.d = list("data" = d1[[1]], "data.with.correlated.variables" = d2)
 				
