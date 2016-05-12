@@ -924,9 +924,9 @@ return(d)
 }
 
 
-query.S = function(Y) {
+query.S = function() {
 
-query = paste("
+query = "
 SELECT sl1.name AS vrac_S, sl2.name AS bouquet_S
 
 FROM network_relation nr
@@ -935,9 +935,7 @@ LEFT JOIN network_relation nrsel ON (nr.seed_lot_father_id = nrsel.seed_lot_fath
 LEFT JOIN entities_seed_lot sl1 ON nr.seed_lot_son_id = sl1.id
 LEFT JOIN entities_seed_lot sl2 ON nrsel.seed_lot_son_id = sl2.id
 
-WHERE nrsel.selection_id IS NOT NULL AND nr.reproduction_id IS NOT NULL AND nr.selection_id IS NULL ",
-
-Y, sep="")
+WHERE nrsel.selection_id IS NOT NULL AND nr.reproduction_id IS NOT NULL AND nr.selection_id IS NULL "
 
 d = get.d(query, info_db)
 
@@ -999,16 +997,9 @@ return(d)
 }
 
 
-query.SR = function(year.in) {
+query.SR = function() {
 
-	# special format for year
-if( !is.null(year.in) ) {
-	Y = paste( "(sl3.date=", year.in, " AND sl4.date=", year.in, ")", sep = "" )
-	Y = paste( Y, collapse = " OR ")
-	Y = paste( " AND (", Y, ")", sep = "" )
-	} else { Y = NULL}
-
-query = paste("
+query = "
 SELECT sl1.name AS vrac_S, sl2.name AS bouquet_S, sl3.name AS vrac_R, sl4.name AS bouquet_R, nr1.block AS bloc_vrac, nr1.\"X\" AS X_vrac, nr1.\"Y\" AS Y_vrac, nr2.block AS bloc_bouquet, nr2.\"X\" AS X_bouquet, nr2.\"Y\" AS Y_bouquet
 FROM network_relation nr
 JOIN network_relation nrsel ON nr.seed_lot_father_id = nrsel.seed_lot_father_id
@@ -1027,13 +1018,12 @@ nr.selection_id IS NULL AND
 nr1.reproduction_id IS NOT NULL AND 
 nr2.reproduction_id IS NOT NULL AND 
 nr1.selection_id IS NULL AND 
-nr2.selection_id IS NULL",
-Y, sep = "")
+nr2.selection_id IS NULL"
 
 d1 = get.d(query, info_db)
 
 # special query when selection have been done in a seed-lot that have been merged after
-query = paste("
+query = "
 SELECT sl1.name AS vrac_S, sl2.name AS bouquet_S, sl3.name AS vrac_R, sl4.name AS bouquet_R, nr1.block AS bloc_vrac, nr1.\"X\" AS X_vrac, nr1.\"Y\" AS Y_vrac, nr2.block AS bloc_bouquet, nr2.\"X\" AS X_bouquet, nr2.\"Y\" AS Y_bouquet
 
 FROM network_relation nr
@@ -1059,8 +1049,7 @@ nr1mix.mixture_id IS NOT NULL AND
 
 nr.block = nrsel.block AND
 (nr.\"X\" = nrsel.\"X\" OR (nr.\"X\" IS NULL AND nr.\"X\" IS NULL)) AND
-(nr.\"Y\" = nrsel.\"Y\" OR (nr.\"Y\" IS NULL AND nr.\"Y\" IS NULL))",
-Y, sep = "")
+(nr.\"Y\" = nrsel.\"Y\" OR (nr.\"Y\" IS NULL AND nr.\"Y\" IS NULL))"
 
 d2 = get.d(query, info_db)
 
@@ -2088,14 +2077,13 @@ filter_V = V.sql(variable.in)
 	}
 
 	if(query.type == "data-S" | query.type == "data-SR") { 
-		if(query.type == "data-S") { message("1. Query SHiNeMaS ..."); tab = query.S(filter_Y) }
-		if(query.type=="data-SR") { message("1. Query SHiNeMaS ..."); tab = query.SR(year.in) }
+		if(query.type == "data-S") { message("1. Query SHiNeMaS ..."); tab = query.S() }
+		if(query.type=="data-SR") { message("1. Query SHiNeMaS ..."); tab = query.SR() }
 		
 		if(!is.null(tab)) {
 			vec.seed_lots = tab[,"sl"]
-			# filter on year already done with the query
-			if(data.type == "seed-lots") { dv = query.data.seed_lots(filter_G, filter_GT, Y = NULL, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj) } 
-			if(data.type == "relation") { dv = query.data.relation(filter_G, filter_GT, Y = NULL, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj) }
+			if(data.type == "seed-lots") { dv = query.data.seed_lots(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj) } 
+			if(data.type == "relation") { dv = query.data.relation(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj) }
 			
 			tab = plyr::rename(tab, replace = c("sl" = "son"))
 			if( !is.null(dv) ) { d = join(tab, dv, by = "son" ) } else { d = NULL }
