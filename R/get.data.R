@@ -24,6 +24,7 @@
 #' 
 #' \item raw information on levels and variables contained in SHiNeMaS :
 #' \itemize{
+#' \item "species"
 #' \item "variable"
 #' \item "person"
 #' \item "year"
@@ -308,6 +309,13 @@ get.d = function(requete, info_db) {
 
 
 # 3. Queries ----------
+
+query.species = function(){
+	d = get.d("SELECT DISTINCT species FROM entities_species", info_db)
+	out = sort(unlist(d)); names(out) = NULL	
+	return(out)
+}
+
 
 query.variable = function(){
 	d = get.d("SELECT DISTINCT name FROM eppdata_variable", info_db)
@@ -2045,7 +2053,10 @@ filter_V = V.sql(variable.in)
 	}
 
  	# 5.4. raw information on levels and variables present in SHiNeMaS ----------
- 	if( query.type == "variable"){ d = query.variable(); attributes(d)$shinemas2R.object = "variable"
+	if( query.type == "species"){ d = query.species(); attributes(d)$shinemas2R.object = "species"
+} 	
+
+	if( query.type == "variable"){ d = query.variable(); attributes(d)$shinemas2R.object = "variable"
  }
  	if( query.type == "person"){ d = query.person(); attributes(d)$shinemas2R.object = "person"
  }

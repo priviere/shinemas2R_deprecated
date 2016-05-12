@@ -11,6 +11,7 @@ The following table summarize the different possibilities:
 \hline
 \texttt{query.type} & type of information present in \BD \\
 \hline
+"species" & species \\
 "variable" & variable \\
 "person" & person \\
 "year" & year \\
