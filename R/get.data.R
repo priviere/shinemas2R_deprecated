@@ -809,14 +809,15 @@ query.cross = function(G = NULL, GT = NULL, Y = NULL, P = NULL, Proj = NULL) {
 	
 	
 query = paste(
-"SELECT 
-sl10.name AS father, gp10.germplasm_name AS father_germplasm, gpt10.germplasm_type AS father_germplasm_type, p10.short_name AS father_person, sl10.date AS father_year, pro10.project_name AS father_project, l10.altitude AS father_alt, l10.longitude AS father_long, l10.latitude AS father_lat, 
+"
+SELECT
+sl10.name AS father, gp10.germplasm_name AS father_germplasm, gpt10.germplasm_type AS father_germplasm_type, p10.short_name AS father_person, sl10.date AS father_year, pro10.project_name AS father_project, l10.altitude AS father_alt, l10.longitude AS father_long, l10.latitude AS father_lat,
 
-sl3.name AS grandfather, gp3.germplasm_name AS grandfather_germplasm, gpt3.germplasm_type AS grandfather_germplasm_type, p3.short_name AS grandfather_person,  sl3.date AS grandfather_year, pro3.project_name AS grandfather_project, l3.altitude AS grandfather_alt, l3.longitude AS grandfather_long, l3.latitude AS grandfather_lat, 
+sl3.name AS grandfather, gp3.germplasm_name AS grandfather_germplasm, gpt3.germplasm_type AS grandfather_germplasm_type, p3.short_name AS grandfather_person, sl3.date AS grandfather_year, pro3.project_name AS grandfather_project, l3.altitude AS grandfather_alt, l3.longitude AS grandfather_long, l3.latitude AS grandfather_lat,
 
-sl2.name AS mother, gp2.germplasm_name AS mother_germplasm, gpt2.germplasm_type AS mother_germplasm_type, p2.short_name AS mother_person, sl2.date AS mother_year, pro2.project_name AS mother_project, l2.altitude AS mother_alt, l2.longitude AS mother_long, l2.latitude AS mother_lat, 
+sl2.name AS mother, gp2.germplasm_name AS mother_germplasm, gpt2.germplasm_type AS mother_germplasm_type, p2.short_name AS mother_person, sl2.date AS mother_year, pro2.project_name AS mother_project, l2.altitude AS mother_alt, l2.longitude AS mother_long, l2.latitude AS mother_lat,
 
-sl4.name AS grandmother, gp4.germplasm_name AS grandmother_germplasm, gpt4.germplasm_type AS grandmother_germplasm_type, p4.short_name AS grandmother_person, sl4.date AS grandmother_year, pro4.project_name AS grandmother_project, l4.altitude AS grandmother_alt, l4.longitude AS grandmother_long, l4.latitude AS grandmother_lat, 
+sl4.name AS grandmother, gp4.germplasm_name AS grandmother_germplasm, gpt4.germplasm_type AS grandmother_germplasm_type, p4.short_name AS grandmother_person, sl4.date AS grandmother_year, pro4.project_name AS grandmother_project, l4.altitude AS grandmother_alt, l4.longitude AS grandmother_long, l4.latitude AS grandmother_lat,
 
 sl1.name AS cross, gp1.germplasm_name AS cross_germplasm, gpt1.germplasm_type AS cross_germplasm_type, p1.short_name AS cross_person, sl1.date AS cross_year, pro1.project_name AS cross_project, l1.altitude AS cross_alt, l1.longitude AS cross_long, l1.latitude AS cross_lat
 
@@ -858,12 +859,12 @@ LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id
 LEFT OUTER JOIN actors_location l3 ON p3.location_id = l3.id
 LEFT OUTER JOIN actors_location l4 ON p4.location_id = l4.id
 
-LEFT OUTER JOIN entities_seed_lot_project eslp ON sl1.id = eslp.seed_lot_id
-LEFT OUTER JOIN actors_project pro1 ON eslp.project_id = pro1.id
-LEFT OUTER JOIN actors_project pro2 ON eslp.project_id = pro2.id
-LEFT OUTER JOIN actors_project pro3 ON eslp.project_id = pro3.id
-LEFT OUTER JOIN actors_project pro4 ON eslp.project_id = pro4.id
-LEFT OUTER JOIN actors_project pro10 ON eslp.project_id = pro10.id
+LEFT OUTER JOIN network_relation_project nrp ON nrp.relation_id = r2.id
+LEFT OUTER JOIN actors_project pro1 ON nrp.project_id = pro1.id
+LEFT OUTER JOIN actors_project pro2 ON nrp.project_id = pro2.id
+LEFT OUTER JOIN actors_project pro3 ON nrp.project_id = pro3.id
+LEFT OUTER JOIN actors_project pro4 ON nrp.project_id = pro4.id
+LEFT OUTER JOIN actors_project pro10 ON nrp.project_id = pro10.id
 
 WHERE r1.seed_lot_father_id <> r2.seed_lot_father_id AND r1.reproduction_id IS NOT NULL AND r1.is_male = 'M'",
 
