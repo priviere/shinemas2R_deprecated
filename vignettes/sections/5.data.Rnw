@@ -604,7 +604,8 @@ default_data_S_ggplot = get.ggplot(
 	)
 @
 
-By default, the following plots are done with \texttt{x.axis} and \texttt{in.col} by default (you can not change it):
+By default, the following plots are done with \texttt{x.axis} and \texttt{in.col} (you can not change it).
+Note that \texttt{NA} are put when there are no data for \texttt{bouquet} AND \texttt{vrac}.
 
 <<message=TRUE,cache=FALSE>>=
 names(default_data_S_ggplot)
@@ -668,7 +669,8 @@ default_data_SR_ggplot = get.ggplot(
 	)
 @
 
-By default, the following plots are done with \texttt{x.axis} and \texttt{in.col} by default (you can not change it):
+By default, the following plots are done with \texttt{x.axis} and \texttt{in.col} (you can not change it).
+Note that \texttt{NA} are put when there are no data for \texttt{bouquet} AND \texttt{vrac}.
 
 <<message=TRUE,cache=FALSE>>=
 names(default_data_SR_ggplot)
