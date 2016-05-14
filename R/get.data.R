@@ -1018,7 +1018,10 @@ nr.selection_id IS NULL AND
 nr1.reproduction_id IS NOT NULL AND 
 nr2.reproduction_id IS NOT NULL AND 
 nr1.selection_id IS NULL AND 
-nr2.selection_id IS NULL"
+nr2.selection_id IS NULL AND
+nr1.is_male = 'X' AND
+nr2.is_male='X'
+"
 
 d1 = get.d(query, info_db)
 
@@ -1115,9 +1118,6 @@ d2 = d2[LINE,]
 
 
 print("vérifier ce que donne d2, est ce que ça a un sens?")
-#print(head(d1))
-#print(head(d2))
-
 
 d = rbind(d1,d2)[,1:4]
 
@@ -1125,7 +1125,7 @@ if(nrow(d) > 0)  {
 	d = cbind.data.frame(
 											"sl" = c(d$vrac_s, d$bouquet_s, d$vrac_r, d$bouquet_r), 											
 											"sl_stat"= rep( c("vracS", "bouquetS", "vracR", "bouquetR"), each = nrow(d) ),
-											"expe"= rep( seq(1, nrow(d), 1), times = ncol(d) )
+											"expe"= rep( seq(1, nrow(d), 1), times = 4 )
 											) 
 	d$sl_statut = paste(sapply(d$sl, function(x){unlist(strsplit(as.character(x),"_"))[3]}), d$sl_stat, sep = ":")
 	d = select(d, - sl_stat)
@@ -1143,10 +1143,10 @@ if(nrow(d) > 0)  {
 	expinfo$ok = sapply( expinfo$exp, function(x){floor(as.numeric(as.character(x)))} )
 	liste = unique(expinfo$ok); name.exp = NULL
 	
-		name.exp.1 = name.exp.2 = NULL
+	name.exp.1 = name.exp.2 = NULL
 	
 	for(i in 1:length(liste)) {
-		toto = subset(expinfo, ok %in% liste[i])
+		toto = droplevels(subset(expinfo, ok %in% liste[i]))
 		toget = grep("vracR", toto[,"sl_statut"])[1]
 		n11 = toto[toget,"g"]
 		n21 = toto[toget, "sl"]
@@ -1165,16 +1165,16 @@ if(nrow(d) > 0)  {
 		name.exp.2 = c(name.exp.2, n2)
 		}
 	
-	d$expe_name = name.exp.1[as.character(d$exp)]	
+	d$expe_name = name.exp.1[as.character(d$expe)]	
 	d$expe_name_2 = name.exp.2[as.character(d$expe)]	
-
+	
 	d$sl = as.factor(d$sl)
 	d$sl_statut = as.factor(d$sl_statut)
 	d$expe = as.factor(d$expe)
 	d$expe_name = as.factor(d$expe_name)
 	d$expe_name_2 = as.factor(d$expe_name_2)
 	
-	} else { d = NULL }
+} else { d = NULL }
 
 return(d)
 }
@@ -1189,8 +1189,8 @@ query.SL.mix = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj
 	} else { filters = NULL }
 	
 	
-query = paste(
-"SELECT DISTINCT sl1.name AS son, gp1.germplasm_name AS son_germplasm, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person , sl1.date AS son_year,
+	query = paste(
+		"SELECT DISTINCT sl1.name AS son, gp1.germplasm_name AS son_germplasm, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person , sl1.date AS son_year,
 string_agg(DISTINCT pro1.project_name,',') AS son_project,
 
 sl2.name AS father, gp2.germplasm_name AS father_germplasm, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, sl2.date AS father_year, string_agg(DISTINCT pro2.project_name,',') AS father_project
@@ -2119,7 +2119,6 @@ filter_V = V.sql(variable.in)
 				}
 				
 				if(data.type == "seed-lots") { out_corr = NULL }
-				
 				
 				# Arrange datasets
 				arrange.data = function(data, data.type){
