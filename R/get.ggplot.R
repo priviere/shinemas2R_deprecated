@@ -433,37 +433,6 @@ if( test2 ){
 			print("A Virer quand les données seront propres dans get.data")
 		}
 	
-	# Delete expe where there are not data for bouquet AND vrac, do that by putting NA
-	if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-S-relation" | shinemas2R.object == "data-SR-seed-lots" | shinemas2R.object == "data-SR-relation" ) {
-		
-		expe_to_keep = NULL
-		vec_expe = unique(data$expe)
-		for(var in vec_variables){
-			for(exp in vec_expe){
-				d_tmp = droplevels(filter(data, expe == exp))
-				t = tapply(d_tmp[,var], d_tmp$sl_statut, mean, na.rm = TRUE)
-				
-				# function used after
-				isnat = function(t, sl_statut){
-					t1 = t[grep(sl_statut, names(t))]
-					if( length(t1) > 0 ) { if(is.na(t1)) { t1 = TRUE } else { t1 = FALSE } } else { t1 = FALSE}
-					return(t1)
-				}
-				
-				if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-S-relation" ) {
-					t1 = isnat(t, "bouquetS")
-					t2 = isnat(t, "vracS")
-					test = t1 | t2 
-				} 
-				if( shinemas2R.object == "data-SR-seed-lots" | shinemas2R.object == "data-SR-relation" ) {
-					t1 = isnat(t, "bouquetR")
-					t2 = isnat(t, "vracR")
-					test = t1 | t2 
-				}
-				if( test ) { data[which(data$expe == exp), var] = NA }
-			}
-		}
-	}
 
 	lv = length(vec_variables)
 	a = 0
