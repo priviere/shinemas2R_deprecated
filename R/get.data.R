@@ -12,7 +12,7 @@
 #' 
 #' @param db_password your password to login. If no password is needed, put ""
 #'
-#' @param query.type Type of query, which will create a data set. There are five types:
+#' @param query.type Type of query, which will create a data set. There are eight types:
 #' 
 #' \enumerate{
 #' 
@@ -20,7 +20,7 @@
 #' 
 #' \item "SL.mix": seed-lots merged from replications and not from 'real' mixtures. All filters are possible except relation.in and variable.in.
 #' 
-#' \item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variable.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in
+#' \item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variable.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in.
 #' 
 #' \item raw information on levels and variables contained in SHiNeMaS :
 #' \itemize{
@@ -38,19 +38,19 @@
 #' 
 #' \item data with variable on specific seed-lots :
 #' \itemize{
-#' \item "data-classic": default dataframe
+#' \item "data-classic": default dataframe.
 #' \item "data-S": selection differential for a given year.
 #' \item "data-SR": seed-lots pairs of selection differential for year n-1 and response to selection for year n.
 #' }
 #' 
-#' \item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. 
+#' \item "methods": information related to the methods used for each variable in SHiNeMaS with its description and units
 #' Filters can be applied on variables. Possible filter is variable.in.
 #' 
 #' \item "person.info": information regarding persons stored in SHiNeMaS. 
-#' Possible filters are person.in and person.out and variable.in
+#' Possible filters are person.in and person.out.
 #' 
 #' \item "grandfather": information on son, father and grandfather. 
-#' All filters are possible except relation.in and variable.in
+#' All filters are possible except relation.in and variable.in.
 #' 
 #' }
 #' 
@@ -218,7 +218,7 @@ if( query.type == "methods" & (
 	!is.null(seed.lot.out) | 
 	!is.null(relation.in) | 
 	!is.null(reproduction.type.in)
-) ) { warning("With query.type == \"cross\", filters germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in and reproduction.type.in are not used.") }
+) ) { warning("With query.type == \"methods\", filters germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in and reproduction.type.in are not used.") }
 
 
 if( query.type == "person.info" & (
@@ -237,7 +237,7 @@ if( query.type == "person.info" & (
 	!is.null(variable.in)
 ) ) { warning("With query.type == \"person.info\", filters germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in and variable.in are not used.") }
 
-if( query.type == "grandfather" & (!is.null(relation.in) | !is.null(variable.in)) ) { warning("With query.type == \"grandfather\", filter relation.in is not used.") }
+if( query.type == "grandfather" & (!is.null(relation.in) | !is.null(variable.in)) ) { warning("With query.type == \"grandfather\", filter relation.in and variable.in is not used.") }
 
 
 if( !is.null(data.type) ) {
@@ -310,72 +310,72 @@ get.d = function(requete, info_db) {
 
 # 3. Queries ----------
 
-query.species = function(){
+query.species = function(info_db){
 	d = get.d("SELECT DISTINCT species FROM entities_species", info_db)
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)
 }
 
 
-query.variable = function(){
+query.variable = function(info_db){
 	d = get.d("SELECT DISTINCT name FROM eppdata_variable", info_db)
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)
 }
 
-query.person = function(){
+query.person = function(info_db){
 	d = get.d("SELECT short_name FROM actors_person", info_db)
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)
 }
 
-query.year = function(){
+query.year = function(info_db){
 	d = get.d("SELECT DISTINCT(date) FROM entities_seed_lot ORDER BY date", info_db)
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)
 }
 
 
-query.project = function(){
+query.project = function(info_db){
 	d = get.d("SELECT project_name FROM actors_project", info_db)
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)	
 }
 
 
-query.seed.lots = function(){
+query.seed.lots = function(info_db){
 	d = get.d("SELECT name FROM entities_seed_lot", info_db)
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)		
 }
 
-query.selection.person = function(){
+query.selection.person = function(info_db){
 	d = get.d("SELECT DISTINCT(short_name) FROM network_selection sel LEFT OUTER JOIN actors_person p ON sel.person_id = p.id", info_db)
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)
 }
 
-query.reproduction.type = function(){
+query.reproduction.type = function(info_db){
 	d = get.d("SELECT reproduction_methode_name FROM network_reproduction_method", info_db)
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)
 }
 
-query.germplasm = function(){
+query.germplasm = function(info_db){
 	d = get.d("SELECT gp.germplasm_name FROM entities_germplasm gp", info_db)	
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)
 }
 
 
-query.germplasm.type = function(){
+query.germplasm.type = function(info_db){
 	d = get.d("SELECT germplasm_type FROM entities_germplasm_type", info_db)	
 	out = sort(unlist(d)); names(out) = NULL	
 	return(out)
 }
 
 
-query.network = function( P = NULL, G = NULL, GT = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL) {
+query.network = function( P = NULL, G = NULL, GT = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db) {
 	f = c( P, G, GT, Y, R, SL, Proj)
 	if( !is.null (f[1]) ) { 
 		f = f[!is.null(f)]
@@ -532,7 +532,7 @@ return(d)
 }
 
 
-query.data.seed_lots = function(G = NULL, GT = NULL, Y = NULL, P = NULL, V = NULL, SL = NULL, Proj = NULL) {
+query.data.seed_lots = function(G = NULL, GT = NULL, Y = NULL, P = NULL, V = NULL, SL = NULL, Proj = NULL, info_db) {
 
 	f = c(G, GT, Y, P, V, SL, Proj)
 	if( !is.null (f[1]) ) { 
@@ -622,7 +622,7 @@ return(d)
 }
 
 
-query.data.relation = function(G = NULL, GT = NULL, Y = NULL, P = NULL, R = NULL, V = NULL, SL = NULL, Proj = NULL) {
+query.data.relation = function(G = NULL, GT = NULL, Y = NULL, P = NULL, R = NULL, V = NULL, SL = NULL, Proj = NULL, info_db) {
 	f = c(G, GT, Y, P, R, V, SL, Proj)
 	if( !is.null (f[1]) ) { 
 		f = f[!is.null(f)]
@@ -805,7 +805,7 @@ return(d)
 }
 
 
-query.cross = function(G = NULL, GT = NULL, Y = NULL, P = NULL, Proj = NULL) {
+query.cross = function(G = NULL, GT = NULL, Y = NULL, P = NULL, Proj = NULL, info_db) {
 
 	f = c(G, GT, Y, P, Proj)
 	if( !is.null (f[1]) ) { 
@@ -924,7 +924,7 @@ return(d)
 }
 
 
-query.S = function() {
+query.S = function(info_db) {
 
 query = "
 SELECT sl1.name AS vrac_S, sl2.name AS bouquet_S
@@ -997,7 +997,7 @@ return(d)
 }
 
 
-query.SR = function() {
+query.SR = function(info_db) {
 
 query = "
 SELECT sl1.name AS vrac_S, sl2.name AS bouquet_S, sl3.name AS vrac_R, sl4.name AS bouquet_R, nr1.block AS bloc_vrac, nr1.\"X\" AS X_vrac, nr1.\"Y\" AS Y_vrac, nr2.block AS bloc_bouquet, nr2.\"X\" AS X_bouquet, nr2.\"Y\" AS Y_bouquet
@@ -1180,7 +1180,7 @@ return(d)
 }
 
 
-query.SL.mix = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj = NULL) {
+query.SL.mix = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj = NULL, info_db) {
 	f = c(G, GT, Y, P, SL, Proj)
 	if( !is.null (f[1]) ) { 
 		f = f[!is.null(f)]
@@ -1251,7 +1251,7 @@ return(d)
 }
 
 
-query.grand.father = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj = NULL) {
+query.grand.father = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj = NULL, info_db) {
 
 	f = c(G, GT, Y, P, SL, Proj)
 	if( !is.null (f[1]) ) { 
@@ -1440,7 +1440,7 @@ if( nrow(d) > 0 ) {
 }
 
 
-query.methods = function(V = NULL){
+query.methods = function(V = NULL, info_db){
 
 if( !is.null (V) ) { filters = paste(" WHERE", V, sep = "") } else { filters = NULL }
 
@@ -1460,7 +1460,7 @@ return(d)
 }
 
 
-query.person.info = function(P = NULL){
+query.person.info = function(P = NULL, info_db){
 
 if( !is.null (P) ) { filters = paste(" WHERE ", P, sep = "") } else { filters = NULL }
 	
@@ -1527,47 +1527,47 @@ update.error.messages = function(x, possible.x) {
 }
 
 if( !is.null(variable.in) ){
-	vec.variable.names = query.variable()
+	vec.variable.names = query.variable(info_db)
 	update.error.messages(variable.in, vec.variable.names)		
 }
 
 if( !is.null(person.in) | !is.null(person.in) ){ 
-	vec.person.names = query.person() 
+	vec.person.names = query.person(info_db) 
 	update.error.messages(person.in, vec.person.names)
 	update.error.messages(person.out, vec.person.names) 
 }
 
 if( !is.null(year.in) | !is.null(year.in) ){
-	vec.years = query.year()
+	vec.years = query.year(info_db)
 	update.error.messages(year.in, vec.years)
 	update.error.messages(year.out, vec.years)	
 }
 
 if( !is.null(project.in) | !is.null(project.in) ){
-	vec.project.names = query.project()
+	vec.project.names = query.project(info_db)
 	update.error.messages(project.in, vec.project.names)
 	update.error.messages(project.out, vec.project.names)
 }
 
 if( !is.null(seed.lot.in) |  !is.null(seed.lot.out)){
-	vec.seed_lots = query.seed.lots()
+	vec.seed_lots = query.seed.lots(info_db)
 	update.error.messages(seed.lot.in, vec.seed_lots)
 	update.error.messages(seed.lot.out, vec.seed_lots)
 }
 
 if( !is.null(reproduction.type.in) ){
-	vec.reproduction.type = query.reproduction.type()
+	vec.reproduction.type = query.reproduction.type(info_db)
 	update.error.messages(reproduction.type.in, vec.reproduction.type)
 }
 
 if( !is.null(germplasm.in) | !is.null(germplasm.out) ){
-	vec.germplasm.names = query.germplasm()
+	vec.germplasm.names = query.germplasm(info_db)
 	update.error.messages(germplasm.in, vec.germplasm.names)
 	update.error.messages(germplasm.out, vec.germplasm.names)	
 }
 
 if( !is.null(germplasm.type.in) | !is.null(germplasm.type.out)){
-	vec.germplasm.type = query.germplasm.type()	
+	vec.germplasm.type = query.germplasm.type(info_db)	
 	update.error.messages(germplasm.type.in, vec.germplasm.type)
 	update.error.messages(germplasm.type.out, vec.germplasm.type)
 }
@@ -1674,14 +1674,14 @@ filter_V = V.sql(variable.in)
 	# 5.1. network ----------	
  	if(query.type == "network") {	
  		message("1. Query SHiNeMaS ...")
- 		reseau = query.network(filter_P, filter_G, filter_GT, filter_Y, filter_R, filter_SL, filter_Proj)
+ 		reseau = query.network(filter_P, filter_G, filter_GT, filter_Y, filter_R, filter_SL, filter_Proj, info_db)
 
  		message("2. Create network matrix ..."); {
  
  			# fill diffusion gap
  			fill.diff.gap = function(reseau){
  				message("2.1. Fill diffusion gaps ...")
- 				RESEAU = query.network(P = NULL, G = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL)
+ 				RESEAU = query.network(P = NULL, G = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db)
 
  				# get seed-lots sent (=father) but never received (=son) that are not in reseau
  				f = unique(as.character(reseau$father)) # vector of seed-lots father
@@ -1911,7 +1911,7 @@ filter_V = V.sql(variable.in)
  				{ 
  				Minfo = as.data.frame(Minfo)
  				
- 				Mcross = query.cross(filter_G, filter_GT, filter_Y, filter_P, filter_Proj)
+ 				Mcross = query.cross(filter_G, filter_GT, filter_Y, filter_P, filter_Proj, info_db)
  				if( is.null(Mcross) ) { 
  					Mcross = as.data.frame(matrix(NA, ncol = 12, nrow = 1))
  					colnames(Mcross) = c("expe", "sl", "type", "germplasm", "germplasm_type", "year", "year_cross", "person", "project", "lat", "long", "alt")
@@ -2035,55 +2035,55 @@ filter_V = V.sql(variable.in)
  	# 5.2. SL.mix ----------
  	if(query.type == "SL.mix") { 
  		message("1. Query SHiNeMaS ...")
- 		d = query.SL.mix(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj) 
+ 		d = query.SL.mix(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj, info_db) 
  		attributes(d)$shinemas2R.object = "SL.mix"
  		}
  	
 	# 5.3. cross ----------
 	if(query.type == "cross") {
 		message("1. Query SHiNeMaS ...")
-		d = query.cross(filter_G, filter_GT, filter_Y, filter_P, filter_Proj)
+		d = query.cross(filter_G, filter_GT, filter_Y, filter_P, filter_Proj, info_db)
 		attributes(d)$shinemas2R.object = "cross"
 	}
 
  	# 5.4. raw information on levels and variables present in SHiNeMaS ----------
-	if( query.type == "species"){ d = query.species(); attributes(d)$shinemas2R.object = "species"
+	if( query.type == "species"){ d = query.species(info_db); attributes(d)$shinemas2R.object = "species"
 } 	
 
-	if( query.type == "variable"){ d = query.variable(); attributes(d)$shinemas2R.object = "variable"
+	if( query.type == "variable"){ d = query.variable(info_db); attributes(d)$shinemas2R.object = "variable"
  }
- 	if( query.type == "person"){ d = query.person(); attributes(d)$shinemas2R.object = "person"
+ 	if( query.type == "person"){ d = query.person(info_db); attributes(d)$shinemas2R.object = "person"
  }
- 	if( query.type == "year"){ d = query.year(); attributes(d)$shinemas2R.object = "year"
+ 	if( query.type == "year"){ d = query.year(info_db); attributes(d)$shinemas2R.object = "year"
  }
- 	if( query.type == "project"){ d = query.project(); attributes(d)$shinemas2R.object = "project"
+ 	if( query.type == "project"){ d = query.project(info_db); attributes(d)$shinemas2R.object = "project"
  }
- 	if( query.type == "seed.lots"){ d = query.seed.lots(); attributes(d)$shinemas2R.object = "seed.lots"
+ 	if( query.type == "seed.lots"){ d = query.seed.lots(info_db); attributes(d)$shinemas2R.object = "seed.lots"
  }
- 	if( query.type == "selection.person"){ d = query.selection.person(); attributes(d)$shinemas2R.object = "selection.person"
+ 	if( query.type == "selection.person"){ d = query.selection.person(info_db); attributes(d)$shinemas2R.object = "selection.person"
  }
- 	if( query.type == "reproduction.type"){ d = query.reproduction.type(); attributes(d)$shinemas2R.object = "reproduction.type"
+ 	if( query.type == "reproduction.type"){ d = query.reproduction.type(info_db); attributes(d)$shinemas2R.object = "reproduction.type"
  }
- 	if( query.type == "germplasm"){ d = query.germplasm(); attributes(d)$shinemas2R.object = "germplasm"
+ 	if( query.type == "germplasm"){ d = query.germplasm(info_db); attributes(d)$shinemas2R.object = "germplasm"
  }
- 	if( query.type == "germplasm.type"){ d = query.germplasm.type(); attributes(d)$shinemas2R.object = "germplasm.type"
+ 	if( query.type == "germplasm.type"){ d = query.germplasm.type(info_db); attributes(d)$shinemas2R.object = "germplasm.type"
  }
  	
 
 	# 5.5. data with variable on specific relation or seed-lots ----------	
 	if(query.type == "data-classic") {
-		if(data.type == "seed-lots") { message("1. Query SHiNeMaS ..."); d = query.data.seed_lots(filter_G, filter_GT, filter_Y, filter_P, filter_V, filter_SL, filter_Proj) }
-		if(data.type == "relation") { message("1. Query SHiNeMaS ..."); d = query.data.relation(filter_G, filter_GT, filter_Y, filter_P, filter_R, filter_V, filter_SL, filter_Proj) }	
+		if(data.type == "seed-lots") { message("1. Query SHiNeMaS ..."); d = query.data.seed_lots(filter_G, filter_GT, filter_Y, filter_P, filter_V, filter_SL, filter_Proj, info_db) }
+		if(data.type == "relation") { message("1. Query SHiNeMaS ..."); d = query.data.relation(filter_G, filter_GT, filter_Y, filter_P, filter_R, filter_V, filter_SL, filter_Proj, info_db) }	
 	}
 
 	if(query.type == "data-S" | query.type == "data-SR") { 
-		if(query.type == "data-S") { message("1. Query SHiNeMaS ..."); tab = query.S() }
-		if(query.type=="data-SR") { message("1. Query SHiNeMaS ..."); tab = query.SR() }
+		if(query.type == "data-S") { message("1. Query SHiNeMaS ..."); tab = query.S(info_db) }
+		if(query.type=="data-SR") { message("1. Query SHiNeMaS ..."); tab = query.SR(info_db) }
 		
 		if(!is.null(tab)) {
 			vec.seed_lots = tab[,"sl"]
-			if(data.type == "seed-lots") { dv = query.data.seed_lots(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj) } 
-			if(data.type == "relation") { dv = query.data.relation(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj) }
+			if(data.type == "seed-lots") { dv = query.data.seed_lots(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj, info_db) } 
+			if(data.type == "relation") { dv = query.data.relation(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj, info_db) }
 			
 			tab = plyr::rename(tab, replace = c("sl" = "son"))
 			if( !is.null(dv) ) { d = join(tab, dv, by = "son" ) } else { d = NULL }
@@ -2176,7 +2176,7 @@ filter_V = V.sql(variable.in)
 				
 				# description of methods
 				filter_V = V.sql(vec_variable)
-				m = query.methods(filter_V)
+				m = query.methods(filter_V, info_db)
 				m$"variable---methods" = paste(m$variable_name, m$method_name, sep = "---")
 				m = list("methods" = m)
 				
@@ -2197,21 +2197,21 @@ filter_V = V.sql(variable.in)
 # 5.6. data on methods ----------	
 if(query.type == "methods") {
 	message("1. Query SHiNeMaS ...")
-	d = query.methods(filter_V)
+	d = query.methods(filter_V, info_db)
 	attributes(d)$shinemas2R.object = "methods"
 	}
 
 # 5.7. query.person.info ----------
 if(query.type == "person.info") {
 	message("1. Query SHiNeMaS ...")
-	d = query.person.info(filter_P)
+	d = query.person.info(filter_P, info_db)
 	attributes(d)$shinemas2R.object = "person.info"
 }
 
 # 5.8. query.grand.father ----------
 if(query.type == "grandfather") {
 	message("1. Query SHiNeMaS ...")
-	d = query.grand.father(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj)
+	d = query.grand.father(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj, info_db)
 	attributes(d)$shinemas2R.object = "grandfather"
 }
 
