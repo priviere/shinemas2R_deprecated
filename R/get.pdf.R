@@ -222,16 +222,16 @@ get.pdf = function(
 		}
 
 		if( n == "includepdf" ) { 
-			if(!is.null(names(d[[1]]))) { stop("Elements of includepdf must be a character") } 
+			if(!is.null(names(d[[1]]))) { stop("Elements of includepdf must be a character") }
 			if(!is.character(d[[1]])) { stop("Elements of includepdf must be a character") } 
-			a = scan(d[[1]], what = "character", quiet = TRUE) # Error message if the file does not exist
+			if( !file.exists(d[[1]]) ) { stop(d[[1]], " does not exist") }
 		}
 		
 	if( n == "input" ) { 
 			if(!is.null(names(d[[1]]))) { stop("Elements of input must be a character") } 
 			if(!is.character(d[[1]])) { stop("Elements of input must be a character") } 
-		a = scan(d[[1]], what = "character", quiet = TRUE) # Error message if the file does not exist		
-		}
+			if( !file.exists(d[[1]]) ) { stop(d[[1]], "does not exist ") }
+	}
 		
 	}
 
@@ -390,7 +390,7 @@ get.pdf = function(
 		if(n == "subsection") { cat("\\subsection{",text.to.tex(d[[1]]),"} \n \n") }
 		if(n == "subsubsection") { cat("\\subsubsection{",text.to.tex(d[[1]]),"} \n \n") }
 		if(n == "text") { cat(text.to.tex(d[[1]]),"\n \n") }
-		if(n == "includepdf") { cat("\\includepdf[]{", we_are_here ,"/", d[["includepdf"]] , "} \n \n", sep = "") }
+		if(n == "includepdf") { cat("\\includepdf[page=-]{", we_are_here ,"/", d[["includepdf"]] , "} \n \n", sep = "") }
 		if(n == "input") { cat("\\input{", we_are_here ,"/", d[["input"]], "} \n \n", sep = "") }
 
 		if(n == "table") {
@@ -604,7 +604,7 @@ get.pdf = function(
 	
 	cat("\\end{document}")
 	
-	# 7. Clode connexion of the .tex ----------
+	# 7. Close connexion of the .tex ----------
 	sink()
 	
 	# 8. Compile .tex two times ----------
