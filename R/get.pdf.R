@@ -230,7 +230,7 @@ get.pdf = function(
 	if( n == "input" ) { 
 			if(!is.null(names(d[[1]]))) { stop("Elements of input must be a character") } 
 			if(!is.character(d[[1]])) { stop("Elements of input must be a character") } 
-			if( !file.exists(d[[1]]) ) { stop(d[[1]], "does not exist ") }
+			if( !file.exists(d[[1]]) ) { stop(d[[1]], " does not exist ") }
 	}
 		
 	}
