@@ -1719,7 +1719,7 @@ filter_V = V.sql(variable.in)
  			for (i in 1:nrow(reseau)) {
  				Father = as.character(reseau[i, "father"])
  				Son = as.character(reseau[i, "son"])
- 				M[Father, Son] = 1 + M[Father, Son] # en colonne vers la ligne
+ 				M[Father, Son] = 1 + M[Father, Son] # From column to the row
  			}
  			
  			n <- network(M, directed = TRUE)
@@ -1814,8 +1814,7 @@ filter_V = V.sql(variable.in)
  				generation = ""		
  				if(!is.na(r)) {
  					type = "reproduction"
- 					f = D_generation[which(D_generation$toto == paste(Father, Son, sep=":")), "generation"]
- 					# f = f[1] # !!!!!!!!!!! virer quand les projets seront liés aux relations, normalement, un seul élément !				 
+ 					f = D_generation[which(D_generation$toto == paste(Father, Son, sep = ":")), "generation"]
  					generation = paste("F", f, sep = "") 
  					}
  				if(!is.na(s)) {type = "selection"} # selection erase reproduction
@@ -1833,14 +1832,10 @@ filter_V = V.sql(variable.in)
  		if(network.info){
  			message("4. Get network information on seed-lots ..."); {
  				
- 				# get rid of replications, i.e. seed-lot father and son have the same germplasm in a mixture
- 				toget = which((as.character(reseau$son_germplasm) == as.character(reseau$father_germplasm)) & !is.na(reseau$mixture_id) )
- 				if( length(toget) > 0) { reseau = reseau[-toget, ] }
- 				
  				# update point with the updated reseau without mixture for replication event
  				point = unique(c(as.character(reseau[,"father"]), as.character(reseau[,"son"])))
  				
- 				# These datas are also useful for part 4. with Mdist
+ 				# These datas are also useful for part 5. with Mdist
  				repro = filter(reseau, !is.na(reproduction_id))
  				reseau_repro = filter(repro, is.na(selection_id))
  				reseau_sel = filter(reseau, !is.na(selection_id))			
@@ -1871,12 +1866,13 @@ filter_V = V.sql(variable.in)
  					if( !is.na(reseau[i, "selection_id"]) ) { relation = "selection"} # erase relation = "reproduction"
  					
  					if( relation == "diffusion") {				
- 						
+ 						# info on father
  						sent = 1 # because is father
  						if( is.element(f, reseau_diff[, "son"]) ) { receive = 1 } else { receive = 0 }				
  						if(sent == 1 & receive == 1) { info.f = gettext("give-receive") }	else { info.f = gettext("give")}
  						Minfo[i, "diffusion_father_info"] = info.f
  						
+ 						# info on son
  						receive = 1 # because is son
  						if( is.element(s, reseau_diff[, "father"]) ) { sent = 1 } else { sent = 0 }
  						if(sent == 1 & receive == 1) { info.s = gettext("give-receive") }	else { info.s = gettext("receive") }
@@ -1884,6 +1880,7 @@ filter_V = V.sql(variable.in)
  					}	
  					
  					if( relation == "reproduction" ) {		
+ 						# info on father
  						if( is.element(f, reseau_repro[, "father"]) ) { sown = 1 } else { sown = 0 }
  						if( is.element(f, reseau_repro[, "son"]) ) { harvested = 1 } else { harvested = 0 }
  						if(harvested == 1 & sown == 0) { info.f = gettext("harvest") }
@@ -1891,6 +1888,7 @@ filter_V = V.sql(variable.in)
  						if(harvested == 1 & sown == 1) { info.f = gettext("harvest-sow") } 					
  						Minfo[i, "reproduction_father_info"] = info.f
  						
+ 						# info on son
  						if( is.element(s, reseau_repro[, "son"]) ) { harvested = 1 } else { harvested = 0 }
  						if( is.element(s, reseau_repro[, "father"]) ) { sown = 1 } else { sown = 0 }
  						if(harvested == 1 & sown == 0) { info.s = gettext("harvest") }
@@ -1901,7 +1899,10 @@ filter_V = V.sql(variable.in)
  					
  					if( relation == "selection" ) { Minfo[i, "selection_info"] = "selection" }
  					
- 					if( relation == "mixture") { Minfo[i, "mixture_info"] = "mixture" }
+ 					if( relation == "mixture") { 
+ 						Minfo[i, "mixture_info"] = "mixture" 
+ 						if(Minfo[i, "father_germplasm"] == Minfo[i, "son_germplasm"]) { Minfo[i, "mixture_info"] = "mixture_rep" } 
+ 						}
  				}
  				
  				# Get duplicated information, there must be one information per seed-lot
@@ -1945,7 +1946,7 @@ filter_V = V.sql(variable.in)
  			message("5. Get Mdist square matrix ...")
  				# Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
  			
- 			# 4.1. For each seed-lot of the network, get their last diffusion_id and the number of reproductions since the last diffusion
+ 			# 4.1. For each seed-lot of the network, get their last diffusion_id and the number of reproductions since the last diffusion ----------
  			fun = function(sl) {
  				test = TRUE
  				nb_repro = 0
@@ -1965,12 +1966,11 @@ filter_V = V.sql(variable.in)
  						
  						if(nrow(d_diff) > 0) { # if the sl come from a diffusion: get the sl father, that has been sent, and get the diffusion id
  							sl = as.character(d_diff[1, "father"]); id_diffusion_sl = as.character(sl); test = FALSE 
- 						} else { # else increase the number of reproductions by 1 and get the sl father to go vback in the history of network
+ 						} else { # else increase the number of reproductions by 1 and get the sl father to go back in the history of network
  							
  							nb_repro = nb_repro + 1
  							if(nrow(d_sl_repro) > 0) { sl = as.character(d_sl_repro[1, "father"]) }
  							if(nrow(d_sl_sel) > 0) { sl = as.character(d_sl_sel[1, "father"]) }							
- 							
  							# Stop if the son do not have father
  							to_check = c(to_check, sl)
  							l = length(to_check)
@@ -1996,7 +1996,7 @@ filter_V = V.sql(variable.in)
  			OUT = lapply(point, function(x){fun(x)})
  			names(OUT) = point
  
- 			# 4.2. For each pair of seed-lots, find the last diffusion in common and calculate the distance
+ 			# 4.2. For each pair of seed-lots, find the last diffusion in common and calculate the distance ----------
 			M_dist = matrix(NA, ncol = length(point), nrow = length(point))
 			diag(M_dist) = 1
  			colnames(M_dist) = rownames(M_dist) = point
