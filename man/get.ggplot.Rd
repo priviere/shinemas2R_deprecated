@@ -127,6 +127,9 @@ The function returns a list with several ggplot objects according to the data an
 \description{
 \code{get.ggplot} generates ggplot objects from \code{get.data} data-set
 }
+\details{
+For data coming from query.type = "data-S" and "data-SR", NA are put when there are no data for bouquet AND vrac
+}
 \examples{
 # See the vignette
 }
