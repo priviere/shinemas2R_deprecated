@@ -1950,34 +1950,24 @@ filter_V = V.sql(variable.in)
  			fun = function(sl) {
  				test = TRUE
  				nb_repro = 0
- 				to_check = "yo"
  				id_diffusion_sl = NULL
  				
  				while(test) {
  					d_sl_repro = reseau_repro[which(reseau_repro$son == sl),]
  					d_sl_sel = reseau_sel[which(reseau_sel$son == sl),]
  					d_sl_diff = reseau_diff[which(reseau_diff$son == sl),]
- 					d_sl_mix = NULL # Not done, if there are neither selection or reproduction or diffusion, then it is mixture and we stop, the same as in a cross event
+ 					d_sl_mix = reseau_diff[which(reseau_diff$son == sl),]
+ 					test = FALSE # default if the sl does not match a son i.e. it is only father => the relations stop
+ 					
+ 					if(nrow(d_sl_mix) > 0){ test = FALSE }
  					
  					# if the seed-lot (sl) come from a reproduction or a selection: get the diffusion or go back in the history of the reproduction
  					if(nrow(d_sl_repro) > 0 | nrow(d_sl_sel) > 0) {
- 						
- 						d_diff = reseau_diff[which(reseau_diff$father == sl),] 
- 						
- 						if(nrow(d_diff) > 0) { # if the sl come from a diffusion: get the sl father, that has been sent, and get the diffusion id
- 							sl = as.character(d_diff[1, "father"]); id_diffusion_sl = as.character(sl); test = FALSE 
- 						} else { # else increase the number of reproductions by 1 and get the sl father to go back in the history of network
- 							
- 							nb_repro = nb_repro + 1
- 							if(nrow(d_sl_repro) > 0) { sl = as.character(d_sl_repro[1, "father"]) }
- 							if(nrow(d_sl_sel) > 0) { sl = as.character(d_sl_sel[1, "father"]) }							
- 							# Stop if the son do not have father
- 							to_check = c(to_check, sl)
- 							l = length(to_check)
- 							if(to_check[l-1] == to_check[l]) { break() } 
- 						}	
- 						
- 					} else { test = FALSE }
+ 						# increase the number of reproductions by 1 and get the sl father to go back in the history of network
+ 						nb_repro = nb_repro + 1
+ 						if(nrow(d_sl_repro) > 0) { sl = as.character(d_sl_repro[1, "father"]) }
+ 						if(nrow(d_sl_sel) > 0) { sl = as.character(d_sl_sel[1, "father"]) }		
+ 					}
  					
  					# if the seed-lot (sl) come from a diffusion: get the sl father, that has been sent, and get the diffusion id
  					if(nrow(d_sl_diff) > 0) {
