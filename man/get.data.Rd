@@ -24,7 +24,7 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 
 \item{db_password}{your password to login. If no password is needed, put ""}
 
-\item{query.type}{Type of query, which will create a data set. There are five types:
+\item{query.type}{Type of query, which will create a data set. There are eight types:
 
 \enumerate{
 
@@ -32,7 +32,7 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 
 \item "SL.mix": seed-lots merged from replications and not from 'real' mixtures. All filters are possible except relation.in and variable.in.
 
-\item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variable.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in
+\item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variable.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in.
 
 \item raw information on levels and variables contained in SHiNeMaS :
 \itemize{
@@ -50,19 +50,19 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 
 \item data with variable on specific seed-lots :
 \itemize{
-\item "data-classic": default dataframe
+\item "data-classic": default dataframe.
 \item "data-S": selection differential for a given year.
 \item "data-SR": seed-lots pairs of selection differential for year n-1 and response to selection for year n.
 }
 
-\item "methods": information related to methods used for each variable in SHiNeMaS with its description and units.
+\item "methods": information related to the methods used for each variable in SHiNeMaS with its description and units
 Filters can be applied on variables. Possible filter is variable.in.
 
 \item "person.info": information regarding persons stored in SHiNeMaS.
-Possible filters are person.in and person.out and variable.in
+Possible filters are person.in and person.out.
 
 \item "grandfather": information on son, father and grandfather.
-All filters are possible except relation.in and variable.in
+All filters are possible except relation.in and variable.in.
 
 }}
 
