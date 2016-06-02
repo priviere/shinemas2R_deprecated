@@ -17,6 +17,8 @@
 #' germplasm and 
 #' seed-lots
 #' 
+#' All query.type can be encrypt unless "variable", "reproduction.type" and "methods"
+#' 
 #' The key is written in .RData format. To use it you should type load("key.RData").
 #' 
 #' @return The function returns the data frame encrypted and writes in the work directory a file.RData with the key
@@ -37,16 +39,9 @@ data
 # 1. Check parameters ----------
 	shinemas2R.object = attributes(data$data)$shinemas2R.object
 	
-	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output"
+	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output and be"
 	if( is.null(shinemas2R.object) ) { stop(mess) }
-	if( !is.element(shinemas2R.object, 
-									c("data-classic-relation", 
-										"data-S-relation", 
-										"data-SR-relation", 
-										"data-classic-seed-lots",
-										"data-S-seed-lots", 
-										"data-SR-seed-lots")) 
-	) { stop(mess) }  
+	if( is.element(shinemas2R.object, c("variable", "reproduction.type", "methods") ) ) { stop(mess) }  
 	
 # 2. Encrypt data ----------
 
@@ -96,7 +91,17 @@ data
 	}
 	
 	message("Encrypt data ...")
-	
+
+	if( shinemas2R.object == "species"){ }
+	if( shinemas2R.object == "person"){ }
+	if( shinemas2R.object == "year"){ }
+	if( shinemas2R.object == "project"){ }
+	if( shinemas2R.object == "seed.lot"){ }
+	if( shinemas2R.object == "selection.person"){ }
+	if( shinemas2R.object == "germplasm"){ }
+	if( shinemas2R.object == "person.info"){ }
+	if( shinemas2R.object == "grandfather"){ }
+
 	if( shinemas2R.object == "network"){
 
 		d = data$data$network
