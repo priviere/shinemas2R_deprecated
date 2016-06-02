@@ -26,6 +26,8 @@ germplasm_type,
 germplasm and
 seed-lots
 
+All query.type can be encrypt unless "variable", "reproduction.type" and "methods"
+
 The key is written in .RData format. To use it you should type load("key.RData").
 }
 \examples{
