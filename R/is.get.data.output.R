@@ -261,6 +261,7 @@ is.get.data.output = function(
 				if( !is.factor(d$son_comments) ) { stop("The data fame must have a column \"son_comments\" as factor") } 
 				if( !is.factor(d$father_species) ) { stop("The data fame must have a column \"father_species\" as factor") } 
 				if( !is.factor(d$father) ) { stop("The data fame must have a column \"father\" as factor") } 
+				if( !is.factor(d$father_project) ) { stop("The data fame must have a column \"father_project\" as factor") } 
 				if( !is.factor(d$father_year) ) { stop("The data fame must have a column \"father_year\" as factor") } 
 				if( !is.factor(d$father_germplasm) ) { stop("The data fame must have a column \"father_germplasm\" as factor") } 
 				if( !is.factor(d$father_germplasm_type) ) { stop("The data fame must have a column \"father_germplasm_type\" as factor") } 
