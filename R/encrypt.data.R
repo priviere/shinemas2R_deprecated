@@ -215,11 +215,18 @@ data
 			d$project = factor(vec_project[as.character(d$project)])
 			return(d)
 		}
-		data$data$data = toto(data$data$data, vec_germplasm, vec_person, vec_year)
-		for(i in 1:length(data$data$data.with.correlated.variables)) {
-			data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
-		}
-	}
+
+		if( !is.null(data$data$data) ) { 
+			data$data$data = toto(data$data$data, vec_germplasm, vec_person, vec_year)
+		} else { data$data$data = NULL }
+		
+		if( length(data$data$data.with.correlated.variables) > 0 ) {
+			for(i in 1:length(data$data$data.with.correlated.variables)) {
+				data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
+			}		
+		} else { data$data$data.with.correlated.variables = NULL }
+		
+			}
 	
 	
 	if( shinemas2R.object == "data-classic-relation" |
@@ -245,11 +252,18 @@ data
 			d$selection_person = factor(vec_selection_person[as.character(d$selection_person)])
 			return(d)
 		}
-		data$data$data = toto(data$data$data, vec_germplasm, vec_person, vec_year)
-		for(i in 1:length(data$data$data.with.correlated.variables)) {
-			data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
-		}
-	}
+		
+		
+		if( !is.null(data$data$data) ) { 
+			data$data$data = toto(data$data$data, vec_germplasm, vec_person, vec_year)
+		} else { data$data$data = NULL }
+		
+		if( length(data$data$data.with.correlated.variables) > 0 ) {
+			for(i in 1:length(data$data$data.with.correlated.variables)) {
+				data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
+			}		
+		} else { data$data$data.with.correlated.variables = NULL }
+			}
 	
 	
 	if( shinemas2R.object == "person.info"){ }
