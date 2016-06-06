@@ -192,7 +192,7 @@ is.get.data.output = function(
 	
 	# 3.1. shinemas2R.object == "data-classic-seed-lots" ----------
 	if( shinemas2R.object == "data-classic-seed-lots") {
-		check.format.all("data-classic-seed-lots")
+		check.format.all(shinemas2R.object)
 
 		check.d = function(d){
 			if( !is.null(d) ) {
@@ -234,7 +234,7 @@ is.get.data.output = function(
 	# 3.2. shinemas2R.object == "data-classic-relation" ----------
 	if( shinemas2R.object == "data-classic-relation") {
 
-	check.format.all("data-classic-relation")
+	check.format.all(shinemas2R.object)
 	
 	check.d = function(d){
 			if( !is.null(d) ) {
