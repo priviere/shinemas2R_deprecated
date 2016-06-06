@@ -412,7 +412,6 @@ is.get.data.output = function(
 	}
 	
 
-		
 	message("The data has been sucessfully updated with shinemas2R.object = \"", shinemas2R.object, "\".")
 	return(data)
 	}
