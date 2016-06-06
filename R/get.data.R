@@ -2135,11 +2135,12 @@ filter_V = V.sql(variable.in)
 							var_meth = var_meth[-which(var_meth == "NA---NA")]
 						}
 						
-						D = select(data, -method_name, -variable_name, -raw_data, -var_meth)
+						D = select(data, -method_name, -variable_name, -raw_data, -var_meth, -raw_data_date)
 						D = droplevels(D[!duplicated(D$ID),]) # In case there is redondant information. This is not possible with SHiNeMaS v1, but it occured in the dev version
-						
-						D = cbind.data.frame(D, matrix(NA, ncol = length(var_meth), nrow = nrow(D)))
-						colnames(D)[(ncol(D) - length(var_meth) + 1) : ncol(D)] = var_meth
+		
+						# In the following: *2 to take into account a column with the date				
+						D = cbind.data.frame(D, matrix(NA, ncol = length(var_meth)*2, nrow = nrow(D))) 
+						colnames(D)[(ncol(D) - length(var_meth)*2 + 1) : ncol(D)] = sort(c(var_meth, paste(var_meth, "date", sep = "$")))
 						
 						pb <- txtProgressBar(min = 0, max = length(var_meth), style = 3)
 						for(j in 1:length(var_meth)) {
@@ -2150,10 +2151,12 @@ filter_V = V.sql(variable.in)
 							{
 							# In case there is redondant information. This is not possible with SHiNeMaS v1, but it occured in the dev version
 							raw_data = as.character(data_tmp$raw_data[which(!duplicated(id))])
+							raw_data_date = as.character(data_tmp$raw_data_date[which(!duplicated(id))])
 							id = as.character(id[which(!duplicated(id))])
 							}
 							
 							D[which(D$ID %in% id), v] = raw_data
+							D[which(D$ID %in% id), paste(v, "$date", sep= "")] = raw_data_date
 							setTxtProgressBar(pb, j)
 						}
 						if(data.type == "relation") { D = select(D, -ID, -correlation_group) }
