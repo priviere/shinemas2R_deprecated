@@ -389,7 +389,7 @@ query =
 paste("
 SELECT 
 
-sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, p1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type,   
+sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, p1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type, 
 l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, ",
 # waiting for generation and sl comments to be implemented in SHiNeMaS
 #sl1.generation AS son_total_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_generation_confidence, sl1.comments AS son_comments, 
@@ -543,7 +543,7 @@ query.data.seed_lots = function(G = NULL, GT = NULL, Y = NULL, P = NULL, V = NUL
 	
 query = 
 paste("
-SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, sp1.species, p1.short_name AS person, v1.name AS variable_name,rd.raw_data, rd.date AS raw_data_date, met.method_name, l1.latitude AS lat, l1.longitude AS long, l1.altitude AS alt, string_agg(DISTINCT pro1.project_name,',')|| ', ' || string_agg(DISTINCT pro2.project_name,',') AS project
+SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, gpt1.germplasm_type AS germplasm_type, sp1.species, p1.short_name AS person, v1.name AS variable_name,rd.raw_data, rd.date AS raw_data_date, met.method_name, l1.latitude AS lat, l1.longitude AS long, l1.altitude AS alt, string_agg(DISTINCT pro1.project_name,',')|| ', ' || string_agg(DISTINCT pro2.project_name,',') AS project
  ",
 # waiting for generation and sl comments to be implemented in SHiNeMaS
 #, sl1.generation AS total_generation_nb, sl1.lgeneration AS local_generation_nb, sl1.confidence AS generation_confidence, sl1.comments AS sl_comments 
@@ -555,6 +555,7 @@ LEFT OUTER JOIN eppdata_raw_data rd ON dr.raw_data_id = rd.id
 LEFT OUTER JOIN eppdata_method met ON rd.method_id=met.id
 LEFT OUTER JOIN eppdata_variable v1 ON rd.variable_id = v1.id
 LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
+LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id = gpt1.id
 LEFT OUTER JOIN entities_species sp1 ON sp1.id = gp1.species_id
 LEFT OUTER JOIN actors_person p1 ON sl1.person_id=p1.id
 LEFT OUTER JOIN actors_location l1 ON l1.id = p1.location_id
@@ -571,7 +572,7 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id
 filters,
 
 "
-GROUP BY sl1.name, sl1.date, gp1.germplasm_name, sp1.species, p1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude
+GROUP BY sl1.name, sl1.date, gp1.germplasm_name, gpt1.germplasm_type, sp1.species, p1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude
 ",
 sep = "")
 
@@ -582,6 +583,7 @@ if(nrow(d) > 0) {
 		project = as.factor(d$project)
 		sl = as.factor(d$sl)
 		germplasm = as.factor(d$germplasm)
+		germplasm_type = as.factor(d$germplasm_type)
 		person = as.factor(d$person)
 		year = as.factor(d$year)
 		variable_name = as.character(d$variable_name)
@@ -601,6 +603,7 @@ if(nrow(d) > 0) {
 		project,
 		sl,
 		germplasm,
+		germplasm_type,
 		person,
 		year,
 		variable_name,
