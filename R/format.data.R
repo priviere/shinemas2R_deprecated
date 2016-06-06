@@ -55,12 +55,11 @@ if( is.null(correlated_group) ) {
 	
 # 2.Vector of variables ----------
 if( shinemas2R.object == "data-classic-relation") { vec_variables = colnames(data)[c(40: ncol(data))] }
-if( shinemas2R.object == "data-S-relation") { vec_variables = colnames(data)[c(1: ncol(data))] }
-if( shinemas2R.object == "data-SR-relation") { vec_variables = colnames(data)[c(1: ncol(data))] } 
+if( shinemas2R.object == "data-S-relation") { vec_variables = colnames(data)[c(44: ncol(data))] }
+if( shinemas2R.object == "data-SR-relation") { vec_variables = colnames(data)[c(44: ncol(data))] } 
 if( shinemas2R.object == "data-classic-seed-lots") { vec_variables = colnames(data)[c(15: ncol(data))] }
-if( shinemas2R.object == "data-S-seed-lots") { vec_variables = colnames(data)[c(1: ncol(data))] }
-if( shinemas2R.object == "data-SR-seed-lots") { vec_variables = colnames(data)[c(1: ncol(data))] }
-
+if( shinemas2R.object == "data-S-seed-lots") { vec_variables = colnames(data)[c(44: ncol(data))] }
+if( shinemas2R.object == "data-SR-seed-lots") { vec_variables = colnames(data)[c(44: ncol(data))] }
 
 
 # 3.Format for packages
