@@ -17,7 +17,7 @@
 #' germplasm and 
 #' seed-lots
 #' 
-#' All query.type can be encrypt unless "variable", "reproduction.type" and "methods"
+#' All query.type can be encrypt unless "species", "variable", "reproduction.type" and "methods"
 #' 
 #' The key is written in .RData format. To use it you should type load("key.RData").
 #' 
@@ -41,7 +41,7 @@ data
 	
 	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output and be"
 	if( is.null(shinemas2R.object) ) { stop(mess) }
-	if( is.element(shinemas2R.object, c("variable", "reproduction.type", "methods") ) ) { stop(mess) }  
+	if( is.element(shinemas2R.object, c("species", "variable", "reproduction.type", "methods") ) ) { stop(mess) }  
 	
 # 2. Encrypt data ----------
 
@@ -91,16 +91,6 @@ data
 	}
 	
 	message("Encrypt data ...")
-
-	if( shinemas2R.object == "species"){ }
-	if( shinemas2R.object == "person"){ }
-	if( shinemas2R.object == "year"){ }
-	if( shinemas2R.object == "project"){ }
-	if( shinemas2R.object == "seed.lot"){ }
-	if( shinemas2R.object == "selection.person"){ }
-	if( shinemas2R.object == "germplasm"){ }
-	if( shinemas2R.object == "person.info"){ }
-	if( shinemas2R.object == "grandfather"){ }
 
 	if( shinemas2R.object == "network"){
 
@@ -160,6 +150,24 @@ data
 		data$data$person = factor(vec_person[as.character(data$data$person)])
 		data$data$project = factor(vec_project[as.character(data$data$project)])
 		}
+
+		
+	if( shinemas2R.object == "person"){ }
+	
+	
+	if( shinemas2R.object == "year"){ }
+	
+	
+	if( shinemas2R.object == "project"){ }
+	
+	
+	if( shinemas2R.object == "seed.lot"){ }
+	
+	
+	if( shinemas2R.object == "selection.person"){ }
+	
+	
+	if( shinemas2R.object == "germplasm"){ }
 	
 	
 	if( shinemas2R.object == "data-classic-seed-lots" | 
@@ -211,6 +219,12 @@ data
 			data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
 		}
 	}
+	
+	
+	if( shinemas2R.object == "person.info"){ }
+	
+	
+	if( shinemas2R.object == "grandfather"){ }
 	
 	
 	key = list(
