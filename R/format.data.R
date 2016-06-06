@@ -26,8 +26,9 @@ correlated_group = NULL,
 format = "PPBstats"
 )
 	# lets go !!! ----------
-
 {
+
+# 1.Error messages ----------
 	data = data$data
 	shinemas2R.object = attributes(data)$shinemas2R.object
 	
@@ -52,7 +53,17 @@ if( is.null(correlated_group) ) {
 		} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
 	}
 	
-	
+# 2.Vector of variables ----------
+if( shinemas2R.object == "data-classic-relation") { vec_variables = colnames(data)[c(1: ncol(data))] }
+if( shinemas2R.object == "data-S-relation") { vec_variables = colnames(data)[c(1: ncol(data))] }
+if( shinemas2R.object == "data-SR-relation") { vec_variables = colnames(data)[c(1: ncol(data))] } 
+if( shinemas2R.object == "data-classic-seed-lots") { vec_variables = colnames(data)[c(1: ncol(data))] }
+if( shinemas2R.object == "data-S-seed-lots") { vec_variables = colnames(data)[c(1: ncol(data))] }
+if( shinemas2R.object == "data-SR-seed-lots") { vec_variables = colnames(data)[c(1: ncol(data))] }
+
+
+
+# 3.Format for packages
 if( format == "PPBstats" ) {
 
 	if( data.on == "son" ){ 
@@ -66,10 +77,6 @@ if( format == "PPBstats" ) {
 		data$format_year = data$father_year
 		data$format_location = data$father_person
 	}
-	
-	vec_variables = colnames(data)[c(33: (ncol(data)-3))] # - 3 because of  format_germplasm format_year format_location
-	# Importance d'avoir le meme nombre de colonnes dans toutes les sorties de data ou alors avec un attributes ?!!!
-	print("Importance d'avoir le meme nombre de colonnes dans toutes les sorties de data ou alors avec un attributes ?!!!")
 	
 	out = data[,c("format_year", "format_location", "format_germplasm", "block", "X", "Y", vec_variables)]
 	colnames(out) = c("year", "location", "germplasm", "block", "X", "Y", vec_variables)
