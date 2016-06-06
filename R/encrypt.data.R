@@ -160,19 +160,45 @@ data
 		}
 	
 	
-	if( shinemas2R.object == "year"){ }
+	if( shinemas2R.object == "year"){ 
+		v = vec_year[as.character(data$data)]
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "year"
+		data$data =  v
+		}
 	
 	
-	if( shinemas2R.object == "project"){ }
+	if( shinemas2R.object == "project"){ 
+		v = vec_project[as.character(data$data)]
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "project"
+		data$data =  v
+		}
 	
 	
-	if( shinemas2R.object == "seed.lot"){ }
+	if( shinemas2R.object == "seed.lots"){ 
+		print(data$data)
+		v = sapply(data$data, encrypt_sl, vec_germplasm, vec_person, vec_year)
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "seed.lots"
+		data$data =  v
+		}
 	
 	
-	if( shinemas2R.object == "selection.person"){ }
+	if( shinemas2R.object == "selection.person"){ 
+		v = vec_person[as.character(data$data)]
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "selection.person"
+		data$data =  v
+		}
 	
 	
-	if( shinemas2R.object == "germplasm"){ }
+	if( shinemas2R.object == "germplasm"){ 
+		v = vec_germplasm[as.character(data$data)]
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "germplasm"
+		data$data =  v
+	}
 	
 	
 	if( shinemas2R.object == "data-classic-seed-lots" | 
