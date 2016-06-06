@@ -125,19 +125,19 @@ data
 	
 	
 	if( shinemas2R.object == "SL.mix"){
+		data$data$son_project = factor(vec_project[as.character(data$data$son_project)])
 		data$data$son = sapply(data$data$son, encrypt_sl, vec_germplasm, vec_person, vec_year)
 		data$data$son_germplasm = factor(vec_germplasm[as.character(data$data$son_germplasm)])
-		data$data$son_germplasm_type = factor(vec_germplasm_type[as.character(data$data$son_germplasm_type)])
-		data$data$son_year = factor(vec_year[as.character(data$data$son_year)])
 		data$data$son_person = factor(vec_person[as.character(data$data$son_person)])
-		data$data$son_project = factor(vec_project[as.character(data$data$son_project)])
+		data$data$son_year = factor(vec_year[as.character(data$data$son_year)])
+		data$data$son_germplasm_type = factor(vec_germplasm_type[as.character(data$data$son_germplasm_type)])
 		
+		data$data$father_project = factor(vec_project[as.character(data$data$father_project)])
 		data$data$father = sapply(data$data$father, encrypt_sl, vec_germplasm, vec_person, vec_year)
 		data$data$father_germplasm = factor(vec_germplasm[as.character(data$data$father_germplasm)])
-		data$data$father_germplasm_type = factor(vec_germplasm_type[as.character(data$data$father_germplasm_type)])
-		data$data$father_year = factor(vec_year[as.character(data$data$father_year)])
 		data$data$father_person = factor(vec_person[as.character(data$data$father_person)])
-		data$data$father_project = factor(vec_project[as.character(data$data$father_project)])
+		data$data$father_year = factor(vec_year[as.character(data$data$father_year)])
+		data$data$father_germplasm_type = factor(vec_germplasm_type[as.character(data$data$father_germplasm_type)])
 		}
 	
 		
