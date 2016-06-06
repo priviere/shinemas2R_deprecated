@@ -266,7 +266,11 @@ data
 			}
 	
 	
-	if( shinemas2R.object == "person.info"){ }
+	if( shinemas2R.object == "person.info"){ 
+		data$data$first_name = NA
+		data$data$last_name = NA
+		data$data$short_name = vec_person[as.character(data$data$short_name)]
+		}
 	
 	
 	if( shinemas2R.object == "grandfather"){ }
