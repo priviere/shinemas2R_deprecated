@@ -152,7 +152,12 @@ data
 		}
 
 		
-	if( shinemas2R.object == "person"){ }
+	if( shinemas2R.object == "person"){ 
+		v = vec_person[as.character(data$data)]
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "person"
+		data$data =  v
+		}
 	
 	
 	if( shinemas2R.object == "year"){ }
