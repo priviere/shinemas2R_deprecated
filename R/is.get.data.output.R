@@ -58,7 +58,7 @@
 #' 
 is.get.data.output = function(
 	data, 
-	shinemas2R.object
+	shinemas2R.object = "network"
 )	
 	# lets go !!! ----------
 {
