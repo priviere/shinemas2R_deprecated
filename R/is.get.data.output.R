@@ -297,9 +297,52 @@ is.get.data.output = function(
 	}
 	
 	
-	if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-SR-seed-lots" ) { }
+	# 3.3. shinemas2R.object == "data-S-seed-lots" and "data-SR-seed-lots" ----------
+	if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-SR-seed-lots" ) {
+		check.format.all(shinemas2R.object)
+		
+		check.d = function(d){
+			if( !is.null(d) ) {
+				if( !is.data.frame(d) ) { stop("The first element of data must be NULL or a data frame.") }
+				
+				col_to_have = c("expe", "sl_statut", "expe_name", "expe_name_2", "species", "project", "sl", "germplasm", "germplasm_type", "person",  "year", "lat", "long", "alt", "total_generation_nb", "local_generation_nb", "generation_confidence", "sl_comments")
+				test = setdiff(col_to_have, colnames(d))
+				if( length(test) > 0 ) { stop("The first element of data (i.e. data) must have the following columns: ", paste(col_to_have, collapse = ", ")) }
+				
+				if( !is.factor(d$expe) ) { stop("The data fame must have a column \"expe\" as factor") } 
+				if( !is.factor(d$sl_statut) ) { stop("The data fame must have a column \"sl_statut\" as factor") }
+				if( !is.factor(d$expe_name) ) { stop("The data fame must have a column \"expe_name\" as factor") }
+				if( !is.factor(d$expe_name_2) ) { stop("The data fame must have a column \"expe_name_2\" as factor") } 
+				if( !is.factor(d$species) ) { stop("The data fame must have a column \"species\" as factor") } 
+				if( !is.factor(d$project) ) { stop("The data fame must have a column \"project\" as factor") } 
+				if( !is.factor(d$sl) ) { stop("The data fame must have a column \"sl\" as factor") } 
+				if( !is.factor(d$germplasm) ) { stop("The data fame must have a column \"germplasm\" as factor") } 
+				if( !is.factor(d$germplasm_type) ) { stop("The data fame must have a column \"germplasm_type\" as factor") } 
+				if( !is.factor(d$person) ) { stop("The data fame must have a column \"person\" as factor") } 
+				if( !is.factor(d$year) ) { stop("The data fame must have a column \"year\" as factor") } 
+				if( !is.numeric(d$lat) ) { stop("The data fame must have a column \"lat\" as numeric") } 
+				if( !is.numeric(d$long) ) { stop("The data fame must have a column \"long\" as numeric") } 
+				if( !is.numeric(d$alt) ) { stop("The data fame must have a column \"alt\" as numeric") } 
+				if( !is.numeric(d$total_generation_nb) ) { stop("The data fame must have a column \"total_generation_nb\" as numeric") } 
+				if( !is.numeric(d$local_generation_nb) ) { stop("The data fame must have a column \"local_generation_nb\" as numeric") } 
+				if( !is.numeric(d$generation_confidence) ) { stop("The data fame must have a column \"generation_confidence\" as numeric") } 
+				if( !is.factor(d$sl_comments) ) { stop("The data fame must have a column \"sl_comments\" as factor") } 
+			}
+		}
+		
+		check.d(data[[1]])
+		
+		lapply(data[[2]], check.d)
+		
+		d = data[[3]]
+		check.format.method(d)
+		
+		attributes(data)$shinemas2R.object = "data-classic-seed.lots"
+		data = list("data" = data, "info_db" = NULL)
+	}
 	
 	
+	# 3.4. shinemas2R.object == "data-S-relation" and "data-SR-relation" ----------
 	if( shinemas2R.object == "data-S-relation" | shinemas2R.object == "data-SR-relation" ) { 
 		check.format.all(shinemas2R.object)
 		
@@ -366,7 +409,8 @@ is.get.data.output = function(
 		attributes(data)$shinemas2R.object = "data-S-relation"
 		data = list("data" = data, "info_db" = NULL)
 		
-		}
+	}
+	
 
 		
 	message("The data has been sucessfully updated with shinemas2R.object = \"", shinemas2R.object, "\".")
