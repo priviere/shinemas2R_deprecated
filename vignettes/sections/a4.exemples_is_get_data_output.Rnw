@@ -5,6 +5,7 @@
 In this appendix, you can find empty data-set that will fit in \texttt{is.get.data.output}.
 
 \subsection{\texttt{shinemas2R.object == "network"}}
+<<message=TRUE,cache=FALSE,warning=FALSE>>=
 network = NULL
 
 network.info = data.frame()
@@ -26,23 +27,25 @@ Mdist = NULL
 
 n = list(network, network.info, Mdist)
 n = is.get.data.output(n)
-
+@
 
 
 \subsection{\texttt{shinemas2R.object == "data..."}}
 
 In all data, you need a methods format:
 
+<<message=TRUE,cache=FALSE,warning=FALSE>>=
 methods = data.frame()
 methods$"method_name" = c("a", "b")
 methods$"variable_name" = c("a", "b")
 methods$"method_description" = c("a", "b")
 methods$"unit" = c("a", "b")
 methods$"variable---methods" = c("a", "b")
-
+@
 
 \subsubsection{\texttt{shinemas2R.object == "data-classic-seed-lots"}}
 
+<<message=TRUE,cache=FALSE,warning=FALSE>>=
 data = data.frame()
 data$species = factor()
 data$project = factor()
@@ -65,10 +68,11 @@ data.with.correlated.variables = list(data, data)
 
 out = list(data, data.with.correlated.variables, methods)
 out = is.get.data.output(out)
-				
+@				
 
 \subsubsection{\texttt{shinemas2R.object == "data-classic-relation"}}
 
+<<message=TRUE,cache=FALSE,warning=FALSE>>=
 nrow = 3
 
 data = data.frame()
@@ -121,13 +125,13 @@ data.with.correlated.variables = list(data, data)
 
 out = list(data, data.with.correlated.variables, methods)
 out = is.get.data.output(out)
+@
 
 
-
-	
 
 \subsubsection{\texttt{shinemas2R.object == "data-S-seed-lots"} \& \texttt{shinemas2R.object == "data-SR-seed-lots"}}
 
+<<message=TRUE,cache=FALSE,warning=FALSE>>=
 data = data.frame()
 data$expe = factor()
 data$sl_statut = factor()
@@ -154,11 +158,12 @@ data.with.correlated.variables = list(data, data)
 
 out = list(data, data.with.correlated.variables, methods)
 out = is.get.data.output(out)
-				
+@				
 
 
 \subsubsection{\texttt{shinemas2R.object == "data-S-relation"} \& \texttt{shinemas2R.object == "data-SR-relation"}}
 
+<<message=TRUE,cache=FALSE,warning=FALSE>>=
 nrow = 3
 
 data = data.frame()
@@ -217,5 +222,5 @@ data.with.correlated.variables = list(data, data)
 
 out = list(data, data.with.correlated.variables, methods)
 out = is.get.data.output(out)
-
+@
 
