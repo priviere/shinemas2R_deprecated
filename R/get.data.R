@@ -2153,7 +2153,8 @@ filter_V = V.sql(variable.in)
 							D[which(D$ID %in% id), v] = raw_data
 							setTxtProgressBar(pb, j)
 						}
-						D = select(D, -ID, -correlation_group)
+						if(data.type == "relation") { D = select(D, -ID, -correlation_group) }
+						if(data.type == "seed-lots") { D = select(D, -ID) }
 						cat("\n")
 					} else { D = NULL }
 					return(D)
