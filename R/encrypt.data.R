@@ -273,7 +273,32 @@ data
 		}
 	
 	
-	if( shinemas2R.object == "grandfather"){ }
+	if( shinemas2R.object == "grandfather"){ 
+		data$data$son_project = factor(vec_person[as.character(data$data$son_project)])
+		data$data$son = sapply(data$data$son, encrypt_sl, vec_germplasm, vec_person, vec_year)
+		data$data$son_germplasm = factor(vec_germplasm[as.character(data$data$son_germplasm)])
+		data$data$son_person = factor(vec_person[as.character(data$data$son_person)])
+		data$data$son_year = factor(vec_year[as.character(data$data$son_year)])
+		data$data$son_germplasm_type = factor(vec_germplasm_type[as.character(data$data$son_germplasm_type)])
+		
+		data$data$father_project = factor(vec_person[as.character(data$data$father_project)])
+		data$data$father = sapply(data$data$father, encrypt_sl, vec_germplasm, vec_person, vec_year)
+		data$data$father_germplasm = factor(vec_germplasm[as.character(data$data$father_germplasm)])
+		data$data$father_person = factor(vec_person[as.character(data$data$father_person)])
+		data$data$father_year = factor(vec_year[as.character(data$data$father_year)])
+		data$data$father_germplasm_type = factor(vec_germplasm_type[as.character(data$data$father_germplasm_type)])
+		
+		data$data$relation_year = factor(vec_year[as.character(data$data$relation_year)])
+		
+		data$data$grandfather_project = factor(vec_person[as.character(data$data$grandfather_project)])
+		data$data$grandfather = sapply(data$data$grandfather, encrypt_sl, vec_germplasm, vec_person, vec_year)
+		data$data$grandfather_germplasm = factor(vec_germplasm[as.character(data$data$grandfather_germplasm)])
+		data$data$grandfather_person = factor(vec_person[as.character(data$data$grandfather_person)])
+		data$data$grandfather_year = factor(vec_year[as.character(data$data$grandfather_year)])
+		data$data$grandfather_germplasm_type = factor(vec_germplasm_type[as.character(data$data$grandfather_germplasm_type)])
+		
+		data$data$relation_father_grandfather_year = factor(vec_year[as.character(data$data$relation_father_grandfather_year)])
+		}
 	
 	
 	key = list(
