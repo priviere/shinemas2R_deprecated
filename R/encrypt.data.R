@@ -61,10 +61,6 @@ data
 	vec = paste("project-", c(1:length(v)), sep = ""); names(vec) = v
 	vec_project = vec
 	
-	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "selection.person")$data
-	vec = paste("sel.person-", c(1:length(v)), sep = ""); names(vec) = v
-	vec_selection_person = vec
-	
 	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "reproduction.type")$data
 	vec = paste("repro.type-", c(1:length(v)), sep = ""); names(vec) = v
 	vec_repro_type = vec
@@ -249,7 +245,7 @@ data
 			d$father_person = factor(vec_person[as.character(d$father_person)])
 			d$father_project = factor(vec_project[as.character(d$father_project)])
 			
-			d$selection_person = factor(vec_selection_person[as.character(d$selection_person)])
+			d$selection_person = factor(vec_person[as.character(d$selection_person)])
 			return(d)
 		}
 		
@@ -305,7 +301,6 @@ data
 		"vec_person" = vec_person,
 		"vec_year" = vec_year,
 		"vec_project" = vec_project,
-		"vec_selection_person" = vec_selection_person,
 		"vec_repro_type" = vec_repro_type,
 		"vec_germplasm_type" = vec_germplasm_type,
 		"vec_germplasm" = vec_germplasm)
