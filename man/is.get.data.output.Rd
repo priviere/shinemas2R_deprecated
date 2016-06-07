@@ -4,7 +4,7 @@
 \alias{is.get.data.output}
 \title{Check if data set can be used as entry for \code{get.ggplot} and \code{get.table}}
 \usage{
-is.get.data.output(data, shinemas2R.object)
+is.get.data.output(data, shinemas2R.object = "network")
 }
 \arguments{
 \item{data}{the date set to check}
