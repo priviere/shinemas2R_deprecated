@@ -8,24 +8,25 @@ In this appendix, you can find empty data-set that will fit in \texttt{is.get.da
 <<message=TRUE,cache=FALSE,warning=FALSE>>=
 network = NULL
 
-network.info = data.frame()
-network.info$sl = factor(c("a", "b", "c"))
-network.info$alt = as.numeric(c(0, 0, 0))
-network.info$long = as.numeric(c(0, 0, 0))
-network.info$lat = as.numeric(c(0, 0, 0))
-network.info$diffusion = factor(c("give", "receive", "give-receive"))
-network.info$id.diff = factor(c(1, 2, 3))
-network.info$reproduction = factor(c("sow", "harvest", "harvest-sow"))
-network.info$mixture = factor(c("mixture", NA, NA))
-network.info$selection = factor(c("selection", NA, NA))
-network.info$cross.info = factor(c("a", "b", "c"))
-network.info$germplasm = factor(c("a", "b", "c"))
-network.info$person = factor(c("a", "b", "c"))
-network.info$year = factor(c("a", "b", "c"))
+network.info = data.frame(
+	sl = factor(c("a", "b", "c")),
+	alt = as.numeric(c(0, 0, 0)),
+	long = as.numeric(c(0, 0, 0)),
+	lat = as.numeric(c(0, 0, 0)),
+	diffusion = factor(c("give", "receive", "give-receive")),
+	id.diff = factor(c(1, 2, 3)),
+	reproduction = factor(c("sow", "harvest", "harvest-sow")),
+	mixture = factor(c("mixture", NA, NA)),
+	selection = factor(c("selection", NA, NA)),
+	cross.info = factor(c("a", "b", "c")),
+	germplasm = factor(c("a", "b", "c")),
+	person = factor(c("a", "b", "c")),
+	year = factor(c("a", "b", "c"))
+)
 
 Mdist = NULL
 
-n = list(network, network.info, Mdist)
+n = list("network" = network, "network.info" = network.info, "Mdist" = Mdist)
 n = is.get.data.output(n)
 @
 
@@ -35,96 +36,100 @@ n = is.get.data.output(n)
 In all data, you need a methods format:
 
 <<message=TRUE,cache=FALSE,warning=FALSE>>=
-methods = data.frame()
-methods$"method_name" = c("a", "b")
-methods$"variable_name" = c("a", "b")
-methods$"method_description" = c("a", "b")
-methods$"unit" = c("a", "b")
-methods$"variable---methods" = c("a", "b")
+methods = data.frame(
+	method_name = c("a", "b"),
+	variable_name = c("a", "b"),
+	method_description = c("a", "b"),
+	unit = c("a", "b"),
+	varmeth = c("a", "b")
+)
+
+methods$method_name = as.character(methods$method_name)
+methods$variable_name = as.character(methods$variable_name)
+methods$method_description = as.character(methods$method_description)
+methods$unit = as.character(methods$unit)
+methods$varmeth = as.character(methods$varmeth)
+
+colnames(methods)[5] = "variable---methods"
 @
 
 \subsubsection{\texttt{shinemas2R.object == "data-classic-seed-lots"}}
 
 <<message=TRUE,cache=FALSE,warning=FALSE>>=
-data = data.frame()
-data$species = factor()
-data$project = factor()
-data$sl = factor()
-data$germplasm = factor()
-data$germplasm_type = factor()
-data$person = factor()
-data$year = factor()
-data$lat = as.numeric()
-data$long = as.numeric()
-data$alt = as.numeric()
-data$total_generation_nb = as.numeric()
-data$local_generation_nb = as.numeric()
-data$generation_confidence = as.numeric()
-data$sl_comments = factor()
-
+data = data.frame(
+	species = factor(c("a", "b", "c")),
+	project = factor(c("a", "b", "c")),
+	sl = factor(c("a", "b", "c")),
+	germplasm = factor(c("a", "b", "c")),
+	germplasm_type = factor(c("a", "b", "c")),
+	person = factor(c("a", "b", "c")),
+	year = factor(c("a", "b", "c")),
+	lat = as.numeric(c(0, 0, 0)),
+	long = as.numeric(c(0, 0, 0)),
+	alt = as.numeric(c(0, 0, 0)),
+	total_generation_nb = as.numeric(c(0, 0, 0)),
+	local_generation_nb = as.numeric(c(0, 0, 0)),
+	generation_confidence = as.numeric(c(0, 0, 0)),
+	sl_comments = factor(c("a", "b", "c"))
+	)
 
 data.with.correlated.variables = list(data, data)
 
-
-out = list(data, data.with.correlated.variables, methods)
-out = is.get.data.output(out)
+out = list("data" = data, "data.with.correlated.variables" = data.with.correlated.variables, "methods" = methods)
+out = is.get.data.output(out, shinemas2R.object = "data-classic-seed-lots")
 @				
 
 \subsubsection{\texttt{shinemas2R.object == "data-classic-relation"}}
 
 <<message=TRUE,cache=FALSE,warning=FALSE>>=
-nrow = 3
-
-data = data.frame()
-
-data$son_species = factor()
-data$son_project = factor()
-data$son = factor()
-data$son_id = factor()
-data$son_year = factor()
-data$son_germplasm = factor()
-data$son_germplasm_type = factor()
-data$son_person = factor()
-data$son_alt = as.numeric()
-data$son_long = as.numeric()
-data$son_lat = as.numeric()
-data$son_total_generation_nb = as.numeric()
-data$son_local_generation_nb = as.numeric()
-data$son_generation_confidence = as.numeric()
-data$son_comments = factor()
-
-data$father_species = factor()
-data$father_project = factor()
-data$father = factor()
-data$father_id = factor()
-data$father_year = factor()
-data$father_germplasm = factor()
-data$father_germplasm_type = factor()
-data$father_person = factor()
-data$father_alt = as.numeric()
-data$father_long = as.numeric()
-data$father_lat = as.numeric()
-data$father_total_generation_nb = as.numeric()
-data$father_local_generation_nb = as.numeric()
-data$father_generation_confidence = as.numeric()
-data$father_comments = factor()
-
-data$reproduction_id = factor()
-data$reproduction_method_name = factor()
-data$selection_id = factor()
-data$selection_person = factor()
-data$mixture_id = factor()
-data$diffusion_id = factor()
-data$relation_year = factor()
-data$X = factor()
-data$Y = factor()
-data$block = factor()
-
+data = data.frame(
+	son_species = factor(c("a", "b", "c")),
+	son_project = factor(c("a", "b", "c")),
+	son = factor(c("a", "b", "c")),
+	son_ind = factor(c("a", "b", "c")),
+	son_year = factor(c("a", "b", "c")),
+	son_germplasm = factor(c("a", "b", "c")),
+	son_germplasm_type = factor(c("a", "b", "c")),
+	son_person = factor(c("a", "b", "c")),
+	son_alt = as.numeric(c(0, 0, 0)),
+	son_long = as.numeric(c(0, 0, 0)),
+	son_lat = as.numeric(c(0, 0, 0)),
+	son_total_generation_nb = as.numeric(c(0, 0, 0)),
+	son_local_generation_nb = as.numeric(c(0, 0, 0)),
+	son_generation_confidence = as.numeric(c(0, 0, 0)),
+	son_comments = factor(c("a", "b", "c")),
+	
+	father_species = factor(c("a", "b", "c")),
+	father_project = factor(c("a", "b", "c")),
+	father = factor(c("a", "b", "c")),
+	father_year = factor(c("a", "b", "c")),
+	father_germplasm = factor(c("a", "b", "c")),
+	father_germplasm_type = factor(c("a", "b", "c")),
+	father_person = factor(c("a", "b", "c")),
+	father_alt = as.numeric(c(0, 0, 0)),
+	father_long = as.numeric(c(0, 0, 0)),
+	father_lat = as.numeric(c(0, 0, 0)),
+	father_total_generation_nb = as.numeric(c(0, 0, 0)),
+	father_local_generation_nb = as.numeric(c(0, 0, 0)),
+	father_generation_confidence = as.numeric(c(0, 0, 0)),
+	father_comments = factor(c("a", "b", "c")),
+	
+	reproduction_id = factor(c("a", "b", "c")),
+	reproduction_method_name = factor(c("a", "b", "c")),
+	selection_id = factor(c("a", "b", "c")),
+	selection_person = factor(c("a", "b", "c")),
+	mixture_id = factor(c("a", "b", "c")),
+	diffusion_id = factor(c("a", "b", "c")),
+	relation_year = factor(c("a", "b", "c")),
+	X = factor(c("a", "b", "c")),
+	Y = factor(c("a", "b", "c")),
+	block = factor(c("a", "b", "c"))
+	)
 
 data.with.correlated.variables = list(data, data)
 
-out = list(data, data.with.correlated.variables, methods)
-out = is.get.data.output(out)
+out = list("data" = data, "data.with.correlated.variables" = data.with.correlated.variables, "methods" = methods)
+out = is.get.data.output(out, shinemas2R.object = "data-classic-relation")
 @
 
 
@@ -132,95 +137,93 @@ out = is.get.data.output(out)
 \subsubsection{\texttt{shinemas2R.object == "data-S-seed-lots"} \& \texttt{shinemas2R.object == "data-SR-seed-lots"}}
 
 <<message=TRUE,cache=FALSE,warning=FALSE>>=
-data = data.frame()
-data$expe = factor()
-data$sl_statut = factor()
-data$expe_name = factor()
-data$expe_name_2 = factor()
-data$species = factor()
-data$project = factor()
-data$sl = factor()
-data$germplasm = factor()
-data$germplasm_type = factor()
-data$person = factor()
-data$year = factor()
-data$lat = as.numeric()
-data$long = as.numeric()
-data$alt = as.numeric()
-data$total_generation_nb = as.numeric()
-data$local_generation_nb = as.numeric()
-data$generation_confidence = as.numeric()
-data$sl_comments = factor()
-
+data = data.frame(
+	expe = factor(c("a", "b", "c")),
+	sl_statut = factor(c("a", "b", "c")),
+	expe_name = factor(c("a", "b", "c")),
+	expe_name_2 = factor(c("a", "b", "c")),
+	species = factor(c("a", "b", "c")),
+	project = factor(c("a", "b", "c")),
+	sl = factor(c("a", "b", "c")),
+	germplasm = factor(c("a", "b", "c")),
+	germplasm_type = factor(c("a", "b", "c")),
+	person = factor(c("a", "b", "c")),
+	year = factor(c("a", "b", "c")),
+	lat = as.numeric(c(0, 0, 0)),
+	long = as.numeric(c(0, 0, 0)),
+	alt = as.numeric(c(0, 0, 0)),
+	total_generation_nb = as.numeric(c(0, 0, 0)),
+	local_generation_nb = as.numeric(c(0, 0, 0)),
+	generation_confidence = as.numeric(c(0, 0, 0)),
+	sl_comments = factor(c("a", "b", "c"))
+	)
 
 data.with.correlated.variables = list(data, data)
 
-
-out = list(data, data.with.correlated.variables, methods)
-out = is.get.data.output(out)
+out = list("data" = data, "data.with.correlated.variables" = data.with.correlated.variables, "methods" = methods)
+out_S = is.get.data.output(out, shinemas2R.object = "data-S-seed-lots")
+out_SR = is.get.data.output(out, shinemas2R.object = "data-SR-seed-lots")
 @				
 
 
 \subsubsection{\texttt{shinemas2R.object == "data-S-relation"} \& \texttt{shinemas2R.object == "data-SR-relation"}}
 
 <<message=TRUE,cache=FALSE,warning=FALSE>>=
-nrow = 3
+data = data.frame(
+	expe = factor(c("a", "b", "c")),
+	sl_statut = factor(c("a", "b", "c")),
+	expe_name = factor(c("a", "b", "c")),
+	expe_name_2 = factor(c("a", "b", "c")),
 
-data = data.frame()
-
-data$expe = factor()
-data$sl_statut = factor()
-data$expe_name = factor()
-data$expe_name_2 = factor()
-
-data$son_species = factor()
-data$son_project = factor()
-data$son = factor()
-data$son_id = factor()
-data$son_year = factor()
-data$son_germplasm = factor()
-data$son_germplasm_type = factor()
-data$son_person = factor()
-data$son_alt = as.numeric()
-data$son_long = as.numeric()
-data$son_lat = as.numeric()
-data$son_total_generation_nb = as.numeric()
-data$son_local_generation_nb = as.numeric()
-data$son_generation_confidence = as.numeric()
-data$son_comments = factor()
-
-data$father_species = factor()
-data$father_project = factor()
-data$father = factor()
-data$father_id = factor()
-data$father_year = factor()
-data$father_germplasm = factor()
-data$father_germplasm_type = factor()
-data$father_person = factor()
-data$father_alt = as.numeric()
-data$father_long = as.numeric()
-data$father_lat = as.numeric()
-data$father_total_generation_nb = as.numeric()
-data$father_local_generation_nb = as.numeric()
-data$father_generation_confidence = as.numeric()
-data$father_comments = factor()
-
-data$reproduction_id = factor()
-data$reproduction_method_name = factor()
-data$selection_id = factor()
-data$selection_person = factor()
-data$mixture_id = factor()
-data$diffusion_id = factor()
-data$relation_year = factor()
-data$X = factor()
-data$Y = factor()
-data$block = factor()
-
+	son_species = factor(c("a", "b", "c")),
+	son_project = factor(c("a", "b", "c")),
+	son = factor(c("a", "b", "c")),
+	son_ind = factor(c("a", "b", "c")),
+	son_year = factor(c("a", "b", "c")),
+	son_germplasm = factor(c("a", "b", "c")),
+	son_germplasm_type = factor(c("a", "b", "c")),
+	son_person = factor(c("a", "b", "c")),
+	son_alt = as.numeric(c(0, 0, 0)),
+	son_long = as.numeric(c(0, 0, 0)),
+	son_lat = as.numeric(c(0, 0, 0)),
+	son_total_generation_nb = as.numeric(c(0, 0, 0)),
+	son_local_generation_nb = as.numeric(c(0, 0, 0)),
+	son_generation_confidence = as.numeric(c(0, 0, 0)),
+	son_comments = factor(c("a", "b", "c")),
+	
+	father_species = factor(c("a", "b", "c")),
+	father_project = factor(c("a", "b", "c")),
+	father = factor(c("a", "b", "c")),
+	father_year = factor(c("a", "b", "c")),
+	father_germplasm = factor(c("a", "b", "c")),
+	father_germplasm_type = factor(c("a", "b", "c")),
+	father_person = factor(c("a", "b", "c")),
+	father_alt = as.numeric(c(0, 0, 0)),
+	father_long = as.numeric(c(0, 0, 0)),
+	father_lat = as.numeric(c(0, 0, 0)),
+	father_total_generation_nb = as.numeric(c(0, 0, 0)),
+	father_local_generation_nb = as.numeric(c(0, 0, 0)),
+	father_generation_confidence = as.numeric(c(0, 0, 0)),
+	father_comments = factor(c("a", "b", "c")),
+	
+	reproduction_id = factor(c("a", "b", "c")),
+	reproduction_method_name = factor(c("a", "b", "c")),
+	selection_id = factor(c("a", "b", "c")),
+	selection_person = factor(c("a", "b", "c")),
+	mixture_id = factor(c("a", "b", "c")),
+	diffusion_id = factor(c("a", "b", "c")),
+	relation_year = factor(c("a", "b", "c")),
+	X = factor(c("a", "b", "c")),
+	Y = factor(c("a", "b", "c")),
+	block = factor(c("a", "b", "c"))
+	)
 
 data.with.correlated.variables = list(data, data)
 
-
-out = list(data, data.with.correlated.variables, methods)
-out = is.get.data.output(out)
+out = list("data" = data, "data.with.correlated.variables" = data.with.correlated.variables, "methods" = methods)
+out_S = is.get.data.output(out, shinemas2R.object = "data-S-relation")
+out_SR = is.get.data.output(out, shinemas2R.object = "data-SR-relation")
 @
+
+
 
