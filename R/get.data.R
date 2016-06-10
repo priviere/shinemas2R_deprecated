@@ -1677,14 +1677,14 @@ filter_V = V.sql(variable.in)
 	# 5.1. network ----------	
  	if(query.type == "network") {	
  		message("1. Query SHiNeMaS ...")
- 		reseau = query.network(filter_P, filter_G, filter_GT, filter_Y, filter_R, filter_SL, filter_Proj, info_db)
+ 		reseau = query.network(filter_P, filter_G, filter_GT, filter_Y, filter_R, filter_SL, filter_Proj, info_db = info_db)
 
  		message("2. Create network matrix ..."); {
  
  			# fill diffusion gap
  			fill.diff.gap = function(reseau){
  				message("2.1. Fill diffusion gaps ...")
- 				RESEAU = query.network(P = NULL, G = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db)
+ 				RESEAU = query.network(P = NULL, G = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db = info_db)
 
  				# get seed-lots sent (=father) but never received (=son) that are not in reseau
  				f = unique(as.character(reseau$father)) # vector of seed-lots father
@@ -1915,7 +1915,7 @@ filter_V = V.sql(variable.in)
  				{ 
  				Minfo = as.data.frame(Minfo)
  				
- 				Mcross = query.cross(filter_G, filter_GT, filter_Y, filter_P, filter_Proj, info_db)
+ 				Mcross = query.cross(filter_G, filter_GT, filter_Y, filter_P, filter_Proj, info_db = info_db)
  				if( is.null(Mcross) ) { 
  					Mcross = as.data.frame(matrix(NA, ncol = 12, nrow = 1))
  					colnames(Mcross) = c("expe", "sl", "type", "germplasm", "germplasm_type", "year", "year_cross", "person", "project", "lat", "long", "alt")
@@ -2028,55 +2028,55 @@ filter_V = V.sql(variable.in)
  	# 5.2. SL.mix ----------
  	if(query.type == "SL.mix") { 
  		message("1. Query SHiNeMaS ...")
- 		d = query.SL.mix(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj, info_db) 
+ 		d = query.SL.mix(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj, info_db = info_db) 
  		attributes(d)$shinemas2R.object = "SL.mix"
  		}
  	
 	# 5.3. cross ----------
 	if(query.type == "cross") {
 		message("1. Query SHiNeMaS ...")
-		d = query.cross(filter_G, filter_GT, filter_Y, filter_P, filter_Proj, info_db)
+		d = query.cross(filter_G, filter_GT, filter_Y, filter_P, filter_Proj, info_db = info_db)
 		attributes(d)$shinemas2R.object = "cross"
 	}
 
  	# 5.4. raw information on levels and variables present in SHiNeMaS ----------
-	if( query.type == "species"){ d = query.species(info_db); attributes(d)$shinemas2R.object = "species"
+	if( query.type == "species"){ d = query.species(info_db = info_db); attributes(d)$shinemas2R.object = "species"
 } 	
 
-	if( query.type == "variable"){ d = query.variable(info_db); attributes(d)$shinemas2R.object = "variable"
+	if( query.type == "variable"){ d = query.variable(info_db = info_db); attributes(d)$shinemas2R.object = "variable"
  }
- 	if( query.type == "person"){ d = query.person(info_db); attributes(d)$shinemas2R.object = "person"
+ 	if( query.type == "person"){ d = query.person(info_db = info_db); attributes(d)$shinemas2R.object = "person"
  }
- 	if( query.type == "year"){ d = query.year(info_db); attributes(d)$shinemas2R.object = "year"
+ 	if( query.type == "year"){ d = query.year(info_db = info_db); attributes(d)$shinemas2R.object = "year"
  }
- 	if( query.type == "project"){ d = query.project(info_db); attributes(d)$shinemas2R.object = "project"
+ 	if( query.type == "project"){ d = query.project(info_db = info_db); attributes(d)$shinemas2R.object = "project"
  }
- 	if( query.type == "seed.lots"){ d = query.seed.lots(info_db); attributes(d)$shinemas2R.object = "seed.lots"
+ 	if( query.type == "seed.lots"){ d = query.seed.lots(info_db = info_db); attributes(d)$shinemas2R.object = "seed.lots"
  }
- 	if( query.type == "selection.person"){ d = query.selection.person(info_db); attributes(d)$shinemas2R.object = "selection.person"
+ 	if( query.type == "selection.person"){ d = query.selection.person(info_db = info_db); attributes(d)$shinemas2R.object = "selection.person"
  }
- 	if( query.type == "reproduction.type"){ d = query.reproduction.type(info_db); attributes(d)$shinemas2R.object = "reproduction.type"
+ 	if( query.type == "reproduction.type"){ d = query.reproduction.type(info_db = info_db); attributes(d)$shinemas2R.object = "reproduction.type"
  }
- 	if( query.type == "germplasm"){ d = query.germplasm(info_db); attributes(d)$shinemas2R.object = "germplasm"
+ 	if( query.type == "germplasm"){ d = query.germplasm(info_db = info_db); attributes(d)$shinemas2R.object = "germplasm"
  }
- 	if( query.type == "germplasm.type"){ d = query.germplasm.type(info_db); attributes(d)$shinemas2R.object = "germplasm.type"
+ 	if( query.type == "germplasm.type"){ d = query.germplasm.type(info_db = info_db); attributes(d)$shinemas2R.object = "germplasm.type"
  }
  	
 
 	# 5.5. data with variable on specific relation or seed-lots ----------	
 	if(query.type == "data-classic") {
-		if(data.type == "seed-lots") { message("1. Query SHiNeMaS ..."); d = query.data.seed_lots(filter_G, filter_GT, filter_Y, filter_P, filter_V, filter_SL, filter_Proj, info_db) }
-		if(data.type == "relation") { message("1. Query SHiNeMaS ..."); d = query.data.relation(filter_G, filter_GT, filter_Y, filter_P, filter_R, filter_V, filter_SL, filter_Proj, info_db) }	
+		if(data.type == "seed-lots") { message("1. Query SHiNeMaS ..."); d = query.data.seed_lots(filter_G, filter_GT, filter_Y, filter_P, filter_V, filter_SL, filter_Proj, info_db = info_db) }
+		if(data.type == "relation") { message("1. Query SHiNeMaS ..."); d = query.data.relation(filter_G, filter_GT, filter_Y, filter_P, filter_R, filter_V, filter_SL, filter_Proj, info_db = info_db) }	
 	}
 
 	if(query.type == "data-S" | query.type == "data-SR") { 
-		if(query.type == "data-S") { message("1. Query SHiNeMaS ..."); tab = query.S(info_db) }
-		if(query.type=="data-SR") { message("1. Query SHiNeMaS ..."); tab = query.SR(info_db) }
+		if(query.type == "data-S") { message("1. Query SHiNeMaS ..."); tab = query.S(info_db = info_db) }
+		if(query.type=="data-SR") { message("1. Query SHiNeMaS ..."); tab = query.SR(info_db = info_db) }
 		
 		if(!is.null(tab)) {
 			vec.seed_lots = tab[,"sl"]
-			if(data.type == "seed-lots") { dv = query.data.seed_lots(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj, info_db) } 
-			if(data.type == "relation") { dv = query.data.relation(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj, info_db) }
+			if(data.type == "seed-lots") { dv = query.data.seed_lots(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj, info_db = info_db) } 
+			if(data.type == "relation") { dv = query.data.relation(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj, info_db = info_db) }
 			
 			tab = plyr::rename(tab, replace = c("sl" = "son"))
 			if( !is.null(dv) ) { d = join(tab, dv, by = "son" ) } else { d = NULL }
@@ -2173,7 +2173,7 @@ filter_V = V.sql(variable.in)
 				
 				# description of methods
 				filter_V = V.sql(vec_variable)
-				m = query.methods(filter_V, info_db)
+				m = query.methods(filter_V, info_db = info_db)
 				m$"variable---methods" = paste(m$variable_name, m$method_name, sep = "---")
 				m = list("methods" = m)
 				
@@ -2194,21 +2194,21 @@ filter_V = V.sql(variable.in)
 # 5.6. data on methods ----------	
 if(query.type == "methods") {
 	message("1. Query SHiNeMaS ...")
-	d = query.methods(filter_V, info_db)
+	d = query.methods(filter_V, info_db = info_db)
 	attributes(d)$shinemas2R.object = "methods"
 	}
 
 # 5.7. query.person.info ----------
 if(query.type == "person.info") {
 	message("1. Query SHiNeMaS ...")
-	d = query.person.info(filter_P, info_db)
+	d = query.person.info(filter_P, info_db = info_db)
 	attributes(d)$shinemas2R.object = "person.info"
 }
 
 # 5.8. query.grand.father ----------
 if(query.type == "grandfather") {
 	message("1. Query SHiNeMaS ...")
-	d = query.grand.father(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj, info_db)
+	d = query.grand.father(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj, info_db = info_db)
 	attributes(d)$shinemas2R.object = "grandfather"
 }
 
