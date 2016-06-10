@@ -1678,348 +1678,354 @@ filter_V = V.sql(variable.in)
  	if(query.type == "network") {	
  		message("1. Query SHiNeMaS ...")
  		reseau = query.network(filter_P, filter_G, filter_GT, filter_Y, filter_R, filter_SL, filter_Proj, info_db = info_db)
-
- 		message("2. Create network matrix ..."); {
- 
- 			# fill diffusion gap
- 			fill.diff.gap = function(reseau){
- 				message("2.1. Fill diffusion gaps ...")
- 				RESEAU = query.network(P = NULL, G = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db = info_db)
-
- 				# get seed-lots sent (=father) but never received (=son) that are not in reseau
- 				f = unique(as.character(reseau$father)) # vector of seed-lots father
- 				s = unique(as.character(reseau$son)) # vector of seed-lots son
- 				sl = f[!is.element(f, s)] # seed-lots that are father and not son, the relation is not in reseau
- 				
- 				# Generate the network from sl
- 				R_to_add = NULL
- 				
- 				for(s in sl) {
- 					toget = s
- 					for(letsgo in 1:1000000)
- 					{
- 						R = RESEAU[which(is.element(RESEAU$son, toget)),]
- 						if(nrow(R) == 0) { break() }
- 						R_to_add = rbind(R_to_add, R)
- 						toget = as.character(R[1,"father"])
- 					}
- 				}
- 				
- 				# on concatène
- 				reseau = unique(rbind(reseau, R_to_add))
- 				return(reseau)
- 			}
- 			
- 			if(fill.diffusion.gap | Mdist) { # To get Mdist, you need to fill the gap
- 				reseau = fill.diff.gap(reseau)	
- 			}
- 			
- 			point = unique(c(as.character(reseau[,"father"]),as.character(reseau[,"son"])))
- 			
- 			M = matrix(0, ncol = length(point), nrow = length(point))
- 			colnames(M) = rownames(M) = point
- 			
- 			for (i in 1:nrow(reseau)) {
- 				Father = as.character(reseau[i, "father"])
- 				Son = as.character(reseau[i, "son"])
- 				M[Father, Son] = 1 + M[Father, Son] # From column to the row
- 			}
- 			
- 			n <- network(M, directed = TRUE)
- 		}
  		
-
- 		message("3. Link information to vertex and edges ..."); {
- 			
- 			# 2.1. information on seed-lots
- 			f = as.character(reseau[,"father"])
- 			s = as.character(reseau[,"son"])	
- 			Y = P = G = TG = SEX = NULL
- 			
- 			for (p in point) {
- 				# year
- 				a = unique(reseau[which(f == p), "father_year"])
- 				b = unique(reseau[which(s == p), "son_year"])
+ 		if( is.null(reseau) ) 
+ 		{ 
+ 			n = Minfo = M_dist = NULL
+ 			message("There is no network for these filters in SHiNeMaS.")
+ 		} else {
+ 			message("2. Create network matrix ..."); {
  				
- 				if(length(a) == 0 & length(b) == 1) { pp = b }
- 				if(length(a) == 0 & length(b) == 0) { pp = NULL }
- 				if(length(a) == 1 & length(b) == 0) { pp = a }
- 				if(length(a) == 1 & length(b) == 1) { pp = unique(a, b) }
- 				
- 				Y = c(Y, as.character(pp))
- 				
- 				# person
- 				a = unique(reseau[which(f == p),"father_person"])
- 				b = unique(reseau[which(s == p),"son_person"])
- 				
- 				if(length(a) == 0 & length(b) == 1) { pp = b }
- 				if(length(a) == 0 & length(b) == 0) { pp = NULL }
- 				if(length(a) == 1 & length(b) == 0) { pp = a }
- 				if(length(a) == 1 & length(b) == 1) { pp = unique(a,b) }
- 				
- 				P = c(P, as.character(pp))	
- 				
- 				# germplasm
- 				a = unique(reseau[which(f == p), "father_germplasm"])
- 				b = unique(reseau[which(s == p), "son_germplasm"])
- 				
- 				if(length(a) == 0 & length(b) == 1) { g = b }
- 				if(length(a) == 0 & length(b) == 0) { g = NULL }
- 				if(length(a) == 1 & length(b) == 0) { g = a }
- 				if(length(a) == 1 & length(b) == 1) { g = unique(a,b) }
- 				
- 				G = c(G, as.character(g))
- 				
- 				# germplasm type
- 				a = unique(reseau[which(f == p), "father_germplasm_type"])
- 				b = unique(reseau[which(s == p), "son_germplasm_type"])
- 				
- 				if(length(a) == 0 & length(b) == 1) { tg = b }
- 				if(length(a) == 0 & length(b) == 0) { tg = NULL }
- 				if(length(a) == 1 & length(b) == 0) { tg = a }
- 				if(length(a) == 1 & length(b) == 1) { tg = unique(a,b) }
- 				
- 				TG = c(TG, as.character(tg))
- 				
- 				# sex associated to seed-lots if it is a cross
- 				sex = reseau[which(f==p),]
- 				sex = sex[which(sex$reproduction_type == "cross"), "is_male"]
- 				if(length(sex) > 0) { sex = sex } else { sex = "" }
- 				SEX = c(SEX, as.character(sex))	
- 			}
-
- 			set.vertex.attribute(n, "year", value = as.vector(Y))
- 			set.vertex.attribute(n, "person", value = as.vector(P))
- 			set.vertex.attribute(n, "germplasm", value = as.vector(G))
- 			set.vertex.attribute(n, "germplasm.type", value = as.vector(TG))
- 			set.vertex.attribute(n, "sex", value = as.vector(SEX))
- 			
- 			# 2.2. information on relations and generations
- 			R = M_generation = matrix("", ncol = length(point), nrow = length(point))
- 			colnames(R) = rownames(R) = colnames(M_generation) = rownames(M_generation) = point
- 			
- 			# number of generations
- 			DD = filter(reseau, !is.na(reproduction_id))
- 			D_generation = unique(DD[,c("father", "son", "son_total_generation_nb")])
- 			D_generation$toto = paste(D_generation$father, D_generation$son, sep = ":")
- 			
- 			stock_type_relation = NULL
- 			
- 			for (i in 1:nrow(reseau)) {
- 				Father = as.character(reseau[i, "father"])
- 				Son = as.character(reseau[i, "son"])
- 				
- 				r = as.character(reseau[i, "reproduction_id"])
- 				s = as.character(reseau[i, "selection_id"])
- 				m = as.character(reseau[i, "mixture_id"])
- 				d = as.character(reseau[i, "diffusion_id"])
- 				
- 				generation = ""		
- 				if(!is.na(r)) {
- 					type = "reproduction"
- 					f = D_generation[which(D_generation$toto == paste(Father, Son, sep = ":")), "generation"]
- 					generation = paste("F", f, sep = "") 
- 					}
- 				if(!is.na(s)) {type = "selection"} # selection erase reproduction
- 				if(!is.na(m)) {type = "mixture"}
- 				if(!is.na(d)) {type = "diffusion"}
- 				
-				R[Father, Son] = type
- 				M_generation[Father, Son] = generation
- 			}
- 			
- 			set.edge.value(n, "relation", value = R)
- 			set.edge.value(n, "generation", value = M_generation)
- 		}
- 				
- 		if(network.info){
- 			message("4. Get network information on seed-lots ..."); {
- 				
- 				# update point with the updated reseau without mixture for replication event
- 				point = unique(c(as.character(reseau[,"father"]), as.character(reseau[,"son"])))
- 				
- 				# These datas are also useful for part 5. with Mdist
- 				repro = filter(reseau, !is.na(reproduction_id))
- 				reseau_repro = filter(repro, is.na(selection_id))
- 				reseau_sel = filter(reseau, !is.na(selection_id))			
- 				reseau_diff = filter(reseau, !is.na(diffusion_id))
- 				
- 				# get Minfo
- 				Minfo = matrix(NA, ncol = 16, nrow = nrow(reseau))
- 				colnames(Minfo) = c("father", "son", "diffusion_father_info", "diffusion_son_info", "id.diff_son", "id.diff_father", "reproduction_father_info", "reproduction_son_info", "selection_info", "mixture_info", "father_alt", "father_long", "father_lat", "son_alt", "son_long", "son_lat")
- 				
- 				for(i in 1:nrow(reseau)) {
+ 				# fill diffusion gap
+ 				fill.diff.gap = function(reseau){
+ 					message("2.1. Fill diffusion gaps ...")
+ 					RESEAU = query.network(P = NULL, G = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db = info_db)
  					
- 					Minfo[i, "father"] = f = as.character(reseau[i, "father"])
- 					Minfo[i, "son"] = s = as.character(reseau[i, "son"])
+ 					# get seed-lots sent (=father) but never received (=son) that are not in reseau
+ 					f = unique(as.character(reseau$father)) # vector of seed-lots father
+ 					s = unique(as.character(reseau$son)) # vector of seed-lots son
+ 					sl = f[!is.element(f, s)] # seed-lots that are father and not son, the relation is not in reseau
  					
- 					# coordinates and id.diff information
- 					Minfo[i, "father_alt"] = reseau[i, "father_alt"]
- 					Minfo[i, "father_long"] = reseau[i, "father_long"]
- 					Minfo[i, "father_lat"] = reseau[i, "father_lat"]
- 					Minfo[i, "son_alt"] = reseau[i, "son_alt"]
- 					Minfo[i, "son_long"] = reseau[i, "son_long"]
- 					Minfo[i, "son_lat"] = reseau[i, "son_lat"]
- 					Minfo[i, "id.diff_son"] = Minfo[i, "id.diff_father"] = reseau[i, "diffusion_id"]
+ 					# Generate the network from sl
+ 					R_to_add = NULL
  					
- 					# relation information
- 					if( !is.na(reseau[i, "diffusion_id"]) ) { relation = "diffusion" }
- 					if( !is.na(reseau[i, "mixture_id"]) ) { relation = "mixture"}
- 					if( !is.na(reseau[i, "reproduction_id"]) ) { relation = "reproduction"}
- 					if( !is.na(reseau[i, "selection_id"]) ) { relation = "selection"} # erase relation = "reproduction"
- 					
- 					if( relation == "diffusion") {				
- 						# info on father
- 						sent = 1 # because is father
- 						if( is.element(f, reseau_diff[, "son"]) ) { receive = 1 } else { receive = 0 }				
- 						if(sent == 1 & receive == 1) { info.f = gettext("give-receive") }	else { info.f = gettext("give")}
- 						Minfo[i, "diffusion_father_info"] = info.f
- 						
- 						# info on son
- 						receive = 1 # because is son
- 						if( is.element(s, reseau_diff[, "father"]) ) { sent = 1 } else { sent = 0 }
- 						if(sent == 1 & receive == 1) { info.s = gettext("give-receive") }	else { info.s = gettext("receive") }
- 						Minfo[i, "diffusion_son_info"] = info.s
- 					}	
- 					
- 					if( relation == "reproduction" ) {		
- 						# info on father
- 						if( is.element(f, reseau_repro[, "father"]) ) { sown = 1 } else { sown = 0 }
- 						if( is.element(f, reseau_repro[, "son"]) ) { harvested = 1 } else { harvested = 0 }
- 						if(harvested == 1 & sown == 0) { info.f = gettext("harvest") }
- 						if(harvested == 0 & sown == 1) { info.f = gettext("sow") }
- 						if(harvested == 1 & sown == 1) { info.f = gettext("harvest-sow") } 					
- 						Minfo[i, "reproduction_father_info"] = info.f
- 						
- 						# info on son
- 						if( is.element(s, reseau_repro[, "son"]) ) { harvested = 1 } else { harvested = 0 }
- 						if( is.element(s, reseau_repro[, "father"]) ) { sown = 1 } else { sown = 0 }
- 						if(harvested == 1 & sown == 0) { info.s = gettext("harvest") }
- 						if(harvested == 0 & sown == 1) { info.s = gettext("sow") }
- 						if(harvested == 1 & sown == 1) { info.s = gettext("harvest-sow") }
- 						Minfo[i, "reproduction_son_info"] = info.s
- 					}
- 					
- 					if( relation == "selection" ) { Minfo[i, "selection_info"] = "selection" }
- 					
- 					if( relation == "mixture") { 
- 						Minfo[i, "mixture_info"] = "mixture" 
- 						if(Minfo[i, "father_germplasm"] == Minfo[i, "son_germplasm"]) { Minfo[i, "mixture_info"] = "mixture_rep" } 
+ 					for(s in sl) {
+ 						toget = s
+ 						for(letsgo in 1:1000000)
+ 						{
+ 							R = RESEAU[which(is.element(RESEAU$son, toget)),]
+ 							if(nrow(R) == 0) { break() }
+ 							R_to_add = rbind(R_to_add, R)
+ 							toget = as.character(R[1,"father"])
  						}
+ 					}
+ 					
+ 					# on concatène
+ 					reseau = unique(rbind(reseau, R_to_add))
+ 					return(reseau)
  				}
  				
- 				# Get duplicated information, there must be one information per seed-lot
- 				Minfo = unique(Minfo)
- 				
- 				# reshape Minfo
- 				{ 
- 				Minfo = as.data.frame(Minfo)
- 				
- 				Mcross = query.cross(filter_G, filter_GT, filter_Y, filter_P, filter_Proj, info_db = info_db)
- 				if( is.null(Mcross) ) { 
- 					Mcross = as.data.frame(matrix(NA, ncol = 12, nrow = 1))
- 					colnames(Mcross) = c("expe", "sl", "type", "germplasm", "germplasm_type", "year", "year_cross", "person", "project", "lat", "long", "alt")
+ 				if(fill.diffusion.gap | Mdist) { # To get Mdist, you need to fill the gap
+ 					reseau = fill.diff.gap(reseau)	
  				}
  				
- 				Minfo = cbind.data.frame(
- 					sl = c(as.character(Minfo$son), as.character(Minfo$father), as.character(Mcross$sl)),
- 					alt = c(as.numeric(as.character(Minfo$son_alt)), as.numeric(as.character(Minfo$father_alt)), as.numeric(as.character(Mcross$alt))),
- 					long = c(as.numeric(as.character(Minfo$son_long)), as.numeric(as.character(Minfo$father_long)), as.numeric(as.character(Mcross$long))),
- 					lat = c(as.numeric(as.character(Minfo$son_lat)), as.numeric(as.character(Minfo$father_lat)), as.numeric(as.character(Mcross$lat))),
- 					diffusion = c(as.character(Minfo$diffusion_son_info), as.character(Minfo$diffusion_father_info), rep(NA, nrow(Mcross))),
- 					id.diff = c(as.character(Minfo$id.diff_son), as.character(Minfo$id.diff_father), rep(NA, nrow(Mcross))),
- 					reproduction = c(as.character(Minfo$reproduction_son_info), as.character(Minfo$reproduction_father_info), rep(NA, nrow(Mcross))),
- 					mixture = c(as.character(Minfo$mixture_info), rep(NA, nrow(Minfo)), rep(NA, nrow(Mcross))), # only associated to son
- 					selection = c(as.character(Minfo$selection_info), rep(NA, nrow(Minfo)), rep(NA, nrow(Mcross))), # only associated to son
- 					cross.info = c(rep(NA, nrow(Minfo)), rep(NA, nrow(Minfo)), as.character(Mcross$type))
- 				)
+ 				point = unique(c(as.character(reseau[,"father"]),as.character(reseau[,"son"])))
  				
- 				# add extra information on levels in separate columns
- 				gs = sapply(as.character(Minfo$sl), function(x){unlist(strsplit(x,"_"))[1]})
- 				Minfo$germplasm = sapply(as.character(gs), function(x){unlist(strsplit(x,"#"))[1]}); Minfo$germplasm = as.factor(Minfo$germplasm)
- 				Minfo$person = sapply(as.character(Minfo$sl), function(x){unlist(strsplit(x,"_"))[2]}); Minfo$person = as.factor(Minfo$person)
- 				Minfo$year = sapply(as.character(Minfo$sl), function(x){unlist(strsplit(x,"_"))[3]}); Minfo$year = as.factor(Minfo$year)
+ 				M = matrix(0, ncol = length(point), nrow = length(point))
+ 				colnames(M) = rownames(M) = point
+ 				
+ 				for (i in 1:nrow(reseau)) {
+ 					Father = as.character(reseau[i, "father"])
+ 					Son = as.character(reseau[i, "son"])
+ 					M[Father, Son] = 1 + M[Father, Son] # From column to the row
  				}
  				
+ 				n <- network(M, directed = TRUE)
  			}
- 		} else { Minfo = NULL }
- 		
- 	
- 		if(Mdist) {
- 			message("5. Get Mdist square matrix ...")
+ 			
+ 			
+ 			message("3. Link information to vertex and edges ..."); {
+ 				
+ 				# 2.1. information on seed-lots
+ 				f = as.character(reseau[,"father"])
+ 				s = as.character(reseau[,"son"])	
+ 				Y = P = G = TG = SEX = NULL
+ 				
+ 				for (p in point) {
+ 					# year
+ 					a = unique(reseau[which(f == p), "father_year"])
+ 					b = unique(reseau[which(s == p), "son_year"])
+ 					
+ 					if(length(a) == 0 & length(b) == 1) { pp = b }
+ 					if(length(a) == 0 & length(b) == 0) { pp = NULL }
+ 					if(length(a) == 1 & length(b) == 0) { pp = a }
+ 					if(length(a) == 1 & length(b) == 1) { pp = unique(a, b) }
+ 					
+ 					Y = c(Y, as.character(pp))
+ 					
+ 					# person
+ 					a = unique(reseau[which(f == p),"father_person"])
+ 					b = unique(reseau[which(s == p),"son_person"])
+ 					
+ 					if(length(a) == 0 & length(b) == 1) { pp = b }
+ 					if(length(a) == 0 & length(b) == 0) { pp = NULL }
+ 					if(length(a) == 1 & length(b) == 0) { pp = a }
+ 					if(length(a) == 1 & length(b) == 1) { pp = unique(a,b) }
+ 					
+ 					P = c(P, as.character(pp))	
+ 					
+ 					# germplasm
+ 					a = unique(reseau[which(f == p), "father_germplasm"])
+ 					b = unique(reseau[which(s == p), "son_germplasm"])
+ 					
+ 					if(length(a) == 0 & length(b) == 1) { g = b }
+ 					if(length(a) == 0 & length(b) == 0) { g = NULL }
+ 					if(length(a) == 1 & length(b) == 0) { g = a }
+ 					if(length(a) == 1 & length(b) == 1) { g = unique(a,b) }
+ 					
+ 					G = c(G, as.character(g))
+ 					
+ 					# germplasm type
+ 					a = unique(reseau[which(f == p), "father_germplasm_type"])
+ 					b = unique(reseau[which(s == p), "son_germplasm_type"])
+ 					
+ 					if(length(a) == 0 & length(b) == 1) { tg = b }
+ 					if(length(a) == 0 & length(b) == 0) { tg = NULL }
+ 					if(length(a) == 1 & length(b) == 0) { tg = a }
+ 					if(length(a) == 1 & length(b) == 1) { tg = unique(a,b) }
+ 					
+ 					TG = c(TG, as.character(tg))
+ 					
+ 					# sex associated to seed-lots if it is a cross
+ 					sex = reseau[which(f==p),]
+ 					sex = sex[which(sex$reproduction_type == "cross"), "is_male"]
+ 					if(length(sex) > 0) { sex = sex } else { sex = "" }
+ 					SEX = c(SEX, as.character(sex))	
+ 				}
+ 				
+ 				set.vertex.attribute(n, "year", value = as.vector(Y))
+ 				set.vertex.attribute(n, "person", value = as.vector(P))
+ 				set.vertex.attribute(n, "germplasm", value = as.vector(G))
+ 				set.vertex.attribute(n, "germplasm.type", value = as.vector(TG))
+ 				set.vertex.attribute(n, "sex", value = as.vector(SEX))
+ 				
+ 				# 2.2. information on relations and generations
+ 				R = M_generation = matrix("", ncol = length(point), nrow = length(point))
+ 				colnames(R) = rownames(R) = colnames(M_generation) = rownames(M_generation) = point
+ 				
+ 				# number of generations
+ 				DD = filter(reseau, !is.na(reproduction_id))
+ 				D_generation = unique(DD[,c("father", "son", "son_total_generation_nb")])
+ 				D_generation$toto = paste(D_generation$father, D_generation$son, sep = ":")
+ 				
+ 				stock_type_relation = NULL
+ 				
+ 				for (i in 1:nrow(reseau)) {
+ 					Father = as.character(reseau[i, "father"])
+ 					Son = as.character(reseau[i, "son"])
+ 					
+ 					r = as.character(reseau[i, "reproduction_id"])
+ 					s = as.character(reseau[i, "selection_id"])
+ 					m = as.character(reseau[i, "mixture_id"])
+ 					d = as.character(reseau[i, "diffusion_id"])
+ 					
+ 					generation = ""		
+ 					if(!is.na(r)) {
+ 						type = "reproduction"
+ 						f = D_generation[which(D_generation$toto == paste(Father, Son, sep = ":")), "generation"]
+ 						generation = paste("F", f, sep = "") 
+ 					}
+ 					if(!is.na(s)) {type = "selection"} # selection erase reproduction
+ 					if(!is.na(m)) {type = "mixture"}
+ 					if(!is.na(d)) {type = "diffusion"}
+ 					
+ 					R[Father, Son] = type
+ 					M_generation[Father, Son] = generation
+ 				}
+ 				
+ 				set.edge.value(n, "relation", value = R)
+ 				set.edge.value(n, "generation", value = M_generation)
+ 			}
+ 			
+ 			if(network.info){
+ 				message("4. Get network information on seed-lots ..."); {
+ 					
+ 					# update point with the updated reseau without mixture for replication event
+ 					point = unique(c(as.character(reseau[,"father"]), as.character(reseau[,"son"])))
+ 					
+ 					# These datas are also useful for part 5. with Mdist
+ 					repro = filter(reseau, !is.na(reproduction_id))
+ 					reseau_repro = filter(repro, is.na(selection_id))
+ 					reseau_sel = filter(reseau, !is.na(selection_id))			
+ 					reseau_diff = filter(reseau, !is.na(diffusion_id))
+ 					
+ 					# get Minfo
+ 					Minfo = matrix(NA, ncol = 16, nrow = nrow(reseau))
+ 					colnames(Minfo) = c("father", "son", "diffusion_father_info", "diffusion_son_info", "id.diff_son", "id.diff_father", "reproduction_father_info", "reproduction_son_info", "selection_info", "mixture_info", "father_alt", "father_long", "father_lat", "son_alt", "son_long", "son_lat")
+ 					
+ 					for(i in 1:nrow(reseau)) {
+ 						
+ 						Minfo[i, "father"] = f = as.character(reseau[i, "father"])
+ 						Minfo[i, "son"] = s = as.character(reseau[i, "son"])
+ 						
+ 						# coordinates and id.diff information
+ 						Minfo[i, "father_alt"] = reseau[i, "father_alt"]
+ 						Minfo[i, "father_long"] = reseau[i, "father_long"]
+ 						Minfo[i, "father_lat"] = reseau[i, "father_lat"]
+ 						Minfo[i, "son_alt"] = reseau[i, "son_alt"]
+ 						Minfo[i, "son_long"] = reseau[i, "son_long"]
+ 						Minfo[i, "son_lat"] = reseau[i, "son_lat"]
+ 						Minfo[i, "id.diff_son"] = Minfo[i, "id.diff_father"] = reseau[i, "diffusion_id"]
+ 						
+ 						# relation information
+ 						if( !is.na(reseau[i, "diffusion_id"]) ) { relation = "diffusion" }
+ 						if( !is.na(reseau[i, "mixture_id"]) ) { relation = "mixture"}
+ 						if( !is.na(reseau[i, "reproduction_id"]) ) { relation = "reproduction"}
+ 						if( !is.na(reseau[i, "selection_id"]) ) { relation = "selection"} # erase relation = "reproduction"
+ 						
+ 						if( relation == "diffusion") {				
+ 							# info on father
+ 							sent = 1 # because is father
+ 							if( is.element(f, reseau_diff[, "son"]) ) { receive = 1 } else { receive = 0 }				
+ 							if(sent == 1 & receive == 1) { info.f = gettext("give-receive") }	else { info.f = gettext("give")}
+ 							Minfo[i, "diffusion_father_info"] = info.f
+ 							
+ 							# info on son
+ 							receive = 1 # because is son
+ 							if( is.element(s, reseau_diff[, "father"]) ) { sent = 1 } else { sent = 0 }
+ 							if(sent == 1 & receive == 1) { info.s = gettext("give-receive") }	else { info.s = gettext("receive") }
+ 							Minfo[i, "diffusion_son_info"] = info.s
+ 						}	
+ 						
+ 						if( relation == "reproduction" ) {		
+ 							# info on father
+ 							if( is.element(f, reseau_repro[, "father"]) ) { sown = 1 } else { sown = 0 }
+ 							if( is.element(f, reseau_repro[, "son"]) ) { harvested = 1 } else { harvested = 0 }
+ 							if(harvested == 1 & sown == 0) { info.f = gettext("harvest") }
+ 							if(harvested == 0 & sown == 1) { info.f = gettext("sow") }
+ 							if(harvested == 1 & sown == 1) { info.f = gettext("harvest-sow") } 					
+ 							Minfo[i, "reproduction_father_info"] = info.f
+ 							
+ 							# info on son
+ 							if( is.element(s, reseau_repro[, "son"]) ) { harvested = 1 } else { harvested = 0 }
+ 							if( is.element(s, reseau_repro[, "father"]) ) { sown = 1 } else { sown = 0 }
+ 							if(harvested == 1 & sown == 0) { info.s = gettext("harvest") }
+ 							if(harvested == 0 & sown == 1) { info.s = gettext("sow") }
+ 							if(harvested == 1 & sown == 1) { info.s = gettext("harvest-sow") }
+ 							Minfo[i, "reproduction_son_info"] = info.s
+ 						}
+ 						
+ 						if( relation == "selection" ) { Minfo[i, "selection_info"] = "selection" }
+ 						
+ 						if( relation == "mixture") { 
+ 							Minfo[i, "mixture_info"] = "mixture" 
+ 							if(Minfo[i, "father_germplasm"] == Minfo[i, "son_germplasm"]) { Minfo[i, "mixture_info"] = "mixture_rep" } 
+ 						}
+ 					}
+ 					
+ 					# Get duplicated information, there must be one information per seed-lot
+ 					Minfo = unique(Minfo)
+ 					
+ 					# reshape Minfo
+ 					{ 
+ 					Minfo = as.data.frame(Minfo)
+ 					
+ 					Mcross = query.cross(filter_G, filter_GT, filter_Y, filter_P, filter_Proj, info_db = info_db)
+ 					if( is.null(Mcross) ) { 
+ 						Mcross = as.data.frame(matrix(NA, ncol = 12, nrow = 1))
+ 						colnames(Mcross) = c("expe", "sl", "type", "germplasm", "germplasm_type", "year", "year_cross", "person", "project", "lat", "long", "alt")
+ 					}
+ 					
+ 					Minfo = cbind.data.frame(
+ 						sl = c(as.character(Minfo$son), as.character(Minfo$father), as.character(Mcross$sl)),
+ 						alt = c(as.numeric(as.character(Minfo$son_alt)), as.numeric(as.character(Minfo$father_alt)), as.numeric(as.character(Mcross$alt))),
+ 						long = c(as.numeric(as.character(Minfo$son_long)), as.numeric(as.character(Minfo$father_long)), as.numeric(as.character(Mcross$long))),
+ 						lat = c(as.numeric(as.character(Minfo$son_lat)), as.numeric(as.character(Minfo$father_lat)), as.numeric(as.character(Mcross$lat))),
+ 						diffusion = c(as.character(Minfo$diffusion_son_info), as.character(Minfo$diffusion_father_info), rep(NA, nrow(Mcross))),
+ 						id.diff = c(as.character(Minfo$id.diff_son), as.character(Minfo$id.diff_father), rep(NA, nrow(Mcross))),
+ 						reproduction = c(as.character(Minfo$reproduction_son_info), as.character(Minfo$reproduction_father_info), rep(NA, nrow(Mcross))),
+ 						mixture = c(as.character(Minfo$mixture_info), rep(NA, nrow(Minfo)), rep(NA, nrow(Mcross))), # only associated to son
+ 						selection = c(as.character(Minfo$selection_info), rep(NA, nrow(Minfo)), rep(NA, nrow(Mcross))), # only associated to son
+ 						cross.info = c(rep(NA, nrow(Minfo)), rep(NA, nrow(Minfo)), as.character(Mcross$type))
+ 					)
+ 					
+ 					# add extra information on levels in separate columns
+ 					gs = sapply(as.character(Minfo$sl), function(x){unlist(strsplit(x,"_"))[1]})
+ 					Minfo$germplasm = sapply(as.character(gs), function(x){unlist(strsplit(x,"#"))[1]}); Minfo$germplasm = as.factor(Minfo$germplasm)
+ 					Minfo$person = sapply(as.character(Minfo$sl), function(x){unlist(strsplit(x,"_"))[2]}); Minfo$person = as.factor(Minfo$person)
+ 					Minfo$year = sapply(as.character(Minfo$sl), function(x){unlist(strsplit(x,"_"))[3]}); Minfo$year = as.factor(Minfo$year)
+ 					}
+ 					
+ 				}
+ 			} else { Minfo = NULL }
+ 			
+ 			
+ 			if(Mdist) {
+ 				message("5. Get Mdist square matrix ...")
  				# Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
- 			
- 			# 4.1. For each seed-lot of the network, get their last diffusion_id and the number of reproductions since the last diffusion ----------
- 			fun = function(sl) {
- 				test = TRUE
- 				nb_repro = 0
- 				id_diffusion_sl = NULL
  				
- 				while(test) {
- 					d_sl_repro = reseau_repro[which(reseau_repro$son == sl),]
- 					d_sl_sel = reseau_sel[which(reseau_sel$son == sl),]
- 					d_sl_diff = reseau_diff[which(reseau_diff$son == sl),]
- 					d_sl_mix = reseau_diff[which(reseau_diff$son == sl),]
- 					test = FALSE # default if the sl does not match a son i.e. it is only father => the relations stop
+ 				# 4.1. For each seed-lot of the network, get their last diffusion_id and the number of reproductions since the last diffusion ----------
+ 				fun = function(sl) {
+ 					test = TRUE
+ 					nb_repro = 0
+ 					id_diffusion_sl = NULL
  					
- 					if(nrow(d_sl_mix) > 0){ test = FALSE }
- 					
- 					# if the seed-lot (sl) come from a reproduction or a selection: get the diffusion or go back in the history of the reproduction
- 					if(nrow(d_sl_repro) > 0 | nrow(d_sl_sel) > 0) {
- 						# increase the number of reproductions by 1 and get the sl father to go back in the history of network
- 						nb_repro = nb_repro + 1
- 						if(nrow(d_sl_repro) > 0) { sl = as.character(d_sl_repro[1, "father"]) }
- 						if(nrow(d_sl_sel) > 0) { sl = as.character(d_sl_sel[1, "father"]) }		
+ 					while(test) {
+ 						d_sl_repro = reseau_repro[which(reseau_repro$son == sl),]
+ 						d_sl_sel = reseau_sel[which(reseau_sel$son == sl),]
+ 						d_sl_diff = reseau_diff[which(reseau_diff$son == sl),]
+ 						d_sl_mix = reseau_diff[which(reseau_diff$son == sl),]
+ 						test = FALSE # default if the sl does not match a son i.e. it is only father => the relations stop
+ 						
+ 						if(nrow(d_sl_mix) > 0){ test = FALSE }
+ 						
+ 						# if the seed-lot (sl) come from a reproduction or a selection: get the diffusion or go back in the history of the reproduction
+ 						if(nrow(d_sl_repro) > 0 | nrow(d_sl_sel) > 0) {
+ 							# increase the number of reproductions by 1 and get the sl father to go back in the history of network
+ 							nb_repro = nb_repro + 1
+ 							if(nrow(d_sl_repro) > 0) { sl = as.character(d_sl_repro[1, "father"]) }
+ 							if(nrow(d_sl_sel) > 0) { sl = as.character(d_sl_sel[1, "father"]) }		
+ 						}
+ 						
+ 						# if the seed-lot (sl) come from a diffusion: get the sl father, that has been sent, and get the diffusion id
+ 						if(nrow(d_sl_diff) > 0) {
+ 							sl = as.character(d_sl_diff[1, "father"])		
+ 							id_diffusion_sl = as.character(sl)
+ 							test = FALSE
+ 						}
+ 						
  					}
  					
- 					# if the seed-lot (sl) come from a diffusion: get the sl father, that has been sent, and get the diffusion id
- 					if(nrow(d_sl_diff) > 0) {
- 						sl = as.character(d_sl_diff[1, "father"])		
- 						id_diffusion_sl = as.character(sl)
- 						test = FALSE
- 					}
- 					
+ 					names(nb_repro) = id_diffusion_sl
+ 					L = c(list("id_diffusion" = id_diffusion_sl), list("nb_repro" = nb_repro))
+ 					return(L)
  				}
  				
- 				names(nb_repro) = id_diffusion_sl
- 				L = c(list("id_diffusion" = id_diffusion_sl), list("nb_repro" = nb_repro))
- 				return(L)
- 			}
- 			
- 			OUT = lapply(point, function(x){fun(x)})
- 			names(OUT) = point
- 
- 			# 4.2. For each pair of seed-lots, find the last diffusion in common and calculate the distance ----------
-			M_dist = matrix(NA, ncol = length(point), nrow = length(point))
-			diag(M_dist) = 1
- 			colnames(M_dist) = rownames(M_dist) = point
- 			
- 			liste_combi = combn(rownames(M_dist), 2)
- 			
- 			for(i in 1:ncol(liste_combi)) {
- 				# sl1
- 				sl1 = liste_combi[1,i]
- 				farm1 = unlist(strsplit(sl1, "_"))[2]
- 				out = OUT[[sl1]]
- 				id_diffusion_sl1 = out$id_diffusion
- 				nb_repro_sl1 = out$nb_repro
+ 				OUT = lapply(point, function(x){fun(x)})
+ 				names(OUT) = point
  				
- 				# sl2
- 				sl2 = liste_combi[2,i]
- 				farm2 = unlist(strsplit(sl2, "_"))[2]
- 				out = OUT[[sl2]]
- 				id_diffusion_sl2 = out$id_diffusion
- 				nb_repro_sl2 = out$nb_repro
+ 				# 4.2. For each pair of seed-lots, find the last diffusion in common and calculate the distance ----------
+ 				M_dist = matrix(NA, ncol = length(point), nrow = length(point))
+ 				diag(M_dist) = 1
+ 				colnames(M_dist) = rownames(M_dist) = point
  				
- 				# Do seed-lots have their last diffusion event in common?
- 				t1 = t2 = FALSE
- 				if(!is.null(id_diffusion_sl1) & !is.null(id_diffusion_sl2) & !is.null(farm1) & !is.null(farm2)) { t1 = id_diffusion_sl1 == id_diffusion_sl2 ; t2 = farm1 != farm2} # They must be on different farms otherwise it is a non sens !
- 				if(t1 & t2) { nb_repro = nb_repro_sl1 + nb_repro_sl2 } else { nb_repro = 0 } 
+ 				liste_combi = combn(rownames(M_dist), 2)
  				
- 				M_dist[sl1, sl2] = nb_repro
- 			}
+ 				for(i in 1:ncol(liste_combi)) {
+ 					# sl1
+ 					sl1 = liste_combi[1,i]
+ 					farm1 = unlist(strsplit(sl1, "_"))[2]
+ 					out = OUT[[sl1]]
+ 					id_diffusion_sl1 = out$id_diffusion
+ 					nb_repro_sl1 = out$nb_repro
+ 					
+ 					# sl2
+ 					sl2 = liste_combi[2,i]
+ 					farm2 = unlist(strsplit(sl2, "_"))[2]
+ 					out = OUT[[sl2]]
+ 					id_diffusion_sl2 = out$id_diffusion
+ 					nb_repro_sl2 = out$nb_repro
+ 					
+ 					# Do seed-lots have their last diffusion event in common?
+ 					t1 = t2 = FALSE
+ 					if(!is.null(id_diffusion_sl1) & !is.null(id_diffusion_sl2) & !is.null(farm1) & !is.null(farm2)) { t1 = id_diffusion_sl1 == id_diffusion_sl2 ; t2 = farm1 != farm2} # They must be on different farms otherwise it is a non sens !
+ 					if(t1 & t2) { nb_repro = nb_repro_sl1 + nb_repro_sl2 } else { nb_repro = 0 } 
+ 					
+ 					M_dist[sl1, sl2] = nb_repro
+ 				}
  			} else { M_dist = NULL }
- 
+ 			} 
+
  	d = list("network" = n, "network.info" = Minfo, "Mdist" = M_dist)
  	attributes(d)$shinemas2R.object = "network"
  	}
