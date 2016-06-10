@@ -55,13 +55,14 @@ get.ggplot_network.relation.map = function(map, data, relation = "reproduction",
 			
 			if( !is.null(hide.labels.parts) ) { if( hide.labels.parts != "all" ){ stop("With ggplot.type \"network-\" and ggplot.display = \"map\" hide.labels.parts can be NULL or \"all\".") } }
 			
-			p = get.ggplot_pie.on.ggplot(map, data = net.info.map, variable = "variable", factor = "person", x.origin = "long", y.origin = "lat", r = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size) 		
-			t = tapply(net.info.map$variable, net.info.map$person, sum, na.rm = TRUE); min = min(t); max = max(t)	
-			p = p + scale_fill_gradient(low = "green", high = "red", name = name, limits = c(min, max))
-			p = p + ggtitle(paste(y, collapse = ", "))
-			
+			if( nrow(net.info.map) > 0 ){
+				p = get.ggplot_pie.on.ggplot(map, data = net.info.map, variable = "variable", factor = "person", x.origin = "long", y.origin = "lat", r = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size) 		
+				t = tapply(net.info.map$variable, net.info.map$person, sum, na.rm = TRUE); min = min(t); max = max(t)	
+				p = p + scale_fill_gradient(low = "green", high = "red", name = name, limits = c(min, max))
+				p = p + ggtitle(paste(y, collapse = ", "))
+			} else { p = NULL }
+
 			n = c(n, paste("map-[", paste(y, collapse = ", "), "]", sep = ""))
-			
 			out = c(out, list(p))
 		}
 		names(out) = n
