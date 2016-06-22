@@ -24,26 +24,30 @@ postgres=# create database shinemas_tuto owner pierre;
 postgres=# GRANT ALL PRIVILEGES ON DATABASE shinemas_tuto TO pierre;
 \end{verbatim}
 
+To exit \texttt{postgres=#}, press \texttt{ctrl + D}.
 
 Once you've done this, download the \texttt{shinemas\_tuto.sql} here: \url{TODO!}, put in your \texttt{/home/pierre} for example, and install it on postgresql.
 
 Note than \texttt{shinemas\_tuto.sql} must be accesible in writing and reading.
 
-To exit \texttt{postgres=#}, press \texttt{ctrl + D}.
 
 \begin{verbatim}
 pierre@RSP:~$ psql -h localhost -d shinemas_tuto -U pierre -f /home/pierre/shinemas_tuto.sql
 \end{verbatim}
 
-You can look at it:
-
+You can look at the databse you have:
 \begin{verbatim}
 sudo -i -u postgres
 postgres@RSP:~$ psql -l
 \end{verbatim}
 
-More information on posgresql can be found here: \url{doc.ubuntu-fr.org/postgresql}
+You can delete the database with
+\begin{verbatim}
+sudo -i -u postgres
+postgres@RSP:~$ dropdb shinemas_tuto
+\end{verbatim}
 
+More information on posgresql can be found here: \url{help.ubuntu.com/community/PostgreSQL}
 
 \subsection{Set up the information to connect to \BD~with \texttt{get.data}}
 
