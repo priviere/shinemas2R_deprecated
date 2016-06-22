@@ -86,11 +86,11 @@ To do so, use \texttt{fill.diffusion.gap = TRUE}.
 
 <<message=TRUE,cache=FALSE>>=
 if(use.get.data){
-	data_network_JAB = get.data(
+	data_network_OLR = get.data(
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password,  # db infos
 		query.type = "network", # network query
-		person.in = "JAB", # person to keep
+		person.in = "OLR", # person to keep
 		filter.on = "father-son" # filter on father AND son
 		)
 } else {
@@ -99,19 +99,19 @@ if(use.get.data){
 	# 3. Link information to vertex and edges ...
 	# 4. Get network information on seed-lots ...
 	
-	#data_network_JAB = encrypt.data(data_network_JAB)
+	#data_network_OLR = encrypt.data(data_network_JAB)
 	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:54:53 2015.RData
-	load("./data/data_network_JAB.RData")
+	load("./data/data_network_OLR.RData")
 	}
 @
 
 <<message=TRUE,cache=FALSE>>=
 if(use.get.data){
-	data_network_JAB_fill_gap = get.data(
+	data_network_OLR_fill_gap = get.data(
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "network", # network query
-		person.in = "JAB", # person to keep
+		person.in = "OLR", # person to keep
 		filter.on = "father-son", # filter on father AND son
 		fill.diffusion.gap = TRUE
 		)
@@ -122,9 +122,9 @@ if(use.get.data){
 	# 3. Link information to vertex and edges ...
 	# 4. Get network information on seed-lots ...
 	
-	#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)
+	#data_network_OLR_fill_gap = encrypt.data(data_network_OLR_fill_gap)
 	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData
-	load("./data/data_network_JAB_fill_gap.RData")
+	load("./data/data_network_OLR_fill_gap.RData")
 	}
 
 @
@@ -163,19 +163,19 @@ p_net_RdR
 Regarding the argument \texttt{fill.diffusion.gap} in the function \texttt{get.data}:
 
 <<message=TRUE,cache=FALSE>>=
-p_JAB = get.ggplot(
-	data_network_JAB,
+p_OLR = get.ggplot(
+	data_network_OLR,
 	ggplot.type = "network-network", 
 	vertex.color = "person"
 	)
-p_JAB = p_JAB$`network-network`
+p_OLR = p_OLR$`network-network`
 
-p_JAB_fill_gap = get.ggplot(
-	data_network_JAB_fill_gap, 
+p_OLR_fill_gap = get.ggplot(
+	data_network_OLR_fill_gap, 
 	ggplot.type = "network-network", 
 	vertex.color = "person"
 	)
-p_JAB_fill_gap = p_JAB_fill_gap$`network-network`
+p_OLR_fill_gap = p_OLR_fill_gap$`network-network`
 @
 
 We can see that extra information are added to know from where the seed-lots come from.
