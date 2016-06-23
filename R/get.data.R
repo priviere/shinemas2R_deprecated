@@ -406,8 +406,8 @@ string_agg(DISTINCT pro2.project_name,',') AS father_project,
 nr.reproduction_id AS reproduction_id, nrm.reproduction_methode_name AS reproduction_method_name, nr.is_male, nr.block,
 nr.selection_id AS selection_id, psel.short_name AS selection_person, 
 nr.mixture_id AS mixture_id, nr.diffusion_id AS diffusion_id,
-rep.date AS relation_year
-			
+rep.start_date AS relation_year_start, rep.end_date AS relation_year_end
+
 FROM network_relation nr
 LEFT OUTER JOIN network_selection sel ON nr.selection_id = sel.id 
 LEFT OUTER JOIN actors_person psel ON sel.person_id = psel.id 
@@ -434,7 +434,7 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 filters,
 
 "
-GROUP BY sp1.species, sl1.name, gp1.germplasm_name, p1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, p2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, nr.reproduction_id, nrm.reproduction_methode_name, nr.is_male, nr.block, nr.selection_id, psel.short_name, nr.mixture_id, nr.diffusion_id, rep.date
+GROUP BY sp1.species, sl1.name, gp1.germplasm_name, p1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, p2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, nr.reproduction_id, nrm.reproduction_methode_name, nr.is_male, nr.block, nr.selection_id, psel.short_name, nr.mixture_id, nr.diffusion_id, rep.start_date, rep.end_date
 ",
 sep = "")
 
@@ -480,8 +480,8 @@ if(nrow(d) > 0) {
 	selection_person = as.factor(d$selection_person)
 	mixture_id = as.character(d$mixture_id)
 	diffusion_id = as.character(d$diffusion_id)
-	relation_year = as.factor(d$relation_year)
-	
+	relation_year_start = as.factor(d$relation_year_start)
+	relation_year_end = as.factor(d$relation_year_end)
 	
 	d = data.frame(
 		son_species,
@@ -523,7 +523,8 @@ if(nrow(d) > 0) {
 		selection_person,
 		mixture_id,
 		diffusion_id,
-		relation_year
+		relation_year_start,
+		relation_year_end
 	)
 	
 	} else { d = NULL }
@@ -649,7 +650,7 @@ sl2.name AS father, sl2.date AS father_year, gp2.germplasm_name AS father_germpl
 "","
 string_agg(DISTINCT pro2.project_name,',') AS father_project,
 							
-v1.name AS variable_name, rd1.raw_data, rd1.group AS correlation_group, rd1.date AS raw_data_date, met1.method_name, rep1.date AS relation_year,
+v1.name AS variable_name, rd1.raw_data, rd1.group AS correlation_group, rd1.date AS raw_data_date, met1.method_name, rep1.start_date AS relation_year_start, rep1.end_date AS relation_year_end,
 nr.reproduction_id AS reproduction_id, nrm1.reproduction_methode_name AS reproduction_method_name, nr.selection_id AS selection_id, psel1.short_name AS selection_person, nr.mixture_id AS mixture_id, nr.diffusion_id AS diffusion_id, 
 nr.\"X\", nr.\"Y\", nr.block
 							
@@ -691,7 +692,7 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 filters,
 
 "
-GROUP BY sl1.name, rd1.individual, sl1.date, gp1.germplasm_name, sp1.species, gpt1.germplasm_type, p1.short_name, l1.altitude, l1.longitude, l1.latitude, sl2.name, sl2.date, gp2.germplasm_name, sp2.species, gpt2.germplasm_type, p2.short_name, l2.altitude, l2.longitude, l2.latitude, v1.name, rd1.raw_data, rd1.group, rd1.date, met1.method_name, rep1.date, nr.reproduction_id, nrm1.reproduction_methode_name, nr.selection_id, psel1.short_name, nr.mixture_id, nr.diffusion_id, nr.\"X\", nr.\"Y\", nr.block
+GROUP BY sl1.name, rd1.individual, sl1.date, gp1.germplasm_name, sp1.species, gpt1.germplasm_type, p1.short_name, l1.altitude, l1.longitude, l1.latitude, sl2.name, sl2.date, gp2.germplasm_name, sp2.species, gpt2.germplasm_type, p2.short_name, l2.altitude, l2.longitude, l2.latitude, v1.name, rd1.raw_data, rd1.group, rd1.date, met1.method_name, rep1.start_date, rep1.end_date, nr.reproduction_id, nrm1.reproduction_methode_name, nr.selection_id, psel1.short_name, nr.mixture_id, nr.diffusion_id, nr.\"X\", nr.\"Y\", nr.block
 ", sep = "")
 
 d = get.d(query, info_db)
@@ -742,12 +743,12 @@ if( nrow(d) > 0 ) {
 	selection_person = as.factor(d$selection_person)
 	mixture_id = as.character(d$mixture_id)
 	diffusion_id = as.character(d$diffusion_id)
-	relation_year = as.factor(d$relation_year)
+	relation_year_start = as.factor(d$relation_year_start)
+	relation_year_end = as.factor(d$relation_year_end)
 	
 	X = as.factor(d$X)
 	Y = as.factor(d$Y)
 	block = as.factor(d$block)
-	
 
 	d = data.frame(
 		son_species,
@@ -793,7 +794,8 @@ if( nrow(d) > 0 ) {
 		selection_person,
 		mixture_id,
 		diffusion_id,
-		relation_year,
+		relation_year_start,
+		relation_year_end,
 		
 		X,
 		Y,
@@ -1280,7 +1282,7 @@ l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_la
 #sl2.comments AS father_comments, 
 "", "string_agg(DISTINCT pro2.project_name,',') AS father_project,
 
-rep1.date AS relation_year,
+rep1.start_date AS relation_year_start, rep1.end_date AS relation_year_end,
 
 spf.species AS grandfather_species, slf.name AS grandfather, gpf.germplasm_name AS grandfather_germplasm, pf.short_name AS grandfather_person, slf.date AS grandfather_year, gptf.germplasm_type AS grandfather_germplasm_type,
 lf.altitude AS grandfather_alt, lf.longitude AS grandfather_long, lf.latitude AS grandfather_lat,",
@@ -1289,7 +1291,7 @@ lf.altitude AS grandfather_alt, lf.longitude AS grandfather_long, lf.latitude AS
 # slf.comments AS grandfather_comments, 
 "", "string_agg(DISTINCT pro2.project_name,',')  AS grandfather_project,
 
-repf.date AS relation_father_grandfather_year
+repf.start_date AS relation_father_grandfather_year_start, repf.end_date AS relation_father_grandfather_year_end
 
 FROM network_relation nr
 LEFT OUTER JOIN network_selection sel1 ON nr.selection_id = sel1.id
@@ -1328,7 +1330,7 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 filters,
 
 "
-GROUP BY sp1.species, sl1.name, gp1.germplasm_name, p1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, p2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, rep1.date, spf.species, slf.name, gpf.germplasm_name, pf.short_name, slf.date, gptf.germplasm_type, lf.altitude, lf.longitude, lf.latitude, repf.date
+GROUP BY sp1.species, sl1.name, gp1.germplasm_name, p1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, p2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, rep1.start_date, rep1.end_date, spf.species, slf.name, gpf.germplasm_name, pf.short_name, slf.date, gptf.germplasm_type, lf.altitude, lf.longitude, lf.latitude, repf.start_date, repf.end_date
 ",
 
 sep = "")
@@ -1367,7 +1369,8 @@ if( nrow(d) > 0 ) {
 	father_generation_confidence = sample( c(1:8), nrow(d), replace = TRUE) # as.character(d$father_generation_confidence)
 	father_comments = rep("blablabla", nrow(d)) # as.character(d$father_comments)
 		
-	relation_year = as.factor(d$relation_year)
+	relation_year_start = as.factor(d$relation_year_start)
+	relation_year_end = as.factor(d$relation_year_end)
 	
 	grandfather_species = as.factor(d$grandfather_species)
 	grandfather_project = as.factor(d$grandfather_project)
@@ -1384,7 +1387,8 @@ if( nrow(d) > 0 ) {
 	grandfather_generation_confidence = sample( c(1:8), nrow(d), replace = TRUE) # as.character(d$grandfather_generation_confidence)
 	grandfather_comments = rep("blablabla", nrow(d)) # as.character(d$grandfather_comments)
 		
-	relation_father_grandfather_year = as.factor(d$relation_father_grandfather_year)
+	relation_father_grandfather_year_start = as.factor(d$relation_father_grandfather_year_start)
+	relation_father_grandfather_year_end = as.factor(d$relation_father_grandfather_year_end)
 	
 	
 	d = data.frame(
@@ -1418,7 +1422,8 @@ if( nrow(d) > 0 ) {
 		father_generation_confidence,
 		father_comments,
 		
-		relation_year,
+		relation_year_start,
+		relation_year_end,
 		
 		grandfather_species,
 		grandfather_project,
@@ -1435,7 +1440,8 @@ if( nrow(d) > 0 ) {
 		grandfather_generation_confidence,
 		grandfather_comments,
 		
-		relation_father_grandfather_year
+		relation_father_grandfather_year_start,
+		relation_father_grandfather_year_end
 	)
 
 }
