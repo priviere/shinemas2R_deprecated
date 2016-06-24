@@ -289,8 +289,9 @@ if(is.null(ggplot.type) & test2) {
 
 if( test2 & length(grep("data-", ggplot.type)) == 0 ) { stop("With data from \"data-...\", ggplot.type must be", paste(vec_all_ggplot_data, collapse = ", \n")) }
 
+t = is.null(info_db) & (ggplot.type == "data-pie.on.network" | ggplot.type == "data-pie.on.map")
 
-if( is.null(info_db) & (ggplot.type == "data-pie.on.network" | ggplot.type == "data-pie.on.map") ) { stop("You can not use ggplot.type == \"data-pie.on.network\" or \"data-pie.on.map\" because you can not be connected to SHiNeMaS, as you used is.get.data.output function.") }
+if( is.null(info_db) & (is.element("data-pie.on.network", ggplot.type) | is.element("data-pie.on.map", ggplot.type) ) ) { stop("You can not use ggplot.type == \"data-pie.on.network\" or \"data-pie.on.map\" because you can not be connected to SHiNeMaS, as you used is.get.data.output function.") }
 
 # 1.3. ggplot.display ----------
 
