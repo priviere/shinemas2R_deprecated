@@ -655,17 +655,17 @@ if( check.arg("network-diffusion-relation", ggplot.type) ) {
 			
 			for(id in vec_id.diff) { # ajouter "event year" pour ajouter de la couleur et faire le split
 				data.diff.tmp = filter(data.diff, id.diff == id)
-				r = 1 #  which(data.diff.tmp[,"diffusion"] == gettext("receive"))
-				d = 2 # which(data.diff.tmp[,"diffusion"] == gettext("give"))
+				r = which(data.diff.tmp[,"diffusion"] == gettext("receive"))
+				g = which(data.diff.tmp[,"diffusion"] == gettext("give"))
 				son_person = c(son_person, as.character(data.diff.tmp[r, "person"]))
 				son_lat = c(son_lat, data.diff.tmp[r, "lat"])
 				son_long = c(son_long, data.diff.tmp[r, "long"])
-				father_person = c(father_person, as.character(data.diff.tmp[d, "person"]))
-				father_lat = c(father_lat, data.diff.tmp[d, "lat"])
-				father_long = c(father_long, data.diff.tmp[d, "long"])
+				father_person = c(father_person, as.character(data.diff.tmp[g, "person"]))
+				father_lat = c(father_lat, data.diff.tmp[g, "lat"])
+				father_long = c(father_long, data.diff.tmp[g, "long"])
 				event_year = c(event_year, as.character(data.diff.tmp[1, "event_year"]))
 				diff = c(diff, paste(as.character(data.diff.tmp[r, "person"]), 
-														 as.character(data.diff.tmp[d, "person"]), 
+														 as.character(data.diff.tmp[g, "person"]), 
 														 as.character(data.diff.tmp[1, "event_year"]), sep = "-")
 				)
 			}
@@ -724,7 +724,7 @@ if( check.arg("network-diffusion-relation", ggplot.type) ) {
 				
 				if( !is.null(hide.labels.parts) ) { if( hide.labels.parts != "all" ){ stop("With ggplot.type \"network-\" and ggplot.display = \"map\" hide.labels.parts can be NULL or \"all\".") } }
 				
-				p = map + geom_segment(data = d.diff.map_tmp, aes(x = son_long, y = son_lat, xend = father_long, yend = father_lat, size = nb_diffusions), arrow = arrow(length = unit(0.5, "cm")))
+				p = map + geom_segment(data = d.diff.map_tmp, aes(x = father_long, y = father_lat, xend = son_long, yend = son_lat, size = nb_diffusions), arrow = arrow(length = unit(0.5, "cm")))
 				p = p +  scale_size(range = c(1,3))
 				
 				if( is.null(hide.labels.parts) ){
