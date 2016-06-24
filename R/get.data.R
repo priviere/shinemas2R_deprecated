@@ -111,6 +111,7 @@
 #' 
 #' The Mdist square matrix can be compared to a differentiation distance. It can be put in relation with genetic Fst for example.
 #' 
+#' 
 #' \item Correlated data or not
 #' 
 #' Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. 
@@ -129,7 +130,13 @@
 #' \item For network it returns a list with
 #' \itemize{
 #' \item the network object
-#' \item the network.info matrix with information on relations in the network
+#' \item the network.info matrix with information on relations in the network. The possible information are:
+#'  \itemize{
+#'  \item reproduction: "sow", "harvest", "harvest-sow"
+#'  \item selection: "selection"
+#'  \item mixture: "mixture", "mixture_rep" (for mixture of replication i.e. seed-lots of identical germplasm)
+#'  \item diffusion: "give", "receive", "give-receive"
+#'  }
 #' \item the Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
 #' }
 #' 
@@ -1915,7 +1922,7 @@ filter_V = V.sql(variable.in)
  						
  						if( relation == "mixture") { 
  							Minfo[i, "mixture_info"] = "mixture" 
- 							if(Minfo[i, "father_germplasm"] == Minfo[i, "son_germplasm"]) { Minfo[i, "mixture_info"] = "mixture_rep" } 
+ 							if(reseau[i, "father_germplasm"] == reseau[i, "son_germplasm"]) { Minfo[i, "mixture_info"] = "mixture_rep" } 
  						}
  					}
  					
