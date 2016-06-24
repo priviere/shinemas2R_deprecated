@@ -122,7 +122,10 @@ for(do in todo) {
 		
 		datapoly <- data.frame(id = id, x = cx, y = cy, value = values[id])
 		
-		ggplot.tmp = ggplot.tmp + geom_polygon(data = datapoly, aes(x = x, y = y, fill = value, group = id, colour = NULL)) # colour = NULL to delete the aes(colour = group) in ggplot argument (for example ggnet.custom)
+		if( length(todo) == 1 ) {
+			datapoly[1,"value"] = datapoly[1,"value"] + datapoly[1,"value"]*0.000000001 # If there is only one point, scale_fill does not work, so here is a little trick, which is defenitly not perfect
+		}
+			ggplot.tmp = ggplot.tmp + geom_polygon(data = datapoly, aes(x = x, y = y, fill = value, group = id, colour = NULL)) 
 	}
 }
 
