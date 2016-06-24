@@ -1922,7 +1922,7 @@ filter_V = V.sql(variable.in)
  						
  						if( relation == "mixture") { 
  							Minfo[i, "mixture_info"] = "mixture" 
- 							if(reseau[i, "father_germplasm"] == reseau[i, "son_germplasm"]) { Minfo[i, "mixture_info"] = "mixture_rep" } 
+ 							if(as.character(reseau[i, "father_germplasm"]) == as.character(reseau[i, "son_germplasm"])) { Minfo[i, "mixture_info"] = "mixture_rep" } 
  						}
  					}
  					
