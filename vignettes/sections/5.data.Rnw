@@ -691,6 +691,8 @@ p_SR_sw_int_all = default_data_S_ggplot$`data-interaction`
 p_SR_sw_int = p_SR_sw_int_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
 @
 
+\end{itemize}
+
 \begin{center}
 \begin{tabular}{cc}
 \texttt{p\_SR\_sw\_bar} & \texttt{p\_SR\_sw\_box} \\
