@@ -58,6 +58,8 @@ In the following examples, three variables are studied:
 
 <<message=TRUE,cache=FALSE>>=
 vec_variables = c("plant_height", "spike_lenght", "spike_weight")
+vec_variables = c("hauteur", "pmg", "poids_epis")
+vec_variables = c("pmg", "pmg")
 @
 
 \subsubsection{\texttt{query.type = "data-classic"}}
@@ -68,20 +70,17 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "data-classic", # data-classic query
-		person.in = "RAB", # person to keep
+		person.in = "JFB", # person to keep
 		filter.on = "father-son", # filters on father AND son
 		data.type = "relation", # data linked to relation between seed-lots
 		variable = vec_variables, # the variables to display
-		project.in = "PPB" # the project 
+		project.in = "DEMO" # the project 
 		)
 } else {
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
 	
-	#data_classic = encrypt.data(data_classic)
-	#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 24 11:59:59 2015.RData
-	#data_classic = data_classic
 	load("./data/data_classic.RData")
 }
 
@@ -133,19 +132,17 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host,
 		db_name = info_db$db_name, db_password = info_db$db_password,
 		query.type = "data-S",
-		person.in = "RAB",
+		person.in = "JFB",
 		filter.on = "father-son",
 		data.type = "relation",
 		variable = vec_variables,
-		project.in = "PPB"
+		project.in = "DEMO"
 		)
 } else {
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
 	
-	#data_S = encrypt.data(data_S)
-	#The key has been written in /home/pierre/key_data-S-relation_Tue Nov 24 12:01:25 2015.RData
 	load("./data/data_S.RData")
 }
 
@@ -168,19 +165,17 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host,
 		db_name = info_db$db_name, db_password = info_db$db_password,
 		query.type = "data-SR",
-		person.in = "RAB",
+		person.in = "JFB",
 		filter.on = "father-son",
 		data.type = "relation",
 		variable = vec_variables,
-		project.in = "PPB"
+		project.in = "DEMO"
 		)
 } else {
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
 	
-	#data_SR = encrypt.data(data_SR)
-	#The key has been written in /home/pierre/key_data-SR-relation_Tue Nov 24 12:02:25 2015.RData
 	load("./data/data_SR.RData")
 }
 
@@ -431,7 +426,6 @@ A cross (X) means that for a given \texttt{ggplot.type}, a given argument can be
 \end{center}
 
 \end{itemize}
-
 
 \item pies on network
 
