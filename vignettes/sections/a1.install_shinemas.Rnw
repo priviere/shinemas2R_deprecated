@@ -24,7 +24,7 @@ postgres=# create database shinemas_tuto owner pierre;
 postgres=# GRANT ALL PRIVILEGES ON DATABASE shinemas_tuto TO pierre;
 \end{verbatim}
 
-To exit \texttt{postgres=#}, press \texttt{ctrl + D}.
+To exit \texttt{postgres=\#}, press \texttt{ctrl + D}.
 
 Once you've done this, download \texttt{shinemas\_tuto.sql}.
 You can find it in the package:
