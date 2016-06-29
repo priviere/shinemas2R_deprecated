@@ -41,7 +41,7 @@ Note than \texttt{shinemas\_tuto.sql} must be accesible in writing and reading.
 pierre@RSP:~$ psql -h localhost -d shinemas_tuto -U pierre -f /home/pierre/shinemas_tuto.sql
 \end{verbatim}
 
-You can look at the databse you have:
+You can look at the data base you have:
 \begin{verbatim}
 sudo -i -u postgres
 postgres@RSP:~$ psql -l
@@ -53,7 +53,7 @@ sudo -i -u postgres
 postgres@RSP:~$ dropdb shinemas_tuto
 \end{verbatim}
 
-More information on posgresql can be found here: \url{help.ubuntu.com/community/PostgreSQL}
+More information on posgresql can be found here: \url{http://help.ubuntu.com/community/PostgreSQL}
 
 \subsection{Set up the information to connect to \BD~with \texttt{get.data}}
 
