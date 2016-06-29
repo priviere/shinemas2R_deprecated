@@ -124,8 +124,8 @@ citation("shinemas2R")
 
 \newpage
 
-
-\input{./sections/a4.exemples_is_get_data_output}
+<<child='sections/a4.exemples_is_get_data_output'>>=
+@
 
 \newpage
 
