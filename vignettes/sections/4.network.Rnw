@@ -32,7 +32,7 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "network", # network query
-		germplasm.in = "Rouge-du-Roc", # germplasm to keep
+		germplasm.in = "C1", # germplasm to keep
 		filter.on = "father-son", # filter on father AND son
 		Mdist = TRUE
 		)
@@ -43,8 +43,6 @@ if(use.get.data){
 	# 4. Get network information on seed-lots ...
 	# 5. Get Mdist square matrix ...
 	
-	#data_network = encrypt.data(data_network)
-	#The key has been written in /home/pierre/key_network_Tue Nov 24 11:52:47 2015.RData
 	load("./data/data_network.RData")
 	}
 @
@@ -99,8 +97,6 @@ if(use.get.data){
 	# 3. Link information to vertex and edges ...
 	# 4. Get network information on seed-lots ...
 	
-	#data_network_OLR = encrypt.data(data_network_JAB)
-	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:54:53 2015.RData
 	load("./data/data_network_OLR.RData")
 	}
 @
@@ -122,8 +118,6 @@ if(use.get.data){
 	# 3. Link information to vertex and edges ...
 	# 4. Get network information on seed-lots ...
 	
-	#data_network_OLR_fill_gap = encrypt.data(data_network_OLR_fill_gap)
-	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData
 	load("./data/data_network_OLR_fill_gap.RData")
 	}
 
@@ -155,8 +149,8 @@ Each \texttt{ggplot.type} with default and custom arguments are explained in the
 By default, the following network is displayed:
 
 <<message=TRUE,cache=FALSE>>=
-p_net_RdR = default_network_ggplot$"network-network"
-p_net_RdR
+p_net_C1 = default_network_ggplot$"network-network"
+p_net_C1
 @
 
 
@@ -182,13 +176,13 @@ We can see that extra information are added to know from where the seed-lots com
 
 \begin{center}
 \begin{tabular}{cc}
-\texttt{p\_JAB} & \texttt{p\_JAB\_fill\_gap} \\
+\texttt{p\_OLR} & \texttt{p\_OLR\_fill\_OLR} \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".5\\textwidth">>=
-p_JAB
+p_OLR
 @
 &
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".5\\textwidth">>=
-p_JAB_fill_gap
+p_OLR_fill_gap
 @
 \\
 \end{tabular}
@@ -390,7 +384,7 @@ p1_slh = get.ggplot(
 	ggplot.display = "barplot",
 	x.axis = "person",
 	in.col = "year",
-	nb_parameters_per_plot_x.axis = 10
+	nb_parameters_per_plot_x.axis = 2
 	)
 
 p11_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-1`
