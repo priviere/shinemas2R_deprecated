@@ -116,7 +116,13 @@ The function returns a list with
 \item For network it returns a list with
 \itemize{
 \item the network object
-\item the network.info matrix with information on relations in the network
+\item the network.info matrix with information on relations in the network. The possible information are:
+ \itemize{
+ \item reproduction: "sow", "harvest", "harvest-sow"
+ \item selection: "selection"
+ \item mixture: "mixture", "mixture_rep" (for mixture of replication i.e. seed-lots of identical germplasm)
+ \item diffusion: "give", "receive", "give-receive"
+ }
 \item the Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
 }
 
@@ -160,6 +166,7 @@ The query "data-SR" takes into account when selection has been done to get a see
 \item Query "network"
 
 The Mdist square matrix can be compared to a differentiation distance. It can be put in relation with genetic Fst for example.
+
 
 \item Correlated data or not
 
