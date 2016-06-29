@@ -17,7 +17,7 @@ postgres=# ALTER USER pierre SUPERUSER;
 postgres=# alter user pierre with encrypted password 'pierre';
 \end{verbatim}
 
-Then, create the data base \texttt{shinemas\_tuto}:
+Then, create the empty data base \texttt{shinemas\_tuto}:
 
 \begin{verbatim}
 postgres=# create database shinemas_tuto owner pierre;
@@ -26,10 +26,16 @@ postgres=# GRANT ALL PRIVILEGES ON DATABASE shinemas_tuto TO pierre;
 
 To exit \texttt{postgres=#}, press \texttt{ctrl + D}.
 
-Once you've done this, download the \texttt{shinemas\_tuto.sql} here: \url{TODO!}, put in your \texttt{/home/pierre} for example, and install it on postgresql.
+Once you've done this, download \texttt{shinemas\_tuto.sql}.
+You can find it in the package:
+
+<<message=TRUE,cache=FALSE,warning=FALSE>>=
+system.file("extdata", "shinemas_dev.sql", package = "shinemas2R")
+@
+
+Put it in your \texttt{/home/pierre}, and install it on postgresql.
 
 Note than \texttt{shinemas\_tuto.sql} must be accesible in writing and reading.
-
 
 \begin{verbatim}
 pierre@RSP:~$ psql -h localhost -d shinemas_tuto -U pierre -f /home/pierre/shinemas_tuto.sql
