@@ -54,11 +54,7 @@ if( is.null(correlated_group) ) {
 	}
 	
 # 2.Vector of variables ----------
-if( shinemas2R.object == "data-classic-relation") { vec_variables = colnames(data)[c(40: ncol(data))] }
-if( shinemas2R.object == "data-S-relation" | shinemas2R.object == "data-SR-relation" ) { vec_variables = colnames(data)[c(44: ncol(data))] }
-if( shinemas2R.object == "data-classic-seed-lots") { vec_variables = colnames(data)[c(15: ncol(data))] }
-if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-SR-seed-lots" ) { vec_variables = colnames(data)[c(19: ncol(data))] }
-
+vec_variables = get.vec_variables(data, shinemas2R)
 
 # 3.Format for packages
 if( format == "PPBstats" ) {

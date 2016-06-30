@@ -133,12 +133,7 @@ get.table <- function(
 		}
 		
 		# 3. Set up data set ----------
-		if( is.element(shinemas2R.object, "data-classic-relation") ) { vec_variables = colnames(data)[c(29:ncol(data))] }
-		if( is.element(shinemas2R.object, c("data-S-relation", "data-SR-relation")) ) { vec_variables = colnames(data)[c(33:ncol(data))] }
-		
-		if( is.element(shinemas2R.object, "data-classic-seed-lots") ) { vec_variables = colnames(data)[c(5:ncol(data))] }
-		if( is.element(shinemas2R.object, c("data-S-seed-lots", "data-SR-seed-lots")) ) { vec_variables = colnames(data)[c(9:ncol(data))] }
-		
+		vec_variables = get.vec_variables(data, shinemas2R)
 		
 		# get rid off rows and cols with only NA
 		x = data
