@@ -412,11 +412,8 @@ if( length(vec_variables) > 0 & length(grep("network", shinemas2R.object)) > 0 )
 
 if( test2 ){
 	
-	if( merge_g_and_s ) { 
-		data$son_germplasm = sapply(as.character(data$son), function(x){unlist(strsplit(x,"_"))[1]}) 
-		data$father_germplasm = sapply(as.character(data$father), function(x){unlist(strsplit(x,"_"))[1]}) 
-	} 
-	
+	data = update.data.merge_g_and_s(data, merge_g_and_s)
+ 
 	test = is.element(vec_variables, colnames(data))
 	not_in_data = vec_variables[!test]
 	if( length(not_in_data) == length(vec_variables) ) { message("None elements of vec_variables are in data."); return(NULL) }
