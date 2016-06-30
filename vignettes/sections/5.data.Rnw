@@ -59,7 +59,7 @@ In the following examples, three variables are studied:
 <<message=TRUE,cache=FALSE>>=
 vec_variables = c("plant_height", "spike_lenght", "spike_weight")
 vec_variables = c("hauteur", "pmg", "poids_epis")
-vec_variables = c("pmg", "pmg")
+vec_variables = c("pmg")
 @
 
 \subsubsection{\texttt{query.type = "data-classic"}}
@@ -187,12 +187,30 @@ colnames(data_SR$data$data)
 
 To get the plots, use the function \texttt{get.ggplot}.
 
+First of all ,you need to choose
+
+\begin{itemize}
+\item on which data set you get the ggplots.
+This can be done with \texttt{correlated\_group} having the following argument:
+\begin{itemize}
+\item \texttt{NULL}, the default argument (\texttt{shinemas2R::get.data()$data$data})
+\item the name of a given \texttt{correlation\_group} (\texttt{shinemas2R::get.data()$data$data.with.correlated.variables})
+\end{itemize}
+
+\item if you want to merge germplasm name and selection name with the argument \texttt{merge_g_and_s} which is \texttt{TRUE} by default
+\end{itemize}
+
+
 The names of the variables are under the form \texttt{variable\_name---methods}:
 <<message=TRUE,cache=FALSE>>=
 vec_variables = c(
 	"plant_height---plant_height", 
 	"spike_lenght---spike_length_F", 
 	"spike_weight---spike_weight"
+	)
+
+vec_variables = c(
+	"pmg---pmg"
 	)
 @
 
@@ -720,6 +738,21 @@ It is possible to customize the plots as presented in Table \ref{custom.plot}.
 \subsection{Get the tables}
 
 From the data, to get the tables, use the function \texttt{get.table}.
+
+First of all ,you need to choose
+
+\begin{itemize}
+\item on which data set you get the ggplots.
+This can be done with \texttt{correlated\_group} having the following argument:
+\begin{itemize}
+\item \texttt{NULL}, the default argument (\texttt{shinemas2R::get.data()$data$data})
+\item the name of a given \texttt{correlation\_group} (\texttt{shinemas2R::get.data()$data$data.with.correlated.variables})
+\end{itemize}
+
+\item if you want to merge germplasm name and selection name with the argument \texttt{merge_g_and_s} which is \texttt{TRUE} by default
+\end{itemize}
+
+
 Five types of tables can be displayed according to \texttt{table.type} argument :
 
 \begin{center}
