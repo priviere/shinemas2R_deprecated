@@ -23,6 +23,11 @@ shinemas2R 0.9.2 ------------------------------------
 
 	- get.ggplot.R:
 		. change argument "display.lables.sex"" to "labels.sex"
+		. rename the argument "fuse_g_and_s"" by "merge_g_and_s"
+		. default argument for "merge_g_and_s"" is TRUE
+		
+	- get.table.R:
+		. rename the argument "fuse_g_and_s"" by "merge_g_and_s"
 		
 	- encrypt.data.R:
 		. update regarding changes in get.data.R
@@ -31,6 +36,7 @@ shinemas2R 0.9.2 ------------------------------------
 		. update regarding changes in get.data.R
 
 * vignette:
+	- update regarding new version of SHiNeMaS
 	- orthograph corrections
 	- update for is.get.data.output.R
 	- add section "Other information in SHiNeMaS"
