@@ -24,3 +24,12 @@ data.to.use = function(data, correlated_group){
 	}
 }
 
+
+update.data.merge_g_and_s = function(data, merge_g_and_s){
+	if( merge_g_and_s ) { 
+		data$son_germplasm = sapply(as.character(data$son), function(x){unlist(strsplit(x,"_"))[1]}) 
+		data$father_germplasm = sapply(as.character(data$father), function(x){unlist(strsplit(x,"_"))[1]}) 
+	}	
+}
+ 
+
