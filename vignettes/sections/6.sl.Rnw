@@ -1,5 +1,5 @@
 % version 0.9.2
-\section{Other information in \BDD}
+\section{Other information in \BD}
 
 For the following \texttt{query.type}, you can set filters to the query with the following argument :
 \begin{itemize}
