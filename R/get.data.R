@@ -1976,7 +1976,6 @@ filter_V = V.sql(variable.in)
  					while(test) {
  						d_sl_repro = reseau_repro[which(reseau_repro$son == sl),]
  						d_sl_sel = reseau_sel[which(reseau_sel$son == sl),]
- 						d_sl_diff = reseau_diff[which(reseau_diff$son == sl),]
  						d_sl_mix = reseau_diff[which(reseau_diff$son == sl),]
  						test = FALSE # default if the sl does not match a son i.e. it is only father => the relations stop
  						
@@ -1987,12 +1986,21 @@ filter_V = V.sql(variable.in)
  							# increase the number of reproductions by 1 and get the sl father to go back in the history of network
  							nb_repro = nb_repro + 1
  							if(nrow(d_sl_repro) > 0) { sl = as.character(d_sl_repro[1, "father"]) }
- 							if(nrow(d_sl_sel) > 0) { sl = as.character(d_sl_sel[1, "father"]) }		
+ 							if(nrow(d_sl_sel) > 0) { sl = as.character(d_sl_sel[1, "father"]) }	
+ 							
+ 							# check if the sl is the son of a diffusion (i.e. the location receive the sl and then sow it)
+ 							d_sl_diff_1 = reseau_diff[which(reseau_diff$son == sl),]
+ 							
+ 							# check if the sl is the father of a diffusion (i.e. the location send AND sow the sl)
+ 							d_sl_diff_2 = reseau_diff[which(reseau_diff$father == sl),]
+ 							
+ 							# A sl can not be father AND son in a diffusion event
+ 							if(nrow(d_sl_diff_1) > 0) { d_sl_diff = d_sl_diff_1 } else { d_sl_diff = d_sl_diff_2 }
  						}
- 						
+
  						# if the seed-lot (sl) come from a diffusion: get the sl father, that has been sent, and get the diffusion id
  						if(nrow(d_sl_diff) > 0) {
- 							sl = as.character(d_sl_diff[1, "father"])		
+ 							sl = as.character(d_sl_diff[1, "father"])	
  							id_diffusion_sl = as.character(sl)
  							test = FALSE
  						}
@@ -2001,6 +2009,9 @@ filter_V = V.sql(variable.in)
  					
  					names(nb_repro) = id_diffusion_sl
  					L = c(list("id_diffusion" = id_diffusion_sl), list("nb_repro" = nb_repro))
+ 					
+ 					print(L)
+ 					
  					return(L)
  				}
  				
