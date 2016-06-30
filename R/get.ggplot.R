@@ -104,7 +104,12 @@
 #' 	\item the relation between seed-lots on maps (ggplot.type = "network-diffusion-relation"). The size of the arrows is proportionnal to the number of diffusions.
 #' 	}
 #' 	
-#' \item a series of ggplots for mixtures (ggplot.type = "network-mixture"). Note that mixtures of replications are not counted here.
+#' \item a series of ggplots for mixtures representing:
+#' 	\itemize{
+#' 	\item the seed-lots coming from 'real' mixtures (ggplot.type = "network-mixture-real")
+#' 	\item the seed-lots coming from mixtures of replication (ggplot.type = "network-mixture-rep")
+#' 	\item the seed-lots coming from all mixtures (ggplot.type = "network-mixture-all")
+#' }
 #' 
 #' \item a series of ggplots for selection (ggplot.type = "network-positive-intra-selected") 
 #' 
@@ -196,7 +201,9 @@ test = is.element(ggplot.type, c(
 	"network-diffusion-sent",
 	"network-diffusion-received",
 	"network-diffusion-relation",
-	"network-mixture",
+	"network-mixture-real",
+	"network-mixture-rep",
+	"network-mixture-all",
 	"network-positive-intra-selected",
 	
 	# data-
@@ -224,7 +231,9 @@ netwok- type:
 \"network-diffusion-sent\",
 \"network-diffusion-received\",
 \"network-diffusion-relation\",
-\"network-mixture\",
+\"network-mixture-real\",
+\"network-mixture-rep\",
+\"network-mixture-all\",
 \"network-positive-intra-selected\"
 																		 
 or data- type:
@@ -249,7 +258,9 @@ vec_all_ggplot_network = 	c("network-network",
 														"network-diffusion-sent",
 														"network-diffusion-received",
 														"network-diffusion-relation",
-														"network-mixture",
+														"network-mixture-real",
+														"network-mixture-rep",
+														"network-mixture-all",
 														"network-positive-intra-selected")
 
 if(is.null(ggplot.type) & test1) { 
@@ -737,22 +748,55 @@ if( check.arg("network-diffusion-relation", ggplot.type) ) {
 	LIST.PLOTS = c(LIST.PLOTS, out)	
 }
 
-# 3.8. network-mixture ----------
-if( check.arg("network-mixture", ggplot.type) ) {
+# 3.8. network-mixture-real ----------
+if( check.arg("network-mixture-real", ggplot.type) ) {
 	
 	if( check.arg("barplot", ggplot.display) ) { 
-		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "mixture", relation.type = "mixture", name = gettext("mixed seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "mixture_real", relation.type = "mixture", name = gettext("real mixed seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
 	} else { out_barplot = NULL }
 	
 	if( check.arg("map", ggplot.display) ) {
-		out_map = get.ggplot_network.relation.map(map, data = data, relation = "mixture", relation.type = "mixture", name = gettext("mixed seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "mixture", relation.type = "mixture_real", name = gettext("real mixed seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 	} else { out_map = NULL }
 	
-	out = list("network-mixture" = c(out_barplot, out_map))	
+	out = list("network-mixture-real" = c(out_barplot, out_map))	
 	LIST.PLOTS = c(LIST.PLOTS, out)	
 }
 
-# 3.9. network-positive-intra-selected ----------
+# 3.9. network-mixture-rep ----------
+if( check.arg("network-mixture-rep", ggplot.type) ) {
+	
+	if( check.arg("barplot", ggplot.display) ) { 
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "mixture", relation.type = "mixture_rep", name = gettext("mixed rep seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+	} else { out_barplot = NULL }
+	
+	if( check.arg("map", ggplot.display) ) {
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "mixture", relation.type = "mixture_rep", name = gettext("mixed rep seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+	} else { out_map = NULL }
+	
+	out = list("network-mixture-rep" = c(out_barplot, out_map))	
+	LIST.PLOTS = c(LIST.PLOTS, out)	
+}
+
+
+# 3.10. network-mixture-all ----------
+if( check.arg("network-mixture-all", ggplot.type) ) {
+	
+	if( check.arg("barplot", ggplot.display) ) { 
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "mixture", relation.type = c("mixture_real", "mixture_rep"), name = gettext("all mixed seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+	} else { out_barplot = NULL }
+	
+	if( check.arg("map", ggplot.display) ) {
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "mixture", relation.type = c("mixture_real", "mixture_rep"), name = gettext("all mixed seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+	} else { out_map = NULL }
+	
+	out = list("network-mixture-all" = c(out_barplot, out_map))	
+	LIST.PLOTS = c(LIST.PLOTS, out)	
+}
+
+
+
+# 3.11. network-positive-intra-selected ----------
 if( check.arg("network-positive-intra-selected", ggplot.type) ) {
 	
 	if( check.arg("barplot", ggplot.display) ) { 
@@ -767,7 +811,7 @@ if( check.arg("network-positive-intra-selected", ggplot.type) ) {
 	LIST.PLOTS = c(LIST.PLOTS, out)	
 }
 
-# 3.10. "network-reproduction-crossed" ----------
+# 3.12. "network-reproduction-crossed" ----------
 if( check.arg("network-reproduction-crossed", ggplot.type) ){
 	
 	if( check.arg("barplot", ggplot.display) ) { 
