@@ -109,11 +109,7 @@ get.table <- function(
 		
 		
 		# 2. germplasm column and update vec_variables ----------
-
-		if( merge_g_and_s ) { 
-			data$son_germplasm = sapply(as.character(data$son), function(x){unlist(strsplit(x,"_"))[1]}) 
-			data$father_germplasm = sapply(as.character(data$father), function(x){unlist(strsplit(x,"_"))[1]}) 
-		} 
+		data = update.data.merge_g_and_s(data, merge_g_and_s)
 		
 		test = is.element(vec_variables, colnames(data))
 		var_not_in_data = vec_variables[!test]
