@@ -197,7 +197,7 @@ This can be done with \texttt{correlated\_group} having the following argument:
 \item the name of a given \texttt{correlation\_group} (\texttt{shinemas2R::get.data()$data$data.with.correlated.variables})
 \end{itemize}
 
-\item if you want to merge germplasm name and selection name with the argument \texttt{merge_g_and_s} which is \texttt{TRUE} by default
+\item if you want to merge germplasm name and selection name with the argument \texttt{merge\_g\_and\_s} which is \texttt{TRUE} by default
 \end{itemize}
 
 
@@ -749,7 +749,7 @@ This can be done with \texttt{correlated\_group} having the following argument:
 \item the name of a given \texttt{correlation\_group} (\texttt{shinemas2R::get.data()$data$data.with.correlated.variables})
 \end{itemize}
 
-\item if you want to merge germplasm name and selection name with the argument \texttt{merge_g_and_s} which is \texttt{TRUE} by default
+\item if you want to merge germplasm name and selection name with the argument \texttt{merge\_g\_and\_s} which is \texttt{TRUE} by default
 \end{itemize}
 
 
