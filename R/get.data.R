@@ -134,7 +134,7 @@
 #'  \itemize{
 #'  \item reproduction: "sow", "harvest", "harvest-sow"
 #'  \item selection: "selection"
-#'  \item mixture: "mixture", "mixture_rep" (for mixture of replication i.e. seed-lots of identical germplasm)
+#'  \item mixture: "mixture_real" (for 'real' mixture i.e. seed-lots of different germplasm), "mixture_rep" (for mixture of replication i.e. seed-lots of identical germplasm)
 #'  \item diffusion: "give", "receive", "give-receive"
 #'  }
 #' \item the Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
@@ -1921,7 +1921,7 @@ filter_V = V.sql(variable.in)
  						if( relation == "selection" ) { Minfo[i, "selection_info"] = "selection" }
  						
  						if( relation == "mixture") { 
- 							Minfo[i, "mixture_info"] = "mixture" 
+ 							Minfo[i, "mixture_info"] = "mixture_real" 
  							if(as.character(reseau[i, "father_germplasm"]) == as.character(reseau[i, "son_germplasm"])) { Minfo[i, "mixture_info"] = "mixture_rep" } 
  						}
  					}
