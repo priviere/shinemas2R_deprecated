@@ -2,6 +2,7 @@ shinemas2R 0.9.2 ------------------------------------
 -----------------------------------------------------
 * new function added: 
 	- is.get.data.output.R
+	- extra_functions.R
 
 * update functions regarding is.get.data.output.R
 
