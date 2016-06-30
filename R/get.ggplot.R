@@ -174,16 +174,7 @@ if(
 ) { message("data is NULL: nothing is done !"); return(NULL) }
 
 
-if( test2 ){
-	if( is.null(correlated_group) ) {
-		data = data$data	
-	} else { 
-		data_tmp = data$data.with.correlated.variables
-		if(is.element(correlated_group, names(d))) {
-			data = data_tmp[[correlated_group]]
-		} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
-	}
-}
+if( test2 ){ data = data.to.use(data, correlated_group) }
 
 
 if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-S-relation" | shinemas2R.object == "data-SR-seed-lots" | shinemas2R.object == "data-SR-relation" ) {
