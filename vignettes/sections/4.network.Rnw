@@ -657,7 +657,11 @@ It corresponds to negative inter selection. \\
 
 \texttt{"network-diffusion-received"} & seed-lots that have been received in a given location. \\
 
-\texttt{"network-mixture"} & seed-lots that have been mixed into a mixture. Note that mixtures of replications are not counted here. \\
+\texttt{"network-mixture-real"} & seed-lots that have been 'really' mixed into a mixture. \\
+
+\texttt{"network-mixture-rep"} & seed-lots coming from replication that have been mixed into a mixture. \\
+
+\texttt{"network-mixture-all"} & seed-lots that have been mixed into a mixture (i.e. \texttt{"network-mixture-real"} + \texttt{"network-mixture-rep"}. \\
 
 \texttt{"network-positive-intra-selected"} & seed-lots where intra germplasm selection have been done.
 It corresponds to mass selection. \\
