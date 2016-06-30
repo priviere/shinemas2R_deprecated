@@ -6,9 +6,9 @@
 #'
 #' @param data output from get.data with query.type = "network" or query.type = "data-...".
 #' 
-#' @param correlated_group Name of the group of correlation in data. NULL by default.
+#' @param correlated_group Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.
 #' 
-#' @param fuse_g_and_s Fuse germplasm and selection name information in a column named germplasm
+#' @param merge_g_and_s Fuse germplasm and selection name information in a column named germplasm. TRUE by default.
 #' 
 #' @param ggplot.type the type of plot you wish.
 #' NULL by default: according to the type of data, it will be "network-all" or "data-all". "X-all" means that all the "X-" objects are done. 
@@ -127,7 +127,7 @@
 get.ggplot <- function(
 	data,
 	correlated_group = NULL,
-	fuse_g_and_s = FALSE,
+	merge_g_and_s = TRUE,
 	ggplot.type = NULL,
 	ggplot.display = NULL,
 	ggplot.on = "son",
@@ -421,7 +421,7 @@ if( length(vec_variables) > 0 & length(grep("network", shinemas2R.object)) > 0 )
 
 if( test2 ){
 	
-	if( fuse_g_and_s ) { 
+	if( merge_g_and_s ) { 
 		data$son_germplasm = sapply(as.character(data$son), function(x){unlist(strsplit(x,"_"))[1]}) 
 		data$father_germplasm = sapply(as.character(data$father), function(x){unlist(strsplit(x,"_"))[1]}) 
 	} 
