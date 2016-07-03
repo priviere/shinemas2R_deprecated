@@ -202,8 +202,6 @@ get.ggplot_plot.it = function(
 				structure(coord_polar(...), class = c("radar", "polar", "coord")) 
 			} 
 			is.linear.radar <- function(coord) TRUE
-
-			attributes(p)$x.axis = NULL; attributes(p)$in.col = in.col
 			
 			p = ggplot(m, aes(x = variable, y = value1, color = in.col)) + geom_path(aes(group = in.col)) + coord_radar()
 			p = p  + xlab("measure") + ylab("relative value") + theme(legend.title = element_blank()) 
