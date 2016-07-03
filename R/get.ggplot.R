@@ -920,6 +920,7 @@ if( check.arg("data-interaction", ggplot.type) ) {
 	LIST.PLOTS = c(LIST.PLOTS, list.plots)
 }
 
+
 # 4.4. data-radar ----------
 if( check.arg("data-radar", ggplot.type) & length(vec_variables) > 1 ) {
 	list.plots = NULL
