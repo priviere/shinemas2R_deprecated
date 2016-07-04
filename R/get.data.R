@@ -18,8 +18,6 @@
 #' 
 #' \item "network": network relations between seed-lots. All filters are possible.
 #' 
-#' \item "SL.mix": seed-lots merged from replications and not from 'real' mixtures. All filters are possible except relation.in and variable.in.
-#' 
 #' \item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variable.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in.
 #' 
 #' \item raw information on levels and variables contained in SHiNeMaS :
@@ -140,8 +138,6 @@
 #' \item the Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
 #' }
 #' 
-#' \item For SL.mix, it returns a data frame with seed-lots son (i.e. coming from the mixture), seed-lots father, germplasm, person, year and project
-#' 
 #' \item For raw information on levels and variables present in SHiNeMaS it returns a vector
 #' 
 #' \item For data with variables on specific seed-lots it returns a list with
@@ -196,7 +192,7 @@ fill.diffusion.gap = FALSE
 # 1. Check parameters ----------
 
 # 1.1. Possibles values of arguments ----------
-if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "SL.mix", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person.info", "grandfather")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"SL.mix\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\", \"person.info\" or \"grandfather\".") }
+if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person.info", "grandfather")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\",\"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\", \"person.info\" or \"grandfather\".") }
 
 test = c(germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in, variable.in)
 if(is.element(query.type, c( "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm")) & !is.null(test)) { stop("You can not use a filter on raw information on levels and variables.") }
@@ -206,8 +202,6 @@ if(!is.null(relation.in)){
 }
 
 # 1.2. Possible filters regarding query.types or data.type ----------
-if( query.type == "SL.mix" & (!is.null(relation.in) | !is.null(variable.in)) ) { warning("With query.type == \"SL.mix\", filter relation.in is not used.") }
-
 if( query.type == "cross" & (!is.null(relation.in) | !is.null(variable.in)) ) { warning("With query.type == \"cross\", filter relation.in and variable.in are not used.") }
 
 if( query.type == "methods" & (
@@ -1071,7 +1065,7 @@ d2 = get.d(query, info_db)
 
 if(FALSE){
 # On nettoie les données
-# Choper dans la réponse le vrac le plus proche du bouquet
+# Choper dans la réponse le vrac le plus proche du bouquet dans le cas de répétitions
 	print("transformet en as num as factor les X et Y, comme ça on retrouve et on est pas contraint par la nature de X et Y")
 # GÉRER LES 4A, 4B, ETC Cf redmine 583 ---------------------------
 NUM = paste(rep(c(1:26),each=length(letters)),rep(c("",letters),rep=26),sep="")
@@ -1187,77 +1181,6 @@ if(nrow(d) > 0)  {
 	d$expe_name_2 = as.factor(d$expe_name_2)
 	
 } else { d = NULL }
-
-return(d)
-}
-
-
-query.SL.mix = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL, Proj = NULL, info_db) {
-	f = c(G, GT, Y, P, SL, Proj)
-	if( !is.null (f[1]) ) { 
-		f = f[!is.null(f)]
-		f = paste(f, collapse = " AND ")
-		filters = paste(" AND ", f, sep = "") 
-	} else { filters = NULL }
-	
-	
-	query = paste(
-		"SELECT DISTINCT sl1.name AS son, gp1.germplasm_name AS son_germplasm, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person , sl1.date AS son_year,
-string_agg(DISTINCT pro1.project_name,',') AS son_project,
-
-sl2.name AS father, gp2.germplasm_name AS father_germplasm, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, sl2.date AS father_year, string_agg(DISTINCT pro2.project_name,',') AS father_project
-
-FROM network_relation nr2 JOIN entities_seed_lot sl2 ON nr2.seed_lot_father_id=sl2.id
-
-LEFT OUTER JOIN network_relation nr1 ON nr2.seed_lot_son_id=nr1.seed_lot_father_id
-LEFT OUTER JOIN entities_seed_lot sl1 ON nr1.seed_lot_son_id = sl1.id
-
-LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
-LEFT OUTER JOIN entities_germplasm gp2 ON sl2.germplasm_id = gp2.id
-LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id = gpt1.id
-LEFT OUTER JOIN entities_germplasm_type gpt2 ON gp2.germplasm_type_id = gpt2.id
-LEFT OUTER JOIN actors_person p1 ON sl1.person_id = p1.id
-LEFT OUTER JOIN actors_person p2 ON sl2.person_id = p2.id
-
-LEFT OUTER JOIN network_relation_project nrp1 ON nrp1.relation_id = nr1.id
-LEFT OUTER JOIN actors_project pro1 ON nrp1.project_id = pro1.id
-
-LEFT OUTER JOIN network_relation_project nrp2 ON nrp2.relation_id = nr2.id
-LEFT OUTER JOIN actors_project pro2 ON nrp2.project_id = pro2.id
-
-WHERE
-nr1.mixture_id IS NOT NULL AND
-sl1.germplasm_id = sl2.germplasm_id",
-
-filters,
-
-"
-GROUP BY sl1.name, gp1.germplasm_name, gpt1.germplasm_type, p1.short_name, sl1.date, sl2.name, gp2.germplasm_name, gpt2.germplasm_type, p2.short_name, sl2.date
-",
-
-sep = "")
-
-d = get.d(query, info_db)
-
-if( nrow(d) > 0 ) {
-
-d = data.frame(
-	son_project = as.factor(d$son_project),
-	son = as.factor(d$son),
-	son_person = as.factor(d$son_person),
-	son_germplasm = as.factor(d$son_germplasm),
-	son_year = as.factor(d$son_year),
-	son_germplasm_type = as.factor(d$son_germplasm_type),
-	
-	father_project = as.factor(d$father_project),
-	father = as.factor(d$father),
-	father_germplasm = as.factor(d$father_germplasm),
-	father_person = as.factor(d$father_person),
-	father_year = as.factor(d$father_year),
-	father_germplasm_type = as.factor(d$father_germplasm_type)
-)
-
-}
 
 return(d)
 }
@@ -2055,13 +1978,6 @@ filter_V = V.sql(variable.in)
  	}
  	
  
- 	# 5.2. SL.mix ----------
- 	if(query.type == "SL.mix") { 
- 		message("1. Query SHiNeMaS ...")
- 		d = query.SL.mix(filter_G, filter_GT, filter_Y, filter_P, filter_SL, filter_Proj, info_db = info_db) 
- 		attributes(d)$shinemas2R.object = "SL.mix"
- 		}
- 	
 	# 5.3. cross ----------
 	if(query.type == "cross") {
 		message("1. Query SHiNeMaS ...")
