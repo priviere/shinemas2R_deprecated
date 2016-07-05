@@ -214,18 +214,27 @@ get.ggplot_plot.it = function(
 	if(ggplot.display == "biplot") {
 		
 		d = reshape.data(d, x.axis = NULL, nb_parameters_per_plot_x.axis = NULL, in.col = in.col, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, vec_variables = vec_variables, labels.on = labels.on, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
-
+		
 		fun = function(pair_var, d, in.col){
 			funb = function(d, pair_var, in.col){
 				colnames(d)[which(colnames(d) == in.col)] = "in.col"
 				var = unlist(strsplit(pair_var, " -azerty- "))
 				var1 = var[1]; colnames(d)[which(colnames(d) == var1)] = "var1"
 				var2 = var[2]; colnames(d)[which(colnames(d) == var2)] = "var2"
-				p = ggplot(d, aes(x = var1, y = var2, label = labels)) 
-				p = p + stat_smooth(method = "lm", se = FALSE)
-				p = p + geom_text(aes(colour = factor(in.col)), size = labels.size)
-				p = p  + xlab(var1) + ylab(var2) + ggtitle(titre) + theme(axis.text.x = element_text(angle=90, hjust=1), legend.title = element_blank()) 
-				attributes(p)$x.axis = NULL; attributes(p)$in.col = in.col
+				
+				dtmp = cbind.data.frame(d[,c(1, 2)], d[, c("var1", "var2")])
+				dtmp = na.omit(dtmp)
+				if( nrow(dtmp) == 0){
+					warning("No biplot is done for ", var1, " and ", var2, " as there are only NA. This can be due to missing data or to mismatch between raw data linked to individuals with raw data linked to relation."); 
+					p = NULL
+				} else {
+					p = ggplot(dtmp, aes(x = var1, y = var2, label = labels)) 
+					p = p + stat_smooth(method = "lm", se = FALSE)
+					p = p + geom_text(aes(colour = factor(in.col)), size = labels.size)
+					p = p  + xlab(var1) + ylab(var2) + ggtitle(titre) + theme(axis.text.x = element_text(angle=90, hjust=1), legend.title = element_blank()) 
+					attributes(p)$x.axis = NULL; attributes(p)$in.col = in.col
+				}
+
 				return(p)
 			}
 			p = lapply(d, funb, pair_var, in.col)
