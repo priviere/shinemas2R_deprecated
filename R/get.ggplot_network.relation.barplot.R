@@ -28,7 +28,7 @@ get.ggplot_network.relation.barplot = function(data, combi, relation = "reproduc
 		net.info = droplevels(filter(data$network.info, selection %in% relation.type))
 		net.info$variable = as.numeric(net.info$selection) # to get a column of 1		
 	}
-	
+
 	if( nrow(net.info) > 0 ){
 		net.info.barplot = plyr::rename(net.info, replace = c(variable = name))
 		
