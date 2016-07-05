@@ -194,8 +194,6 @@ get.ggplot_plot.it = function(
 			colnames(m) = c("variable", "value", "value1", "in.col")
 			m$in.col = factor(m$in.col)
 			
-			print(m)
-			
 			# Define a new coordinate system 
 			coord_radar <- function(...) { 
 				structure(coord_polar(...), class = c("radar", "polar", "coord")) 
