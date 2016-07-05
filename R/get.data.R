@@ -39,6 +39,7 @@
 #' \item "data-classic": default dataframe.
 #' \item "data-S": selection differential for a given year.
 #' \item "data-SR": seed-lots pairs of selection differential for year n-1 and response to selection for year n.
+#' \item "data-mixture-1": seed-lots used in a mixture
 #' }
 #' 
 #' \item "methods": information related to the methods used for each variable in SHiNeMaS with its description and units
@@ -202,7 +203,7 @@ mixrep_to_repro = TRUE
 # 1. Check parameters ----------
 
 # 1.1. Possibles values of arguments ----------
-if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person.info", "grandfather")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\",\"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\", \"person.info\" or \"grandfather\".") }
+if(!is.element(query.type, c("network", "data-classic", "data-S", "data-SR", "data-mixture-1", "cross", "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm", "methods", "person.info", "grandfather")))  { 	stop("query.type must be \"network\", \"data-classic\", \"data-S\", \"data-SR\", \"data-mixture-1\", \"cross\", \"variable\", \"person\", \"year\", \"project\", \"seed.lots\", \"selection.person\", \"reproduction.type\", \"germplasm.type\", \"germplasm\", \"methods\", \"person.info\" or \"grandfather\".") }
 
 test = c(germplasm.in, germplasm.out, germplasm.type.in, germplasm.type.out, year.in, year.out, project.in, project.out, person.in, person.out, seed.lot.in, seed.lot.out, relation.in, reproduction.type.in, variable.in)
 if(is.element(query.type, c( "variable", "person", "year", "project", "seed.lots", "selection.person", "reproduction.type", "germplasm.type", "germplasm")) & !is.null(test)) { stop("You can not use a filter on raw information on levels and variables.") }
@@ -1462,6 +1463,24 @@ return(d)
 }
 
 
+query.mixture1 = function(P = NULL, G = NULL, GT = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db){
+	dtmp = query.network( P = NULL, G = NULL, GT = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db)
+	dtmp = droplevels(dtmp[which(!is.na(dtmp$mixture_id)),])
+	
+	if(nrow(dtmp) > 0) {	
+		d = cbind.data.frame(
+			sl = c(as.character(dtmp$father), as.character(dtmp$son)),
+			sl_statut = rep( c("father", "son"), each = nrow(dtmp) ),
+			expe = dtmp$mixture_id
+		)
+		d$sl = as.factor(d$sl)
+		d$sl_statut = as.factor(d$sl_statut)
+		d$expe = as.factor(d$expe)
+		d = unique(d) # to have one row for the result of the mixture
+	} else { d= NULL }
+	return(d)
+}
+
 # 4. Filters --------------------------------------------------------------
 
 
@@ -2045,9 +2064,10 @@ filter_V = V.sql(variable.in)
 		if(data.type == "relation") { message("1. Query SHiNeMaS ..."); d = query.data.relation(filter_G, filter_GT, filter_Y, filter_P, filter_R, filter_V, filter_SL, filter_Proj, info_db = info_db) }	
 	}
 
-	if(query.type == "data-S" | query.type == "data-SR") { 
+	if(query.type == "data-S" | query.type == "data-SR" | query.type == "data-mixture-1") { 
 		if(query.type == "data-S") { message("1. Query SHiNeMaS ..."); tab = query.S(info_db = info_db) }
 		if(query.type=="data-SR") { message("1. Query SHiNeMaS ..."); tab = query.SR(info_db = info_db) }
+		if(query.type=="data-mixture-1") { message("1. Query SHiNeMaS ..."); tab = query.mixture1(info_db = info_db) }
 		
 		if(!is.null(tab)) {
 			vec.seed_lots = tab[,"sl"]
@@ -2057,7 +2077,8 @@ filter_V = V.sql(variable.in)
 			tab = plyr::rename(tab, replace = c("sl" = "son"))
 			if( !is.null(dv) ) { d = join(tab, dv, by = "son" ) } else { d = NULL }
 			} else { d = NULL }
-		}		
+	}		
+
 
 	# Set up datasets
 	if( query.type == "data-classic" | query.type == "data-S" | query.type == "data-SR" ) {
