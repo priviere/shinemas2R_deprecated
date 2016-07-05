@@ -85,6 +85,8 @@
 #' @param Mdist For query.type = "network". If TRUE, computes the Mdist matrix and return it in the results. See details.
 #' 
 #' @param fill.diffusion.gap For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)
+#'
+#' @param mixrep_to_repro For query.type = "network", tranform the mixtures of replications into reproductions, i.e. the network keeps only 'real' mixtures (i.e. different germplasm for father and son) and correct the information regarding what have been harvested and sown after as the mixture disappear. TRUE by default.
 #' 
 #' @details
 #' \itemize{
@@ -184,7 +186,8 @@ variable.in = NULL,
 data.type = NULL,
 network.info = TRUE,
 Mdist = FALSE,
-fill.diffusion.gap = FALSE
+fill.diffusion.gap = FALSE,
+mixrep_to_repro = TRUE
 )
 
 # lets go !!! ----
@@ -1620,6 +1623,23 @@ filter_V = V.sql(variable.in)
  			n = Minfo = M_dist = NULL
  			message("There is no network for these filters in SHiNeMaS.")
  		} else {
+ 			
+ 			if(mixrep_to_repro){
+ 				row_id_mix_rep = which(!is.na(reseau$mixture_id) & (as.character(reseau$son_germplasm) == as.character(reseau$father_germplasm)))
+ 				
+ 				id_mix_rep = unique(as.character(reseau[row_id_mix_rep, "mixture_id"]))
+ 				
+ 				for(id in id_mix_rep){
+ 					row_mix_rep = which(id %in% as.character(reseau$mixture_id))
+ 					sl_harvested = reseau[row_mix_rep, "father"]
+ 					row = which(as.character(r$son) == sl_harvested)
+ 					reseau[row, "son"] = reseau[row_mix_rep, "son"]
+ 				}
+ 				
+ 				reseau = droplevels(reseau[-row_id_mix_rep,])
+ 				message("Mixtures from replication have been deleted and replaced by reproductions.")
+ 			}
+ 			
  			message("2. Create network matrix ..."); {
  				
  				# fill diffusion gap
