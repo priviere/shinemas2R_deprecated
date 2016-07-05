@@ -32,7 +32,6 @@ This square matrix can be compared to a differentiation distance.
 It can be put in relation with genetic $F_{st}$ for example \citep{nei_analysis_1973}\footnote{The \R~package \texttt{adegenet} can be used for that.}.
 
 
-
 <<message=TRUE,cache=FALSE>>=
 if(use.get.data){
 	data_network = get.data(
@@ -428,9 +427,9 @@ p11_slh
 p12_slh
 @
 \\
-\texttt{p11\_slh\_bw} &  \\
+\texttt{p12\_slh\_bw} &  \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-p11_slh_bw
+p12_slh_bw
 @
 &
 \\
