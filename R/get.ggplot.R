@@ -122,6 +122,8 @@
 #' @details 
 #' For data coming from query.type = "data-S" and "data-SR", NA are put when there are no data for bouquet AND vrac
 #' 
+#' For data-radar, it is the mean which is represented
+#' 
 #' @examples 
 #' # See the vignette
 #' 
