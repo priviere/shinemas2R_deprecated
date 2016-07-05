@@ -752,11 +752,12 @@ if( check.arg("network-diffusion-relation", ggplot.type) ) {
 	LIST.PLOTS = c(LIST.PLOTS, out)	
 }
 
+
 # 3.8. network-mixture-real ----------
 if( check.arg("network-mixture-real", ggplot.type) ) {
 	
 	if( check.arg("barplot", ggplot.display) ) { 
-		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "mixture_real", relation.type = "mixture", name = gettext("real mixed seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "mixture", relation.type = "mixture_real", name = gettext("real mixed seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
 	} else { out_barplot = NULL }
 	
 	if( check.arg("map", ggplot.display) ) {
