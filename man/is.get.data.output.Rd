@@ -30,9 +30,23 @@ This is useful when the user do not have SHiNeMaS but wish to use the other func
 \details{
 Formats of the different shinemas2R.object:
 	\itemize{
-	 \item "network" It must be a list of three elements: "network", "network.info" and "Mdist" (see \code{get.data} for more details) with the followinf format:
+	 \item "network" It must be a list of four elements: "network", "network.query", "network.info" and "Mdist" (see \code{get.data} for more details) with the followinf format:
 	 \itemize{
 	 	\item "network" must be a network object. It can be NULL. Vertex attributes can be put on "year", "person", "germplasm", germplasm.type" and "sex". Edge attributes can be put on "relation" and "generation"
+
+	 	\item "network.query" must be a dataframe. It can be NULL. It has the following columns:
+son_species, son_project, son, son_germplasm, son_person, son_year, son_germplasm_type which are factors,
+son_alt, son_long, son_lat, son_total_generation_nb, son_local_generation_nb which are numerics,
+son_generation_confidence, son_comments which are characters,father_species, father_project, son, father_germplasm, father_person, father_year, father_germplasm_type which are factors,
+father_alt, father_long, father_lat, father_total_generation_nb, father_local_generation_nb which are numerics,
+father_generation_confidence, father_comments which are characters,
+reproduction_id which is character,
+reproduction_method_name, is_male, block which are factors,
+selection_id which is character,
+selection_person which is factor,
+mixture_id, diffusion_id  which are character,
+relation_year_start, relation_year_end which are factors.
+
 	 	\item "network.info" must be a dataframe. It can be NULL. It has the following columns: sl, which is a character; alt, long and lat which are numeric; diffusion, id.diff, reproduction, mixture, cross.info, germplasm, person and year, which are factor.
 	 	Possible values for diffusion are for EN: "give", "receive", "give-receive" or NA.
 	 	Possible values for reproduction are for EN: "sow", "harvest", "harvest-sow" or NA.
@@ -57,7 +71,7 @@ Formats of the different shinemas2R.object:
 	}
 }
 \examples{
-# See the vignette
+# See the vignette and appendix D
 }
 \author{
 Pierre Riviere
