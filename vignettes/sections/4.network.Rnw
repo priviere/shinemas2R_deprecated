@@ -64,6 +64,11 @@ n_igraph = intergraph::asIgraph(n)
 n_igraph
 @
 
+\item the network.query dataframe coming from the query
+<<message=TRUE,cache=FALSE>>=
+head(data_network$data$network.query)
+@
+
 
 \item the network.info matrix with information on relation in the network.
 <<message=TRUE,cache=FALSE>>=
@@ -122,6 +127,12 @@ if(use.get.data){
 	}
 
 @
+
+Sometimes, seed-lots are replicated and then mixted.
+This can be seen as 'false' mixture compared to 'real' mixture where the germplasm father and son are different.
+In order to take this into account in the analysis of the network, it can be useful to delete the 'false' mixture and declare it as a reproduction.
+This can be done with the argument \texttt{mixrep\_to\_repro} which tranform the mixtures of replications into reproductions, i.e. the network keeps only 'real' mixtures (i.e. different germplasm for father and son) and correct the information regarding what have been harvested and sown after as the mixture disappear. 
+The value is \texttt{TRUE} by default.
 
 
 \subsection{Get the ggplots}
