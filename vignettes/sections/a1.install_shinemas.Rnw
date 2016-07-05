@@ -30,7 +30,7 @@ Once you've done this, download \texttt{shinemas\_tuto.sql}.
 You can find it in the package:
 
 <<message=TRUE,cache=FALSE,warning=FALSE>>=
-system.file("extdata", "shinemas_dev.sql", package = "shinemas2R")
+system.file("extdata", "shinemas_tuto.sql", package = "shinemas2R")
 @
 
 Put it in your \texttt{/home/pierre}, and install it on postgresql.
