@@ -1622,6 +1622,8 @@ filter_V = V.sql(variable.in)
 
 	# 5.1. network ----------	
  	if(query.type == "network") {	
+ 		
+ 		# 5.1.1. Query SHiNeMaS ----------	
  		message("1. Query SHiNeMaS ...")
  		reseau = query.network(filter_P, filter_G, filter_GT, filter_Y, filter_R, filter_SL, filter_Proj, info_db = info_db)
  		
@@ -1647,6 +1649,7 @@ filter_V = V.sql(variable.in)
  				message("Mixtures from replication have been deleted and replaced by reproductions.")
  			}
  			
+ 			# 5.1.2. Create network matrix ----------	
  			message("2. Create network matrix ..."); {
  				
  				# fill diffusion gap
@@ -1696,10 +1699,10 @@ filter_V = V.sql(variable.in)
  				n <- network(M, directed = TRUE)
  			}
  			
- 			
+ 			# 5.1.3. Link information to vertex and edges ----------	
  			message("3. Link information to vertex and edges ..."); {
  				
- 				# 2.1. information on seed-lots
+ 				# A. information on seed-lots
  				f = as.character(reseau[,"father"])
  				s = as.character(reseau[,"son"])	
  				Y = P = G = TG = SEX = NULL
@@ -1762,7 +1765,7 @@ filter_V = V.sql(variable.in)
  				set.vertex.attribute(n, "germplasm.type", value = as.vector(TG))
  				set.vertex.attribute(n, "sex", value = as.vector(SEX))
  				
- 				# 2.2. information on relations and generations
+ 				# B. information on relations and generations
  				R = M_generation = matrix("", ncol = length(point), nrow = length(point))
  				colnames(R) = rownames(R) = colnames(M_generation) = rownames(M_generation) = point
  				
@@ -1800,6 +1803,7 @@ filter_V = V.sql(variable.in)
  				set.edge.value(n, "generation", value = M_generation)
  			}
  			
+ 			# 5.1.4. Get network information on seed-lots ----------	
  			if(network.info){
  				message("4. Get network information on seed-lots ..."); {
  					
@@ -1912,12 +1916,13 @@ filter_V = V.sql(variable.in)
  				}
  			} else { Minfo = NULL }
  			
- 			
+
+ 			# 5.1.5. Get Mdist square matrix ----------	
  			if(Mdist) {
  				message("5. Get Mdist square matrix ...")
  				# Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
  				
- 				# 4.1. For each seed-lot of the network, get their last diffusion_id and the number of reproductions since the last diffusion ----------
+ 				# A. For each seed-lot of the network, get their last diffusion_id and the number of reproductions since the last diffusion ----------
  				fun = function(sl) {
  					test = TRUE
  					nb_repro = 0
@@ -1966,7 +1971,7 @@ filter_V = V.sql(variable.in)
  				OUT = lapply(point, function(x){fun(x)})
  				names(OUT) = point
  				
- 				# 4.2. For each pair of seed-lots, find the last diffusion in common and calculate the distance ----------
+ 				# B. For each pair of seed-lots, find the last diffusion in common and calculate the distance ----------
  				M_dist = matrix(NA, ncol = length(point), nrow = length(point))
  				diag(M_dist) = 1
  				colnames(M_dist) = rownames(M_dist) = point
