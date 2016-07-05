@@ -133,7 +133,7 @@ get.table <- function(
 		}
 		
 		# 3. Set up data set ----------
-		vec_variables = get.vec_variables(data, shinemas2R)
+		vec_variables = get.vec_variables(data, shinemas2R.object)
 		
 		# get rid off rows and cols with only NA
 		x = data
