@@ -36,7 +36,7 @@ update.data.merge_g_and_s = function(data, merge_g_and_s){
 }
  
 # get.table, format.data
-get.vec_variables = function(data, shinemas2R){
+get.vec_variables = function(data, shinemas2R.object){
 	if( shinemas2R.object == "data-classic-relation") { vec_variables = colnames(data)[c(40: ncol(data))] }
 	if( shinemas2R.object == "data-S-relation" | shinemas2R.object == "data-SR-relation" ) { vec_variables = colnames(data)[c(44: ncol(data))] }
 	if( shinemas2R.object == "data-classic-seed-lots") { vec_variables = colnames(data)[c(15: ncol(data))] }

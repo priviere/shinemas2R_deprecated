@@ -54,7 +54,7 @@ if( is.null(correlated_group) ) {
 	}
 	
 # 2.Vector of variables ----------
-vec_variables = get.vec_variables(data, shinemas2R)
+vec_variables = get.vec_variables(data, shinemas2R.object)
 
 # 3.Format for packages
 if( format == "PPBstats" ) {
