@@ -39,12 +39,12 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "network", # network query
-		germplasm.in = "C1", # germplasm to keep
 		filter.on = "father-son", # filter on father AND son
 		Mdist = TRUE
 		)
 } else { 
 	# 1. Query SHiNeMaS ...
+	# Mixtures from replication have been deleted and replaced by reproductions.
 	# 2. Create network matrix ...
 	# 3. Link information to vertex and edges ...
 	# 4. Get network information on seed-lots ...
@@ -105,6 +105,7 @@ if(use.get.data){
 		)
 } else {
 	# 1. Query SHiNeMaS ...
+	# Mixtures from replication have been deleted and replaced by reproductions.
 	# 2. Create network matrix ...
 	# 3. Link information to vertex and edges ...
 	# 4. Get network information on seed-lots ...
@@ -125,6 +126,7 @@ if(use.get.data){
 		)
 } else {
 	# 1. Query SHiNeMaS ...
+	# Mixtures from replication have been deleted and replaced by reproductions.
 	# 2. Create network matrix ...
 	# 2.1. Fill diffusion gaps ...
 	# 3. Link information to vertex and edges ...
@@ -145,7 +147,6 @@ The value is \texttt{TRUE} by default.
 \subsection{Get the ggplots}
 
 Once, you have got the data, you can create plots with the function \texttt{get.ggplot}.
-
 
 <<message=TRUE,cache=FALSE>>=
 default_network_ggplot = get.ggplot(data_network)
@@ -407,15 +408,12 @@ p1_slh = get.ggplot(
 
 p11_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-1`
 p12_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-2|in.col-1`
-p13_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-3|in.col-1`
-p14_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-4|in.col-1`
-p15_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-5|in.col-1`
 @
 
 
 Note that you can easily change settings of the plot as it is a ggplot object, for example
 <<message=TRUE,cache=FALSE>>=
-p15_slh_bw = p15_slh + theme_bw()
+p12_slh_bw = p12_slh + theme_bw()
 @
 
 
@@ -430,23 +428,11 @@ p11_slh
 p12_slh
 @
 \\
-\texttt{p13\_slh} & \texttt{p14\_slh} \\
+\texttt{p11\_slh\_bw} &  \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-p13_slh
+p11_slh_bw
 @
 &
-<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-p14_slh
-@
-\\
-\texttt{p15\_slh} & \texttt{p15\_slh\_bw}  \\
-<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-p15_slh
-@
-&
-<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-p15_slh_bw
-@
 \\
 \end{tabular}
 \end{center}
@@ -461,12 +447,11 @@ p2_slh = get.ggplot(
 	ggplot.display = "barplot",
 	x.axis = "person",
 	in.col = "year",
-	nb_parameters_per_plot_in.col = 3
+	nb_parameters_per_plot_in.col = 2
 	)
 
 p21_slh = p2_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-1`
 p22_slh = p2_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-2`
-p23_slh = p2_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-3`
 @
 
 \begin{center}
@@ -479,12 +464,6 @@ p21_slh
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
 p22_slh
 @
-\\
-\texttt{p23\_slh} & \\
-<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-p23_slh
-@
-&
 \\
 \end{tabular}
 \end{center}
@@ -508,19 +487,19 @@ The scale represent the number of seed-lots harvested.
 m_slh = default_network_ggplot$`network-reproduction-harvested`$map
 names(m_slh)
 
-m4_slh = m_slh$`map-[2011]`
-m9_slh = m_slh$`map-[2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2014]`
+m1_slh = m_slh$`map-[2011]`
+m5_slh = m_slh$`map-[2011, 2012, 2013, 2014]`
 @
 
 \begin{center}
 \begin{tabular}{cc}
-\texttt{m4\_slh} & \texttt{m9\_slh} \\
+\texttt{m1\_slh} & \texttt{m5\_slh} \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-m4_slh
+m1_slh
 @
 &
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-m9_slh
+m5_slh
 @
 \\
 \end{tabular}
@@ -566,7 +545,7 @@ p_slh = get.ggplot(
 	hide.labels.parts = NULL
 	)
 
-p_slh$`network-reproduction-harvested`$map$`map-[2011]`
+p_slh$`network-reproduction-harvested`$map$`map-[2014]`
 @
 
 \end{itemize}
@@ -587,19 +566,19 @@ The size of the arrows is proprotionnal to the number of diffusions (\texttt{nb\
 m_dr = default_network_ggplot$`network-diffusion-relation`$map
 names(m_dr)
 
-m4_dr = m_dr$`map-[2009]`
-m7_dr = m_dr$`map-[2002, 2007, 2008, 2009, 2010, 2011]`
+m1_dr = m_dr$`map-[2012]`
+m3_dr = m_dr$`map-[2012, 2014]`
 @
 
 \begin{center}
 \begin{tabular}{cc}
-\texttt{m4\_dr} & \texttt{m7\_dr} \\
+\texttt{m1\_dr} & \texttt{m3\_dr} \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-m4_dr
+m1_dr
 @
 &
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-m7_dr
+m3_dr
 @
 \\
 \end{tabular}
@@ -641,7 +620,7 @@ cb$cross$barplot$`year-germplasm`$`x.axis-1|in.col-1`
 @
 
 <<message=TRUE,cache=FALSE,out.width=".6\\textwidth">>=
-cm$cross$map$`map-[2002, 2008, 2009]`
+cm$cross$map$`map-[2011]`
 @
 
 \item Custom arguments
