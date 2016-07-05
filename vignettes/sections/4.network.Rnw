@@ -677,7 +677,7 @@ It corresponds to negative inter selection. \\
 
 \texttt{"network-mixture-real"} & seed-lots that have been 'really' mixed into a mixture. \\
 
-\texttt{"network-mixture-rep"} & seed-lots coming from replication that have been mixed into a mixture. \\
+\texttt{"network-mixture-rep"} & seed-lots coming from replication that have been mixed into a mixture. Note that it is \texttt{NULL} when the argument \texttt{mixrep\_to\_repro} in \texttt{get.data} is \texttt{TRUE} (default argument).\\
 
 \texttt{"network-mixture-all"} & seed-lots that have been mixed into a mixture (i.e. \texttt{"network-mixture-real"} + \texttt{"network-mixture-rep"}. \\
 
