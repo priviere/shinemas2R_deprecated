@@ -124,6 +124,8 @@
 #' 
 #' For data-radar, it is the mean which is represented
 #' 
+#' For data-biplot note that no plots are possible for between raw data linked to individuals and raw data linked to relation.
+#' 
 #' @examples 
 #' # See the vignette
 #' 
