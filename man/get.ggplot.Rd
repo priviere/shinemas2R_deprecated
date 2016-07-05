@@ -134,6 +134,10 @@ The function returns a list with several ggplot objects according to the data an
 }
 \details{
 For data coming from query.type = "data-S" and "data-SR", NA are put when there are no data for bouquet AND vrac
+
+For data-radar, it is the mean which is represented
+
+For data-biplot note that no plots are possible for between raw data linked to individuals and raw data linked to relation.
 }
 \examples{
 # See the vignette
