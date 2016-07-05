@@ -130,6 +130,7 @@
 #' \item For network it returns a list with
 #' \itemize{
 #' \item the network object
+#' \item the network.query dataframe coming from the query
 #' \item the network.info matrix with information on relations in the network. The possible information are:
 #'  \itemize{
 #'  \item reproduction: "sow", "harvest", "harvest-sow"
@@ -1993,7 +1994,7 @@ filter_V = V.sql(variable.in)
  			} else { M_dist = NULL }
  			} 
 
- 	d = list("network" = n, "network.info" = Minfo, "Mdist" = M_dist)
+ 	d = list("network" = n, "network.query" = reseau, "network.info" = Minfo, "Mdist" = M_dist)
  	attributes(d)$shinemas2R.object = "network"
  	}
  	
