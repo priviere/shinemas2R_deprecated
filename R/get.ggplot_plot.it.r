@@ -174,19 +174,16 @@ get.ggplot_plot.it = function(
 	if(ggplot.display == "radar") {
 
 			d = reshape.data(d, x.axis = NULL, nb_parameters_per_plot_x.axis = NULL, in.col = in.col, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, vec_variables = vec_variables)
-		
+
 		fun = function(d, vec_variables, in.col){
 			colnames(d)[which(colnames(d) == in.col)] = "in.col"
 			
 			d = droplevels(d[,c(vec_variables, "in.col")])
-			tokeep = apply(d[,vec_variables], 1, function(x){ !is.na(sum(x)) })
-			t = length(which(tokeep))
-			if( t > 0 ) { warning(t, " rows have been deleted for variables ", paste(vec_variables, collapse = ", "), " because of at least one NA on the row for these variables.") }
-			d = droplevels(d[tokeep,])
-			
+
 			m = NULL
 			for(variable in vec_variables){
 				value = tapply(d[,variable], d$in.col, mean)
+
 				if( length(value) > 1 ) { # rescale all variables to lie between 0 and 1
 					value1 = (value - min(value, na.rm = TRUE)) / (max(value, na.rm = TRUE) - min(value, na.rm = TRUE))
 				} else { value1 = 1 }
