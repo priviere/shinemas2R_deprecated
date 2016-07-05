@@ -22,8 +22,15 @@ Possibles values are \texttt{"father"}, \texttt{"son"} or \texttt{"father-son"}.
 It is set by default to \texttt{"father-son"}.
 
 It is possible to get the \texttt{Mdist} square matrix with the number of reproductions that separate two seed-lots since their last common diffusion (argument \texttt{Mdist = TRUE}).
+Note that a value of 1 means a distance between 
+\begin{itemize}
+	\item a seed-lot that has been diffused to location A without beeing sown and harvested on location B and
+	\item a seed-lot that has been diffused to location B and beeing sown and harvested on location B
+\end{itemize}
+
 This square matrix can be compared to a differentiation distance. 
 It can be put in relation with genetic $F_{st}$ for example \citep{nei_analysis_1973}\footnote{The \R~package \texttt{adegenet} can be used for that.}.
+
 
 
 <<message=TRUE,cache=FALSE>>=
