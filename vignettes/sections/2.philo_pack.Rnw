@@ -112,8 +112,8 @@ For example:
 info_db = list(
 	db_user = "pierre",
 	db_host = "127.0.0.1", # localhost
-	db_name = "shinemas_dev_20160705", # "shinemas_dev"
-	db_password = "pierre"
+	db_name = "shinemas_dev",
+	db_password = "toto"
 )
 @
 
@@ -124,7 +124,7 @@ The procedure to do so is explained in appendix \ref{install_shinemas}.
 
 As you will use \texttt{get.data}, you should set:
 <<message=TRUE,cache=FALSE>>=
-use.get.data = TRUE # to update in next version
+use.get.data = FALSE
 @
 
 \subsubsection{Test without \BD~installed}
