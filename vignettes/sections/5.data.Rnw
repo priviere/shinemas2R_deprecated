@@ -57,9 +57,7 @@ The names of the variables are under the form \texttt{variable\_name---methods}.
 In the following examples, three variables are studied:
 
 <<message=TRUE,cache=FALSE>>=
-vec_variables = c("plant_height", "spike_lenght", "spike_weight")
 vec_variables = c("hauteur", "pmg", "poids_epis")
-vec_variables = c("pmg")
 @
 
 \subsubsection{\texttt{query.type = "data-classic"}}
@@ -94,7 +92,7 @@ head(data_classic$data$methods)
 The data with correlated variables :
 
 <<message=TRUE,cache=FALSE>>=
-colnames(data_classic$data$data.with.correlated.variables)
+names(data_classic$data$data.with.correlated.variables)
 @
 
 
@@ -203,14 +201,10 @@ This can be done with \texttt{correlated\_group} having the following argument:
 
 The names of the variables are under the form \texttt{variable\_name---methods}:
 <<message=TRUE,cache=FALSE>>=
-vec_variables = c(
-	"plant_height---plant_height", 
-	"spike_lenght---spike_length_F", 
-	"spike_weight---spike_weight"
-	)
-
-vec_variables = c(
-	"pmg---pmg"
+plot_vec_variables = c(
+	"hauteur---hauteur_tige", 
+	"pmg---pmg", 
+	"poids_epis---poids_epis"
 	)
 @
 
@@ -226,7 +220,7 @@ vec_variables = c(
 <<message=TRUE,cache=FALSE>>=
 default_data_classic_ggplot = get.ggplot(
 	data_classic, 
-	vec_variables = vec_variables
+	vec_variables = plot_vec_variables
 	)
 @
 
@@ -249,9 +243,10 @@ which correpond to \texttt{ggplot.type} arguments:
 
 \texttt{"data-interaction"} &  interaction, there is one interation plot per variable \\
 
-\texttt{"data-radar"} &  radar, there is one radar per set of variables (i.e. the whole \texttt{vec\_variables}) \\
+\texttt{"data-radar"} &  radar, there is one radar per set of variables (i.e. the whole \texttt{vec\_variables}). It is the mean that is represented. \\
 
-\texttt{"data-biplot"} &  biplot, there is one biplot per pairs of variables \\
+\texttt{"data-biplot"} &  biplot, there is one biplot per pairs of variables.
+Note that no plots are possible for between raw data linked to individuals and raw data linked to relation. \\
 
 \hline
 \end{tabular}
@@ -273,19 +268,19 @@ For example:
 \item For barplot:
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_bar_all = default_data_classic_ggplot$`data-barplot`$`germplasm-year`
-p_cal_ph_bar = p_cal_ph_bar_all$`plant_height---plant_height`$`x.axis-1|in.col-1`
+p_cal_ph_bar = p_cal_ph_bar_all$`hauteur---hauteur_tige`$`x.axis-1|in.col-1`
 @
 
-\item For bolxplot:
+\item For boxplot:
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_box_all = default_data_classic_ggplot$`data-boxplot`$`germplasm-year`
-p_cal_ph_box = p_cal_ph_box_all$`plant_height---plant_height`$`x.axis-1|in.col-1`
+p_cal_ph_box = p_cal_ph_box_all$`hauteur---hauteur_tige`$`x.axis-1|in.col-1`
 @
 
 \item For interaction plot:
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_int_all = default_data_classic_ggplot$`data-interaction`$`year-germplasm`
-p_cal_ph_int = p_cal_ph_int_all$`plant_height---plant_height`$`x.axis-1|in.col-1`
+p_cal_ph_int = p_cal_ph_int_all$`hauteur---hauteur_tige`$`x.axis-1|in.col-1`
 @
 \end{itemize}
 
@@ -329,7 +324,7 @@ For biplot, you must choose the pair of variables you wish, for example,
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_sl_bip_all = default_data_classic_ggplot$`data-biplot`
 p_cal_ph_sl_bip = p_cal_ph_sl_bip_all$`NA-year`
-p_cal_ph_sl_bip = p_cal_ph_sl_bip$`plant_height---plant_height - spike_lenght---spike_length_F`
+p_cal_ph_sl_bip = p_cal_ph_sl_bip$`hauteur---hauteur_tige - poids_epis---poids_epis`
 p_cal_ph_sl_bip = p_cal_ph_sl_bip$`x.axis-1|in.col-1`
 @
 
@@ -465,20 +460,17 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "data-classic", # data-classic query
-		person.in = "LUD", # person to keep
-		year.in = 2011, # year to kepp
+		person.in = "OLR", # person to keep
 		filter.on = "father-son", # filters on father AND son
 		data.type = "relation", # data linked to relation between seed-lots
-		variable = vec_variables, # the variables to display
-		project.in = "PPB" # the project 
+		variable = "poids_epis", # the variables to display
+		project.in = "DEMO" # the project 
 		)
-	
-	data_classic_bis = encrypt.data(data_classic_bis)
 	
 	pn = get.ggplot(
 		data_classic_bis, 
 		ggplot.type = "data-pie.on.network", 
-		vec_variables = "spike_weight---spike_weight", 
+		vec_variables = "poids_epis---poids_epis", 
 		pie.size = .25, 
 		hide.labels.parts = "person"
 		)
@@ -487,14 +479,11 @@ if(use.get.data){
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
-	#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 25 22:29:59 2015.RData
 	load("./data/data_classic_bis.RData")
 	
 	# 1. Query SHiNeMaS ...
 	# 2. Create network matrix ...
 	# 3. Link information to vertex and edges ...
-	# The key has been written in /home/pierre/key_network_Wed Nov 25 22:30:16 2015.RData
-
 	load("./data/pn.RData")
 	}
 @
@@ -506,8 +495,8 @@ The result is divided into two plots: the empty network and the network with the
 <<message=TRUE,cache=FALSE>>=
 names(pn$`data-pie.on.network`)
 
-p1 = pn$`data-pie.on.network`$`spike_weight---spike_weight`$network
-p2 = pn$`data-pie.on.network`$`spike_weight---spike_weight`$pie.on.network
+p1 = pn$`data-pie.on.network`$`poids_epis---poids_epis`$network
+p2 = pn$`data-pie.on.network`$`poids_epis---poids_epis`$pie.on.network
 @
 
 \begin{center}
@@ -546,20 +535,18 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "data-classic", # data-classic query
-		germplasm.in = "Rouge-du-Roc", # germplasm to keep
-		person.in = c("RAB", "CHD", "JSG"), # person to keep
+		germplasm.in = "C1", # germplasm to keep
+		person.in = c("OLR", "MLN", "JFB"), # person to keep
 		filter.on = "father-son", # filters on father AND son
 		data.type = "relation", # data linked to relation between seed-lots
-		variable = vec_variables, # the variables to display
-		project.in = "PPB" # the project
+		variable = "poids_epis", # the variables to display
+		project.in = "DEMO" # the project
 		)
-	
-	data_classic_ter = encrypt.data(data_classic_ter)
-	
+
 	pm = get.ggplot(
 		data_classic_ter, 
 		ggplot.type = "data-pie.on.map", 
-		vec_variables = "spike_weight---spike_weight"
+		vec_variables = "poids_epis---poids_epis"
 		)
 } else { 
 	load("./data/data_classic_ter.RData")
@@ -572,7 +559,7 @@ names(pm$`data-pie.on.map`)
 You can get the default ggplot (\texttt{p}) or customized it (\texttt{p\_bis}):
 
 <<message=TRUE,cache=FALSE,out.width=".8\\textwidth">>=
-p = pm$`data-pie.on.map`$`spike_weight---spike_weight`$`map-[2011]`
+p = pm$`data-pie.on.map`$`poids_epis---poids_epis`$`map-[2013]`
 
 p_bis = p + 
 	ggtitle("spike_weight in 2011") + # change the title
@@ -611,7 +598,7 @@ In the example, as \texttt{data\_classic} is done on one germplasm (Rouge du Roc
 <<message=TRUE,cache=FALSE>>=
 default_data_S_ggplot = get.ggplot(
 	data_S, 
-	vec_variables = vec_variables,
+	vec_variables = plot_vec_variables,
 	nb_parameters_per_plot_x.axis = 5
 	)
 @
@@ -630,19 +617,19 @@ which correpond to ggplot.type arguments as explained in the previous section.
 \item For barplot:
 <<message=TRUE,cache=FALSE>>=
 p_S_sw_bar_all = default_data_S_ggplot$`data-barplot`
-p_S_sw_bar = p_S_sw_bar_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_S_sw_bar = p_S_sw_bar_all$`pmg---pmg`$`x.axis-1|in.col-1`
 @
 
 \item For boxplot:
 <<message=TRUE,cache=FALSE>>=
 p_S_sw_box_all = default_data_S_ggplot$`data-boxplot`
-p_S_sw_box = p_S_sw_box_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_S_sw_box = p_S_sw_box_all$`pmg---pmg`$`x.axis-1|in.col-1`
 @
 
 \item For interaction plot:
 <<message=TRUE,cache=FALSE>>=
 p_S_sw_int_all = default_data_S_ggplot$`data-interaction`
-p_S_sw_int = p_S_sw_int_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_S_sw_int = p_S_sw_int_all$`pmg---pmg`$`x.axis-1|in.col-1`
 @
 
 \end{itemize}
@@ -676,7 +663,7 @@ It is possible to customize the plots as presented in Table \ref{custom.plot}.
 <<message=TRUE,cache=FALSE>>=
 default_data_SR_ggplot = get.ggplot(
 	data_SR, 
-	vec_variables = vec_variables, 
+	vec_variables = plot_vec_variables, 
 	nb_parameters_per_plot_x.axis = 5
 	)
 @
@@ -693,20 +680,20 @@ which correpond to ggplot.type arguments as explained in the previsou section.
 \begin{itemize}
 \item For barplot:
 <<message=TRUE,cache=FALSE>>=
-p_SR_sw_bar_all = default_data_S_ggplot$`data-barplot`
-p_SR_sw_bar = p_SR_sw_bar_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_SR_sw_bar_all = default_data_SR_ggplot$`data-barplot`
+p_SR_sw_bar = p_SR_sw_bar_all$`poids_epis---poids_epis`$`x.axis-1|in.col-1`
 @
 
 \item For boxplot:
 <<message=TRUE,cache=FALSE>>=
-p_SR_sw_box_all = default_data_S_ggplot$`data-boxplot`
-p_SR_sw_box = p_SR_sw_box_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_SR_sw_box_all = default_data_SR_ggplot$`data-boxplot`
+p_SR_sw_box = p_SR_sw_box_all$`poids_epis---poids_epis`$`x.axis-1|in.col-1`
 @
 
 \item For interaction plot:
 <<message=TRUE,cache=FALSE>>=
-p_SR_sw_int_all = default_data_S_ggplot$`data-interaction`
-p_SR_sw_int = p_SR_sw_int_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_SR_sw_int_all = default_data_SR_ggplot$`data-interaction`
+p_SR_sw_int = p_SR_sw_int_all$`poids_epis---poids_epis`$`x.axis-1|in.col-1`
 @
 
 \end{itemize}
@@ -794,7 +781,7 @@ Then you should set \texttt{vec\_variables} with the variables displayed in the 
 tab_class = get.table(
 	data_classic, 
 	table.type = "raw",
-	vec_variables = vec_variables
+	vec_variables = plot_vec_variables
 	)
 @
 
@@ -820,14 +807,13 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "data-classic", # data-classic query
-		person.in = "RAB", # person to keep
+		person.in = "JFB", # person to keep
 		filter.on = "father-son", # filters on father AND son
 		data.type = "relation", # data linked to relation between seed-lots
-		variable = "sowing_practices", # the variables to display
-		project.in = "PPB" # the project
+		variable = "densite_semis", # the variables to display
+		project.in = "DEMO" # the project
 		)
 	
-	data_classic_4 = encrypt.data(data_classic_4)
 } else { 
 	load("./data/data_classic_4.RData")
 	}
@@ -835,7 +821,7 @@ if(use.get.data){
 tab_class_4 = get.table(
 	data_classic_4, 
 	table.type = "raw", 
-	vec_variables = "sowing_practices---sowing_notice_sowing_practices"
+	vec_variables = "densite_semis---densite_semis"
 	)
 @
 
@@ -871,13 +857,12 @@ Instead of raw information, some statistics may be useful, for example,
 tab_class = get.table(
 	data_classic, 
 	table.type = "mean.sd.cv",
-	vec_variables = vec_variables
+	vec_variables = plot_vec_variables
 	)
 names(tab_class$not_duplicated_infos)
 colnames(tab_class$not_duplicated_infos$`set-1`)
 dim(tab_class$not_duplicated_infos$`set-1`)
 @
-
 
 
 \item Custom arguments
@@ -923,13 +908,13 @@ For example,
 tab_class = get.table(
 	data_classic,
 	table.type = "mean.sd.cv",
-	vec_variables = vec_variables,
-	nb_row = 30
+	vec_variables = plot_vec_variables,
+	nb_row = 10
 	)
 names(tab_class$not_duplicated_infos)
 @
 
-The information is split into several tables with at least 30 rows.
+The information is split into several tables with at least 10 rows.
 
 <<message=TRUE,cache=FALSE>>=
 dim(tab_class$not_duplicated_infos$`set-1`)
@@ -944,7 +929,7 @@ For example,
 tab_S_msc = get.table(
 	data_S,
 	table.type = "mean.sd.cv",
-	vec_variables = vec_variables,
+	vec_variables = plot_vec_variables,
 	nb_col = 3 # Otherwise, the table is too large
 	)
 
