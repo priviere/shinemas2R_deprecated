@@ -182,7 +182,7 @@ get.ggplot_plot.it = function(
 
 			m = NULL
 			for(variable in vec_variables){
-				value = tapply(d[,variable], d$in.col, mean)
+				value = tapply(d[,variable], d$in.col, mean, na.rm = TRUE)
 
 				if( length(value) > 1 ) { # rescale all variables to lie between 0 and 1
 					value1 = (value - min(value, na.rm = TRUE)) / (max(value, na.rm = TRUE) - min(value, na.rm = TRUE))
@@ -193,6 +193,8 @@ get.ggplot_plot.it = function(
 			}
 			colnames(m) = c("variable", "value", "value1", "in.col")
 			m$in.col = factor(m$in.col)
+			
+			print(m)
 			
 			# Define a new coordinate system 
 			coord_radar <- function(...) { 
