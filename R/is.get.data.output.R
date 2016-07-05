@@ -21,9 +21,23 @@
 #' 	@details 
 #' 	Formats of the different shinemas2R.object:
 #' 	\itemize{
-#' 	 \item "network" It must be a list of three elements: "network", "network.info" and "Mdist" (see \code{get.data} for more details) with the followinf format:
+#' 	 \item "network" It must be a list of four elements: "network", "network.query", "network.info" and "Mdist" (see \code{get.data} for more details) with the followinf format:
 #' 	 \itemize{
 #' 	 	\item "network" must be a network object. It can be NULL. Vertex attributes can be put on "year", "person", "germplasm", germplasm.type" and "sex". Edge attributes can be put on "relation" and "generation"
+#' 	 	
+#' 	 	\item "network.query" must be a dataframe. It can be NULL. It has the following columns: 
+#' son_species, son_project, son, son_germplasm, son_person, son_year, son_germplasm_type which are factors,
+#' son_alt, son_long, son_lat, son_total_generation_nb, son_local_generation_nb which are numerics,
+#' son_generation_confidence, son_comments which are characters,father_species, father_project, son, father_germplasm, father_person, father_year, father_germplasm_type which are factors,
+#' father_alt, father_long, father_lat, father_total_generation_nb, father_local_generation_nb which are numerics,
+#' father_generation_confidence, father_comments which are characters,
+#' reproduction_id which is character,
+#' reproduction_method_name, is_male, block which are factors,
+#' selection_id which is character,
+#' selection_person which is factor,
+#' mixture_id, diffusion_id  which are character,
+#' relation_year_start, relation_year_end which are factors.
+#'
 #' 	 	\item "network.info" must be a dataframe. It can be NULL. It has the following columns: sl, which is a character; alt, long and lat which are numeric; diffusion, id.diff, reproduction, mixture, cross.info, germplasm, person and year, which are factor.
 #' 	 	Possible values for diffusion are for EN: "give", "receive", "give-receive" or NA.
 #' 	 	Possible values for reproduction are for EN: "sow", "harvest", "harvest-sow" or NA.
@@ -50,7 +64,7 @@
 #' @return The function returns a data set with the corresponding shinemas2R.object attributes or an error.
 #' 
 #' @examples 
-#' # See the vignette
+#' # See the vignette and appendix D
 #' 
 #' @author Pierre Riviere
 #' 
@@ -74,9 +88,11 @@ is.get.data.output = function(
 		if( is.null(names(data)[1]) ) { stop(mess) }
 		if( is.null(names(data)[2]) ) { stop(mess) }
 		if( is.null(names(data)[3]) ) { stop(mess) }
+		if( is.null(names(data)[4]) ) { stop(mess) }
 		if( names(data)[1] != "network" ) { stop(mess) }
-		if( names(data)[2] != "network.info" ) { stop(mess) }
-		if( names(data)[3] != "Mdist" ) { stop(mess) }
+		if( names(data)[2] != "network.query" ) { stop(mess) }
+		if( names(data)[3] != "network.info" ) { stop(mess) }
+		if( names(data)[4] != "Mdist" ) { stop(mess) }
 		
 		# 2.1. "network" ----------
 		if( !is.null(data[[1]]) ) {
@@ -104,13 +120,108 @@ is.get.data.output = function(
 			update.edge.attributes(n = data[[1]], e.att = "relation")
 			update.edge.attributes(n = data[[1]], e.att = "generation")
 		}
-		
-		
-		# 2.2. "network.info" ----------
+
+		# 2.2. "network.query" ----------
 		ni = data[[2]]
+		if( !is.null(ni) ) {
+			if( !is.data.frame(ni) ) { stop("The second element of data (i.e. network.query) must be NULL or a data frame.") }
+			
+			col_to_have = c(
+				"son_species",
+				"son_project",
+				"son",
+				"son_germplasm",
+				"son_person",
+				"son_year",
+				"son_germplasm_type",
+				"son_alt",
+				"son_long",
+				"son_lat",
+				"son_total_generation_nb",
+				"son_local_generation_nb",
+				"son_generation_confidence",
+				"son_comments",
+				
+				"father_species",
+				"father_project",
+				"father",
+				"father_germplasm",
+				"father_person",
+				"father_year",
+				"father_germplasm_type",
+				"father_alt",
+				"father_long",
+				"father_lat",
+				"father_total_generation_nb",
+				"father_local_generation_nb",
+				"father_generation_confidence",
+				"father_comments",
+				
+				"reproduction_id",
+				"reproduction_method_name",
+				"is_male",
+				"block",
+				
+				"selection_id",
+				"selection_person",
+				"mixture_id",
+				"diffusion_id",
+				"relation_year_start",
+				"relation_year_end")
+			test = setdiff(colnames(ni), col_to_have)
+			
+			if( length(test) > 0 ) { stop("The second element of data (i.e. network.query) must have the following columns: ", paste(col_to_have, collapse = ", ")) }
+
+			if( !is.factor(ni$son_species) ) { stop("The data fame must have a column \"son_species\" as factor") } 
+			if( !is.factor(ni$son_project) ) { stop("The data fame must have a column \"son_project\" as factor") } 
+			if( !is.factor(ni$son) ) { stop("The data fame must have a column \"son\" as factor") } 
+			if( !is.factor(ni$son_germplasm) ) { stop("The data fame must have a column \"son_germplasm\" as factor") } 
+			if( !is.factor(ni$son_person) ) { stop("The data fame must have a column \"son_person\" as factor") } 
+			if( !is.factor(ni$son_year) ) { stop("The data fame must have a column \"son_year\" as factor") } 
+			if( !is.factor(ni$son_germplasm_type) ) { stop("The data fame must have a column \"son_germplasm_type\" as factor") } 
+			if( !is.numeric(ni$son_alt) ) { stop("The data fame must have a column \"son_alt\" as numeric") } 
+			if( !is.numeric(ni$son_long) ) { stop("The data fame must have a column \"son_long\" as numeric") } 
+			if( !is.numeric(ni$son_lat) ) { stop("The data fame must have a column \"son_lat\" as numeric") } 
+			if( !is.numeric(ni$son_total_generation_nb) ) { stop("The data fame must have a column \"son_total_generation_nb\" as numeric") } 
+			if( !is.numeric(ni$son_local_generation_nb) ) { stop("The data fame must have a column \"son_local_generation_nb\" as numeric") } 
+			if( !is.character(ni$son_generation_confidence) ) { stop("The data fame must have a column \"son_generation_confidence\" as character") } 
+			if( !is.character(ni$son_comments) ) { stop("The data fame must have a column \"son_comments\" as character") } 
+			
+			
+			if( !is.factor(ni$father_species) ) { stop("The data fame must have a column \"father_species\" as factor") } 
+			if( !is.factor(ni$father_project) ) { stop("The data fame must have a column \"father_project\" as factor") } 
+			if( !is.factor(ni$father) ) { stop("The data fame must have a column \"son\" as factor") } 
+			if( !is.factor(ni$father_germplasm) ) { stop("The data fame must have a column \"father_germplasm\" as factor") } 
+			if( !is.factor(ni$father_person) ) { stop("The data fame must have a column \"father_person\" as factor") } 
+			if( !is.factor(ni$father_year) ) { stop("The data fame must have a column \"father_year\" as factor") } 
+			if( !is.factor(ni$father_germplasm_type) ) { stop("The data fame must have a column \"father_germplasm_type\" as factor") } 
+			if( !is.numeric(ni$father_alt) ) { stop("The data fame must have a column \"father_alt\" as numeric") } 
+			if( !is.numeric(ni$father_long) ) { stop("The data fame must have a column \"father_long\" as numeric") } 
+			if( !is.numeric(ni$father_lat) ) { stop("The data fame must have a column \"father_lat\" as numeric") } 
+			if( !is.numeric(ni$father_total_generation_nb) ) { stop("The data fame must have a column \"father_total_generation_nb\" as numeric") } 
+			if( !is.numeric(ni$father_local_generation_nb) ) { stop("The data fame must have a column \"father_local_generation_nb\" as numeric") } 
+			if( !is.character(ni$father_generation_confidence) ) { stop("The data fame must have a column \"father_generation_confidence\" as character") } 
+			if( !is.character(ni$father_comments) ) { stop("The data fame must have a column \"father_comments\" as character") } 
+			
+			if( !is.character(ni$reproduction_id) ) { stop("The data fame must have a column \"reproduction_id\" as character") } 
+			if( !is.factor(ni$reproduction_method_name) ) { stop("The data fame must have a column \"reproduction_method_name\" as factor") } 
+			if( !is.factor(ni$is_male) ) { stop("The data fame must have a column \"is_male\" as factor") } 
+			if( !is.factor(ni$block) ) { stop("The data fame must have a column \"block\" as factor") } 
+			
+			if( !is.character(ni$selection_id) ) { stop("The data fame must have a column \"selection_id\" as character") } 
+			if( !is.factor(ni$selection_person) ) { stop("The data fame must have a column \"selection_person\" as factor") } 
+			if( !is.character(ni$mixture_id) ) { stop("The data fame must have a column \"mixture_id\" as character") } 
+			if( !is.character(ni$diffusion_id) ) { stop("The data fame must have a column \"diffusion_id\" as character") } 
+			if( !is.factor(ni$relation_year_start) ) { stop("The data fame must have a column \"relation_year_start\" as factor") } 
+			if( !is.factor(ni$relation_year_end) ) { stop("The data fame must have a column \"relation_year_end\" as factor") } 
+		}
+		
+		
+		# 2.3. "network.info" ----------
+		ni = data[[3]]
 		
 		if( !is.null(ni) ) {
-			if( !is.data.frame(ni) ) { stop("The second of data must be NULL or a data frame.") }
+			if( !is.data.frame(ni) ) { stop("The third element of data must be NULL or a data frame.") }
 			
 			col_to_have = c("sl", "alt", "long", "lat", "diffusion", "id.diff", "reproduction", "mixture", "selection", "cross.info", "germplasm", "person", "year")
 			test = setdiff(colnames(ni), c(col_to_have))
@@ -145,11 +256,11 @@ is.get.data.output = function(
 		}
 		
 
-		# 2.3. "Mdist" ----------
-		Md = data[[3]]
+		# 2.4. "Mdist" ----------
+		Md = data[[4]]
 		
 		if( !is.null(Md) ) {
-			mess = "Mdist msut be a square matric with the same names in columns and in rows."
+			mess = "Mdist must be a square matric with the same names in columns and in rows."
 			if( ncol(Md) != nrow(Md) ) { stop(mess) }
 			test = unique(colnames(Md) == rownames(Md))
 			test = length(test) == 1 & test[1]
