@@ -124,7 +124,7 @@ The procedure to do so is explained in appendix \ref{install_shinemas}.
 
 As you will use \texttt{get.data}, you should set:
 <<message=TRUE,cache=FALSE>>=
-use.get.data = FALSE
+use.get.data = TRUE
 @
 
 \subsubsection{Test without \BD~installed}
@@ -132,7 +132,7 @@ use.get.data = FALSE
 In this vignette, you can test \pack~without installing \BD.
 You do not use the \texttt{get.data} function:
 <<message=TRUE,cache=FALSE>>=
-use.get.data = TRUE
+use.get.data = FALSE
 @
 
 And you can download the data-sets :
