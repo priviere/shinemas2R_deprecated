@@ -9,10 +9,6 @@ For the following \texttt{query.type}, you can set filters to the query with the
 
 Values of filter depends on the \texttt{query.type}.
 
-\subsection{\texttt{query.type = "SL.mix"}}
-Values of filters can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl} or \texttt{reproduction.type}.
-
-
 \subsection{\texttt{query.type = "cross"}}
 values of filters can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person} or \texttt{project}.
 
@@ -27,7 +23,5 @@ values of filters can be \texttt{person}.
 
 \subsection{\texttt{query.type = "grandfather"}}
 values of filters can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl} or \texttt{reproduction.type}.
-
-
 
 
