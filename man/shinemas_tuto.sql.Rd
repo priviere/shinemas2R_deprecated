@@ -2,7 +2,7 @@
 % Please edit documentation in R/extdata.R
 \name{shinemas_tuto.sql}
 \alias{shinemas_tuto.sql}
-\title{SHiNeMaS in sql format use in the tutorial of the vignette}
+\title{SHiNeMaS in sql format used in the tutorial of the vignette}
 \format{sql}
 \usage{
 See the vignette Appendix A Install SHiNeMaS on localhost
