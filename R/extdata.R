@@ -1,4 +1,4 @@
-#' SHiNeMaS in sql format use in the tutorial of the vignette
+#' SHiNeMaS in sql format used in the tutorial of the vignette
 #'
 #' @name shinemas_tuto.sql
 #'
