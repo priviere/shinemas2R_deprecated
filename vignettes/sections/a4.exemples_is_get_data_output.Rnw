@@ -8,6 +8,60 @@ In this appendix, you can find empty data-set that will fit in \texttt{is.get.da
 <<message=TRUE,cache=FALSE,warning=FALSE>>=
 network = NULL
 
+network.query = data.frame(
+	son_species = factor(c("a", "b", "c")),
+	son_project = factor(c("a", "b", "c")),
+	son = factor(c("a", "b", "c")),
+	son_germplasm = factor(c("a", "b", "c")),
+	son_person = factor(c("a", "b", "c")),
+	son_year = factor(c("a", "b", "c")),
+	son_germplasm_type = factor(c("a", "b", "c")),
+	son_alt = as.numeric(c(0, 0, 0)),
+	son_long = as.numeric(c(0, 0, 0)),
+	son_lat = as.numeric(c(0, 0, 0)),
+	son_total_generation_nb = as.numeric(c(0, 0, 0)),
+	son_local_generation_nb = as.numeric(c(0, 0, 0)),
+	son_generation_confidence = c("a", "b", "c"),
+	son_comments = c("a", "b", "c"),
+	
+	father_species = factor(c("a", "b", "c")),
+	father_project = factor(c("a", "b", "c")),
+	father = factor(c("a", "b", "c")),
+	father_germplasm = factor(c("a", "b", "c")),
+	father_person = factor(c("a", "b", "c")),
+	father_year = factor(c("a", "b", "c")),
+	father_germplasm_type = factor(c("a", "b", "c")),
+	father_alt = as.numeric(c(0, 0, 0)),
+	father_long = as.numeric(c(0, 0, 0)),
+	father_lat = as.numeric(c(0, 0, 0)),
+	father_total_generation_nb = as.numeric(c(0, 0, 0)),
+	father_local_generation_nb = as.numeric(c(0, 0, 0)),
+	father_generation_confidence = c("a", "b", "c"),
+	father_comments = c("a", "b", "c"),
+	
+	reproduction_id = c("a", "b", "c"),
+	reproduction_method_name = factor(c("a", "b", "c")),
+	is_male = factor(c("a", "b", "c")),
+	block = factor(c("a", "b", "c")),
+	
+	selection_id = c("a", "b", "c"),
+	selection_person = factor(c("a", "b", "c")),
+	mixture_id = c("a", "b", "c"),
+	diffusion_id = c("a", "b", "c"),
+	relation_year_start = factor(c("a", "b", "c")),
+	relation_year_end = factor(c("a", "b", "c"))
+)
+
+network.query$son_generation_confidence = as.character(network.query$son_generation_confidence)
+network.query$son_comments = as.character(network.query$son_comments)
+network.query$father_generation_confidence = as.character(network.query$father_generation_confidence)
+network.query$father_comments = as.character(network.query$father_comments)
+network.query$reproduction_id = as.character(network.query$reproduction_id)
+network.query$selection_id = as.character(network.query$selection_id)
+network.query$mixture_id = as.character(network.query$mixture_id)
+network.query$diffusion_id = as.character(network.query$diffusion_id)
+
+
 network.info = data.frame(
 	sl = factor(c("a", "b", "c")),
 	alt = as.numeric(c(0, 0, 0)),
@@ -26,7 +80,7 @@ network.info = data.frame(
 
 Mdist = NULL
 
-n = list("network" = network, "network.info" = network.info, "Mdist" = Mdist)
+n = list("network" = network, "network.query" = network.query, "network.info" = network.info, "Mdist" = Mdist)
 n = is.get.data.output(n)
 @
 
