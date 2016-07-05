@@ -110,6 +110,12 @@
 #' \item Query "network"
 #' 
 #' The Mdist square matrix can be compared to a differentiation distance. It can be put in relation with genetic Fst for example.
+#' Note that a value of 1 means a distance between 
+#' \itemize{
+#' 	\item a seed-lot that has been diffused to location A without beeing sown and harvested on location B and
+#' 	\item a seed-lot that has been diffused to location B and beeing sown and harvested on location B
+#' 	}
+#' 
 #' 
 #' 
 #' \item Correlated data or not
@@ -1633,7 +1639,7 @@ filter_V = V.sql(variable.in)
  				for(id in id_mix_rep){
  					row_mix_rep = which(id %in% as.character(reseau$mixture_id))
  					sl_harvested = reseau[row_mix_rep, "father"]
- 					row = which(as.character(r$son) == sl_harvested)
+ 					row = which(as.character(reseau$son) == sl_harvested)
  					reseau[row, "son"] = reseau[row_mix_rep, "son"]
  				}
  				
@@ -1921,6 +1927,7 @@ filter_V = V.sql(variable.in)
  						d_sl_repro = reseau_repro[which(reseau_repro$son == sl),]
  						d_sl_sel = reseau_sel[which(reseau_sel$son == sl),]
  						d_sl_mix = reseau_diff[which(reseau_diff$son == sl),]
+ 						d_sl_diff = reseau_diff[which(reseau_diff$son == sl),]
  						test = FALSE # default if the sl does not match a son i.e. it is only father => the relations stop
  						
  						if(nrow(d_sl_mix) > 0){ test = FALSE }
@@ -1953,9 +1960,6 @@ filter_V = V.sql(variable.in)
  					
  					names(nb_repro) = id_diffusion_sl
  					L = c(list("id_diffusion" = id_diffusion_sl), list("nb_repro" = nb_repro))
- 					
- 					print(L)
- 					
  					return(L)
  				}
  				
