@@ -51,6 +51,7 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 \item "data-classic": default dataframe.
 \item "data-S": selection differential for a given year.
 \item "data-SR": seed-lots pairs of selection differential for year n-1 and response to selection for year n.
+\item "data-mixture-1": seed-lots used in a mixture
 }
 
 \item "methods": information related to the methods used for each variable in SHiNeMaS with its description and units
