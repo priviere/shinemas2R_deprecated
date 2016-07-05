@@ -4,7 +4,7 @@
 \alias{get.table}
 \title{Get table from \code{get.data}}
 \usage{
-get.table(data, correlated_group = NULL, fuse_g_and_s = FALSE,
+get.table(data, correlated_group = NULL, merge_g_and_s = FALSE,
   table.type = NULL, table.on = "son", vec_variables = NULL,
   nb_row = NULL, nb_col = NULL, nb_duplicated_rows = 10,
   col_to_display = c("person", "germplasm", "year", "block", "X", "Y"),
@@ -13,9 +13,9 @@ get.table(data, correlated_group = NULL, fuse_g_and_s = FALSE,
 \arguments{
 \item{data}{It can be either output from \code{get.data} or ggplot.object from \code{get.ggplot}.}
 
-\item{correlated_group}{Name of the group of correlation in data. NULL by default.}
+\item{correlated_group}{Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.}
 
-\item{fuse_g_and_s}{Fuse germplasm and selection name information in a column named germplasm}
+\item{merge_g_and_s}{Fuse germplasm and selection name information in a column named germplasm. TRUE by default.}
 
 \item{table.type}{the type of table you wish according to the type of data.
 For data coming from \code{get.data}, it can be :

@@ -4,7 +4,7 @@
 \alias{get.ggplot}
 \title{Get ggplot objects from \code{get.data}}
 \usage{
-get.ggplot(data, correlated_group = NULL, fuse_g_and_s = FALSE,
+get.ggplot(data, correlated_group = NULL, merge_g_and_s = TRUE,
   ggplot.type = NULL, ggplot.display = NULL, ggplot.on = "son",
   x.axis = NULL, in.col = NULL, vec_variables = NULL,
   nb_parameters_per_plot_x.axis = NULL,
@@ -16,9 +16,9 @@ get.ggplot(data, correlated_group = NULL, fuse_g_and_s = FALSE,
 \arguments{
 \item{data}{output from get.data with query.type = "network" or query.type = "data-...".}
 
-\item{correlated_group}{Name of the group of correlation in data. NULL by default.}
+\item{correlated_group}{Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.}
 
-\item{fuse_g_and_s}{Fuse germplasm and selection name information in a column named germplasm}
+\item{merge_g_and_s}{Fuse germplasm and selection name information in a column named germplasm. TRUE by default.}
 
 \item{ggplot.type}{the type of plot you wish.
 NULL by default: according to the type of data, it will be "network-all" or "data-all". "X-all" means that all the "X-" objects are done.
@@ -114,7 +114,12 @@ The function returns a list with several ggplot objects according to the data an
 	\item the relation between seed-lots on maps (ggplot.type = "network-diffusion-relation"). The size of the arrows is proportionnal to the number of diffusions.
 	}
 
-\item a series of ggplots for mixtures (ggplot.type = "network-mixture"). Note that mixtures of replications are not counted here.
+\item a series of ggplots for mixtures representing:
+	\itemize{
+	\item the seed-lots coming from 'real' mixtures (ggplot.type = "network-mixture-real")
+	\item the seed-lots coming from mixtures of replication (ggplot.type = "network-mixture-rep")
+	\item the seed-lots coming from all mixtures (ggplot.type = "network-mixture-all")
+}
 
 \item a series of ggplots for selection (ggplot.type = "network-positive-intra-selected")
 
