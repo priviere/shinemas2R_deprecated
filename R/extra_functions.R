@@ -1,6 +1,8 @@
 # 0. help -----------------------------------------------------------------
 #' Some functions used in several functions of shinemas2R
 #' 
+#' @name extra_functions
+#' 
 #' @description
 #' This file group several functions used in several functions of shinemas2R:
 #' \itemize{
