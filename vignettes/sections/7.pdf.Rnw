@@ -148,8 +148,8 @@ out = list(
 
 out = list(
 	"figure" = list(
-		"caption" = "Network for Rouge du Roc", 
-		"content" = p_net_RdR, 
+		"caption" = "Network for C1", 
+		"content" = p_net_C1, 
 		"width" = 1)
 	); OUT = c(OUT, out)
 
@@ -166,9 +166,9 @@ out = list(
 
 out = list(
 	"figure" = list(
-		"caption" = "Repartition of Rouge du Roc harvested 
+		"caption" = "Repartition of seed-lots harvested 
 		since the beginning of the project.",
-		"content" = m9_slh, 
+		"content" = m5_slh, 
 		"width" = 1)
 	); OUT = c(OUT, out)
 
