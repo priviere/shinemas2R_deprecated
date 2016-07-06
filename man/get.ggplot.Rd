@@ -4,22 +4,21 @@
 \alias{get.ggplot}
 \title{Get ggplot objects from \code{get.data}}
 \usage{
-get.ggplot(data, correlated_group = NULL, fuse_g_and_s = FALSE,
+get.ggplot(data, correlated_group = NULL, merge_g_and_s = TRUE,
   ggplot.type = NULL, ggplot.display = NULL, ggplot.on = "son",
   x.axis = NULL, in.col = NULL, vec_variables = NULL,
   nb_parameters_per_plot_x.axis = NULL,
   nb_parameters_per_plot_in.col = NULL, vertex.size = 3,
   vertex.color = "year", organise.sl = FALSE, labels.on = "son",
-  hide.labels.parts = "all", display.labels.sex = TRUE,
-  labels.generation = TRUE, labels.size = 3, location.map = "france",
-  pie.size = 0.5)
+  hide.labels.parts = "all", labels.sex = TRUE, labels.generation = TRUE,
+  labels.size = 3, location.map = "france", pie.size = 0.5)
 }
 \arguments{
 \item{data}{output from get.data with query.type = "network" or query.type = "data-...".}
 
-\item{correlated_group}{Name of the group of correlation in data. NULL by default.}
+\item{correlated_group}{Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.}
 
-\item{fuse_g_and_s}{Fuse germplasm and selection name information in a column named germplasm}
+\item{merge_g_and_s}{Fuse germplasm and selection name information in a column named germplasm. TRUE by default.}
 
 \item{ggplot.type}{the type of plot you wish.
 NULL by default: according to the type of data, it will be "network-all" or "data-all". "X-all" means that all the "X-" objects are done.
@@ -79,13 +78,21 @@ For "data-biplot", the default value is NULL.
 For an easier visualization, digit is never displayed unless you choose NULL.
 Note that with ggplot.type "network-" and ggplot.display = "map", hide.labels.part can be NULL or "all" as only person can be displayed.}
 
+<<<<<<< HEAD
+\item{labels.sex}{For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".}
+=======
 \item{display.labels.sex}{For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".}
+>>>>>>> master
 
 \item{labels.generation}{For ggplot.type = "network-network". If TRUE, displays generation for each reproduction}
 
 \item{labels.size}{Size of the labels}
 
+<<<<<<< HEAD
+\item{location.map}{Location of the map. See \code{?map_data}, argument \code{map}, for more details.}
+=======
 \item{location.map}{Location of the map. See \code{?map} for more details.}
+>>>>>>> master
 
 \item{pie.size}{Size of the pie when using pies}
 }
@@ -115,7 +122,16 @@ The function returns a list with several ggplot objects according to the data an
 	\item the relation between seed-lots on maps (ggplot.type = "network-diffusion-relation"). The size of the arrows is proportionnal to the number of diffusions.
 	}
 
+<<<<<<< HEAD
+\item a series of ggplots for mixtures representing:
+	\itemize{
+	\item the seed-lots coming from 'real' mixtures (ggplot.type = "network-mixture-real")
+	\item the seed-lots coming from mixtures of replication (ggplot.type = "network-mixture-rep")
+	\item the seed-lots coming from all mixtures (ggplot.type = "network-mixture-all")
+}
+=======
 \item a series of ggplots for mixtures (ggplot.type = "network-mixture"). Note that mixtures of replications are not counted here.
+>>>>>>> master
 
 \item a series of ggplots for selection (ggplot.type = "network-positive-intra-selected")
 
@@ -127,6 +143,19 @@ The function returns a list with several ggplot objects according to the data an
 }
 \description{
 \code{get.ggplot} generates ggplot objects from \code{get.data} data-set
+<<<<<<< HEAD
+}
+\details{
+For data coming from query.type = "data-S" and "data-SR", NA are put when there are no data for bouquet AND vrac
+
+For data-radar, it is the mean which is represented
+
+For data-biplot note that no plots are possible for between raw data linked to individuals and raw data linked to relation.
+}
+\examples{
+# See the vignette
+=======
+>>>>>>> master
 }
 \author{
 Pierre Riviere

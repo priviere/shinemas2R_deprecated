@@ -28,19 +28,22 @@ get.ggplot_network.relation.barplot = function(data, combi, relation = "reproduc
 		net.info = droplevels(filter(data$network.info, selection %in% relation.type))
 		net.info$variable = as.numeric(net.info$selection) # to get a column of 1		
 	}
-	
-	net.info.barplot = plyr::rename(net.info, replace = c(variable = name))
-	
-	p_barplot = NULL	
 
-	for(comb in combi) {
-		x.axis = comb[1] # compulsory
-		if( length(comb) == 2 ) { in.col = comb[2] } else { in.col = NULL } # optionnal
-		p = get.ggplot_plot.it(d = net.info.barplot, titre = NULL, ggplot.display = "barplot", vec_variables = name, x.axis = x.axis, in.col = in.col, ggplot.type = ggplot.type, nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col)	
-		p_barplot = c(p_barplot, p)
-	}
-	names(p_barplot) = unlist(lapply(combi, function(x){paste(x[1], x[2], sep="-")}))
+	if( nrow(net.info) > 0 ){
+		net.info.barplot = plyr::rename(net.info, replace = c(variable = name))
+		
+		p_barplot = NULL	
+		
+		for(comb in combi) {
+			x.axis = comb[1] # compulsory
+			if( length(comb) == 2 ) { in.col = comb[2] } else { in.col = NULL } # optionnal
+			p = get.ggplot_plot.it(d = net.info.barplot, titre = NULL, ggplot.display = "barplot", vec_variables = name, x.axis = x.axis, in.col = in.col, ggplot.type = ggplot.type, nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col)	
+			p_barplot = c(p_barplot, p)
+		}
+		names(p_barplot) = unlist(lapply(combi, function(x){paste(x[1], x[2], sep="-")}))
+		
+		out = list("barplot" = p_barplot)
+	} else { out = NULL }
 	
-	out = list("barplot" = p_barplot)
 	return(out)
 }

@@ -4,15 +4,16 @@
 \alias{get.data}
 \title{Query SHiNeMaS and return the datasets}
 \usage{
-get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
-  db_password = "pierre", query.type = "person",
-  fill.diffusion.gap = FALSE, network.info = TRUE, Mdist = FALSE,
-  data.type = NULL, filter.on = NULL, germplasm.in = NULL,
+get.data(db_user = "pierre", db_host = "127.0.0.1",
+  db_name = "shinemas_tuto", db_password = "pierre",
+  query.type = "person", filter.on = NULL, germplasm.in = NULL,
   germplasm.out = NULL, germplasm.type.in = NULL,
   germplasm.type.out = NULL, year.in = NULL, year.out = NULL,
   project.in = NULL, project.out = NULL, person.in = NULL,
   person.out = NULL, seed.lot.in = NULL, seed.lot.out = NULL,
-  relation.in = NULL, reproduction.type.in = NULL, variable.in = NULL)
+  relation.in = NULL, reproduction.type.in = NULL, variable.in = NULL,
+  data.type = NULL, network.info = TRUE, Mdist = FALSE,
+  fill.diffusion.gap = FALSE, mixrep_to_repro = TRUE)
 }
 \arguments{
 \item{db_user}{user name of SHiNeMaS}
@@ -23,17 +24,21 @@ get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
 
 \item{db_password}{your password to login. If no password is needed, put ""}
 
-\item{query.type}{Type of query, which will create a data set. There are five types:
+\item{query.type}{Type of query, which will create a data set. There are eight types:
+
 \enumerate{
 
-\item "network": network relations between seed-lots
-
+<<<<<<< HEAD
+\item "network": network relations between seed-lots. All filters are possible.
+=======
 \item "SL.mix": seed-lots merged from replications and not from 'real' mixtures
+>>>>>>> master
 
-\item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross.
+\item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variable.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in.
 
 \item raw information on levels and variables contained in SHiNeMaS :
 \itemize{
+\item "species"
 \item "variable"
 \item "person"
 \item "year"
@@ -47,17 +52,26 @@ get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
 
 \item data with variable on specific seed-lots :
 \itemize{
-\item "data-classic": default dataframe
+\item "data-classic": default dataframe.
 \item "data-S": selection differential for a given year.
 \item "data-SR": seed-lots pairs of selection differential for year n-1 and response to selection for year n.
+\item "data-mixture-1": seed-lots used in a mixture
 }
 
-\item "methods": information related to methods used for each variable in SHiNeMaS with its description and units. Filters can be applied on variables.
+\item "methods": information related to the methods used for each variable in SHiNeMaS with its description and units
+Filters can be applied on variables. Possible filter is variable.in.
+
+<<<<<<< HEAD
+\item "person.info": information regarding persons stored in SHiNeMaS.
+Possible filters are person.in and person.out.
+
+\item "grandfather": information on son, father and grandfather.
+All filters are possible except relation.in and variable.in.
 
 }}
 
-\item{fill.diffusion.gap}{For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)}
-
+\item{filter.on}{This argument is needed if you want to use filters. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son". Filter.on is not used for data.type = "seed-lots", query.type = "methods" and query.type = "person.info"}
+=======
 \item{network.info}{For query.type = "network". If TRUE, aggregates information on relations and seed-lots on the network.}
 
 \item{Mdist}{For query.type = "network". If TRUE, computes the Mdist matrix. See details.}
@@ -65,6 +79,7 @@ get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
 \item{data.type}{For queries in "data-". Type of data: "relation" for data linked to relation between seed lots and "seed-lots" for data linked to seed lots}
 
 \item{filter.on}{This argument is needed for filters for queries in "network", "data-" and "data.type" = data.relation. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son".}
+>>>>>>> master
 
 \item{germplasm.in}{Filter: vector with germplasms to keep. By default, all the germplasms are in.}
 
@@ -95,6 +110,16 @@ get.data(db_user = "pierre", db_host = "127.0.0.1", db_name = "shinemas",
 \item{reproduction.type.in}{Filter on reproduction types}
 
 \item{variable.in}{Filter: vector with variables to keep. If NULL, all variables in SHiNeMaS are displayed.}
+
+\item{data.type}{For queries in "data-". Type of data: "relation" for data linked to relation between seed lots and "seed-lots" for data linked to seed lots}
+
+\item{network.info}{For query.type = "network". If TRUE, aggregates information on relations and seed-lots on the network and return it in the results.}
+
+\item{Mdist}{For query.type = "network". If TRUE, computes the Mdist matrix and return it in the results. See details.}
+
+\item{fill.diffusion.gap}{For query.type = "network", create a network with no gaps between seed-lots (as long as there is information!)}
+
+\item{mixrep_to_repro}{For query.type = "network", tranform the mixtures of replications into reproductions, i.e. the network keeps only 'real' mixtures (i.e. different germplasm for father and son) and correct the information regarding what have been harvested and sown after as the mixture disappear. TRUE by default.}
 }
 \value{
 The function returns a list with
@@ -106,11 +131,20 @@ The function returns a list with
 \item For network it returns a list with
 \itemize{
 \item the network object
+<<<<<<< HEAD
+\item the network.query dataframe coming from the query
+\item the network.info matrix with information on relations in the network. The possible information are:
+ \itemize{
+ \item reproduction: "sow", "harvest", "harvest-sow"
+ \item selection: "selection"
+ \item mixture: "mixture_real" (for 'real' mixture i.e. seed-lots of different germplasm), "mixture_rep" (for mixture of replication i.e. seed-lots of identical germplasm)
+ \item diffusion: "give", "receive", "give-receive"
+ }
+=======
 \item the network.info matrix with information on relations in the network
+>>>>>>> master
 \item the Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
 }
-
-\item For SL.mix, it returns a data frame with seed-lots son (i.e. coming from the mixture), seed-lots father, germplasm, person, year and project
 
 \item For raw information on levels and variables present in SHiNeMaS it returns a vector
 
@@ -150,17 +184,32 @@ The query "data-SR" takes into account when selection has been done to get a see
 \item Query "network"
 
 The Mdist square matrix can be compared to a differentiation distance. It can be put in relation with genetic Fst for example.
+<<<<<<< HEAD
+Note that a value of 1 means a distance between
+\itemize{
+	\item a seed-lot that has been diffused to location A without beeing sown and harvested on location B and
+	\item a seed-lot that has been diffused to location B and beeing sown and harvested on location B
+	}
+
+
+=======
+>>>>>>> master
 
 \item Correlated data or not
+
 Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot.
 Therefore the element of the list for non correlated data is always NULL.
-For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on ther same individual) or not.
+
+For data linked to relations, as it can be linked to individual within a seed-lot, data may be correlated (data taken on the same individual) or not.
 }
+}
+\examples{
+# See the vignette
 }
 \author{
 Pierre Riviere for R code and Yannick de Oliveira for SQL code
 }
 \seealso{
-\code{\link{encrypt.data}}, \code{\link{translate.data}},, \code{\link{get.ggplot}}, \code{\link{get.table}}
+\code{\link{encrypt.data}}, \code{\link{translate.data}},, \code{\link{format.data}}, \code{\link{get.ggplot}}, \code{\link{get.table}}
 }
 

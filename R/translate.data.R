@@ -1,25 +1,23 @@
 # 0. help -----------------------------------------------------------------
-#' Translate variables present in data coming from \code{get.data}
+#' Translate variables and methods present in data coming from \code{get.data}
 #' 
 #' @param data output from the \code{get.data} function
 #' 
 #' @param list_translation A list with as many elements as variables to translate. It is under the form list(c("tkw", "pmg"), c("protein", "proteine")).
 #' 
-#' @return The data with translated variables
+#' @return The data with translated data
 #' 
-#' @seealso \code{\link{get.data}} 
+#' @seealso \code{\link{get.data}}, \code{\link{is.get.data.output}}
 #' 
-
 translate.data = function(
 data,
 list_translation
 )
 	# lets go !!! ----------
-
 {
-	shinemas2R.object = attributes(data)$shinemas2R.object
+	shinemas2R.object = attributes(data$data)$shinemas2R.object
 	
-	mess = "data must come from shinemas2R::get.data"
+	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output"
 	if( is.null(shinemas2R.object) ) { stop(mess) }
 	if( !is.element(shinemas2R.object, 
 									c("data-classic-relation", 
@@ -31,26 +29,36 @@ list_translation
 	) { stop(mess) }  
 	
 	
-	att_data = attributes(data)$shinemas2R.object
-	data_cor = data$datasets.with.correlated.variables 
-	data_not_cor = data$datasets.with.non.correlated.variables
-	meth = data$methods
+	translate = function(d, n1 ,n2){
+		if( !is.null(d)){
+			# variables
+			toget = grep(paste(n1, "---", sep = ""), colnames(d))
+			if( length(toget) > 0 ){ colnames(d)[toget] = sub(paste(n1, "---", sep = ""), paste(n2, "---", sep = ""), colnames(d)[toget]) }
+			# methods
+			toget = grep(paste("---", n1, sep = ""), colnames(d))
+			if( length(toget) > 0 ){ colnames(d)[toget] = sub(paste("---", n1, sep = ""), paste("---", n2, sep = ""), colnames(d)[toget]) }
+		}
+		return(d)
+	}
 	
 	for(n in list_translation){
 		n1 = n[1]; n2 = n[2]
-		toget = which(colnames(data_cor) == n1)
-		if( length(toget) > 0 ){ colnames(data_cor)[toget] = n2 }
-		toget = which(colnames(data_not_cor) == n1)
-		if( length(toget) > 0 ){ colnames(data_not_cor)[toget] = n2 }
-	}
-	
-	out = list(
-"datasets.with.correlated.variables" = data_cor, 
-"datasets.with.non.correlated.variables" = data_not_cor, 
-"methods" = meth
-)
-	attributes(out)$shinemas2R.object = att_data
+		
+		# data
+		data$data$data = translate(data$data$data, n1, n2)
+		data$data$data.with.correlated.variables = lapply(data$data$data.with.correlated.variables, translate, n1, n2)
+		
+		# methods
+		toget = grep(paste(n1, "---", sep = ""), data$data$methods$"variable---methods")
+		if( length(toget) > 0 ){ data$data$methods$"variable---methods"[toget] = sub(paste(n1, "---", sep = ""), paste(n2, "---", sep = ""), data$data$methods$"variable---methods"[toget]) }
+		toget = grep(paste("---", n1, sep = ""), data$data$methods$"variable---methods")
+		if( length(toget) > 0 ){ data$data$methods$"variable---methods"[toget] = sub(paste("---", n1, sep = ""), paste("---", n2, sep = ""), data$data$methods$"variable---methods"[toget]) }
+		
+		a = unlist(strsplit(as.character(data$data$methods$"variable---methods"), "---"))
+		data$data$methods$variable_name = factor(a[seq(1,length(a),2)])
+		data$data$methods$method_name = factor(a[seq(2,length(a),2)])
+		}
 
-	return(out)
+	return(data)
 }
 
