@@ -10,8 +10,8 @@
 #' 
 #' @param merge_g_and_s Fuse germplasm and selection name information in a column named germplasm. TRUE by default.
 #' 
-#' @param table.type the type of table you wish according to the type of data. 
-#' For data coming from \code{get.data}, it can be :
+#' @param table.type The type of table you wish according to the type of data. 
+#' For data coming from \code{get.data}, it can be:
 #' 	\itemize{
 #' 	\item "raw" display raw data. Useful with text for example
 #' 	\item "mean" display for each variable columns with mean

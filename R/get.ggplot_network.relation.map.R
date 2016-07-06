@@ -1,4 +1,4 @@
-#' Function use in get.ggplot
+#' Function used in get.ggplot
 #' @description
 #' draw pie on maps for network relations
 #' 

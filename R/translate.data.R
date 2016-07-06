@@ -3,7 +3,7 @@
 #' 
 #' @param data output from the \code{get.data} function
 #' 
-#' @param list_translation A list with as many element as variables or methods to translate. It is under the form list(c("tkw", "pmg"), c("protein", "proteine")).
+#' @param list_translation A list with as many elements as variables to translate. It is under the form list(c("tkw", "pmg"), c("protein", "proteine")).
 #' 
 #' @return The data with translated data
 #' 

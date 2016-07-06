@@ -9,31 +9,31 @@ get.ggplot_pie.on.ggplot(ggplot, data, variable, factor, x.origin = 1,
   precision = 10000)
 }
 \arguments{
-\item{ggplot}{a ggplot object on wich put the pies}
+\item{ggplot}{a ggplot object on which to put the pies}
 
-\item{data}{A data set with at least four columns: the variable, the factor, the X and Y coordinates for the pie.}
+\item{data}{a data set with at least four columns: the variable, the factor, the X and Y coordinates for the pie.}
 
-\item{variable}{Name of the column of data with the variable}
+\item{variable}{name of the column of data with the variable}
 
-\item{factor}{Name of the column of data with the factor. factor is a location.}
+\item{factor}{name of the column of data with the factor. factor is a location.}
 
 \item{x.origin}{the x origin of the pie}
 
 \item{y.origin}{the y origin of the pie}
 
-\item{r}{the radius of the pie. If the radius is too big and the pie do not fit on the ggplot object, an error is returned.}
+\item{r}{the radius of the pie. If the radius is too big and the pie does not fit on the ggplot object, an error is returned.}
 
 \item{hide.labels.parts}{see hide.labels.parts argument in \code{get.ggplot}}
 
-\item{precision}{The precision in the drawing of the pie. The higher the better.}
+\item{precision}{the precision in the drawing of the pie. The higher the better.}
 
-\item{label.size}{Size of the label. label correspond to factor}
+\item{label.size}{size of the label. label corresponds to factor}
 }
 \value{
 The function returns a ggplot with pies on it
 }
 \description{
-\code{get.ggplot_pie.on.ggplot} display pies on ggplot object such as network or map
+\code{get.ggplot_pie.on.ggplot} displays pies on ggplot object such as network or map
 }
 \author{
 Pierre Rivière
