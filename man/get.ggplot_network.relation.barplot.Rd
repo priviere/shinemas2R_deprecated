@@ -2,7 +2,7 @@
 % Please edit documentation in R/get.ggplot_network.relation.barplot.R
 \name{get.ggplot_network.relation.barplot}
 \alias{get.ggplot_network.relation.barplot}
-\title{Function use in get.ggplot}
+\title{Function used in get.ggplot}
 \usage{
 get.ggplot_network.relation.barplot(data, combi, relation = "reproduction",
   relation.type = "recolte", name = "harvested seed-lots",

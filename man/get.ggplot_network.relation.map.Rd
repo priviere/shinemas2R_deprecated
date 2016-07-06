@@ -2,7 +2,7 @@
 % Please edit documentation in R/get.ggplot_network.relation.map.R
 \name{get.ggplot_network.relation.map}
 \alias{get.ggplot_network.relation.map}
-\title{Function use in get.ggplot}
+\title{Function used in get.ggplot}
 \usage{
 get.ggplot_network.relation.map(map, data, relation = "reproduction",
   relation.type = "recolte", name = "harvested seed-lots", pie.size,

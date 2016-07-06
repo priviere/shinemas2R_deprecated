@@ -2,7 +2,7 @@
 % Please edit documentation in R/get.ggplot_hide.labels.part.R
 \name{get.ggplot_hide.labels.part}
 \alias{get.ggplot_hide.labels.part}
-\title{Function use in get.ggplot}
+\title{Function used in get.ggplot}
 \usage{
 get.ggplot_hide.labels.part(label, hide.labels.parts)
 }
