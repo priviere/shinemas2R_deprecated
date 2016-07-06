@@ -28,11 +28,7 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 
 \enumerate{
 
-<<<<<<< HEAD
 \item "network": network relations between seed-lots. All filters are possible.
-=======
-\item "SL.mix": seed-lots merged from replications and not from 'real' mixtures
->>>>>>> master
 
 \item "cross": seed-lots used to give a cross: father, grandfather, mother, grandmother and cross. All filters are possible except variable.in, relation.in, seed.lots.in, seed.lots.out and reproduction.type.in.
 
@@ -61,7 +57,6 @@ get.data(db_user = "pierre", db_host = "127.0.0.1",
 \item "methods": information related to the methods used for each variable in SHiNeMaS with its description and units
 Filters can be applied on variables. Possible filter is variable.in.
 
-<<<<<<< HEAD
 \item "person.info": information regarding persons stored in SHiNeMaS.
 Possible filters are person.in and person.out.
 
@@ -71,15 +66,6 @@ All filters are possible except relation.in and variable.in.
 }}
 
 \item{filter.on}{This argument is needed if you want to use filters. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son". Filter.on is not used for data.type = "seed-lots", query.type = "methods" and query.type = "person.info"}
-=======
-\item{network.info}{For query.type = "network". If TRUE, aggregates information on relations and seed-lots on the network.}
-
-\item{Mdist}{For query.type = "network". If TRUE, computes the Mdist matrix. See details.}
-
-\item{data.type}{For queries in "data-". Type of data: "relation" for data linked to relation between seed lots and "seed-lots" for data linked to seed lots}
-
-\item{filter.on}{This argument is needed for filters for queries in "network", "data-" and "data.type" = data.relation. It chooses on which seed-lots the filters are applied: "son", "father" or "father-son".}
->>>>>>> master
 
 \item{germplasm.in}{Filter: vector with germplasms to keep. By default, all the germplasms are in.}
 
@@ -131,7 +117,6 @@ The function returns a list with
 \item For network it returns a list with
 \itemize{
 \item the network object
-<<<<<<< HEAD
 \item the network.query dataframe coming from the query
 \item the network.info matrix with information on relations in the network. The possible information are:
  \itemize{
@@ -140,9 +125,6 @@ The function returns a list with
  \item mixture: "mixture_real" (for 'real' mixture i.e. seed-lots of different germplasm), "mixture_rep" (for mixture of replication i.e. seed-lots of identical germplasm)
  \item diffusion: "give", "receive", "give-receive"
  }
-=======
-\item the network.info matrix with information on relations in the network
->>>>>>> master
 \item the Mdist square matrix with the number of reproductions that separate two seed-lots since their last common diffusion.
 }
 
@@ -184,7 +166,6 @@ The query "data-SR" takes into account when selection has been done to get a see
 \item Query "network"
 
 The Mdist square matrix can be compared to a differentiation distance. It can be put in relation with genetic Fst for example.
-<<<<<<< HEAD
 Note that a value of 1 means a distance between
 \itemize{
 	\item a seed-lot that has been diffused to location A without beeing sown and harvested on location B and
@@ -192,8 +173,6 @@ Note that a value of 1 means a distance between
 	}
 
 
-=======
->>>>>>> master
 
 \item Correlated data or not
 
