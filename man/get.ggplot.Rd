@@ -78,21 +78,13 @@ For "data-biplot", the default value is NULL.
 For an easier visualization, digit is never displayed unless you choose NULL.
 Note that with ggplot.type "network-" and ggplot.display = "map", hide.labels.part can be NULL or "all" as only person can be displayed.}
 
-<<<<<<< HEAD
 \item{labels.sex}{For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".}
-=======
-\item{display.labels.sex}{For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".}
->>>>>>> master
 
 \item{labels.generation}{For ggplot.type = "network-network". If TRUE, displays generation for each reproduction}
 
 \item{labels.size}{Size of the labels}
 
-<<<<<<< HEAD
 \item{location.map}{Location of the map. See \code{?map_data}, argument \code{map}, for more details.}
-=======
-\item{location.map}{Location of the map. See \code{?map} for more details.}
->>>>>>> master
 
 \item{pie.size}{Size of the pie when using pies}
 }
@@ -122,16 +114,12 @@ The function returns a list with several ggplot objects according to the data an
 	\item the relation between seed-lots on maps (ggplot.type = "network-diffusion-relation"). The size of the arrows is proportionnal to the number of diffusions.
 	}
 
-<<<<<<< HEAD
 \item a series of ggplots for mixtures representing:
 	\itemize{
 	\item the seed-lots coming from 'real' mixtures (ggplot.type = "network-mixture-real")
 	\item the seed-lots coming from mixtures of replication (ggplot.type = "network-mixture-rep")
 	\item the seed-lots coming from all mixtures (ggplot.type = "network-mixture-all")
 }
-=======
-\item a series of ggplots for mixtures (ggplot.type = "network-mixture"). Note that mixtures of replications are not counted here.
->>>>>>> master
 
 \item a series of ggplots for selection (ggplot.type = "network-positive-intra-selected")
 
@@ -143,7 +131,6 @@ The function returns a list with several ggplot objects according to the data an
 }
 \description{
 \code{get.ggplot} generates ggplot objects from \code{get.data} data-set
-<<<<<<< HEAD
 }
 \details{
 For data coming from query.type = "data-S" and "data-SR", NA are put when there are no data for bouquet AND vrac
@@ -154,8 +141,6 @@ For data-biplot note that no plots are possible for between raw data linked to i
 }
 \examples{
 # See the vignette
-=======
->>>>>>> master
 }
 \author{
 Pierre Riviere
