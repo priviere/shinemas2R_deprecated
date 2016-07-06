@@ -1,4 +1,4 @@
-# version 0.9.1
+% version 0.9.2
 \section{pdf compilation with \LaTeX}
 \label{pdf}
 
@@ -7,7 +7,7 @@ This is particularly useful in participatory research to give feedback to stackh
 
 \texttt{get.pdf} creates a \texttt{.tex} file that is compiled into a \texttt{.pdf} file.
 You need to install \LaTeX~and the following packages : \texttt{longtable}, \texttt{lscape}, \texttt{graphicx}, \texttt{pdfpages}, \texttt{float}, \texttt{hyperref} and \texttt{fancyhdr}. 
-To download LaTeX, go to \url{http://latex-project.org/ftp.html}.
+To download LaTeX, go to \url{latex-project.org/ftp.html}.
 
 
 \subsection{Philosophy of \texttt{get.pdf} }
@@ -87,7 +87,7 @@ macro & description \\
 \end{table}
 
 
-Tutorials on \LaTeX~can be found here: \url{https://en.wikibooks.org/wiki/LaTeX}.
+Tutorials on \LaTeX~can be found here: \url{en.wikibooks.org/wiki/LaTeX}.
 
 See appendix \ref{getpdf_examples} for some examples.
 
@@ -148,8 +148,8 @@ out = list(
 
 out = list(
 	"figure" = list(
-		"caption" = "Network for Rouge du Roc", 
-		"content" = p_net_RdR, 
+		"caption" = "Network for C1", 
+		"content" = p_net_C1, 
 		"width" = 1)
 	); OUT = c(OUT, out)
 
@@ -166,9 +166,9 @@ out = list(
 
 out = list(
 	"figure" = list(
-		"caption" = "Repartition of Rouge du Roc harvested 
+		"caption" = "Repartition of seed-lots harvested 
 		since the beginning of the project.",
-		"content" = m9_slh, 
+		"content" = m5_slh, 
 		"width" = 1)
 	); OUT = c(OUT, out)
 

@@ -7,13 +7,16 @@
 #' 
 #' @param fuse_g_and_s Fuse germplasm and selection name information in a column named germplasm
 #' 
-#' @param correlated_group Name of the group of correlation in data. NULL by default.
+#' @param correlated_group Name of the group of correlation in data. NULL by default meaning that all the data are taken.
 #' 
 #' @param format the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are several formats within a package. Possible values are "PPBstats".
 #' 
 #' @return The data set with the right format for the R package
 #' 
-#' @seealso \code{\link{get.data}} 
+#' @examples
+#' # See the vignette
+#' 
+#' @seealso \code{\link{get.data}}, \code{\link{is.get.data.output}}
 #' 
 format.data = function(
 data,
@@ -23,19 +26,20 @@ correlated_group = NULL,
 format = "PPBstats"
 )
 	# lets go !!! ----------
-
 {
+
+# 1.Error messages ----------
 	data = data$data
 	shinemas2R.object = attributes(data)$shinemas2R.object
 	
-	mess = "data must come from shinemas2R::get.data"
+	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output. It must be with query.type \"data-classic\", \"data-S\" or \"data-SR\"."
 	if( is.null(shinemas2R.object) ) { stop(mess) }
 	if( !is.element(shinemas2R.object, 
 									c("data-classic-relation", 
 										"data-S-relation", 
 										"data-SR-relation", 
 										"data-classic-seed-lots",
-										"data-S-seed-lots", 
+										"data-S-seed-lots",
 										"data-SR-seed-lots")) 
 	) { stop(mess) }  
 	
@@ -49,7 +53,10 @@ if( is.null(correlated_group) ) {
 		} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
 	}
 	
-	
+# 2.Vector of variables ----------
+vec_variables = get.vec_variables(data, shinemas2R.object)
+
+# 3.Format for packages
 if( format == "PPBstats" ) {
 
 	if( data.on == "son" ){ 
@@ -64,14 +71,14 @@ if( format == "PPBstats" ) {
 		data$format_location = data$father_person
 	}
 	
-
-	vec_variables = colnames(data)[c(29: (ncol(data)-3))] # - 3 because of  format_germplasm format_year format_location
-	# Importance d'avoir le meme nombre de colonnes dans toutes les sorties de data ou alors avec un attributes ?!!!
-	print("Importance d'avoir le meme nombre de colonnes dans toutes les sorties de data ou alors avec un attributes ?!!!")
-	
 	out = data[,c("format_year", "format_location", "format_germplasm", "block", "X", "Y", vec_variables)]
 	colnames(out) = c("year", "location", "germplasm", "block", "X", "Y", vec_variables)
-	
+	out$year = factor(out$year)
+	out$location = factor(out$location)
+	out$germplasm = factor(out$germplasm)
+	out$block = factor(out$block)
+	out$X = factor(out$X)
+	out$Y = factor(out$Y)
 	}
 
 return(out)
