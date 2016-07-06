@@ -35,7 +35,7 @@ system.file("extdata", "shinemas_tuto.sql", package = "shinemas2R")
 
 Put it in your \texttt{/home/pierre}, and install it on postgresql.
 
-Note than \texttt{shinemas\_tuto.sql} must be accesible in writing and reading.
+Note that \texttt{shinemas\_tuto.sql} must be accesible in writing and reading.
 
 \begin{verbatim}
 pierre@RSP:~$ psql -h localhost -d shinemas_tuto -U pierre -f /home/pierre/shinemas_tuto.sql
