@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.12.4)  20 JAN 2016 21:53
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.12.4)  6 JUL 2016 10:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1197,40 +1197,40 @@ LaTeX Info: Redefining \nameref on input line 90.
 \openout4 = `shinemas2R.out'.
 
  (./sections/1.head.tex
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 2.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 14.
+(Font)              <14.4> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 14.
+(Font)              <7> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 19.
+(Font)              <5> on input line 20.
 
-<./figures/cc-by-nc-sa.png, id=190, 97.0827pt x 33.9669pt>
+<./figures/cc-by-nc-sa.png, id=239, 97.0827pt x 33.9669pt>
 File: ./figures/cc-by-nc-sa.png Graphic file (type png)
 
 <use ./figures/cc-by-nc-sa.png>
-Package pdftex.def Info: ./figures/cc-by-nc-sa.png used on input line 33.
+Package pdftex.def Info: ./figures/cc-by-nc-sa.png used on input line 34.
 (pdftex.def)             Requested size: 70.8018pt x 24.77281pt.
 
-<./figures/Logo-RSP.png, id=192, 1127.99016pt x 1140.13152pt>
+<./figures/Logo-RSP.png, id=241, 1127.99016pt x 1140.13152pt>
 File: ./figures/Logo-RSP.png Graphic file (type png)
 
 <use ./figures/Logo-RSP.png>
-Package pdftex.def Info: ./figures/Logo-RSP.png used on input line 40.
+Package pdftex.def Info: ./figures/Logo-RSP.png used on input line 41.
 (pdftex.def)             Requested size: 70.8018pt x 71.55379pt.
 
-<./figures/Logo-UMRGV.jpg, id=194, 1277.77374pt x 496.85625pt>
+<./figures/Logo-UMRGV.jpg, id=243, 1277.77374pt x 496.85625pt>
 File: ./figures/Logo-UMRGV.jpg Graphic file (type jpg)
 
 <use ./figures/Logo-UMRGV.jpg>
-Package pdftex.def Info: ./figures/Logo-UMRGV.jpg used on input line 52.
+Package pdftex.def Info: ./figures/Logo-UMRGV.jpg used on input line 53.
 (pdftex.def)             Requested size: 70.8018pt x 27.52808pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--66
+Underfull \hbox (badness 10000) in paragraph at lines 56--67
 
  []
 
@@ -1247,342 +1247,356 @@ figures/cc-by-nc-sa.png> <./figures/Logo-RSP.png> <./figures/Logo-UMRGV.jpg>]
 (./shinemas2R.toc
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1.
+ [2]
+Overfull \hbox (40.31587pt too wide) in paragraph at lines 62--62
+ [][] [][][]\T1/cmtt/m/n/10 shinemas2R.object == "data-S-seed-lots" \T1/cmr/m/n
+/10 & \T1/cmtt/m/n/10 shinemas2R.object == "data-SR-seed-lots"[][] [][]  
+ []
+
+
+Overfull \hbox (29.81844pt too wide) in paragraph at lines 63--63
+ [][] [][][]\T1/cmtt/m/n/10 shinemas2R.object == "data-S-relation" \T1/cmr/m/n/
+10 & \T1/cmtt/m/n/10 shinemas2R.object == "data-SR-relation"[][] [][]  
+ []
+
 )
 \tf@toc=\write5
 \openout5 = `shinemas2R.toc'.
 
- [2] <./figures/wheat.JPG, id=265, 2826.56pt x 2119.92pt>
+ <./figures/wheat.JPG, id=325, 2826.56pt x 2119.92pt>
 File: ./figures/wheat.JPG Graphic file (type jpg)
 
 <use ./figures/wheat.JPG>
-Package pdftex.def Info: ./figures/wheat.JPG used on input line 80.
+Package pdftex.def Info: ./figures/wheat.JPG used on input line 81.
 (pdftex.def)             Requested size: 377.62642pt x 283.2009pt.
  [3 <./figures/wheat.JPG>])
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 103.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 104.
 
-<./figures/relation_SL_EN.pdf, id=275, 796.9775pt x 597.23125pt>
+<./figures/relation_SL_EN.pdf, id=335, 796.9775pt x 597.23125pt>
 File: ./figures/relation_SL_EN.pdf Graphic file (type pdf)
 
 <use ./figures/relation_SL_EN.pdf>
-Package pdftex.def Info: ./figures/relation_SL_EN.pdf used on input line 121.
+Package pdftex.def Info: ./figures/relation_SL_EN.pdf used on input line 122.
 (pdftex.def)             Requested size: 377.62642pt x 282.97697pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 133--135
+Underfull \hbox (badness 10000) in paragraph at lines 134--136
 
  []
 
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 140.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 141.
 [4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.147 \begin{itemize}
-                      <./figures/relation_SL_EN.pdf>]
-<./figures/shinemas2R_function_relations.pdf, id=308, 796.9775pt x 426.59375pt>
+l.147 
+       <./figures/relation_SL_EN.pdf>]
+<./figures/shinemas2R_function_relations.pdf, id=369, 796.9775pt x 426.59375pt>
 File: ./figures/shinemas2R_function_relations.pdf Graphic file (type pdf)
 <use ./figures/shinemas2R_function_relations.pdf>
 Package pdftex.def Info: ./figures/shinemas2R_function_relations.pdf used on in
-put line 181.
+put line 184.
 (pdftex.def)             Requested size: 472.03123pt x 252.658pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 195.
-
-
-Package xcolor Warning: Incompatible color definition on input line 215.
+Package xcolor Warning: Incompatible color definition on input line 198.
 
 [5pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
 has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.224 \end{kframe}
-                   <./figures/shinemas2R_function_relations.pdf>]
+l.216 
+       <./figures/shinemas2R_function_relations.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 234.
-
-
-Package xcolor Warning: Incompatible color definition on input line 246.
+Package xcolor Warning: Incompatible color definition on input line 218.
 
 
-Package xcolor Warning: Incompatible color definition on input line 256.
+Package xcolor Warning: Incompatible color definition on input line 237.
 
 
-Overfull \hbox (89.58162pt too wide) in paragraph at lines 259--259
+Package xcolor Warning: Incompatible color definition on input line 249.
+
+
+Overfull \hbox (41.87471pt too wide) in paragraph at lines 256--257
+[]\T1/cmr/m/n/10 And you can down-load the data-sets here : [][]$\T1/cmtt/m/n/1
+0 https : / / www . dropbox . com / sh / u1wrwttbn4mq5l4 / AACXqZNtzI6TPUeZ _
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 260.
+
+
+Overfull \hbox (89.58162pt too wide) in paragraph at lines 263--263
 [][]\T1/cmtt/m/n/10 system[][]([][]"cp -r /home/pierre/Documents/geek/R-stats/R
 dev/R_package_shinemas2R/shinemas2R_data/*RData ./data"[][])[][] 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 268--269
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--271
+
+ []
+
 [6]
 
-Package xcolor Warning: Incompatible color definition on input line 298.
+Package xcolor Warning: Incompatible color definition on input line 313.
 
 [7]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 366.
+(Font)              <8> on input line 371.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 366.
+(Font)              <6> on input line 371.
 
 
-Package xcolor Warning: Incompatible color definition on input line 370.
+Package xcolor Warning: Incompatible color definition on input line 375.
 
 
-Overfull \hbox (12.58653pt too wide) in paragraph at lines 389--389
-[]        []\T1/cmtt/m/it/10 #The key has been written in /home/pierre/key_netw
-ork_Tue Nov 24 11:52:47 2015.RData[][] 
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 400.
+Package xcolor Warning: Incompatible color definition on input line 403.
 
 [8]
 
-Package xcolor Warning: Incompatible color definition on input line 431.
+Package xcolor Warning: Incompatible color definition on input line 434.
 
 
-Package xcolor Warning: Incompatible color definition on input line 456.
-
-
-Package xcolor Warning: Incompatible color definition on input line 488.
+Package xcolor Warning: Incompatible color definition on input line 458.
 
 [9]
 
-Package xcolor Warning: Incompatible color definition on input line 506.
+Package xcolor Warning: Incompatible color definition on input line 547.
+
+[10]
+
+Package xcolor Warning: Incompatible color definition on input line 572.
 
 
-Overfull \hbox (17.83525pt too wide) in paragraph at lines 523--523
-[]        []\T1/cmtt/m/it/10 # The key has been written in /home/pierre/key_net
-work_Tue Nov 24 11:54:53 2015.RData[][] 
- []
+Package xcolor Warning: Incompatible color definition on input line 590.
 
 
-Package xcolor Warning: Incompatible color definition on input line 531.
+Package xcolor Warning: Incompatible color definition on input line 614.
+
+[11]
+
+Package xcolor Warning: Incompatible color definition on input line 651.
 
 
-Overfull \hbox (17.83525pt too wide) in paragraph at lines 550--550
-[]        []\T1/cmtt/m/it/10 # The key has been written in /home/pierre/key_net
-work_Tue Nov 24 11:55:53 2015.RData[][] 
- []
+Package xcolor Warning: Incompatible color definition on input line 657.
 
 
-Package xcolor Warning: Incompatible color definition on input line 564.
-
-
-Package xcolor Warning: Incompatible color definition on input line 570.
-
-
-Overfull \hbox (10.85085pt too wide) in paragraph at lines 570--570
+Overfull \hbox (10.85085pt too wide) in paragraph at lines 657--657
 []\T1/cmtt/m/it/10 ## As ggplot.type is NULL, ggplot.type is set to network-net
 work, network-reproduction-sown,
  []
 
 
-Overfull \hbox (173.56111pt too wide) in paragraph at lines 570--570
+Overfull \hbox (173.56111pt too wide) in paragraph at lines 657--657
 \T1/cmtt/m/it/10 network-reproduction-harvested, network-reproduction-positive-
 inter-selected, network-reproduction-positive-inter-selected,
  []
 
 
-Overfull \hbox (47.59187pt too wide) in paragraph at lines 570--570
+Overfull \hbox (47.59187pt too wide) in paragraph at lines 657--657
 \T1/cmtt/m/it/10 network-reproduction-negative-inter-selected, network-reproduc
 tion-crossed, network-diffusion-sent,
  []
 
 
-Overfull \hbox (73.83546pt too wide) in paragraph at lines 570--570
+Overfull \hbox (42.34315pt too wide) in paragraph at lines 657--657
 \T1/cmtt/m/it/10 network-diffusion-received, network-diffusion-relation, networ
-k-mixture, network-positive-intra-selected 
+k-mixture-real, network-mixture-rep,
  []
 
 
-Overfull \hbox (0.35341pt too wide) in paragraph at lines 570--570
+Overfull \hbox (0.35341pt too wide) in paragraph at lines 657--657
 \T1/cmtt/m/it/10 ## As ggplot.display is NULL, ggplot.display is set to c("barp
 lot", "map"). Note that for
  []
 
 
-Overfull \hbox (37.09444pt too wide) in paragraph at lines 570--570
+Overfull \hbox (37.09444pt too wide) in paragraph at lines 657--657
 \T1/cmtt/m/it/10 ## As x.axis and in.col are NULL, all the combinaisons of x.ax
 is and in.col are done for barplot.[] 
  []
 
-[10]
 
-Package xcolor Warning: Incompatible color definition on input line 580.
-
-
-Package xcolor Warning: Incompatible color definition on input line 610.
-
-<figures/shinemas2R_unnamed-chunk-23-1.pdf, id=371, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-23-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-23-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-23-1.pdf used on inpu
-t line 617.
-(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
- [11]
-
-Package xcolor Warning: Incompatible color definition on input line 629.
-
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 636
-.
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
-File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-
-Package xcolor Warning: Incompatible color definition on input line 654.
-
-<figures/shinemas2R_unnamed-chunk-25-1.pdf, id=377, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-25-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-25-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-25-1.pdf used on inpu
-t line 656.
-(pdftex.def)             Requested size: 236.01561pt x 236.01605pt.
+Package xcolor Warning: Incompatible color definition on input line 667.
 
 
-Package xcolor Warning: Incompatible color definition on input line 665.
+Package xcolor Warning: Incompatible color definition on input line 699.
 
-<figures/shinemas2R_unnamed-chunk-26-1.pdf, id=378, 505.89pt x 505.89pt>
+[12] <figures/shinemas2R_unnamed-chunk-26-1.pdf, id=442, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-26-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-26-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-26-1.pdf used on inpu
-t line 667.
+t line 706.
+(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 718.
+
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 725
+.
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+) [13 <./figures/shinemas2R_unnamed-chunk-26-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 743.
+
+<figures/shinemas2R_unnamed-chunk-28-1.pdf, id=460, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-28-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-28-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-28-1.pdf used on inpu
+t line 745.
 (pdftex.def)             Requested size: 236.01561pt x 236.01605pt.
 
-Overfull \hbox (43.9951pt too wide) in paragraph at lines 651--676
+
+Package xcolor Warning: Incompatible color definition on input line 754.
+
+<figures/shinemas2R_unnamed-chunk-29-1.pdf, id=461, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-29-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-29-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-29-1.pdf used on inpu
+t line 756.
+(pdftex.def)             Requested size: 236.01561pt x 236.01605pt.
+
+Overfull \hbox (43.9951pt too wide) in paragraph at lines 740--765
  [] 
  []
 
-[12 <./figures/shinemas2R_unnamed-chunk-23-1.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 702--707
+
+Underfull \hbox (badness 10000) in paragraph at lines 789--794
 \T1/cmtt/m/n/10 "person:germplasm"\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 "year:germpl
 asm"\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 "person:year"\T1/cmr/m/n/10 ,
  []
 
 
-Overfull \hbox (12.39699pt too wide) in paragraph at lines 687--715
+Overfull \hbox (12.39699pt too wide) in paragraph at lines 776--802
 [][]
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 724.
+Package xcolor Warning: Incompatible color definition on input line 811.
 
-[13pdfTeX warning (ext4): destination with the same identifier (name{table.1}) 
+[14pdfTeX warning (ext4): destination with the same identifier (name{table.1}) 
 has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.737 \end{kframe}
-                   <./figures/shinemas2R_unnamed-chunk-25-1.pdf> <./figures/shi
-nemas2R_unnamed-chunk-26-1.pdf>]
-<figures/shinemas2R_unnamed-chunk-27-1.pdf, id=422, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-27-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-27-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-27-1.pdf used on inpu
-t line 740.
-(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
-
-Overfull \hbox (12.39699pt too wide) in paragraph at lines 757--766
- [] 
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 782.
-
-[14 <./figures/shinemas2R_unnamed-chunk-27-1.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 817.
-
-<figures/shinemas2R_unnamed-chunk-29-1.pdf, id=438, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-29-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-29-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-29-1.pdf used on inpu
-t line 819.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 828.
-
-<figures/shinemas2R_unnamed-chunk-30-1.pdf, id=439, 505.89pt x 505.89pt>
+l.824 \end{kframe}
+                   <./figures/shinemas2R_unnamed-chunk-28-1.pdf> <./figures/shi
+nemas2R_unnamed-chunk-29-1.pdf>]
+<figures/shinemas2R_unnamed-chunk-30-1.pdf, id=490, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-30-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-30-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-30-1.pdf used on inpu
-t line 830.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+t line 827.
+(pdftex.def)             Requested size: 472.03123pt x 472.03983pt.
+
+Overfull \hbox (12.39699pt too wide) in paragraph at lines 844--853
+ [] 
+ []
+
+[15 <./figures/shinemas2R_unnamed-chunk-30-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 869.
 
 
-Package xcolor Warning: Incompatible color definition on input line 840.
+Package xcolor Warning: Incompatible color definition on input line 904.
 
-<figures/shinemas2R_unnamed-chunk-31-1.pdf, id=440, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-31-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-31-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-31-1.pdf used on inpu
-t line 842.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 851.
-
-<figures/shinemas2R_unnamed-chunk-32-1.pdf, id=441, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-32-1.pdf, id=505, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-32-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-32-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-32-1.pdf used on inpu
-t line 853.
+t line 906.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 863.
+Package xcolor Warning: Incompatible color definition on input line 915.
 
-<figures/shinemas2R_unnamed-chunk-33-1.pdf, id=442, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-33-1.pdf, id=506, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-33-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-33-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-33-1.pdf used on inpu
-t line 865.
+t line 917.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 874.
+Package xcolor Warning: Incompatible color definition on input line 927.
 
-<figures/shinemas2R_unnamed-chunk-34-1.pdf, id=443, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-34-1.pdf, id=507, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-34-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-34-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-34-1.pdf used on inpu
-t line 876.
+t line 929.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
- [15]
-Underfull \hbox (badness 8170) in paragraph at lines 898--899
-[]|\T1/cmr/m/n/10 factor dis-play on the x.axis of a plot:
+
+
+Package xcolor Warning: Incompatible color definition on input line 938.
+
+<figures/shinemas2R_unnamed-chunk-35-1.pdf, id=508, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-35-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-35-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-35-1.pdf used on inpu
+t line 940.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 950.
+
+<figures/shinemas2R_unnamed-chunk-36-1.pdf, id=509, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-36-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-36-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-36-1.pdf used on inpu
+t line 952.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 961.
+
+<figures/shinemas2R_unnamed-chunk-37-1.pdf, id=510, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-37-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-37-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-37-1.pdf used on inpu
+t line 963.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+ [16]
+Underfull \hbox (badness 4316) in paragraph at lines 985--986
+[]|\T1/cmr/m/n/10 factor dis-played on the x.axis of a plot:
  []
 
 
-Overfull \hbox (12.39699pt too wide) in paragraph at lines 893--911
+Overfull \hbox (12.39699pt too wide) in paragraph at lines 980--998
 [][]
  []
 
-[16 <./figures/shinemas2R_unnamed-chunk-29-1.pdf> <./figures/shinemas2R_unnamed
--chunk-30-1.pdf> <./figures/shinemas2R_unnamed-chunk-31-1.pdf> <./figures/shine
-mas2R_unnamed-chunk-32-1.pdf> <./figures/shinemas2R_unnamed-chunk-33-1.pdf> <./
-figures/shinemas2R_unnamed-chunk-34-1.pdf>]
+[17 <./figures/shinemas2R_unnamed-chunk-32-1.pdf> <./figures/shinemas2R_unnamed
+-chunk-33-1.pdf> <./figures/shinemas2R_unnamed-chunk-34-1.pdf> <./figures/shine
+mas2R_unnamed-chunk-35-1.pdf> <./figures/shinemas2R_unnamed-chunk-36-1.pdf> <./
+figures/shinemas2R_unnamed-chunk-37-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 920.
-
-
-Package xcolor Warning: Incompatible color definition on input line 935.
+Package xcolor Warning: Incompatible color definition on input line 1007.
 
 
-Overfull \hbox (30.60216pt too wide) in paragraph at lines 946--946
+Package xcolor Warning: Incompatible color definition on input line 1022.
+
+
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 1033--1033
 [][]\T1/cmtt/m/n/10 p11_slh[] []=[] []p1_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
 /m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
 []barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
@@ -1591,7 +1605,7 @@ TS1/cmtt/m/n/10 `[][]
  []
 
 
-Overfull \hbox (30.60216pt too wide) in paragraph at lines 947--947
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 1034--1034
 [][]\T1/cmtt/m/n/10 p12_slh[] []=[] []p1_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
 /m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
 []barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
@@ -1600,112 +1614,52 @@ TS1/cmtt/m/n/10 `[][]
  []
 
 
-Overfull \hbox (30.60216pt too wide) in paragraph at lines 948--948
-[][]\T1/cmtt/m/n/10 p13_slh[] []=[] []p1_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
-/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
-[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
- `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-3|in.col-1\
-TS1/cmtt/m/n/10 `[][] 
- []
+Package xcolor Warning: Incompatible color definition on input line 1042.
 
 
-Overfull \hbox (30.60216pt too wide) in paragraph at lines 949--949
-[][]\T1/cmtt/m/n/10 p14_slh[] []=[] []p1_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
-/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
-[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
- `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-4|in.col-1\
-TS1/cmtt/m/n/10 `[][] 
- []
+Package xcolor Warning: Incompatible color definition on input line 1054.
 
-
-Overfull \hbox (30.60216pt too wide) in paragraph at lines 950--950
-[][]\T1/cmtt/m/n/10 p15_slh[] []=[] []p1_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
-/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
-[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
- `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-5|in.col-1\
-TS1/cmtt/m/n/10 `[][] 
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 958.
-
-
-Package xcolor Warning: Incompatible color definition on input line 970.
-
-<figures/shinemas2R_unnamed-chunk-38-1.pdf, id=483, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-38-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-38-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-38-1.pdf used on inpu
-t line 972.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 981.
-
-<figures/shinemas2R_unnamed-chunk-39-1.pdf, id=484, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-39-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-39-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-39-1.pdf used on inpu
-t line 983.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 993.
-
-<figures/shinemas2R_unnamed-chunk-40-1.pdf, id=485, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-40-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-40-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-40-1.pdf used on inpu
-t line 995.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1004.
-
-<figures/shinemas2R_unnamed-chunk-41-1.pdf, id=486, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-41-1.pdf, id=550, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-41-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-41-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-41-1.pdf used on inpu
-t line 1006.
+t line 1056.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1016.
+Package xcolor Warning: Incompatible color definition on input line 1065.
 
-<figures/shinemas2R_unnamed-chunk-42-1.pdf, id=487, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-42-1.pdf, id=551, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-42-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-42-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-42-1.pdf used on inpu
-t line 1018.
+t line 1067.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1027.
+Package xcolor Warning: Incompatible color definition on input line 1077.
 
-<figures/shinemas2R_unnamed-chunk-43-1.pdf, id=488, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-43-1.pdf, id=552, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-43-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-43-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-43-1.pdf used on inpu
-t line 1029.
+t line 1079.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
- [17pdfTeX warning (ext4): destination with the same identifier (name{table.2})
+ [18pdfTeX warning (ext4): destination with the same identifier (name{table.2})
  has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.1038 \end{center}
+l.1089 \end{center}
                    ]
 
-Package xcolor Warning: Incompatible color definition on input line 1044.
+Package xcolor Warning: Incompatible color definition on input line 1095.
 
 
-Overfull \hbox (30.60216pt too wide) in paragraph at lines 1055--1055
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 1106--1106
 [][]\T1/cmtt/m/n/10 p21_slh[] []=[] []p2_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
 /m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
 []barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
@@ -1714,7 +1668,7 @@ TS1/cmtt/m/n/10 `[][]
  []
 
 
-Overfull \hbox (30.60216pt too wide) in paragraph at lines 1056--1056
+Overfull \hbox (30.60216pt too wide) in paragraph at lines 1107--1107
 [][]\T1/cmtt/m/n/10 p22_slh[] []=[] []p2_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
 /m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
 []barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
@@ -1723,285 +1677,251 @@ TS1/cmtt/m/n/10 `[][]
  []
 
 
-Overfull \hbox (30.60216pt too wide) in paragraph at lines 1057--1057
-[][]\T1/cmtt/m/n/10 p23_slh[] []=[] []p2_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt
-/m/n/10 network-reproduction-harvested\TS1/cmtt/m/n/10 `[][]\T1/cmtt/m/n/10 $[]
-[]barplot[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 person-year\TS1/cmtt/m/n/10
- `[][]\T1/cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-3\
-TS1/cmtt/m/n/10 `[][] 
- []
+Package xcolor Warning: Incompatible color definition on input line 1116.
 
-[18 <./figures/shinemas2R_unnamed-chunk-38-1.pdf> <./figures/shinemas2R_unnamed
--chunk-39-1.pdf> <./figures/shinemas2R_unnamed-chunk-40-1.pdf> <./figures/shine
-mas2R_unnamed-chunk-41-1.pdf> <./figures/shinemas2R_unnamed-chunk-42-1.pdf> <./
-figures/shinemas2R_unnamed-chunk-43-1.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 1066.
-
-<figures/shinemas2R_unnamed-chunk-45-1.pdf, id=529, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-45-1.pdf, id=558, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-45-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-45-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-45-1.pdf used on inpu
-t line 1068.
+t line 1118.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1077.
+Package xcolor Warning: Incompatible color definition on input line 1127.
 
-<figures/shinemas2R_unnamed-chunk-46-1.pdf, id=530, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-46-1.pdf, id=559, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-46-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-46-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-46-1.pdf used on inpu
-t line 1079.
+t line 1129.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+ [19 <./figures/shinemas2R_unnamed-chunk-41-1.pdf> <./figures/shinemas2R_unname
+d-chunk-42-1.pdf> <./figures/shinemas2R_unnamed-chunk-43-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1156.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1177.
+
+<figures/shinemas2R_unnamed-chunk-48-1.pdf, id=581, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-48-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-48-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-48-1.pdf used on inpu
+t line 1179.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1089.
+Package xcolor Warning: Incompatible color definition on input line 1188.
 
-<figures/shinemas2R_unnamed-chunk-47-1.pdf, id=531, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-47-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-47-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-47-1.pdf used on inpu
-t line 1091.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1119.
-
-
-Overfull \hbox (4.35857pt too wide) in paragraph at lines 1138--1138
-[]\T1/cmtt/m/n/10 ## [13] "map-[2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
- 2010, 2011, 2012, 2014]"[] 
- []
-
-
-Overfull \hbox (41.0996pt too wide) in paragraph at lines 1141--1141
-[][]\T1/cmtt/m/n/10 m9_slh[] []=[] []m_slh[][]$[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m
-/n/10 map-[2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 20
-14]\TS1/cmtt/m/n/10 `[][] 
- []
-
-[19 <./figures/shinemas2R_unnamed-chunk-45-1.pdf> <./figures/shinemas2R_unnamed
--chunk-46-1.pdf> <./figures/shinemas2R_unnamed-chunk-47-1.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 1150.
-
-<figures/shinemas2R_unnamed-chunk-49-1.pdf, id=553, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-49-1.pdf, id=582, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-49-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-49-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-49-1.pdf used on inpu
-t line 1152.
+t line 1190.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+ [20 <./figures/shinemas2R_unnamed-chunk-45-1.pdf> <./figures/shinemas2R_unname
+d-chunk-46-1.pdf> <./figures/shinemas2R_unnamed-chunk-48-1.pdf> <./figures/shin
+emas2R_unnamed-chunk-49-1.pdf>]
 
+Package xcolor Warning: Incompatible color definition on input line 1234.
 
-Package xcolor Warning: Incompatible color definition on input line 1161.
-
-<figures/shinemas2R_unnamed-chunk-50-1.pdf, id=554, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-50-1.pdf, id=615, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-50-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-50-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-50-1.pdf used on inpu
-t line 1163.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+t line 1247.
+(pdftex.def)             Requested size: 283.22162pt x 283.22699pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1207.
+Package xcolor Warning: Incompatible color definition on input line 1270.
 
-[20pdfTeX warning (ext4): destination with the same identifier (name{table.3}) 
+[21pdfTeX warning (ext4): destination with the same identifier (name{table.3}) 
 has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.1218 \end{kframe}
-                    <./figures/shinemas2R_unnamed-chunk-49-1.pdf> <./figures/sh
-inemas2R_unnamed-chunk-50-1.pdf>]
-<figures/shinemas2R_unnamed-chunk-51-1.pdf, id=575, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-51-1.pdf Graphic file (type pdf)
+l.1282 \end{kframe}
+                    <./figures/shinemas2R_unnamed-chunk-50-1.pdf>]
 
-<use figures/shinemas2R_unnamed-chunk-51-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-51-1.pdf used on inpu
-t line 1220.
-(pdftex.def)             Requested size: 283.22162pt x 283.22699pt.
+Package xcolor Warning: Incompatible color definition on input line 1289.
+
+<figures/shinemas2R_unnamed-chunk-52-1.pdf, id=627, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-52-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-52-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-52-1.pdf used on inpu
+t line 1291.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1243.
+Package xcolor Warning: Incompatible color definition on input line 1300.
 
-
-Package xcolor Warning: Incompatible color definition on input line 1268.
-
-<figures/shinemas2R_unnamed-chunk-53-1.pdf, id=576, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-53-1.pdf, id=628, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-53-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-53-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-53-1.pdf used on inpu
-t line 1270.
+t line 1302.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1279.
-
-<figures/shinemas2R_unnamed-chunk-54-1.pdf, id=577, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-54-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-54-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-54-1.pdf used on inpu
-t line 1281.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
- [21 <./figures/shinemas2R_unnamed-chunk-51-1.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 1314.
+Package xcolor Warning: Incompatible color definition on input line 1335.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1337.
+Package xcolor Warning: Incompatible color definition on input line 1358.
 
-<figures/shinemas2R_unnamed-chunk-56-1.pdf, id=590, 505.89pt x 505.89pt>
+[22 <./figures/shinemas2R_unnamed-chunk-52-1.pdf> <./figures/shinemas2R_unnamed
+-chunk-53-1.pdf>]
+<figures/shinemas2R_unnamed-chunk-55-1.pdf, id=646, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-55-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-55-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-55-1.pdf used on inpu
+t line 1364.
+(pdftex.def)             Requested size: 283.22162pt x 283.22699pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1373.
+
+<figures/shinemas2R_unnamed-chunk-56-1.pdf, id=647, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-56-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-56-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-56-1.pdf used on inpu
-t line 1343.
+t line 1379.
 (pdftex.def)             Requested size: 283.22162pt x 283.22699pt.
 
-
-Package xcolor Warning: Incompatible color definition on input line 1352.
-
-[22 <./figures/shinemas2R_unnamed-chunk-53-1.pdf> <./figures/shinemas2R_unnamed
--chunk-54-1.pdf>]
-<figures/shinemas2R_unnamed-chunk-57-1.pdf, id=608, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-57-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-57-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-57-1.pdf used on inpu
-t line 1358.
-(pdftex.def)             Requested size: 283.22162pt x 283.22699pt.
-
-Overfull \hbox (94.80257pt too wide) in paragraph at lines 1374--1376
-\T1/cmr/m/n/10 For the oth-ers \T1/cmtt/m/n/10 ggplot.type\T1/cmr/m/n/10 , as i
-t is ex-actly the same types of plots than for \T1/cmtt/m/n/10 ggplot.type = "n
-etwork-reproduction-harvested"\T1/cmr/m/n/10 ,
+Overfull \hbox (86.9156pt too wide) in paragraph at lines 1395--1397
+\T1/cmr/m/n/10 For the other \T1/cmtt/m/n/10 ggplot.type\T1/cmr/m/n/10 , as it 
+is ex-actly the same type of plots than for \T1/cmtt/m/n/10 ggplot.type = "netw
+ork-reproduction-harvested"\T1/cmr/m/n/10 ,
  []
 
-[23 <./figures/shinemas2R_unnamed-chunk-56-1.pdf> <./figures/shinemas2R_unnamed
--chunk-57-1.pdf>]
-Overfull \hbox (5.42543pt too wide) in paragraph at lines 1387--1387
+[23 <./figures/shinemas2R_unnamed-chunk-55-1.pdf> <./figures/shinemas2R_unnamed
+-chunk-56-1.pdf>]
+Overfull \hbox (5.42543pt too wide) in paragraph at lines 1408--1408
 []|\T1/cmtt/m/n/10 "network-reproduction-positive-inter-selected"| 
  []
 
 
-Overfull \hbox (5.42543pt too wide) in paragraph at lines 1390--1390
+Overfull \hbox (5.42543pt too wide) in paragraph at lines 1411--1411
 []|\T1/cmtt/m/n/10 "network-reproduction-negative-inter-selected"| 
  []
 
 
-Overfull \hbox (23.99998pt too wide) in paragraph at lines 1380--1404
+Underfull \hbox (badness 7397) in paragraph at lines 1422--1423
+[]|\T1/cmr/m/n/10 seed-lots that have been mixed into a mix-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1422--1423
+\T1/cmr/m/n/10 ture (i.e. \T1/cmtt/m/n/10 "network-mixture-real" \T1/cmr/m/n/10
+ +
+ []
+
+
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 1401--1429
  [] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1413.
+Package xcolor Warning: Incompatible color definition on input line 1438.
 
 [24]
 
-Package xcolor Warning: Incompatible color definition on input line 1495.
+Package xcolor Warning: Incompatible color definition on input line 1521.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1505.
+Package xcolor Warning: Incompatible color definition on input line 1531.
+
+[25] [26]
+
+Package xcolor Warning: Incompatible color definition on input line 1609.
 
 
-Overfull \hbox (86.06859pt too wide) in paragraph at lines 1524--1524
-[]        []\T1/cmtt/m/it/10 #The key has been written in /home/pierre/key_data
--classic-relation_Tue Nov 24 11:59:59 2015.RData[][] 
- []
-
-[25]
-
-Package xcolor Warning: Incompatible color definition on input line 1570.
+Package xcolor Warning: Incompatible color definition on input line 1622.
 
 
-Overfull \hbox (21.14972pt too wide) in paragraph at lines 1581--1581
+Overfull \hbox (21.14972pt too wide) in paragraph at lines 1641--1641
 []\T1/cmr/bx/n/10 Selection dif-fer-en-tial (\T1/cmtt/m/n/10 query.type = "data
 -S"\T1/cmr/bx/n/10 ), re-sponse to se-lec-tion (\T1/cmtt/m/n/10 query.type = "d
 ata-SR"\T1/cmr/bx/n/10 )
  []
 
-[26] <./figures/SandR_EN.pdf, id=646, page=8, 796.9775pt x 597.23125pt>
+<./figures/SandR_EN.pdf, id=684, page=8, 796.9775pt x 597.23125pt>
 File: ./figures/SandR_EN.pdf Graphic file (type pdf)
 
 <use ./figures/SandR_EN.pdf, page 8>
-Package pdftex.def Info: ./figures/SandR_EN.pdf, page8 used on input line 1597.
+Package pdftex.def Info: ./figures/SandR_EN.pdf, page8 used on input line 1657.
 
 (pdftex.def)             Requested size: 377.62642pt x 282.97697pt.
+ [27]
 
+Package xcolor Warning: Incompatible color definition on input line 1670.
 
-Package xcolor Warning: Incompatible color definition on input line 1610.
-
-
-Overfull \hbox (54.57628pt too wide) in paragraph at lines 1629--1629
-[]        []\T1/cmtt/m/it/10 #The key has been written in /home/pierre/key_data
--S-relation_Tue Nov 24 12:01:25 2015.RData[][] 
- []
-
-[27pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
+[28pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
  has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.1656 \end{kframe}
+l.1721 \end{kframe}
                     <./figures/SandR_EN.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 1668.
+Package xcolor Warning: Incompatible color definition on input line 1735.
 
-
-Overfull \hbox (59.825pt too wide) in paragraph at lines 1687--1687
-[]        []\T1/cmtt/m/it/10 #The key has been written in /home/pierre/key_data
--SR-relation_Tue Nov 24 12:02:25 2015.RData[][] 
+[29]
+Overfull \hbox (62.76634pt too wide) in paragraph at lines 1801--1802
+[]\T1/cmr/m/n/10 the name of a given \T1/cmtt/m/n/10 correlation_group \T1/cmr/
+m/n/10 (\T1/cmtt/m/n/10 shinemas2R::get.data()$data$data.with.correlated.variab
+les\T1/cmr/m/n/10 ) 
  []
 
-[28]
 
-Package xcolor Warning: Incompatible color definition on input line 1724.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1745.
+Package xcolor Warning: Incompatible color definition on input line 1810.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1754.
+Package xcolor Warning: Incompatible color definition on input line 1831.
 
 
-Overfull \hbox (68.34831pt too wide) in paragraph at lines 1754--1754
+Package xcolor Warning: Incompatible color definition on input line 1840.
+
+
+Overfull \hbox (68.34831pt too wide) in paragraph at lines 1840--1840
 []\T1/cmtt/m/it/10 ## As ggplot.type is NULL, ggplot.Type is set to data-barplo
 t, data-boxplot, data-interaction,
  []
 
 
-Overfull \hbox (15.86113pt too wide) in paragraph at lines 1754--1754
+Overfull \hbox (15.86113pt too wide) in paragraph at lines 1840--1840
 \T1/cmtt/m/it/10 ## As x.axis and in.col are NULL, all the combinaisons of x.ax
 is and in.col are done
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1761.
+Package xcolor Warning: Incompatible color definition on input line 1847.
+
+[30]
+
+Package xcolor Warning: Incompatible color definition on input line 1852.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1766.
-
-[29]
-Overfull \hbox (23.80122pt too wide) in paragraph at lines 1780--1797
+Overfull \hbox (23.80122pt too wide) in paragraph at lines 1866--1884
  [] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1805.
+Package xcolor Warning: Incompatible color definition on input line 1892.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1822.
+Package xcolor Warning: Incompatible color definition on input line 1909.
 
 
-Overfull \hbox (3.06879pt too wide) in paragraph at lines 1824--1824
+Overfull \hbox (3.06879pt too wide) in paragraph at lines 1911--1911
 [][]\T1/cmtt/m/n/10 p_cal_ph_bar_all[] []=[] []default_data_classic_ggplot[][]$
 [][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 data-barplot\TS1/cmtt/m/n/10 `[][]\T1/cmt
 t/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 germplasm-year\TS1/cmtt/m/n/10 
@@ -2009,18 +1929,10 @@ t/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 germplasm-year\TS1/cmtt/m/n/10
  []
 
 
-Overfull \hbox (18.81494pt too wide) in paragraph at lines 1825--1825
-[][]\T1/cmtt/m/n/10 p_cal_ph_bar[] []=[] []p_cal_ph_bar_all[][]$[][]\TS1/cmtt/m
-/n/10 `\T1/cmtt/m/n/10 plant_height---plant_height\TS1/cmtt/m/n/10 `[][]\T1/cmt
-t/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-1\TS1/cmtt/m/n/
-10 `[][] 
- []
+Package xcolor Warning: Incompatible color definition on input line 1919.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1832.
-
-
-Overfull \hbox (3.06879pt too wide) in paragraph at lines 1834--1834
+Overfull \hbox (3.06879pt too wide) in paragraph at lines 1921--1921
 [][]\T1/cmtt/m/n/10 p_cal_ph_box_all[] []=[] []default_data_classic_ggplot[][]$
 [][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 data-boxplot\TS1/cmtt/m/n/10 `[][]\T1/cmt
 t/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 germplasm-year\TS1/cmtt/m/n/10 
@@ -2028,18 +1940,10 @@ t/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 germplasm-year\TS1/cmtt/m/n/10
  []
 
 
-Overfull \hbox (18.81494pt too wide) in paragraph at lines 1835--1835
-[][]\T1/cmtt/m/n/10 p_cal_ph_box[] []=[] []p_cal_ph_box_all[][]$[][]\TS1/cmtt/m
-/n/10 `\T1/cmtt/m/n/10 plant_height---plant_height\TS1/cmtt/m/n/10 `[][]\T1/cmt
-t/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-1\TS1/cmtt/m/n/
-10 `[][] 
- []
+Package xcolor Warning: Incompatible color definition on input line 1929.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1842.
-
-
-Overfull \hbox (24.06366pt too wide) in paragraph at lines 1844--1844
+Overfull \hbox (24.06366pt too wide) in paragraph at lines 1931--1931
 [][]\T1/cmtt/m/n/10 p_cal_ph_int_all[] []=[] []default_data_classic_ggplot[][]$
 [][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 data-interaction\TS1/cmtt/m/n/10 `[][]\T1
 /cmtt/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 year-germplasm\TS1/cmtt/m/n
@@ -2047,619 +1951,692 @@ Overfull \hbox (24.06366pt too wide) in paragraph at lines 1844--1844
  []
 
 
-Overfull \hbox (18.81494pt too wide) in paragraph at lines 1845--1845
-[][]\T1/cmtt/m/n/10 p_cal_ph_int[] []=[] []p_cal_ph_int_all[][]$[][]\TS1/cmtt/m
-/n/10 `\T1/cmtt/m/n/10 plant_height---plant_height\TS1/cmtt/m/n/10 `[][]\T1/cmt
-t/m/n/10 $[][]\TS1/cmtt/m/n/10 `\T1/cmtt/m/n/10 x.axis-1|in.col-1\TS1/cmtt/m/n/
-10 `[][] 
- []
+Package xcolor Warning: Incompatible color definition on input line 1943.
 
-
-Package xcolor Warning: Incompatible color definition on input line 1856.
-
-<figures/shinemas2R_unnamed-chunk-71-1.pdf, id=676, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-71-1.pdf, id=719, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-71-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-71-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-71-1.pdf used on inpu
-t line 1858.
+t line 1945.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1867.
+Package xcolor Warning: Incompatible color definition on input line 1954.
 
-<figures/shinemas2R_unnamed-chunk-72-1.pdf, id=677, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-72-1.pdf, id=720, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-72-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-72-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-72-1.pdf used on inpu
-t line 1869.
+t line 1956.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1879.
+Package xcolor Warning: Incompatible color definition on input line 1966.
 
-<figures/shinemas2R_unnamed-chunk-73-1.pdf, id=678, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-73-1.pdf, id=721, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-73-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-73-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-73-1.pdf used on inpu
-t line 1881.
+t line 1968.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
- [30]
+ [31]
 
-Package xcolor Warning: Incompatible color definition on input line 1899.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1911.
+Package xcolor Warning: Incompatible color definition on input line 1986.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1921.
+Package xcolor Warning: Incompatible color definition on input line 1998.
 
 
-Overfull \hbox (73.59703pt too wide) in paragraph at lines 1925--1925
+Package xcolor Warning: Incompatible color definition on input line 2008.
+
+
+Overfull \hbox (15.86113pt too wide) in paragraph at lines 2012--2012
 [][]\T1/cmtt/m/n/10 p_cal_ph_sl_bip[] []=[] []p_cal_ph_sl_bip[][]$[][]\TS1/cmtt
-/m/n/10 `\T1/cmtt/m/n/10 plant_height---plant_height - spike_lenght---spike_len
-gth_F\TS1/cmtt/m/n/10 `[][] 
+/m/n/10 `\T1/cmtt/m/n/10 hauteur---hauteur_tige - poids_epis---poids_epis\TS1/c
+mtt/m/n/10 `[][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1935.
+Package xcolor Warning: Incompatible color definition on input line 2022.
 
-<figures/shinemas2R_unnamed-chunk-77-1.pdf, id=683, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-77-1.pdf, id=727, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-77-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-77-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-77-1.pdf used on inpu
-t line 1937.
+t line 2024.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1946.
+Package xcolor Warning: Incompatible color definition on input line 2033.
 
-<figures/shinemas2R_unnamed-chunk-78-1.pdf, id=684, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-78-1.pdf, id=728, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-78-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-78-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-78-1.pdf used on inpu
-t line 1948.
+t line 2035.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
- [31 <./figures/shinemas2R_unnamed-chunk-71-1.pdf> <./figures/shinemas2R_unname
+ [32 <./figures/shinemas2R_unnamed-chunk-71-1.pdf> <./figures/shinemas2R_unname
 d-chunk-72-1.pdf> <./figures/shinemas2R_unnamed-chunk-73-1.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 1975--1975
+Underfull \hbox (badness 10000) in paragraph at lines 2062--2062
 []|\T1/cmr/m/n/10 default
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2014--2014
+Underfull \hbox (badness 10000) in paragraph at lines 2101--2101
 []|\T1/cmtt/m/n/10 nb_parameters_per
  []
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 2016--2016
+Underfull \hbox (badness 1281) in paragraph at lines 2103--2103
 []|\T1/cmr/m/n/10 the num-ber of pa-ram-e-ters per plot on
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2024--2024
+Underfull \hbox (badness 10000) in paragraph at lines 2111--2111
 []|\T1/cmtt/m/n/10 nb_parameters_per
  []
 
 
-Underfull \hbox (badness 1062) in paragraph at lines 2026--2026
+Underfull \hbox (badness 1062) in paragraph at lines 2113--2113
 []|\T1/cmr/m/n/10 the num-ber of pa-ram-e-ters per plot for
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2036--2040
+Underfull \hbox (badness 10000) in paragraph at lines 2123--2127
 \T1/cmtt/m/n/10 "year:germplasm"\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 "person:year"\
 T1/cmr/m/n/10 ,
  []
 
-[32 <./figures/shinemas2R_unnamed-chunk-77-1.pdf> <./figures/shinemas2R_unnamed
+[33 <./figures/shinemas2R_unnamed-chunk-77-1.pdf> <./figures/shinemas2R_unnamed
 -chunk-78-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2073.
+Package xcolor Warning: Incompatible color definition on input line 2159.
 
 
-Overfull \hbox (38.59169pt too wide) in paragraph at lines 2078--2078
+Overfull \hbox (38.59169pt too wide) in paragraph at lines 2164--2164
 []                []\T1/cmtt/m/n/10 db_name[] []= info_db[][]$[][]db_name,[] []
 db_password[] []= info_db[][]$[][]db_password,[] []\T1/cmtt/m/it/10 # db infos[
 ][] 
  []
 
 
-Overfull \hbox (12.3481pt too wide) in paragraph at lines 2083--2083
+Overfull \hbox (12.3481pt too wide) in paragraph at lines 2168--2168
 []                []\T1/cmtt/m/n/10 data.type[] []=[] []"relation"[][],[] []\T1
 /cmtt/m/it/10 # data linked to relation between seed-lots[][] 
  []
 
-
-Overfull \hbox (133.06862pt too wide) in paragraph at lines 2102--2102
-[]        []\T1/cmtt/m/it/10 #The key has been written in /home/pierre/key_data
--classic-relation_Tue Nov 25 22:29:59 2015.RData[][] 
- []
-
-
-Overfull \hbox (64.83528pt too wide) in paragraph at lines 2108--2108
-[]        []\T1/cmtt/m/it/10 # The key has been written in /home/pierre/key_net
-work_Wed Nov 25 22:30:16 2015.RData[][] 
- []
-
-[33pdfTeX warning (ext4): destination with the same identifier (name{table.4}) 
+[34pdfTeX warning (ext4): destination with the same identifier (name{table.4}) 
 has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.2113 \end{kframe}
+l.2193 \end{kframe}
                    ]
 
-Package xcolor Warning: Incompatible color definition on input line 2121.
+Package xcolor Warning: Incompatible color definition on input line 2201.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2139.
+Package xcolor Warning: Incompatible color definition on input line 2219.
 
-<figures/shinemas2R_unnamed-chunk-81-1.pdf, id=726, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-81-1.pdf, id=770, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-81-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-81-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-81-1.pdf used on inpu
-t line 2141.
+t line 2221.
 (pdftex.def)             Requested size: 283.22162pt x 283.22699pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2151.
+Package xcolor Warning: Incompatible color definition on input line 2231.
 
-<figures/shinemas2R_unnamed-chunk-82-1.pdf, id=727, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-82-1.pdf, id=771, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-82-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-82-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-82-1.pdf used on inpu
-t line 2153.
+t line 2233.
 (pdftex.def)             Requested size: 377.62642pt x 377.6334pt.
- [34]
+ [35]
 Overfull \vbox (5.90149pt too high) has occurred while \output is active []
 
 
-[35 <./figures/shinemas2R_unnamed-chunk-81-1.pdf> <./figures/shinemas2R_unnamed
+[36 <./figures/shinemas2R_unnamed-chunk-81-1.pdf> <./figures/shinemas2R_unnamed
 -chunk-82-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2180.
+Package xcolor Warning: Incompatible color definition on input line 2260.
 
 
-Overfull \hbox (38.59169pt too wide) in paragraph at lines 2185--2185
+Overfull \hbox (38.59169pt too wide) in paragraph at lines 2265--2265
 []                []\T1/cmtt/m/n/10 db_name[] []= info_db[][]$[][]db_name,[] []
 db_password[] []= info_db[][]$[][]db_password,[] []\T1/cmtt/m/it/10 # db infos[
 ][] 
  []
 
 
-Overfull \hbox (12.3481pt too wide) in paragraph at lines 2190--2190
+Overfull \hbox (12.3481pt too wide) in paragraph at lines 2270--2270
 []                []\T1/cmtt/m/n/10 data.type[] []=[] []"relation"[][],[] []\T1
 /cmtt/m/it/10 # data linked to relation between seed-lots[][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 2218.
+Package xcolor Warning: Incompatible color definition on input line 2296.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2233.
+Package xcolor Warning: Incompatible color definition on input line 2311.
 
-<figures/shinemas2R_unnamed-chunk-85-1.pdf, id=759, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-85-1.pdf, id=802, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-85-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-85-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-85-1.pdf used on inpu
-t line 2235.
+t line 2313.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2244.
+Package xcolor Warning: Incompatible color definition on input line 2322.
 
-<figures/shinemas2R_unnamed-chunk-86-1.pdf, id=760, 505.89pt x 505.89pt>
+<figures/shinemas2R_unnamed-chunk-86-1.pdf, id=803, 505.89pt x 505.89pt>
 File: figures/shinemas2R_unnamed-chunk-86-1.pdf Graphic file (type pdf)
 
 <use figures/shinemas2R_unnamed-chunk-86-1.pdf>
 Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-86-1.pdf used on inpu
-t line 2246.
+t line 2324.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
- [36]
+ [37]
 
-Package xcolor Warning: Incompatible color definition on input line 2273.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2283.
+Package xcolor Warning: Incompatible color definition on input line 2351.
 
 
-Overfull \hbox (21.34828pt too wide) in paragraph at lines 2283--2283
+Package xcolor Warning: Incompatible color definition on input line 2361.
+
+
+Overfull \hbox (21.34828pt too wide) in paragraph at lines 2361--2361
 []\T1/cmtt/m/it/10 ## As ggplot.type is NULL, ggplot.Type is set to data-barplo
 t, data-boxplot, data-interaction,
  []
 
 
-Overfull \hbox (79.08418pt too wide) in paragraph at lines 2283--2283
+Overfull \hbox (79.08418pt too wide) in paragraph at lines 2361--2361
 \T1/cmtt/m/it/10 ## As ggplot.type is NULL and data come from "data-S" or "data
 -SR", ggplot.type is set to "data-barplot",
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 2294.
+Package xcolor Warning: Incompatible color definition on input line 2373.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2310.
+Package xcolor Warning: Incompatible color definition on input line 2389.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2320.
+Package xcolor Warning: Incompatible color definition on input line 2399.
 
-[37 <./figures/shinemas2R_unnamed-chunk-85-1.pdf> <./figures/shinemas2R_unnamed
+[38 <./figures/shinemas2R_unnamed-chunk-85-1.pdf> <./figures/shinemas2R_unnamed
 -chunk-86-1.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 2330.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2346.
-
-<figures/shinemas2R_unnamed-chunk-92-1.pdf, id=784, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-92-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-92-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-92-1.pdf used on inpu
-t line 2348.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2357.
-
-<figures/shinemas2R_unnamed-chunk-93-1.pdf, id=785, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-93-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-93-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-93-1.pdf used on inpu
-t line 2359.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2369.
-
-<figures/shinemas2R_unnamed-chunk-94-1.pdf, id=786, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-94-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-94-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-94-1.pdf used on inpu
-t line 2371.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2388.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2398.
-
-
-Overfull \hbox (21.34828pt too wide) in paragraph at lines 2398--2398
-[]\T1/cmtt/m/it/10 ## As ggplot.type is NULL, ggplot.Type is set to data-barplo
-t, data-boxplot, data-interaction,
- []
-
-
-Overfull \hbox (79.08418pt too wide) in paragraph at lines 2398--2398
-\T1/cmtt/m/it/10 ## As ggplot.type is NULL and data come from "data-S" or "data
--SR", ggplot.type is set to "data-barplot",
- []
-
-[38 <./figures/shinemas2R_unnamed-chunk-92-1.pdf> <./figures/shinemas2R_unnamed
--chunk-93-1.pdf> <./figures/shinemas2R_unnamed-chunk-94-1.pdf>]
 
 Package xcolor Warning: Incompatible color definition on input line 2409.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2424.
+Package xcolor Warning: Incompatible color definition on input line 2425.
+
+<figures/shinemas2R_unnamed-chunk-92-1.pdf, id=827, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-92-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-92-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-92-1.pdf used on inpu
+t line 2427.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2434.
+Package xcolor Warning: Incompatible color definition on input line 2436.
+
+<figures/shinemas2R_unnamed-chunk-93-1.pdf, id=828, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-93-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-93-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-93-1.pdf used on inpu
+t line 2438.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2444.
+Package xcolor Warning: Incompatible color definition on input line 2448.
 
+<figures/shinemas2R_unnamed-chunk-94-1.pdf, id=829, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-94-1.pdf Graphic file (type pdf)
 
-Package xcolor Warning: Incompatible color definition on input line 2456.
-
-<figures/shinemas2R_unnamed-chunk-100-1.pdf, id=809, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-100-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-100-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-100-1.pdf used on inp
-ut line 2458.
+<use figures/shinemas2R_unnamed-chunk-94-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-94-1.pdf used on inpu
+t line 2450.
 (pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
 Package xcolor Warning: Incompatible color definition on input line 2467.
 
-<figures/shinemas2R_unnamed-chunk-101-1.pdf, id=810, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-101-1.pdf Graphic file (type pdf)
 
-<use figures/shinemas2R_unnamed-chunk-101-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-101-1.pdf used on inp
-ut line 2469.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+Package xcolor Warning: Incompatible color definition on input line 2477.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2479.
-
-<figures/shinemas2R_unnamed-chunk-102-1.pdf, id=811, 505.89pt x 505.89pt>
-File: figures/shinemas2R_unnamed-chunk-102-1.pdf Graphic file (type pdf)
-
-<use figures/shinemas2R_unnamed-chunk-102-1.pdf>
-Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-102-1.pdf used on inp
-ut line 2481.
-(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
- [39]
-Overfull \hbox (41.79973pt too wide) in paragraph at lines 2503--2523
- [] 
+Overfull \hbox (21.34828pt too wide) in paragraph at lines 2477--2477
+[]\T1/cmtt/m/it/10 ## As ggplot.type is NULL, ggplot.Type is set to data-barplo
+t, data-boxplot, data-interaction,
  []
+
+
+Overfull \hbox (79.08418pt too wide) in paragraph at lines 2477--2477
+\T1/cmtt/m/it/10 ## As ggplot.type is NULL and data come from "data-S" or "data
+-SR", ggplot.type is set to "data-barplot",
+ []
+
+[39 <./figures/shinemas2R_unnamed-chunk-92-1.pdf> <./figures/shinemas2R_unnamed
+-chunk-93-1.pdf> <./figures/shinemas2R_unnamed-chunk-94-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 2489.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2504.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2514.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2524.
 
 
 Package xcolor Warning: Incompatible color definition on input line 2538.
 
-[40 <./figures/shinemas2R_unnamed-chunk-100-1.pdf> <./figures/shinemas2R_unname
-d-chunk-101-1.pdf> <./figures/shinemas2R_unnamed-chunk-102-1.pdf>]
+<figures/shinemas2R_unnamed-chunk-100-1.pdf, id=851, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-100-1.pdf Graphic file (type pdf)
 
-Package xcolor Warning: Incompatible color definition on input line 2552.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2565.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2580.
+<use figures/shinemas2R_unnamed-chunk-100-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-100-1.pdf used on inp
+ut line 2540.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
 
 
-Overfull \hbox (15.30191pt too wide) in paragraph at lines 2584--2584
-[]                []\T1/cmtt/m/n/10 db_user[] []= info_db[][]$[][]db_user,[] []
-db_host[] []= info_db[][]$[][]db_host,[] []\T1/cmtt/m/it/10 # db infos[][] 
+Package xcolor Warning: Incompatible color definition on input line 2549.
+
+<figures/shinemas2R_unnamed-chunk-101-1.pdf, id=852, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-101-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-101-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-101-1.pdf used on inp
+ut line 2551.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2561.
+
+<figures/shinemas2R_unnamed-chunk-102-1.pdf, id=853, 505.89pt x 505.89pt>
+File: figures/shinemas2R_unnamed-chunk-102-1.pdf Graphic file (type pdf)
+
+<use figures/shinemas2R_unnamed-chunk-102-1.pdf>
+Package pdftex.def Info: figures/shinemas2R_unnamed-chunk-102-1.pdf used on inp
+ut line 2563.
+(pdftex.def)             Requested size: 188.8096pt x 188.81284pt.
+ [40]
+Overfull \hbox (62.76634pt too wide) in paragraph at lines 2590--2591
+[]\T1/cmr/m/n/10 the name of a given \T1/cmtt/m/n/10 correlation_group \T1/cmr/
+m/n/10 (\T1/cmtt/m/n/10 shinemas2R::get.data()$data$data.with.correlated.variab
+les\T1/cmr/m/n/10 ) 
  []
 
 
-Overfull \hbox (57.29166pt too wide) in paragraph at lines 2585--2585
+Overfull \hbox (26.51955pt too wide) in paragraph at lines 2600--2620
+ [] 
+ []
+
+[41 <./figures/shinemas2R_unnamed-chunk-100-1.pdf> <./figures/shinemas2R_unname
+d-chunk-101-1.pdf> <./figures/shinemas2R_unnamed-chunk-102-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 2635.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2649.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2662.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2677.
+
+
+Overfull \hbox (38.59169pt too wide) in paragraph at lines 2682--2682
 []                []\T1/cmtt/m/n/10 db_name[] []= info_db[][]$[][]db_name,[] []
 db_password[] []= info_db[][]$[][]db_password,[] []\T1/cmtt/m/it/10 # db infos[
 ][] 
  []
 
 
-Overfull \hbox (31.04807pt too wide) in paragraph at lines 2589--2589
+Overfull \hbox (12.3481pt too wide) in paragraph at lines 2686--2686
 []                []\T1/cmtt/m/n/10 data.type[] []=[] []"relation"[][],[] []\T1
 /cmtt/m/it/10 # data linked to relation between seed-lots[][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 2610.
+Package xcolor Warning: Incompatible color definition on input line 2706.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2624.
+Package xcolor Warning: Incompatible color definition on input line 2720.
 
 
-Overfull \hbox (1.25443pt too wide) in paragraph at lines 2620--2624
-[]\T1/cmr/m/n/10 The seed-lots that are con-cerned. By de-fault \T1/cmtt/m/n/10
- col_to_display = c("person", "germplasm",
- []
-
-
-Overfull \hbox (95.37958pt too wide) in paragraph at lines 2620--2624
+Overfull \hbox (76.67961pt too wide) in paragraph at lines 2716--2720
 \T1/cmtt/m/n/10 "year", "block", "X", "Y")\T1/cmr/m/n/10 , there-fore, the in-f
 or-ma-tion is un-der the form : \T1/cmtt/m/n/10 person-germplasm-year-block-X-Y
 \T1/cmr/m/n/10 .
  []
 
-
-Package xcolor Warning: Incompatible color definition on input line 2636.
-
-[41]
-
-Package xcolor Warning: Incompatible color definition on input line 2649.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2665.
+[42]
+Overfull \hbox (787.42271pt too wide) in paragraph at lines 2727--2727
+[]\T1/cmtt/m/n/10 ##                                                           
+                                                                               
+                                                                               
+   seed-lots[] 
+ []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2735--2735
+Overfull \hbox (787.42271pt too wide) in paragraph at lines 2727--2727
+[]\T1/cmtt/m/n/10 ## 1 JFB-C1-2014-1-A-2, JFB-C1-2014-1-A-1, JFB-C1-2014-2-C-1,
+ JFB-C2-2014-1-A-3, JFB-C2-2014-2-D-1, JFB-C3-2014-1-B-1, JFB-C3-2014-1-B-2, JF
+B-C4-2014-2-C-3, JFB-C4-2014-2-C-2, JFB-C5-2014-1-B-3, JFB-C6-2014-2-D-2, JFB-C
+6-2014-2-D-3[] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 2733.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2747.
+
+
+Package xcolor Warning: Incompatible color definition on input line 2763.
+
+[43]
+Underfull \hbox (badness 10000) in paragraph at lines 2841--2841
 []|\T1/cmtt/m/n/10 c("person",
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2735--2735
+Underfull \hbox (badness 10000) in paragraph at lines 2841--2841
 \T1/cmtt/m/n/10 "germplasm",
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2735--2735
+Underfull \hbox (badness 10000) in paragraph at lines 2841--2841
 \T1/cmtt/m/n/10 "year", "block",
  []
 
-[42]
 
-Package xcolor Warning: Incompatible color definition on input line 2753.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2772.
+Package xcolor Warning: Incompatible color definition on input line 2860.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2788.
+Package xcolor Warning: Incompatible color definition on input line 2879.
 
-[43pdfTeX warning (ext4): destination with the same identifier (name{table.5}) 
+[44pdfTeX warning (ext4): destination with the same identifier (name{table.5}) 
 has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.2812 \end{kframe}
-                   ]
+l.2893 F
+        or example,]
 
-Package xcolor Warning: Incompatible color definition on input line 2829.
+Package xcolor Warning: Incompatible color definition on input line 2895.
 
 
-Overfull \hbox (177.56627pt too wide) in paragraph at lines 2838--2838
-[]\T1/cmtt/m/n/10 ## [1] "Importance d\TS1/cmtt/m/n/10 '\T1/cmtt/m/n/10 avoir l
-e meme nombre de colonnes dans toutes les sorties de data ou alors avec un attr
-ibutes ?!!!"[] 
+Package xcolor Warning: Incompatible color definition on input line 2931.
+
+[45] [46]
+Overfull \hbox (12.01723pt too wide) in paragraph at lines 3002--3003
+\T1/cmr/m/n/10 values of fil-ters can be \T1/cmtt/m/n/10 germplasm\T1/cmr/m/n/1
+0 , \T1/cmtt/m/n/10 germplasm.type\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 year\T1/cmr/
+m/n/10 , \T1/cmtt/m/n/10 person\T1/cmr/m/n/10 , \T1/cmtt/m/n/10 project\T1/cmr/
+m/n/10 , \T1/cmtt/m/n/10 seed-lots \T1/cmr/m/n/10 or \T1/cmtt/m/n/10 reproducti
+on.type\T1/cmr/m/n/10 . 
  []
 
-[44] [45] [46pdfTeX warning (ext4): destination with the same identifier (name{
-table.6}) has been already used, duplicate ignored
+[47] [48]
 
-\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
-                                                  
-l.2977 S
-        ee appendix \ref{getpdf_examples} for some examples.]
-
-Package xcolor Warning: Incompatible color definition on input line 2984.
+Package xcolor Warning: Incompatible color definition on input line 3107.
 
 
-Package xcolor Warning: Incompatible color definition on input line 2993.
+Package xcolor Warning: Incompatible color definition on input line 3116.
 
 
-Package xcolor Warning: Incompatible color definition on input line 3007.
+Package xcolor Warning: Incompatible color definition on input line 3130.
 
 
-Overfull \hbox (30.60216pt too wide) in paragraph at lines 3057--3057
+Overfull \hbox (5.60213pt too wide) in paragraph at lines 3180--3180
 []                []\T1/cmtt/m/n/10 "caption"[] []=[] []"Seed-lots harvested fo
 r each person by year for Rouge du Roc"[][],[][] 
  []
 
+[49pdfTeX warning (ext4): destination with the same identifier (name{table.6}) 
+has been already used, duplicate ignored
 
-Overfull \hbox (20.10472pt too wide) in paragraph at lines 3098--3098
-[]                []\T1/cmtt/m/n/10 "caption"[] []=[] []paste[][]([][]"Selectio
-n differentia for spike weight on RAB farm."[][]),[][] 
+\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
+                                                  
+l.3257 \end{kframe}
+                   ]
+Underfull \vbox (badness 10000) detected at line 3257
  []
 
 
-Overfull \hbox (20.10472pt too wide) in paragraph at lines 3107--3107
-[]                []\T1/cmtt/m/n/10 "caption"[] []=[] []paste[][]([][]"Selectio
-n differentia for spike weight on RAB farm."[][]),[][] 
+Underfull \vbox (badness 10000) detected at line 3257
  []
 
+[50]
 
-Overfull \hbox (20.10472pt too wide) in paragraph at lines 3129--3129
-[]                []\T1/cmtt/m/n/10 "caption"[] []=[] []paste[][]([][]"Selectio
-n differentia for spike weight on RAB farm."[][]),[][] 
- []
-
-[47]
-Underfull \vbox (badness 10000) detected at line 3134
- []
+Package xcolor Warning: Incompatible color definition on input line 3267.
 
 
-Underfull \vbox (badness 10000) detected at line 3134
- []
+Package xcolor Warning: Incompatible color definition on input line 3279.
 
-[48]
+[51] [52] (./sections/8.use_rights.tex) [53]
 
-Package xcolor Warning: Incompatible color definition on input line 3144.
-
-
-Package xcolor Warning: Incompatible color definition on input line 3156.
-
-[49] (./sections/7.use_rights.tex) [50]
-
-Package xcolor Warning: Incompatible color definition on input line 3172.
+Package xcolor Warning: Incompatible color definition on input line 3295.
 
 
-Overfull \hbox (266.79448pt too wide) in paragraph at lines 3194--3194
+Overfull \hbox (241.79445pt too wide) in paragraph at lines 3317--3317
 []\T1/cmtt/m/n/10 ##     title = {shinemas2R: An R package to visualize outputs
  from the data base Seed History and Network Management System (SHiNeMaS)},[] 
  []
 
-[51] (./sections/8.tail.tex
-<./figures/Logo-Diversifood.jpg, id=903, 664.4022pt x 285.9483pt>
+[54] (./sections/9.tail.tex
+<./figures/Logo-Diversifood.jpg, id=953, 664.4022pt x 285.9483pt>
 File: ./figures/Logo-Diversifood.jpg Graphic file (type jpg)
 
 <use ./figures/Logo-Diversifood.jpg>
 Package pdftex.def Info: ./figures/Logo-Diversifood.jpg used on input line 8.
 (pdftex.def)             Requested size: 132.16817pt x 56.88321pt.
 
-<./figures/Logo-SOLIBAM.jpg, id=904, 301.125pt x 253.94875pt>
+<./figures/Logo-SOLIBAM.jpg, id=954, 301.125pt x 253.94875pt>
 File: ./figures/Logo-SOLIBAM.jpg Graphic file (type jpg)
 
 <use ./figures/Logo-SOLIBAM.jpg>
 Package pdftex.def Info: ./figures/Logo-SOLIBAM.jpg used on input line 9.
 (pdftex.def)             Requested size: 84.96216pt x 71.65152pt.
 
-<./figures/Logo-EU.jpg, id=905, 5722.37875pt x 3788.1525pt>
+<./figures/Logo-EU.jpg, id=955, 5722.37875pt x 3788.1525pt>
 File: ./figures/Logo-EU.jpg Graphic file (type jpg)
 
 <use ./figures/Logo-EU.jpg>
 Package pdftex.def Info: ./figures/Logo-EU.jpg used on input line 10.
 (pdftex.def)             Requested size: 94.4048pt x 62.48447pt.
 
-<./figures/Logo-FdF.jpg, id=906, 595.22375pt x 621.32124pt>
+<./figures/Logo-FdF.jpg, id=956, 595.22375pt x 621.32124pt>
 File: ./figures/Logo-FdF.jpg Graphic file (type jpg)
 
 <use ./figures/Logo-FdF.jpg>
 Package pdftex.def Info: ./figures/Logo-FdF.jpg used on input line 11.
 (pdftex.def)             Requested size: 84.96216pt x 88.6814pt.
- (./shinemas2R.bbl)) [52 <./figures/Logo-Diversifood.jpg> <./figures/Logo-SOLIB
+ (./shinemas2R.bbl)) [55 <./figures/Logo-Diversifood.jpg> <./figures/Logo-SOLIB
 AM.jpg> <./figures/Logo-EU.jpg> <./figures/Logo-FdF.jpg>]
 
-Package xcolor Warning: Incompatible color definition on input line 3248.
+Package xcolor Warning: Incompatible color definition on input line 3362.
 
-[53] (./sections/a2.text_SandR.tex) [54] (./sections/a3.getpdf_examples.tex)
-[55]
 
-! LaTeX Error: \begin{itemize} on input line 2421 ended by \end{document}.
+Overfull \hbox (115.82521pt too wide) in paragraph at lines 3368--3368
+[]\T1/cmtt/m/n/10 ## [1] "/home/pierre/Documents/geek/R-stats/Rdev/R_package_sh
+inemas2R/shinemas2R/inst/extdata/shinemas_tuto.sql"[] 
+ []
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.3280 \end{document}
-                     
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3280.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3280.
-(./shinemas2R.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3280.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3280.
+Overfull \hbox (10.85085pt too wide) in paragraph at lines 3378--3378
+[]\T1/cmtt/m/n/10 pierre@RSP:~$ psql -h localhost -d shinemas_tuto -U pierre -f
+ /home/pierre/shinemas_tuto.sql[] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 3397.
+
+[56] (./sections/a2.text_SandR.tex) [57] (./sections/a3.getpdf_examples.tex)
+[58]
+
+Package xcolor Warning: Incompatible color definition on input line 3435.
+
+
+Overfull \hbox (26.597pt too wide) in paragraph at lines 3483--3483
+[][]\T1/cmtt/m/n/10 network.query[][]$[][]son_generation_confidence[] []=[] []a
+s.character[][](network.query[][]$[][]son_generation_confidence)[][] 
+ []
+
+
+Overfull \hbox (58.08931pt too wide) in paragraph at lines 3485--3485
+[][]\T1/cmtt/m/n/10 network.query[][]$[][]father_generation_confidence[] []=[] 
+[]as.character[][](network.query[][]$[][]father_generation_confidence)[][] 
+ []
+
+
+Overfull \hbox (105.32777pt too wide) in paragraph at lines 3511--3511
+[][]\T1/cmtt/m/n/10 n[] []=[] []list[][]([][]"network"[] []= network,[] []"netw
+ork.query"[] []= network.query,[] []"network.info"[] []= network.info,[] []"Mdi
+st"[] []= Mdist)[][] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 3516.
+
+[59]
+
+Package xcolor Warning: Incompatible color definition on input line 3525.
+
+
+Package xcolor Warning: Incompatible color definition on input line 3549.
+
+
+Overfull \hbox (121.07393pt too wide) in paragraph at lines 3570--3570
+[][]\T1/cmtt/m/n/10 out[] []=[] []list[][]([][]"data"[] []= data,[] []"data.wit
+h.correlated.variables"[] []= data.with.correlated.variables,[] []"methods"[] [
+]= methods)[][] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 3575.
+
+
+Overfull \hbox (5.60213pt too wide) in paragraph at lines 3575--3575
+[]\T1/cmtt/m/it/10 ## The data has been sucessfully updated with shinemas2R.obj
+ect = "data-classic-seed-lots".[] 
+ []
+
+[60]
+
+Package xcolor Warning: Incompatible color definition on input line 3581.
+
+
+Overfull \hbox (121.07393pt too wide) in paragraph at lines 3629--3629
+[][]\T1/cmtt/m/n/10 out[] []=[] []list[][]([][]"data"[] []= data,[] []"data.wit
+h.correlated.variables"[] []= data.with.correlated.variables,[] []"methods"[] [
+]= methods)[][] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 3634.
+
+
+Overfull \hbox (0.35341pt too wide) in paragraph at lines 3634--3634
+[]\T1/cmtt/m/it/10 ## The data has been sucessfully updated with shinemas2R.obj
+ect = "data-classic-relation".[] 
+ []
+
+[61]
+
+Package xcolor Warning: Incompatible color definition on input line 3642.
+
+
+Overfull \hbox (121.07393pt too wide) in paragraph at lines 3667--3667
+[][]\T1/cmtt/m/n/10 out[] []=[] []list[][]([][]"data"[] []= data,[] []"data.wit
+h.correlated.variables"[] []= data.with.correlated.variables,[] []"methods"[] [
+]= methods)[][] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 3672.
+
+
+Package xcolor Warning: Incompatible color definition on input line 3677.
+
+
+Package xcolor Warning: Incompatible color definition on input line 3684.
+
+[62]
+Overfull \hbox (121.07393pt too wide) in paragraph at lines 3737--3737
+[][]\T1/cmtt/m/n/10 out[] []=[] []list[][]([][]"data"[] []= data,[] []"data.wit
+h.correlated.variables"[] []= data.with.correlated.variables,[] []"methods"[] [
+]= methods)[][] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 3742.
+
+
+Package xcolor Warning: Incompatible color definition on input line 3747.
+
+[63] [64]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3758.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3758.
+ (./shinemas2R.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3758.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3758.
 
 Package rerunfilecheck Info: File `shinemas2R.out' has not changed.
-(rerunfilecheck)             Checksum: 88ED043643333125CA2A316E3CA41D87;3574.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3280.
- )
-(\end occurred inside a group at level 1)
-
-### semi simple group (level 1) entered at line 2421 (\begingroup)
-### bottom level 
+(rerunfilecheck)             Checksum: 2A727903C05AF532263BB3C7CFB12A8C;4692.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3758.
+ ) 
 Here is how much of TeX's memory you used:
- 19376 strings out of 493485
- 358109 string characters out of 3143526
- 500072 words of memory out of 3000000
- 22072 multiletter control sequences out of 15000+200000
+ 19390 strings out of 493485
+ 357747 string characters out of 3143526
+ 530569 words of memory out of 3000000
+ 22069 multiletter control sequences out of 15000+200000
  18047 words of font info for 43 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,12n,56p,813b,584s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/us
-r/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0700.pf
-b></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/
-fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/c
-m-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit1000.pfb
-></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/f
-onts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm
--super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-</usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fo
-nts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-
-super/sftt0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb><
-/usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf/fon
-ts/type1/public/cm-super/sftt1440.pfb></usr/share/texmf/fonts/type1/public/cm-s
-uper/sftt2488.pfb>
-Output written on shinemas2R.pdf (55 pages, 8513891 bytes).
+ 56i,12n,56p,860b,508s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/
+fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0700.pfb></usr/share/
+texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/pu
+blic/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx14
+40.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit1000.pfb></usr/share/t
+exmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/pub
+lic/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm080
+0.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/te
+xmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/publ
+ic/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0800
+.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/tex
+mf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf/fonts/type1/publi
+c/cm-super/sftt1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt2488.
+pfb>
+Output written on shinemas2R.pdf (64 pages, 7603228 bytes).
 PDF statistics:
- 1030 PDF objects out of 1200 (max. 8388607)
- 827 compressed objects within 9 object streams
- 131 named destinations out of 1000 (max. 500000)
- 633 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1110 PDF objects out of 1200 (max. 8388607)
+ 905 compressed objects within 10 object streams
+ 152 named destinations out of 1000 (max. 500000)
+ 709 words of extra memory for PDF output out of 10000 (max. 10000000)
 

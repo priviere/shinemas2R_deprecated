@@ -1,4 +1,4 @@
-# version 0.9.1
+% version 0.10
 \section{Philosophy of \pack}
 
 \subsection{What is \BD?}
@@ -41,7 +41,9 @@ It does descriptive analysis, formats data for existing \R~packages to perform s
 \pack~is divided into three steps (Figure \ref{function_relations}):
 
 \begin{enumerate}
-\item Get the data from \BD~with \texttt{get.data}. You may encrypt the data with \texttt{encrypt.data} or translate it with \texttt{translate.data}.
+\item Get the data from \BD~with \texttt{get.data}. It is possible to use data in the same format than \texttt{get.data} outputs. This can be done with \texttt{is.get.data.output}. This is useful when the user do not have SHiNeMaS but wish to use the other functions of the package.
+
+You may encrypt the data with \texttt{encrypt.data} or translate it with \texttt{translate.data}.
 There are two types of data:
 \begin{itemize}
 \item network relations between \sl~(section \ref{network})
@@ -94,7 +96,7 @@ To continue, load the package:
 library(shinemas2R)
 @
 
-For an easier visualization, all warning messages are not represented (NAs introduced, rows deleted, etc.)
+For an easier visualization in the vignette, all warning messages are not represented (NAs introduced, rows deleted, etc.)
 
 \subsubsection{Test with \BD~installed}
 
@@ -108,14 +110,14 @@ For example:
 
 <<message=TRUE,cache=FALSE>>=
 info_db = list(
-	db_user = "toto",
-	db_host = "127.175.166.175", 
-	db_name = "my_shinemas",
-	db_password = "secret"
-	)
+	db_user = "pierre",
+	db_host = "127.0.0.1", # localhost
+	db_name = "shinemas_dev",
+	db_password = "toto"
+)
 @
 
-\item install a demo of \BD.
+\item install a demo of \BD~on your computer.
 The procedure to do so is explained in appendix \ref{install_shinemas}.
 
 \end{itemize}
@@ -125,7 +127,7 @@ As you will use \texttt{get.data}, you should set:
 use.get.data = TRUE
 @
 
-\subsubsection{Test without installing \BD}
+\subsubsection{Test without \BD~installed}
 
 In this vignette, you can test \pack~without installing \BD.
 You do not use the \texttt{get.data} function:
@@ -133,12 +135,22 @@ You do not use the \texttt{get.data} function:
 use.get.data = FALSE
 @
 
-And you can load the data-sets by downloading it:
+And you can download the data-sets here : \url{https://www.dropbox.com/sh/u1wrwttbn4mq5l4/AACXqZNtzI6TPUeZ_15eyHz_a?dl=0} and put it in the folder data.
 
+The following code is specific to my computer.
 <<message=TRUE,cache=FALSE>>=
 system("mkdir data")
 system("cp -r /home/pierre/Documents/geek/R-stats/Rdev/R_package_shinemas2R/shinemas2R_data/*RData ./data")
 @
 
-and then \texttt{load()} it.
+and then \texttt{load()} it.\\
+
+~\\
+
+In this vignette, there are no examples with \texttt{is.get.data.output}.
+Refer to appendix \ref{examples_is_get_data_output} to know the format that must have the data to be used in the other functions of the package (i.e. \texttt{get.ggplot} and \texttt{get.table} followed by \texttt{get.pdf}).
+
+
+
+
 

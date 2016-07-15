@@ -1,4 +1,4 @@
-# version 0.9.1
+% version 0.10
 \section{Data linked to the \sl~and to the relations between \sl}
 \label{data}
 
@@ -19,7 +19,7 @@ You can set filters to the query with the following argument :
 \item \texttt{filter.out} to choose everything except \texttt{filter.out}
 \end{itemize}
 
-values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation}, \texttt{reproduction type} or \texttt{variable}.
+values of filters can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation}, \texttt{reproduction.type} or \texttt{variable}.
 
 
 It is important to choose if you apply the filter on the \texttt{father} or the \texttt{son} of a relation.
@@ -41,7 +41,7 @@ The function returns a list with
 \begin{itemize}
 \item a data frame with the data set
 \item a list with data set with individuals that are correlated for a set of variables
-\item the description of methods used for each variable in with its description and units
+\item the description of methods used for each variable with its description and units
 \end{itemize}
 
 Note that for data linked to seed-lots, all the data are correlated as there is one measure for a given seed-lot. 
@@ -50,14 +50,14 @@ For data linked to relations, as it can be linked to individual within a seed-lo
 
 A data set with only correlated variables for each individual is useful when doing multivariate analysis such as PCA.
 
-The names of the variables are under the form \texttt{variable\_name---methods}.
+The names of the variables in the output of the function are under the form \texttt{variable\_name---methods}.
 
 \vspace{.5cm}
 
 In the following examples, three variables are studied:
 
 <<message=TRUE,cache=FALSE>>=
-vec_variables = c("plant_height", "spike_lenght", "spike_weight")
+vec_variables = c("hauteur", "pmg", "poids_epis")
 @
 
 \subsubsection{\texttt{query.type = "data-classic"}}
@@ -68,37 +68,38 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "data-classic", # data-classic query
-		person.in = "RAB", # person to keep
+		person.in = "JFB", # person to keep
 		filter.on = "father-son", # filters on father AND son
 		data.type = "relation", # data linked to relation between seed-lots
 		variable = vec_variables, # the variables to display
-		project.in = "PPB" # the project 
+		project.in = "DEMO" # the project 
 		)
+} else {
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
-	
-} else {
-	
-	#data_classic = encrypt.data(data_classic)
-	#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 24 11:59:59 2015.RData
-	#data_classic = data_classic
+
 	load("./data/data_classic.RData")
 }
 
 names(data_classic$data)
 colnames(data_classic$data$data)
 
-head(data_classic$methods)
+head(data_classic$data$methods)
 
 @
 
 The data with correlated variables :
 
 <<message=TRUE,cache=FALSE>>=
-colnames(data_classic$data$data.with.correlated.variables)
+names(data_classic$data$data.with.correlated.variables)
 @
 
+The methods related to each variable :
+
+<<message=TRUE,cache=FALSE>>=
+data_classic$data$methods
+@
 
 \subsubsection{Selection differential (\texttt{query.type = "data-S"}), response to selection (\texttt{query.type = "data-SR"}) and heritability}
 \label{data-S-and-SR}
@@ -134,21 +135,17 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host,
 		db_name = info_db$db_name, db_password = info_db$db_password,
 		query.type = "data-S",
-		person.in = "RAB",
+		person.in = "JFB",
 		filter.on = "father-son",
 		data.type = "relation",
 		variable = vec_variables,
-		project.in = "PPB"
+		project.in = "DEMO"
 		)
+} else {
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
 	
-} else {
-
-	
-	#data_S = encrypt.data(data_S)
-	#The key has been written in /home/pierre/key_data-S-relation_Tue Nov 24 12:01:25 2015.RData
 	load("./data/data_S.RData")
 }
 
@@ -171,19 +168,17 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host,
 		db_name = info_db$db_name, db_password = info_db$db_password,
 		query.type = "data-SR",
-		person.in = "RAB",
+		person.in = "JFB",
 		filter.on = "father-son",
 		data.type = "relation",
 		variable = vec_variables,
-		project.in = "PPB"
+		project.in = "DEMO"
 		)
 } else {
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
 	
-	#data_SR = encrypt.data(data_SR)
-	#The key has been written in /home/pierre/key_data-SR-relation_Tue Nov 24 12:02:25 2015.RData
 	load("./data/data_SR.RData")
 }
 
@@ -195,12 +190,26 @@ colnames(data_SR$data$data)
 
 To get the plots, use the function \texttt{get.ggplot}.
 
+First of all ,you need to choose
+
+\begin{itemize}
+\item on which data set you get the ggplots.
+This can be done on \texttt{correlated\_group} having the following argument:
+\begin{itemize}
+\item \texttt{NULL}, the default argument (\texttt{shinemas2R::get.data()\$data\$data})
+\item the name of a given \texttt{correlation\_group} (\texttt{shinemas2R::get.data()\$data\$data.with.correlated.variables})
+\end{itemize}
+
+\item if you want to merge germplasm name and selection name with the argument \texttt{merge\_g\_and\_s} which is \texttt{TRUE} by default
+\end{itemize}
+
+
 The names of the variables are under the form \texttt{variable\_name---methods}:
 <<message=TRUE,cache=FALSE>>=
-vec_variables = c(
-	"plant_height---plant_height", 
-	"spike_lenght---spike_length_F", 
-	"spike_weight---spike_weight"
+plot_vec_variables = c(
+	"hauteur---hauteur_tige", 
+	"pmg---pmg", 
+	"poids_epis---poids_epis"
 	)
 @
 
@@ -216,7 +225,7 @@ vec_variables = c(
 <<message=TRUE,cache=FALSE>>=
 default_data_classic_ggplot = get.ggplot(
 	data_classic, 
-	vec_variables = vec_variables
+	vec_variables = plot_vec_variables
 	)
 @
 
@@ -239,9 +248,10 @@ which correpond to \texttt{ggplot.type} arguments:
 
 \texttt{"data-interaction"} &  interaction, there is one interation plot per variable \\
 
-\texttt{"data-radar"} &  radar, there is one radar per set of variables (i.e. the whole \texttt{vec\_variables}) \\
+\texttt{"data-radar"} &  radar, there is one radar per set of variables (i.e. the whole \texttt{vec\_variables}). It is the mean that is represented. \\
 
-\texttt{"data-biplot"} &  biplot, there is one biplot per pairs of variables \\
+\texttt{"data-biplot"} &  biplot, there is one biplot per pairs of variables.
+Note that no plots are possible for between raw data linked to individuals and raw data linked to relation. \\
 
 \hline
 \end{tabular}
@@ -263,19 +273,19 @@ For example:
 \item For barplot:
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_bar_all = default_data_classic_ggplot$`data-barplot`$`germplasm-year`
-p_cal_ph_bar = p_cal_ph_bar_all$`plant_height---plant_height`$`x.axis-1|in.col-1`
+p_cal_ph_bar = p_cal_ph_bar_all$`hauteur---hauteur_tige`$`x.axis-1|in.col-1`
 @
 
-\item For bolxplot:
+\item For boxplot:
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_box_all = default_data_classic_ggplot$`data-boxplot`$`germplasm-year`
-p_cal_ph_box = p_cal_ph_box_all$`plant_height---plant_height`$`x.axis-1|in.col-1`
+p_cal_ph_box = p_cal_ph_box_all$`hauteur---hauteur_tige`$`x.axis-1|in.col-1`
 @
 
 \item For interaction plot:
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_int_all = default_data_classic_ggplot$`data-interaction`$`year-germplasm`
-p_cal_ph_int = p_cal_ph_int_all$`plant_height---plant_height`$`x.axis-1|in.col-1`
+p_cal_ph_int = p_cal_ph_int_all$`hauteur---hauteur_tige`$`x.axis-1|in.col-1`
 @
 \end{itemize}
 
@@ -319,7 +329,7 @@ For biplot, you must choose the pair of variables you wish, for example,
 <<message=TRUE,cache=FALSE>>=
 p_cal_ph_sl_bip_all = default_data_classic_ggplot$`data-biplot`
 p_cal_ph_sl_bip = p_cal_ph_sl_bip_all$`NA-year`
-p_cal_ph_sl_bip = p_cal_ph_sl_bip$`plant_height---plant_height - spike_lenght---spike_length_F`
+p_cal_ph_sl_bip = p_cal_ph_sl_bip$`hauteur---hauteur_tige - poids_epis---poids_epis`
 p_cal_ph_sl_bip = p_cal_ph_sl_bip$`x.axis-1|in.col-1`
 @
 
@@ -435,7 +445,6 @@ A cross (X) means that for a given \texttt{ggplot.type}, a given argument can be
 
 \end{itemize}
 
-
 \item pies on network
 
 \begin{itemize}
@@ -448,7 +457,7 @@ The pie represent the distribution of a given variable for a given seed-lot.
 In the following example, as we're working with encrypted data, \texttt{get.ggplot} reverse the transcription to query \BD~and encrypt again.
 
 Note that this example is done on a little data set.
-Indeed, the pies are drawn with a polygon which need lots of points that take memory.
+Indeed, the pies are drawn with a polygon which needs lots of points that take memory.
 
 <<message=TRUE,cache=FALSE>>=
 if(use.get.data){
@@ -456,20 +465,17 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "data-classic", # data-classic query
-		person.in = "LUD", # person to keep
-		year.in = 2011, # year to kepp
+		person.in = "OLR", # person to keep
 		filter.on = "father-son", # filters on father AND son
 		data.type = "relation", # data linked to relation between seed-lots
-		variable = vec_variables, # the variables to display
-		project.in = "PPB" # the project 
+		variable = "poids_epis", # the variables to display
+		project.in = "DEMO" # the project 
 		)
-	
-	data_classic_bis = encrypt.data(data_classic_bis)
 	
 	pn = get.ggplot(
 		data_classic_bis, 
 		ggplot.type = "data-pie.on.network", 
-		vec_variables = "spike_weight---spike_weight", 
+		vec_variables = "poids_epis---poids_epis", 
 		pie.size = .25, 
 		hide.labels.parts = "person"
 		)
@@ -478,14 +484,11 @@ if(use.get.data){
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
-	#The key has been written in /home/pierre/key_data-classic-relation_Tue Nov 25 22:29:59 2015.RData
 	load("./data/data_classic_bis.RData")
 	
 	# 1. Query SHiNeMaS ...
 	# 2. Create network matrix ...
 	# 3. Link information to vertex and edges ...
-	# The key has been written in /home/pierre/key_network_Wed Nov 25 22:30:16 2015.RData
-
 	load("./data/pn.RData")
 	}
 @
@@ -497,8 +500,8 @@ The result is divided into two plots: the empty network and the network with the
 <<message=TRUE,cache=FALSE>>=
 names(pn$`data-pie.on.network`)
 
-p1 = pn$`data-pie.on.network`$`spike_weight---spike_weight`$network
-p2 = pn$`data-pie.on.network`$`spike_weight---spike_weight`$pie.on.network
+p1 = pn$`data-pie.on.network`$`poids_epis---poids_epis`$network
+p2 = pn$`data-pie.on.network`$`poids_epis---poids_epis`$pie.on.network
 @
 
 \begin{center}
@@ -537,20 +540,18 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "data-classic", # data-classic query
-		germplasm.in = "Rouge-du-Roc", # germplasm to keep
-		person.in = c("RAB", "CHD", "JSG"), # person to keep
+		germplasm.in = "C1", # germplasm to keep
+		person.in = c("OLR", "MLN", "JFB"), # person to keep
 		filter.on = "father-son", # filters on father AND son
 		data.type = "relation", # data linked to relation between seed-lots
-		variable = vec_variables, # the variables to display
-		project.in = "PPB" # the project
+		variable = "poids_epis", # the variables to display
+		project.in = "DEMO" # the project
 		)
-	
-	data_classic_ter = encrypt.data(data_classic_ter)
-	
+
 	pm = get.ggplot(
 		data_classic_ter, 
 		ggplot.type = "data-pie.on.map", 
-		vec_variables = "spike_weight---spike_weight"
+		vec_variables = "poids_epis---poids_epis"
 		)
 } else { 
 	load("./data/data_classic_ter.RData")
@@ -563,7 +564,7 @@ names(pm$`data-pie.on.map`)
 You can get the default ggplot (\texttt{p}) or customized it (\texttt{p\_bis}):
 
 <<message=TRUE,cache=FALSE,out.width=".8\\textwidth">>=
-p = pm$`data-pie.on.map`$`spike_weight---spike_weight`$`map-[2011]`
+p = pm$`data-pie.on.map`$`poids_epis---poids_epis`$`map-[2013]`
 
 p_bis = p + 
 	ggtitle("spike_weight in 2011") + # change the title
@@ -591,7 +592,7 @@ Arguments can be customed related to map plots (Table \ref{custom.map}).
 
 For \texttt{data-pie.on.map}, it is also possible to choose \texttt{x.axis} in order to get a map for each \texttt{year} or each \texttt{germplasm}.
 
-In the example, as \texttt{data\_classic} is done on one germplasm (Rouge du Roc), \texttt{x.axis = year} has been chosen (default argument).
+In the example, as \texttt{data\_classic} is done on one germplasm (C1), \texttt{x.axis = year} has been chosen (default argument).
 
 \end{itemize}
 
@@ -602,12 +603,13 @@ In the example, as \texttt{data\_classic} is done on one germplasm (Rouge du Roc
 <<message=TRUE,cache=FALSE>>=
 default_data_S_ggplot = get.ggplot(
 	data_S, 
-	vec_variables = vec_variables,
+	vec_variables = plot_vec_variables,
 	nb_parameters_per_plot_x.axis = 5
 	)
 @
 
-By default, the following plots are done with \texttt{x.axis} and \texttt{in.col} by default (you can not change it):
+By default, the following plots are done with \texttt{x.axis} and \texttt{in.col} (you can not change it).
+Note that \texttt{NA} are put when there are no data for \texttt{bouquet} AND \texttt{vrac} (i.e. nothing is displayed).
 
 <<message=TRUE,cache=FALSE>>=
 names(default_data_S_ggplot)
@@ -620,19 +622,19 @@ which correpond to ggplot.type arguments as explained in the previous section.
 \item For barplot:
 <<message=TRUE,cache=FALSE>>=
 p_S_sw_bar_all = default_data_S_ggplot$`data-barplot`
-p_S_sw_bar = p_S_sw_bar_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_S_sw_bar = p_S_sw_bar_all$`pmg---pmg`$`x.axis-1|in.col-1`
 @
 
 \item For boxplot:
 <<message=TRUE,cache=FALSE>>=
 p_S_sw_box_all = default_data_S_ggplot$`data-boxplot`
-p_S_sw_box = p_S_sw_box_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_S_sw_box = p_S_sw_box_all$`pmg---pmg`$`x.axis-1|in.col-1`
 @
 
 \item For interaction plot:
 <<message=TRUE,cache=FALSE>>=
 p_S_sw_int_all = default_data_S_ggplot$`data-interaction`
-p_S_sw_int = p_S_sw_int_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_S_sw_int = p_S_sw_int_all$`pmg---pmg`$`x.axis-1|in.col-1`
 @
 
 \end{itemize}
@@ -666,12 +668,13 @@ It is possible to customize the plots as presented in Table \ref{custom.plot}.
 <<message=TRUE,cache=FALSE>>=
 default_data_SR_ggplot = get.ggplot(
 	data_SR, 
-	vec_variables = vec_variables, 
+	vec_variables = plot_vec_variables, 
 	nb_parameters_per_plot_x.axis = 5
 	)
 @
 
-By default, the following plots are done with \texttt{x.axis} and \texttt{in.col} by default (you can not change it):
+By default, the following plots are done with \texttt{x.axis} and \texttt{in.col} (you can not change it).
+Note that \texttt{NA} are put when there are no data for \texttt{bouquet} AND \texttt{vrac} (i.e. nothing is displayed).
 
 <<message=TRUE,cache=FALSE>>=
 names(default_data_SR_ggplot)
@@ -682,21 +685,23 @@ which correpond to ggplot.type arguments as explained in the previsou section.
 \begin{itemize}
 \item For barplot:
 <<message=TRUE,cache=FALSE>>=
-p_SR_sw_bar_all = default_data_S_ggplot$`data-barplot`
-p_SR_sw_bar = p_SR_sw_bar_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_SR_sw_bar_all = default_data_SR_ggplot$`data-barplot`
+p_SR_sw_bar = p_SR_sw_bar_all$`poids_epis---poids_epis`$`x.axis-1|in.col-1`
 @
 
 \item For boxplot:
 <<message=TRUE,cache=FALSE>>=
-p_SR_sw_box_all = default_data_S_ggplot$`data-boxplot`
-p_SR_sw_box = p_SR_sw_box_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_SR_sw_box_all = default_data_SR_ggplot$`data-boxplot`
+p_SR_sw_box = p_SR_sw_box_all$`poids_epis---poids_epis`$`x.axis-1|in.col-1`
 @
 
 \item For interaction plot:
 <<message=TRUE,cache=FALSE>>=
-p_SR_sw_int_all = default_data_S_ggplot$`data-interaction`
-p_SR_sw_int = p_SR_sw_int_all$`spike_weight---spike_weight`$`x.axis-1|in.col-1`
+p_SR_sw_int_all = default_data_SR_ggplot$`data-interaction`
+p_SR_sw_int = p_SR_sw_int_all$`poids_epis---poids_epis`$`x.axis-1|in.col-1`
 @
+
+\end{itemize}
 
 \begin{center}
 \begin{tabular}{cc}
@@ -725,6 +730,21 @@ It is possible to customize the plots as presented in Table \ref{custom.plot}.
 \subsection{Get the tables}
 
 From the data, to get the tables, use the function \texttt{get.table}.
+
+First of all ,you need to choose
+
+\begin{itemize}
+\item on which data set you get the ggplots.
+This can be done with \texttt{correlated\_group} having the following argument:
+\begin{itemize}
+\item \texttt{NULL}, the default argument (\texttt{shinemas2R::get.data()\$data\$data})
+\item the name of a given \texttt{correlation\_group} (\texttt{shinemas2R::get.data()\$data\$data.with.correlated.variables})
+\end{itemize}
+
+\item if you want to merge germplasm name and selection name with the argument \texttt{merge\_g\_and\_s} which is \texttt{TRUE} by default
+\end{itemize}
+
+
 Five types of tables can be displayed according to \texttt{table.type} argument :
 
 \begin{center}
@@ -766,7 +786,7 @@ Then you should set \texttt{vec\_variables} with the variables displayed in the 
 tab_class = get.table(
 	data_classic, 
 	table.type = "raw",
-	vec_variables = vec_variables
+	vec_variables = plot_vec_variables
 	)
 @
 
@@ -792,14 +812,13 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "data-classic", # data-classic query
-		person.in = "RAB", # person to keep
+		person.in = "JFB", # person to keep
 		filter.on = "father-son", # filters on father AND son
 		data.type = "relation", # data linked to relation between seed-lots
-		variable = "sowing_practices", # the variables to display
-		project.in = "PPB" # the project
+		variable = "densite_semis", # the variables to display
+		project.in = "DEMO" # the project
 		)
 	
-	data_classic_4 = encrypt.data(data_classic_4)
 } else { 
 	load("./data/data_classic_4.RData")
 	}
@@ -807,7 +826,7 @@ if(use.get.data){
 tab_class_4 = get.table(
 	data_classic_4, 
 	table.type = "raw", 
-	vec_variables = "sowing_practices---sowing_notice_sowing_practices"
+	vec_variables = "densite_semis---densite_semis"
 	)
 @
 
@@ -843,13 +862,12 @@ Instead of raw information, some statistics may be useful, for example,
 tab_class = get.table(
 	data_classic, 
 	table.type = "mean.sd.cv",
-	vec_variables = vec_variables
+	vec_variables = plot_vec_variables
 	)
 names(tab_class$not_duplicated_infos)
 colnames(tab_class$not_duplicated_infos$`set-1`)
 dim(tab_class$not_duplicated_infos$`set-1`)
 @
-
 
 
 \item Custom arguments
@@ -895,13 +913,13 @@ For example,
 tab_class = get.table(
 	data_classic,
 	table.type = "mean.sd.cv",
-	vec_variables = vec_variables,
-	nb_row = 30
+	vec_variables = plot_vec_variables,
+	nb_row = 10
 	)
 names(tab_class$not_duplicated_infos)
 @
 
-The information is split into several tables with at least 30 rows.
+The information is split into several tables with at least 10 rows.
 
 <<message=TRUE,cache=FALSE>>=
 dim(tab_class$not_duplicated_infos$`set-1`)
@@ -916,7 +934,7 @@ For example,
 tab_S_msc = get.table(
 	data_S,
 	table.type = "mean.sd.cv",
-	vec_variables = vec_variables,
+	vec_variables = plot_vec_variables,
 	nb_col = 3 # Otherwise, the table is too large
 	)
 
@@ -945,11 +963,4 @@ data_for_PPBstats = format.data(
 head(data_for_PPBstats)
 @
 
-%\section{Set of \sl}
-
-%\subsection{\texttt{query.type = "SL.mix"}}
-
-%\subsection{\texttt{query.type = "cross"}}
-
-% parler de fuse g s et correlated var pour plot et table
 

@@ -1,8 +1,8 @@
 # 0. help -----------------------------------------------------------------
-#' Encrypt data from \code{get.data}
+#' Encrypt data from \code{get.data} or \code{is.get.fata.output}
 #'
 #' @description
-#' \code{encrypt.data} encrypts data from \code{get.data}
+#' \code{encrypt.data} encrypts data from \code{get.data} or \code{is.get.fata.output}
 #'
 #' @param data output from \code{get.data}
 #' 
@@ -17,13 +17,18 @@
 #' germplasm and 
 #' seed-lots
 #' 
+#' All query.type can be encrypt unless "species", "variable", "reproduction.type" and "methods"
+#' 
 #' The key is written in .RData format. To use it you should type load("key.RData").
 #' 
-#' @return The function returns the data frame encrypted and writes in the work directory a file.txt with the key
+#' @return The function returns the data frame encrypted and writes in the work directory a file.RData with the key
+#' 
+#' @examples 
+#' # See the vignette
 #' 
 #' @author Pierre Rivière 
 #' 
-#' @seealso \code{\link{get.data}}
+#' @seealso \code{\link{get.data}}, \code{\link{is.get.data.output}}
 #' 
 #' 
 encrypt.data <- function(
@@ -32,23 +37,15 @@ data
 # lets go !!! ----
 {
 # 1. Check parameters ----------
-shinemas2R.object = attributes(data$data)$shinemas2R.object
-
-if( !is.element(shinemas2R.object, c(
-	"network",
-	"SL.mix",
-	"cross",
-	"data-classic-seed-lots",
-	"data-classic-relation",
-	"data-S-seed-lots",
-	"data-S-relation",
-	"data-SR-seed-lots",
-	"data-SR-relation")
-) ) {
-	stop("data must come from shinemas2R::get.data.")
-}
-
+	shinemas2R.object = attributes(data$data)$shinemas2R.object
+	
+	mess = "data must come from shinemas2R::get.data or shinemas2R:is.get.data.output and be"
+	if( is.null(shinemas2R.object) ) { stop(mess) }
+	if( is.element(shinemas2R.object, c("species", "variable", "reproduction.type", "methods") ) ) { stop(mess) }  
+	
 # 2. Encrypt data ----------
+
+	message("Prepare key for encryption ...")
 
 	info_db = data$info_db
 	
@@ -63,10 +60,6 @@ if( !is.element(shinemas2R.object, c(
 	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "project")$data
 	vec = paste("project-", c(1:length(v)), sep = ""); names(vec) = v
 	vec_project = vec
-	
-	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "selection.person")$data
-	vec = paste("sel.person-", c(1:length(v)), sep = ""); names(vec) = v
-	vec_selection_person = vec
 	
 	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "reproduction.type")$data
 	vec = paste("repro.type-", c(1:length(v)), sep = ""); names(vec) = v
@@ -93,7 +86,8 @@ if( !is.element(shinemas2R.object, c(
 		return(sl)
 	}
 	
-	
+	message("Encrypt data ...")
+
 	if( shinemas2R.object == "network"){
 
 		d = data$data$network
@@ -127,19 +121,19 @@ if( !is.element(shinemas2R.object, c(
 	
 	
 	if( shinemas2R.object == "SL.mix"){
+		data$data$son_project = factor(vec_project[as.character(data$data$son_project)])
 		data$data$son = sapply(data$data$son, encrypt_sl, vec_germplasm, vec_person, vec_year)
 		data$data$son_germplasm = factor(vec_germplasm[as.character(data$data$son_germplasm)])
-		data$data$son_germplasm_type = factor(vec_germplasm_type[as.character(data$data$son_germplasm_type)])
-		data$data$son_year = factor(vec_year[as.character(data$data$son_year)])
 		data$data$son_person = factor(vec_person[as.character(data$data$son_person)])
-		data$data$son_project = factor(vec_project[as.character(data$data$son_project)])
+		data$data$son_year = factor(vec_year[as.character(data$data$son_year)])
+		data$data$son_germplasm_type = factor(vec_germplasm_type[as.character(data$data$son_germplasm_type)])
 		
+		data$data$father_project = factor(vec_project[as.character(data$data$father_project)])
 		data$data$father = sapply(data$data$father, encrypt_sl, vec_germplasm, vec_person, vec_year)
 		data$data$father_germplasm = factor(vec_germplasm[as.character(data$data$father_germplasm)])
-		data$data$father_germplasm_type = factor(vec_germplasm_type[as.character(data$data$father_germplasm_type)])
-		data$data$father_year = factor(vec_year[as.character(data$data$father_year)])
 		data$data$father_person = factor(vec_person[as.character(data$data$father_person)])
-		data$data$father_project = factor(vec_project[as.character(data$data$father_project)])
+		data$data$father_year = factor(vec_year[as.character(data$data$father_year)])
+		data$data$father_germplasm_type = factor(vec_germplasm_type[as.character(data$data$father_germplasm_type)])
 		}
 	
 		
@@ -152,6 +146,55 @@ if( !is.element(shinemas2R.object, c(
 		data$data$person = factor(vec_person[as.character(data$data$person)])
 		data$data$project = factor(vec_project[as.character(data$data$project)])
 		}
+
+		
+	if( shinemas2R.object == "person"){ 
+		v = vec_person[as.character(data$data)]
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "person"
+		data$data =  v
+		}
+	
+	
+	if( shinemas2R.object == "year"){ 
+		v = vec_year[as.character(data$data)]
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "year"
+		data$data =  v
+		}
+	
+	
+	if( shinemas2R.object == "project"){ 
+		v = vec_project[as.character(data$data)]
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "project"
+		data$data =  v
+		}
+	
+	
+	if( shinemas2R.object == "seed.lots"){ 
+		print(data$data)
+		v = sapply(data$data, encrypt_sl, vec_germplasm, vec_person, vec_year)
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "seed.lots"
+		data$data =  v
+		}
+	
+	
+	if( shinemas2R.object == "selection.person"){ 
+		v = vec_person[as.character(data$data)]
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "selection.person"
+		data$data =  v
+		}
+	
+	
+	if( shinemas2R.object == "germplasm"){ 
+		v = vec_germplasm[as.character(data$data)]
+		names(v) = NULL
+		attributes(v)$shinemas2R.object = "germplasm"
+		data$data =  v
+	}
 	
 	
 	if( shinemas2R.object == "data-classic-seed-lots" | 
@@ -168,11 +211,18 @@ if( !is.element(shinemas2R.object, c(
 			d$project = factor(vec_project[as.character(d$project)])
 			return(d)
 		}
-		data$data$data = toto(data$data$data, vec_germplasm, vec_person, vec_year)
-		for(i in 1:length(data$data$data.with.correlated.variables)) {
-			data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
-		}
-	}
+
+		if( !is.null(data$data$data) ) { 
+			data$data$data = toto(data$data$data, vec_germplasm, vec_person, vec_year)
+		} else { data$data$data = NULL }
+		
+		if( length(data$data$data.with.correlated.variables) > 0 ) {
+			for(i in 1:length(data$data$data.with.correlated.variables)) {
+				data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
+			}		
+		} else { data$data$data.with.correlated.variables = NULL }
+		
+			}
 	
 	
 	if( shinemas2R.object == "data-classic-relation" |
@@ -186,30 +236,71 @@ if( !is.element(shinemas2R.object, c(
 			d$son_germplasm_type = factor(vec_germplasm_type[as.character(d$son_germplasm_type)])
 			d$son_year = factor(vec_year[as.character(d$son_year)])
 			d$son_person = factor(vec_person[as.character(d$son_person)])
+			d$son_project = factor(vec_project[as.character(d$son_project)])
 			
 			d$father = sapply(d$father, encrypt_sl, vec_germplasm, vec_person, vec_year)
 			d$father_germplasm = factor(vec_germplasm[as.character(d$father_germplasm)])
 			d$father_germplasm_type = factor(vec_germplasm_type[as.character(d$father_germplasm_type)])
 			d$father_year = factor(vec_year[as.character(d$father_year)])
 			d$father_person = factor(vec_person[as.character(d$father_person)])
+			d$father_project = factor(vec_project[as.character(d$father_project)])
 			
-			d$project = factor(vec_project[as.character(d$project)])
-			
-			d$selection_person = factor(vec_selection_person[as.character(d$selection_person)])
+			d$selection_person = factor(vec_person[as.character(d$selection_person)])
 			return(d)
 		}
-		data$data$data = toto(data$data$data, vec_germplasm, vec_person, vec_year)
-		for(i in 1:length(data$data$data.with.correlated.variables)) {
-			data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
+		
+		
+		if( !is.null(data$data$data) ) { 
+			data$data$data = toto(data$data$data, vec_germplasm, vec_person, vec_year)
+		} else { data$data$data = NULL }
+		
+		if( length(data$data$data.with.correlated.variables) > 0 ) {
+			for(i in 1:length(data$data$data.with.correlated.variables)) {
+				data$data$data.with.correlated.variables[[i]] = toto(data$data$data.with.correlated.variables[[i]], vec_germplasm, vec_person, vec_year)
+			}		
+		} else { data$data$data.with.correlated.variables = NULL }
+			}
+	
+	
+	if( shinemas2R.object == "person.info"){ 
+		data$data$first_name = NA
+		data$data$last_name = NA
+		data$data$short_name = vec_person[as.character(data$data$short_name)]
 		}
-	}
+	
+	
+	if( shinemas2R.object == "grandfather"){ 
+		data$data$son_project = factor(vec_person[as.character(data$data$son_project)])
+		data$data$son = sapply(data$data$son, encrypt_sl, vec_germplasm, vec_person, vec_year)
+		data$data$son_germplasm = factor(vec_germplasm[as.character(data$data$son_germplasm)])
+		data$data$son_person = factor(vec_person[as.character(data$data$son_person)])
+		data$data$son_year = factor(vec_year[as.character(data$data$son_year)])
+		data$data$son_germplasm_type = factor(vec_germplasm_type[as.character(data$data$son_germplasm_type)])
+		
+		data$data$father_project = factor(vec_person[as.character(data$data$father_project)])
+		data$data$father = sapply(data$data$father, encrypt_sl, vec_germplasm, vec_person, vec_year)
+		data$data$father_germplasm = factor(vec_germplasm[as.character(data$data$father_germplasm)])
+		data$data$father_person = factor(vec_person[as.character(data$data$father_person)])
+		data$data$father_year = factor(vec_year[as.character(data$data$father_year)])
+		data$data$father_germplasm_type = factor(vec_germplasm_type[as.character(data$data$father_germplasm_type)])
+		
+		data$data$relation_year = factor(vec_year[as.character(data$data$relation_year)])
+		
+		data$data$grandfather_project = factor(vec_person[as.character(data$data$grandfather_project)])
+		data$data$grandfather = sapply(data$data$grandfather, encrypt_sl, vec_germplasm, vec_person, vec_year)
+		data$data$grandfather_germplasm = factor(vec_germplasm[as.character(data$data$grandfather_germplasm)])
+		data$data$grandfather_person = factor(vec_person[as.character(data$data$grandfather_person)])
+		data$data$grandfather_year = factor(vec_year[as.character(data$data$grandfather_year)])
+		data$data$grandfather_germplasm_type = factor(vec_germplasm_type[as.character(data$data$grandfather_germplasm_type)])
+		
+		data$data$relation_father_grandfather_year = factor(vec_year[as.character(data$data$relation_father_grandfather_year)])
+		}
 	
 	
 	key = list(
 		"vec_person" = vec_person,
 		"vec_year" = vec_year,
 		"vec_project" = vec_project,
-		"vec_selection_person" = vec_selection_person,
 		"vec_repro_type" = vec_repro_type,
 		"vec_germplasm_type" = vec_germplasm_type,
 		"vec_germplasm" = vec_germplasm)

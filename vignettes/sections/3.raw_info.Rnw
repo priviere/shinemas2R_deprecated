@@ -1,4 +1,4 @@
-# version 0.9.1
+% version 0.10
 \section{Raw information on levels and variables}
 \label{raw}
 
@@ -11,6 +11,7 @@ The following table summarize the different possibilities:
 \hline
 \texttt{query.type} & type of information present in \BD \\
 \hline
+"species" & species \\
 "variable" & variable \\
 "person" & person \\
 "year" & year \\

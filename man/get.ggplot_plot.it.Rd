@@ -2,7 +2,7 @@
 % Please edit documentation in R/get.ggplot_plot.it.r
 \name{get.ggplot_plot.it}
 \alias{get.ggplot_plot.it}
-\title{Function use in get.ggplot}
+\title{Function used in get.ggplot}
 \usage{
 get.ggplot_plot.it(d, titre = NULL, ggplot.display, x.axis, in.col,
   ggplot.type, vec_variables, equal.ylim = TRUE,

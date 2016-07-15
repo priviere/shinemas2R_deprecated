@@ -1,0 +1,27 @@
+% version 0.10
+\section{Other information in \BD}
+
+For the following \texttt{query.type}, you can set filters to the query with the following argument :
+\begin{itemize}
+\item \texttt{filter.in} to choose nothing except \texttt{filter.in}
+\item \texttt{filter.out} to choose everything except \texttt{filter.out}
+\end{itemize}
+
+Values of filter depends on the \texttt{query.type}.
+
+\subsection{\texttt{query.type = "cross"}}
+values of filters can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person} or \texttt{project}.
+
+
+\subsection{\texttt{query.type = "method"}}
+values of filters can be \texttt{variable}.
+
+
+\subsection{\texttt{query.type = "person-info"}}
+values of filters can be \texttt{person}.
+
+
+\subsection{\texttt{query.type = "grandfather"}}
+values of filters can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl} or \texttt{reproduction.type}.
+
+

@@ -1,10 +1,11 @@
-# version 0.9.1
+% version 0.10
 \section{Install \BD~on localhost}
 \label{install_shinemas}
 
 \subsection{Install PostgreSQL and \BD}
 
-With Linux,
+With Linux, firt install \texttt{postgresql} and create your account and password.
+
 \begin{verbatim}
 pierre@RSP:~$ sudo apt-get install postgresql
 pierre@RSP:~$ sudo -i -u postgres
@@ -13,29 +14,46 @@ postgres=# ALTER USER postgres with password 'postgres';
 postgres=# create user pierre;
 postgres=# ALTER ROLE pierre WITH CREATEDB;
 postgres=# ALTER USER pierre SUPERUSER;
-postgres=# create database shinemas_tuto owner pierre;
 postgres=# alter user pierre with encrypted password 'pierre';
+\end{verbatim}
+
+Then, create the empty data base \texttt{shinemas\_tuto}:
+
+\begin{verbatim}
+postgres=# create database shinemas_tuto owner pierre;
 postgres=# GRANT ALL PRIVILEGES ON DATABASE shinemas_tuto TO pierre;
 \end{verbatim}
 
+To exit \texttt{postgres=\#}, press \texttt{ctrl + D}.
 
-Once you've done this, download the \texttt{shinemas\_tuto.sql} here: \url{TODO!}, put in your \texttt{/home} for example, and install it on postgresql.
+Once you've done this, download \texttt{shinemas\_tuto.sql}.
+You can find it in the package:
 
-Note than \texttt{shinemas\_tuto.sql} must be accesible in writing and reading.
+<<message=TRUE,cache=FALSE,warning=FALSE>>=
+system.file("extdata", "shinemas_tuto.sql", package = "shinemas2R")
+@
+
+Put it in your \texttt{/home/pierre}, and install it on postgresql.
+
+Note that \texttt{shinemas\_tuto.sql} must be accesible in writing and reading.
 
 \begin{verbatim}
-pierre@RSP:~$ psql -h localhost -d shinemas_tuto -U pierre -f /home/shinemas_tuto.sql
+pierre@RSP:~$ psql -h localhost -d shinemas_tuto -U pierre -f /home/pierre/shinemas_tuto.sql
 \end{verbatim}
 
-You can look at it:
-
+You can look at the data base you have:
 \begin{verbatim}
 sudo -i -u postgres
 postgres@RSP:~$ psql -l
 \end{verbatim}
 
-More information on posgresql can be found here: \url{http://doc.ubuntu-fr.org/postgresql}
+You can delete the database with
+\begin{verbatim}
+sudo -i -u postgres
+postgres@RSP:~$ dropdb shinemas_tuto
+\end{verbatim}
 
+More information on posgresql can be found here: \url{http://help.ubuntu.com/community/PostgreSQL}
 
 \subsection{Set up the information to connect to \BD~with \texttt{get.data}}
 
@@ -48,7 +66,7 @@ info_db = list(
 	)
 @
 
-\texttt{db\_info} is use in \texttt{get.data} funtion.
+\texttt{db\_info} is use in \texttt{get.data} function.
 
 
 
