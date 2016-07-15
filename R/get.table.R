@@ -6,9 +6,9 @@
 #'
 #' @param data It can be either output from \code{get.data} or ggplot.object from \code{get.ggplot}.
 #' 
-#' @param correlated_group Name of the group of correlation in data. NULL by default.
+#' @param correlated_group Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.
 #' 
-#' @param fuse_g_and_s Fuse germplasm and selection name information in a column named germplasm
+#' @param merge_g_and_s Fuse germplasm and selection name information in a column named germplasm. TRUE by default.
 #' 
 #' @param table.type The type of table you wish according to the type of data. 
 #' For data coming from \code{get.data}, it can be:
@@ -42,13 +42,16 @@
 #' 
 #' @author Pierre Riviere
 #' 
+#' @examples 
+#' # See the vignette
+#' 
 #' @seealso \code{\link{get.data}}, \code{\link{get.ggplot}}
 #' 
 #'
 get.table <- function(
 	data,
 	correlated_group = NULL,
-	fuse_g_and_s = FALSE,
+	merge_g_and_s = FALSE,
 	table.type = NULL,
 	table.on = "son",
 	vec_variables = NULL,
@@ -93,14 +96,7 @@ get.table <- function(
 			is.null(data$data.with.correlated.variables)
 		) { message("data is NULL: nothing is done !"); return(NULL) }
 		
-		if( is.null(correlated_group) ) {
-			data = data$data	
-		} else { 
-			data_tmp = data$data.with.correlated.variables
-			if(is.element(correlated_group, names(d))) {
-				data = data_tmp[[correlated_group]]
-			} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
-		}
+		data = data.to.use(data, correlated_group)
 		
 		if( !is.null(col_to_display) ) {
 			test = is.element(col_to_display, c("person", "germplasm", "year", "block", "X", "Y"))
@@ -113,11 +109,7 @@ get.table <- function(
 		
 		
 		# 2. germplasm column and update vec_variables ----------
-
-		if( fuse_g_and_s ) { 
-			data$son_germplasm = sapply(as.character(data$son), function(x){unlist(strsplit(x,"_"))[1]}) 
-			data$father_germplasm = sapply(as.character(data$father), function(x){unlist(strsplit(x,"_"))[1]}) 
-		} 
+		data = update.data.merge_g_and_s(data, merge_g_and_s)
 		
 		test = is.element(vec_variables, colnames(data))
 		var_not_in_data = vec_variables[!test]
@@ -141,12 +133,7 @@ get.table <- function(
 		}
 		
 		# 3. Set up data set ----------
-		if( is.element(shinemas2R.object, "data-classic-relation") ) { vec_variables = colnames(data)[c(29:ncol(data))] }
-		if( is.element(shinemas2R.object, c("data-S-relation", "data-SR-relation")) ) { vec_variables = colnames(data)[c(33:ncol(data))] }
-		
-		if( is.element(shinemas2R.object, "data-classic-seed-lots") ) { vec_variables = colnames(data)[c(5:ncol(data))] }
-		if( is.element(shinemas2R.object, c("data-S-seed-lots", "data-SR-seed-lots")) ) { vec_variables = colnames(data)[c(9:ncol(data))] }
-		
+		vec_variables = get.vec_variables(data, shinemas2R.object)
 		
 		# get rid off rows and cols with only NA
 		x = data

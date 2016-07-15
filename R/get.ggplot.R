@@ -6,9 +6,9 @@
 #'
 #' @param data output from get.data with query.type = "network" or query.type = "data-...".
 #' 
-#' @param correlated_group Name of the group of correlation in data. NULL by default.
+#' @param correlated_group Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.
 #' 
-#' @param fuse_g_and_s Fuse germplasm and selection name information in a column named germplasm
+#' @param merge_g_and_s Fuse germplasm and selection name information in a column named germplasm. TRUE by default.
 #' 
 #' @param ggplot.type the type of plot you wish.
 #' NULL by default: according to the type of data, it will be "network-all" or "data-all". "X-all" means that all the "X-" objects are done. 
@@ -69,13 +69,13 @@
 #' For an easier visualization, digit is never displayed unless you choose NULL.
 #' Note that with ggplot.type "network-" and ggplot.display = "map", hide.labels.part can be NULL or "all" as only person can be displayed.
 #' 
-#' @param display.labels.sex For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".
+#' @param labels.sex For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".
 #' 
 #' @param labels.generation For ggplot.type = "network-network". If TRUE, displays generation for each reproduction
 #' 
 #' @param labels.size Size of the labels
 #' 
-#' @param location.map Location of the map. See \code{?map} for more details.
+#' @param location.map Location of the map. See \code{?map_data}, argument \code{map}, for more details.
 #' 
 #' @param pie.size Size of the pie when using pies
 #' 
@@ -104,7 +104,12 @@
 #' 	\item the relation between seed-lots on maps (ggplot.type = "network-diffusion-relation"). The size of the arrows is proportionnal to the number of diffusions.
 #' 	}
 #' 	
-#' \item a series of ggplots for mixtures (ggplot.type = "network-mixture"). Note that mixtures of replications are not counted here.
+#' \item a series of ggplots for mixtures representing:
+#' 	\itemize{
+#' 	\item the seed-lots coming from 'real' mixtures (ggplot.type = "network-mixture-real")
+#' 	\item the seed-lots coming from mixtures of replication (ggplot.type = "network-mixture-rep")
+#' 	\item the seed-lots coming from all mixtures (ggplot.type = "network-mixture-all")
+#' }
 #' 
 #' \item a series of ggplots for selection (ggplot.type = "network-positive-intra-selected") 
 #' 
@@ -114,6 +119,16 @@
 #' 
 #' }
 #' 
+#' @details 
+#' For data coming from query.type = "data-S" and "data-SR", NA are put when there are no data for bouquet AND vrac
+#' 
+#' For data-radar, it is the mean which is represented
+#' 
+#' For data-biplot note that no plots are possible for between raw data linked to individuals and raw data linked to relation.
+#' 
+#' @examples 
+#' # See the vignette
+#' 
 #' @author Pierre Riviere
 #' 
 #' @seealso \code{\link{get.data}}
@@ -121,7 +136,7 @@
 get.ggplot <- function(
 	data,
 	correlated_group = NULL,
-	fuse_g_and_s = FALSE,
+	merge_g_and_s = TRUE,
 	ggplot.type = NULL,
 	ggplot.display = NULL,
 	ggplot.on = "son",
@@ -135,7 +150,7 @@ get.ggplot <- function(
 	organise.sl = FALSE,
 	labels.on = "son",
 	hide.labels.parts = "all", 
-	display.labels.sex = TRUE, 
+	labels.sex = TRUE, 
 	labels.generation = TRUE,
 	labels.size = 3,
 	location.map = "france", 
@@ -163,20 +178,12 @@ if( test ){ stop("data must come from shinemas2R::get.data") }
 if( 
 	is.null(data$data) & 
 	is.null(data$data.with.correlated.variables) & 
-	is.null(data$network)
+	is.null(data$network) &
+	is.null(data$network.info)
 ) { message("data is NULL: nothing is done !"); return(NULL) }
 
 
-if( test2 ){
-	if( is.null(correlated_group) ) {
-		data = data$data	
-	} else { 
-		data_tmp = data$data.with.correlated.variables
-		if(is.element(correlated_group, names(d))) {
-			data = data_tmp[[correlated_group]]
-		} else { stop(correlated_group, "is not a group of the data set. Possibles groups are: ", paste(names(data_tmp), collapse = ", "), ".") }
-	}
-}
+if( test2 ){ data = data.to.use(data, correlated_group) }
 
 
 if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-S-relation" | shinemas2R.object == "data-SR-seed-lots" | shinemas2R.object == "data-SR-relation" ) {
@@ -198,7 +205,9 @@ test = is.element(ggplot.type, c(
 	"network-diffusion-sent",
 	"network-diffusion-received",
 	"network-diffusion-relation",
-	"network-mixture",
+	"network-mixture-real",
+	"network-mixture-rep",
+	"network-mixture-all",
 	"network-positive-intra-selected",
 	
 	# data-
@@ -226,7 +235,9 @@ netwok- type:
 \"network-diffusion-sent\",
 \"network-diffusion-received\",
 \"network-diffusion-relation\",
-\"network-mixture\",
+\"network-mixture-real\",
+\"network-mixture-rep\",
+\"network-mixture-all\",
 \"network-positive-intra-selected\"
 																		 
 or data- type:
@@ -251,7 +262,9 @@ vec_all_ggplot_network = 	c("network-network",
 														"network-diffusion-sent",
 														"network-diffusion-received",
 														"network-diffusion-relation",
-														"network-mixture",
+														"network-mixture-real",
+														"network-mixture-rep",
+														"network-mixture-all",
 														"network-positive-intra-selected")
 
 if(is.null(ggplot.type) & test1) { 
@@ -282,6 +295,9 @@ if(is.null(ggplot.type) & test2) {
 
 if( test2 & length(grep("data-", ggplot.type)) == 0 ) { stop("With data from \"data-...\", ggplot.type must be", paste(vec_all_ggplot_data, collapse = ", \n")) }
 
+t = is.null(info_db) & (ggplot.type == "data-pie.on.network" | ggplot.type == "data-pie.on.map")
+
+if( is.null(info_db) & (is.element("data-pie.on.network", ggplot.type) | is.element("data-pie.on.map", ggplot.type) ) ) { stop("You can not use ggplot.type == \"data-pie.on.network\" or \"data-pie.on.map\" because you can not be connected to SHiNeMaS, as you used is.get.data.output function.") }
 
 # 1.3. ggplot.display ----------
 
@@ -316,7 +332,13 @@ if(check.ggplot.display & test1 & !is.null(ggplot.display)) {
 }
 
 # 1.3.2. data ----------
-if( ggplot.type == "data-pie.on.map") { ggplot.display = "map"}
+if(!is.null(ggplot.type)) { 
+	if( length(ggplot.type) == 1 ) { 
+		if( ggplot.type == "data-pie.on.map" ) { 
+			ggplot.display = "map"
+		} 
+	}
+}
 # No problems with ggplot.display as it is related to ggplot.type directly (i.e. for ggplot.type = "data.radar", ggplot.display = "radar")
 
 # 1.4. x.axis and in.col ----------
@@ -405,11 +427,8 @@ if( length(vec_variables) > 0 & length(grep("network", shinemas2R.object)) > 0 )
 
 if( test2 ){
 	
-	if( fuse_g_and_s ) { 
-		data$son_germplasm = sapply(as.character(data$son), function(x){unlist(strsplit(x,"_"))[1]}) 
-		data$father_germplasm = sapply(as.character(data$father), function(x){unlist(strsplit(x,"_"))[1]}) 
-	} 
-	
+	data = update.data.merge_g_and_s(data, merge_g_and_s)
+ 
 	test = is.element(vec_variables, colnames(data))
 	not_in_data = vec_variables[!test]
 	if( length(not_in_data) == length(vec_variables) ) { message("None elements of vec_variables are in data."); return(NULL) }
@@ -423,26 +442,28 @@ if( test2 ){
 	
 	# Delete expe where there are not data for bouquet AND vrac, do that by putting NA
 	if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-S-relation" | shinemas2R.object == "data-SR-seed-lots" | shinemas2R.object == "data-SR-relation" ) {
-		
 		expe_to_keep = NULL
+
 		vec_expe = unique(data$expe)
+
 		for(var in vec_variables){
 			for(exp in vec_expe){
 				d_tmp = droplevels(filter(data, expe == exp))
 				t = tapply(d_tmp[,var], d_tmp$sl_statut, mean, na.rm = TRUE)
-				
+
 				# function used after
 				isnat = function(t, sl_statut){
 					t1 = t[grep(sl_statut, names(t))]
 					if( length(t1) > 0 ) { if(is.na(t1)) { t1 = TRUE } else { t1 = FALSE } } else { t1 = FALSE}
 					return(t1)
 				}
-				
+
 				if( shinemas2R.object == "data-S-seed-lots" | shinemas2R.object == "data-S-relation" ) {
 					t1 = isnat(t, "bouquetS")
 					t2 = isnat(t, "vracS")
 					test = t1 | t2 
 				} 
+
 				if( shinemas2R.object == "data-SR-seed-lots" | shinemas2R.object == "data-SR-relation" ) {
 					t1 = isnat(t, "bouquetR")
 					t2 = isnat(t, "vracR")
@@ -452,7 +473,7 @@ if( test2 ){
 			}
 		}
 	}
-
+	
 	lv = length(vec_variables)
 	a = 0
 	for(var in vec_variables){
@@ -521,7 +542,9 @@ if( check.arg("map", ggplot.display) ) {
 # 3.1. network-network ----------
 if( check.arg("network-network", ggplot.type) ) {
 
-	p_network = get.ggplot_plot.network(data, vertex.color, vertex.size, hide.labels.parts, display.labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)$pnet
+	if(( !is.null(data$network))){
+		p_network = get.ggplot_plot.network(data, vertex.color, vertex.size, hide.labels.parts, labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)$pnet
+	} else { p_network = NULL }
 	
 	LIST.PLOTS = c(LIST.PLOTS, list("network-network" = p_network))
 }
@@ -530,11 +553,11 @@ if( check.arg("network-network", ggplot.type) ) {
 if( check.arg("network-reproduction-sown", ggplot.type) ) {
 	
 	if( check.arg("barplot", ggplot.display) ) { 
-		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "reproduction", relation.type = c(gettext("sown"), gettext("harvest-sow")), name = gettext("sown seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "reproduction", relation.type = c(gettext("sow"), gettext("harvest-sow")), name = gettext("sown seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
 	} else { out_barplot = NULL }
 	
 	if( check.arg("map", ggplot.display) ) {
-		out_map = get.ggplot_network.relation.map(map, data = data, relation = "reproduction", relation.type = c(gettext("sown"), gettext("harvest-sow")), name = gettext("sown seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "reproduction", relation.type = c(gettext("sow"), gettext("harvest-sow")), name = gettext("sown seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 	} else { out_map = NULL }
 	
 	out = list("network-reproduction-sown" = c(out_barplot, out_map))	
@@ -621,123 +644,164 @@ if( check.arg("network-diffusion-received", ggplot.type) ) {
 # 3.7. network-diffusion-relation ----------
 if( check.arg("network-diffusion-relation", ggplot.type) ) {
 	
-	data.diff = droplevels(filter(data$network.info, !is.na(id.diff)))
-	vec_id.diff = as.character(unique(data.diff$id.diff))
-	son_person = son_lat = son_long = father_person = father_lat = father_long = event_year = diff = NULL
-	
-	# A METTRE A JOUR QUAND ON AURA EVENT YEAR --------------------------
-	print("A METTRE A JOUR QUAND ON AURA EVENT YEAR")
-	data.diff$event_year = data.diff$year
-	print("A METTRE A JOUR QUAND ON AURA EVENT YEAR")
-	
-	for(id in vec_id.diff) { # ajouter "event year" pour ajouter de la couleur et faire le split
-		data.diff.tmp = filter(data.diff, id.diff == id)
-		r = 1 #  which(data.diff.tmp[,"diffusion"] == gettext("receive"))
-		d = 2 # which(data.diff.tmp[,"diffusion"] == gettext("give"))
-		son_person = c(son_person, as.character(data.diff.tmp[r, "person"]))
-		son_lat = c(son_lat, data.diff.tmp[r, "lat"])
-		son_long = c(son_long, data.diff.tmp[r, "long"])
-		father_person = c(father_person, as.character(data.diff.tmp[d, "person"]))
-		father_lat = c(father_lat, data.diff.tmp[d, "lat"])
-		father_long = c(father_long, data.diff.tmp[d, "long"])
-		event_year = c(event_year, as.character(data.diff.tmp[1, "event_year"]))
-		diff = c(diff, paste(as.character(data.diff.tmp[r, "person"]), 
-												 as.character(data.diff.tmp[d, "person"]), 
-												 as.character(data.diff.tmp[1, "event_year"]), sep = "-")
-						 )
-	}
-	
-	d.diff.map = cbind.data.frame(factor(son_person), son_lat, son_long, factor(father_person), father_lat, father_long, factor(event_year), factor(diff))
-	colnames(d.diff.map) = c("son_person", "son_lat", "son_long", "father_person", "father_lat", "father_long", "event_year", "diff")
-	
-	# Add size regarding the number of diffusion for one diff
-	s = table(d.diff.map$diff)
-	d.diff.map$nb_diffusions = as.numeric(as.character((s[d.diff.map$diff])))
-
-	# check if it fits on the map, otherwise it sends an error
-	dgg = map$data
+	if( !is.null(data$network.info) ){
+		data.diff = droplevels(filter(data$network.info, !is.na(id.diff)))
 		
-	lon.range = range(dgg$lon)
-	x.range = range(c(d.diff.map$son_long, d.diff.map$father_long), na.rm = TRUE)	
-	lat.range = range(dgg$lat)
-	y.range = range(c(d.diff.map$son_lat, d.diff.map$father_lat), na.rm = TRUE)
+		if( nrow(data.diff) > 0 ){
+			vec_id.diff = as.character(unique(data.diff$id.diff))
+			son_person = son_lat = son_long = father_person = father_lat = father_long = event_year = diff = NULL
+			
+			# A METTRE A JOUR QUAND ON AURA EVENT YEAR --------------------------
+			print("A METTRE A JOUR QUAND ON AURA EVENT YEAR")
+			data.diff$event_year = data.diff$year
+			print("A METTRE A JOUR QUAND ON AURA EVENT YEAR")
+			
+			for(id in vec_id.diff) { # ajouter "event year" pour ajouter de la couleur et faire le split
+				data.diff.tmp = filter(data.diff, id.diff == id)
+				r = which(data.diff.tmp[,"diffusion"] == gettext("receive"))
+				g = which(data.diff.tmp[,"diffusion"] == gettext("give"))
+				son_person = c(son_person, as.character(data.diff.tmp[r, "person"]))
+				son_lat = c(son_lat, data.diff.tmp[r, "lat"])
+				son_long = c(son_long, data.diff.tmp[r, "long"])
+				father_person = c(father_person, as.character(data.diff.tmp[g, "person"]))
+				father_lat = c(father_lat, data.diff.tmp[g, "lat"])
+				father_long = c(father_long, data.diff.tmp[g, "long"])
+				event_year = c(event_year, as.character(data.diff.tmp[1, "event_year"]))
+				diff = c(diff, paste(as.character(data.diff.tmp[r, "person"]), 
+														 as.character(data.diff.tmp[g, "person"]), 
+														 as.character(data.diff.tmp[1, "event_year"]), sep = "-")
+				)
+			}
+			
+			d.diff.map = cbind.data.frame(factor(son_person), son_lat, son_long, factor(father_person), father_lat, father_long, factor(event_year), factor(diff))
+			colnames(d.diff.map) = c("son_person", "son_lat", "son_long", "father_person", "father_lat", "father_long", "event_year", "diff")
+			
+			# Add size regarding the number of diffusion for one diff
+			s = table(d.diff.map$diff)
+			d.diff.map$nb_diffusions = as.numeric(as.character((s[d.diff.map$diff])))
+			
+			# check if it fits on the map, otherwise it sends an error
+			dgg = map$data
+			
+			lon.range = range(dgg$lon)
+			x.range = range(c(d.diff.map$son_long, d.diff.map$father_long), na.rm = TRUE)	
+			lat.range = range(dgg$lat)
+			y.range = range(c(d.diff.map$son_lat, d.diff.map$father_lat), na.rm = TRUE)
+			
+			if( x.range[1] < lon.range[1] | x.range[2] > lon.range[2] | y.range[1] < lat.range[1] | y.range[2] > lat.range[2] ) { stop("The information do not fit on the map. You should zoom out.") } 
+			
+			# Do ggplot  -------------------
+			
+			all_year = sort(unique(as.numeric(as.character(d.diff.map$event_year))))
+			
+			tmp = NULL
+			for(i in all_year){tmp = c(tmp, list(i))}
+			all_year = c(tmp, list(all_year))
+			
+			out = list()
+			n = NULL
+			
+			for(y in all_year){
+				d.diff.map_tmp = filter(d.diff.map, event_year %in% y)
+				
+				# delete if info is missing for long and lat and put a message
+				no_lat_or_long_son = unique(c(
+					which(is.na(d.diff.map_tmp$son_long)), 
+					which(is.na(d.diff.map_tmp$son_lat)))
+				)
+				no_lat_or_long_father = unique(c(
+					which(is.na(d.diff.map_tmp$father_long)), 
+					which(is.na(d.diff.map_tmp$father_lat)))
+				)
+				
+				t = NULL
+				if( length(no_lat_or_long_son) > 0 ) { t = c(t, as.character(d.diff.map_tmp$person[no_lat_or_long_son])) }
+				if( length(no_lat_or_long_father) > 0 ) { t = c(t, as.character(d.diff.map_tmp$person[no_lat_or_long_father])) }
+				if( length(t) == 0 ) { t = NULL }
+				
+				if( !is.null(t) ) {
+					text = paste(t, collapse = ", ")
+					message(paste(y, collapse = ", "), ": ",text, " have no informations for coordinates and are not represented on the map.")
+					d.diff.map_tmp = d.diff.map_tmp[-unique(c(no_lat_or_long_son, no_lat_or_long_father)),]
+				}
+				
+				if( !is.null(hide.labels.parts) ) { if( hide.labels.parts != "all" ){ stop("With ggplot.type \"network-\" and ggplot.display = \"map\" hide.labels.parts can be NULL or \"all\".") } }
+				
+				p = map + geom_segment(data = d.diff.map_tmp, aes(x = father_long, y = father_lat, xend = son_long, yend = son_lat, size = nb_diffusions), arrow = arrow(length = unit(0.5, "cm")))
+				p = p +  scale_size(range = c(1,3))
+				
+				if( is.null(hide.labels.parts) ){
+					p = p + geom_text(data = d.diff.map_tmp, aes(x = son_long, y = son_lat, label = son_person), size = labels.size)
+					p = p + geom_text(data = d.diff.map_tmp, aes(x = father_long, y = father_lat, label = father_person), size = labels.size)
+				}
+				
+				p = p + ggtitle(paste(y, collapse = ", "))
+				
+				n = c(n, paste("map-[", paste(y, collapse = ", "), "]", sep = ""))
+				
+				out = c(out, list(p))
+				
+			}
+			names(out) = n
+		} else { out = NULL }
+		
+		out_map = list("map" = out)
+	} else { list("map" = NULL) }
 	
-	if( x.range[1] < lon.range[1] | x.range[2] > lon.range[2] | y.range[1] < lat.range[1] | y.range[2] > lat.range[2] ) { stop("The information do not fit on the map. You should zoom out.") } 
-	
-	# Do ggplot  -------------------
-	
-	all_year = sort(unique(as.numeric(as.character(d.diff.map$event_year))))
-
-	tmp = NULL
-	for(i in all_year){tmp = c(tmp, list(i))}
-	all_year = c(tmp, list(all_year))
-	
-	out = list()
-	n = NULL
-	
-	for(y in all_year){
-		d.diff.map_tmp = filter(d.diff.map, event_year %in% y)
-		
-		# delete if info is missing for long and lat and put a message
-		no_lat_or_long_son = unique(c(
-			which(is.na(d.diff.map_tmp$son_long)), 
-			which(is.na(d.diff.map_tmp$son_lat)))
-			)
-		no_lat_or_long_father = unique(c(
-			which(is.na(d.diff.map_tmp$father_long)), 
-			which(is.na(d.diff.map_tmp$father_lat)))
-		)
-		
-		t = NULL
-		if( length(no_lat_or_long_son) > 0 ) { t = c(t, as.character(d.diff.map_tmp$person[no_lat_or_long_son])) }
-		if( length(no_lat_or_long_father) > 0 ) { t = c(t, as.character(d.diff.map_tmp$person[no_lat_or_long_father])) }
-		if( length(t) == 0 ) { t = NULL }
-
-		if( !is.null(t) ) {
-			text = paste(t, collapse = ", ")
-			message(paste(y, collapse = ", "), ": ",text, " have no informations for coordinates and are not represented on the map.")
-			d.diff.map_tmp = d.diff.map_tmp[-unique(c(no_lat_or_long_son, no_lat_or_long_father)),]
-		}
-
-		if( !is.null(hide.labels.parts) ) { if( hide.labels.parts != "all" ){ stop("With ggplot.type \"network-\" and ggplot.display = \"map\" hide.labels.parts can be NULL or \"all\".") } }
-		
-		p = map + geom_segment(data = d.diff.map_tmp, aes(x = son_long, y = son_lat, xend = father_long, yend = father_lat, size = nb_diffusions), arrow = arrow(length = unit(0.5, "cm")))
-		p = p +  scale_size(range = c(1,3))
-		
-		if( is.null(hide.labels.parts) ){
-			p = p + geom_text(data = d.diff.map_tmp, aes(x = son_long, y = son_lat, label = son_person), size = labels.size)
-			p = p + geom_text(data = d.diff.map_tmp, aes(x = father_long, y = father_lat, label = father_person), size = labels.size)
-		}
-		
-		p = p + ggtitle(paste(y, collapse = ", "))
-		
-		n = c(n, paste("map-[", paste(y, collapse = ", "), "]", sep = ""))
-		
-		out = c(out, list(p))
-		
-		}
-	names(out) = n
-	out_map = list("map" = out)
 	out = list("network-diffusion-relation" = out_map)
 	LIST.PLOTS = c(LIST.PLOTS, out)	
 }
 
-# 3.8. network-mixture ----------
-if( check.arg("network-mixture", ggplot.type) ) {
+
+# 3.8. network-mixture-real ----------
+if( check.arg("network-mixture-real", ggplot.type) ) {
 	
 	if( check.arg("barplot", ggplot.display) ) { 
-		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "mixture", relation.type = "mixture", name = gettext("mixed seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "mixture", relation.type = "mixture_real", name = gettext("real mixed seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
 	} else { out_barplot = NULL }
 	
 	if( check.arg("map", ggplot.display) ) {
-		out_map = get.ggplot_network.relation.map(map, data = data, relation = "mixture", relation.type = "mixture", name = gettext("mixed seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "mixture", relation.type = "mixture_real", name = gettext("real mixed seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 	} else { out_map = NULL }
 	
-	out = list("network-mixture" = c(out_barplot, out_map))	
+	out = list("network-mixture-real" = c(out_barplot, out_map))	
 	LIST.PLOTS = c(LIST.PLOTS, out)	
 }
 
-# 3.9. network-positive-intra-selected ----------
+# 3.9. network-mixture-rep ----------
+if( check.arg("network-mixture-rep", ggplot.type) ) {
+	
+	if( check.arg("barplot", ggplot.display) ) { 
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "mixture", relation.type = "mixture_rep", name = gettext("mixed rep seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+	} else { out_barplot = NULL }
+	
+	if( check.arg("map", ggplot.display) ) {
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "mixture", relation.type = "mixture_rep", name = gettext("mixed rep seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+	} else { out_map = NULL }
+	
+	out = list("network-mixture-rep" = c(out_barplot, out_map))	
+	LIST.PLOTS = c(LIST.PLOTS, out)	
+}
+
+
+# 3.10. network-mixture-all ----------
+if( check.arg("network-mixture-all", ggplot.type) ) {
+	
+	if( check.arg("barplot", ggplot.display) ) { 
+		out_barplot = get.ggplot_network.relation.barplot(data = data, combi = combi, relation = "mixture", relation.type = c("mixture_real", "mixture_rep"), name = gettext("all mixed seed-lots"), nb_parameters_per_plot_x.axis = nb_parameters_per_plot_x.axis, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, ggplot.type = ggplot.type)
+	} else { out_barplot = NULL }
+	
+	if( check.arg("map", ggplot.display) ) {
+		out_map = get.ggplot_network.relation.map(map, data = data, relation = "mixture", relation.type = c("mixture_real", "mixture_rep"), name = gettext("all mixed seed-lots"), pie.size = pie.size, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+	} else { out_map = NULL }
+	
+	out = list("network-mixture-all" = c(out_barplot, out_map))	
+	LIST.PLOTS = c(LIST.PLOTS, out)	
+}
+
+
+
+# 3.11. network-positive-intra-selected ----------
 if( check.arg("network-positive-intra-selected", ggplot.type) ) {
 	
 	if( check.arg("barplot", ggplot.display) ) { 
@@ -752,7 +816,7 @@ if( check.arg("network-positive-intra-selected", ggplot.type) ) {
 	LIST.PLOTS = c(LIST.PLOTS, out)	
 }
 
-# 3.10. "network-reproduction-crossed" ----------
+# 3.12. "network-reproduction-crossed" ----------
 if( check.arg("network-reproduction-crossed", ggplot.type) ){
 	
 	if( check.arg("barplot", ggplot.display) ) { 
@@ -798,7 +862,6 @@ if( check.arg("network-reproduction-crossed", ggplot.type) ){
 	out = list("network-reproduction-crossed" = list("barplot" = out_barplot, "map" = out_map))
 	LIST.PLOTS = c(LIST.PLOTS, out)	
 }
-
 
 # 4. Plot for data- type ########## ----------
 
@@ -861,6 +924,7 @@ if( check.arg("data-interaction", ggplot.type) ) {
 	}
 	LIST.PLOTS = c(LIST.PLOTS, list.plots)
 }
+
 
 # 4.4. data-radar ----------
 if( check.arg("data-radar", ggplot.type) & length(vec_variables) > 1 ) {
@@ -990,7 +1054,7 @@ if( check.arg("data-pie.on.network", ggplot.type) ) {
 		
 		n = n$data
 		
-		p = get.ggplot_plot.network(n, vertex.color, vertex.size, hide.labels.parts, display.labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)
+		p = get.ggplot_plot.network(n, vertex.color, vertex.size, hide.labels.parts, labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)
 		p_net = p$pnet
 		plotcoord = p$plotcoord
 		colnames(plotcoord)[which(colnames(plotcoord) == "id")] = "sl"

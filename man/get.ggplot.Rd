@@ -4,22 +4,21 @@
 \alias{get.ggplot}
 \title{Get ggplot objects from \code{get.data}}
 \usage{
-get.ggplot(data, correlated_group = NULL, fuse_g_and_s = FALSE,
+get.ggplot(data, correlated_group = NULL, merge_g_and_s = TRUE,
   ggplot.type = NULL, ggplot.display = NULL, ggplot.on = "son",
   x.axis = NULL, in.col = NULL, vec_variables = NULL,
   nb_parameters_per_plot_x.axis = NULL,
   nb_parameters_per_plot_in.col = NULL, vertex.size = 3,
   vertex.color = "year", organise.sl = FALSE, labels.on = "son",
-  hide.labels.parts = "all", display.labels.sex = TRUE,
-  labels.generation = TRUE, labels.size = 3, location.map = "france",
-  pie.size = 0.5)
+  hide.labels.parts = "all", labels.sex = TRUE, labels.generation = TRUE,
+  labels.size = 3, location.map = "france", pie.size = 0.5)
 }
 \arguments{
 \item{data}{output from get.data with query.type = "network" or query.type = "data-...".}
 
-\item{correlated_group}{Name of the group of correlation in data. NULL by default.}
+\item{correlated_group}{Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.}
 
-\item{fuse_g_and_s}{Fuse germplasm and selection name information in a column named germplasm}
+\item{merge_g_and_s}{Fuse germplasm and selection name information in a column named germplasm. TRUE by default.}
 
 \item{ggplot.type}{the type of plot you wish.
 NULL by default: according to the type of data, it will be "network-all" or "data-all". "X-all" means that all the "X-" objects are done.
@@ -57,7 +56,7 @@ The possibilites are:
 
 \item{x.axis}{factor displayed on the x.axis of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, all the combinaison are done for x.axis and in.col.}
 
-\item{in.col}{factor displayed in color of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lots. If NULL, in.col is not displayed. Note it is compulsory for data-biplot and data-radar as in these cases x.axis is not used.}
+\item{in.col}{factor displayed in color of a plot: "germplasm", "year" or "person" referring to the attributes of a seed-lot. If NULL, in.col is not displayed. Note that it is compulsory for data-biplot and data-radar as in these cases x.axis is not used.}
 
 \item{vec_variables}{For "data-" type : a vector of variables displayed.}
 
@@ -69,23 +68,23 @@ The possibilites are:
 
 \item{vertex.color}{For ggplot.type = "network", color of the vertex. It can be chosen according to  "person", "germplasm" or "year". If NULL, it is in black.}
 
-\item{organise.sl}{For ggplot.type = "network", organise seed-lots for an easier visualisation}
+\item{organise.sl}{For ggplot.type = "network", organizes seed-lots for an easier visualization}
 
-\item{labels.on}{"son" or "father". For ggplot.type = "data-biplot" choose if labels are on son or father seed-lots. For other "data-..." plots, there are no labels as it is managed by x.axis and in.col.}
+\item{labels.on}{"son" or "father". For ggplot.type = "data-biplot" chooses if labels are on son or father seed-lots. For other "data-..." plots, there are no labels as it is managed by x.axis and in.col.}
 
 \item{hide.labels.parts}{For ggplot.type = network-network and data-biplot.
 Parts of the label hidden: "germplasm", "person", "year", "person:germplasm", "year:germplasm", "person:year", "all". "all" means that no labels are dispayed. If NULL labels are displayed. Labels are based on seed-lots names under the form germplasm_year_person_digit.
 For "data-biplot", the default value is NULL.
-For easier visualisation, Digit is never display unless you choose NULL.
-Note that with ggplot.type "network-" and ggplot.display = "map", hide.labels.part can be NULL or "all" as only person can be display.}
+For an easier visualization, digit is never displayed unless you choose NULL.
+Note that with ggplot.type "network-" and ggplot.display = "map", hide.labels.part can be NULL or "all" as only person can be displayed.}
 
-\item{display.labels.sex}{For ggplot.type = "network-network", if TRUE, display the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".}
+\item{labels.sex}{For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".}
 
-\item{labels.generation}{For ggplot.type = "network-network", if TRUE, display generation for each reproduction}
+\item{labels.generation}{For ggplot.type = "network-network". If TRUE, displays generation for each reproduction}
 
 \item{labels.size}{Size of the labels}
 
-\item{location.map}{Location of the map see \code{?map} for more details.}
+\item{location.map}{Location of the map. See \code{?map_data}, argument \code{map}, for more details.}
 
 \item{pie.size}{Size of the pie when using pies}
 }
@@ -112,21 +111,36 @@ The function returns a list with several ggplot objects according to the data an
 	\itemize{
 	\item the seed-lots sent (ggplot.type = "network-diffusion-sent")
 	\item the seed-lots received (ggplot.type = "network-diffusion-received")
-	\item the relation between seed-lots on maps (ggplot.type = "network-diffusion-relation"). The size of the arrows is proprotionnal to the number of diffusions.
+	\item the relation between seed-lots on maps (ggplot.type = "network-diffusion-relation"). The size of the arrows is proportionnal to the number of diffusions.
 	}
 
-\item a series of ggplots for mixture (ggplot.type = "network-mixture"). Note that mixture of replications are not counted here.
+\item a series of ggplots for mixtures representing:
+	\itemize{
+	\item the seed-lots coming from 'real' mixtures (ggplot.type = "network-mixture-real")
+	\item the seed-lots coming from mixtures of replication (ggplot.type = "network-mixture-rep")
+	\item the seed-lots coming from all mixtures (ggplot.type = "network-mixture-all")
+}
 
 \item a series of ggplots for selection (ggplot.type = "network-positive-intra-selected")
 
 }
 
-\item For "data-" type, plots are displayed for each variable of vec_variables for "data-barplot", "data-boxplot", "data-interation". It is all possibles pairs for "data-biplot". It is all the variables for "data-radar".
+\item For "data-" type, plots are displayed for each variable of vec_variables for "data-barplot", "data-boxplot", "data-interation". It is all possible pairs for "data-biplot". It is all the variables for "data-radar".
 
 }
 }
 \description{
-\code{get.ggplot} generates ggplot object from \code{get.data} data-set
+\code{get.ggplot} generates ggplot objects from \code{get.data} data-set
+}
+\details{
+For data coming from query.type = "data-S" and "data-SR", NA are put when there are no data for bouquet AND vrac
+
+For data-radar, it is the mean which is represented
+
+For data-biplot note that no plots are possible for between raw data linked to individuals and raw data linked to relation.
+}
+\examples{
+# See the vignette
 }
 \author{
 Pierre Riviere

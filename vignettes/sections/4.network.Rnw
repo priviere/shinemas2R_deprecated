@@ -1,4 +1,4 @@
-# version 0.9.1
+% version 0.10
 \section{Network relations between \sl }
 \label{network}
 
@@ -13,7 +13,7 @@ You can set filters to the query with the following argument :
 \item \texttt{filter.out} to choose everything except \texttt{filter.out}
 \end{itemize}
 
-values of \texttt{filter} can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation} or \texttt{reproduction type}.
+values of filters can be \texttt{germplasm}, \texttt{germplasm.type}, \texttt{year}, \texttt{person}, \texttt{project}, \texttt{\sl}, \texttt{relation} or \texttt{reproduction.type}.
 
 
 It is important to choose whether to apply the filter to the \texttt{father} or to the \texttt{son} of a relation.
@@ -22,6 +22,12 @@ Possibles values are \texttt{"father"}, \texttt{"son"} or \texttt{"father-son"}.
 It is set by default to \texttt{"father-son"}.
 
 It is possible to get the \texttt{Mdist} square matrix with the number of reproductions that separate two seed-lots since their last common diffusion (argument \texttt{Mdist = TRUE}).
+Note that a value of 1 means a distance between 
+\begin{itemize}
+	\item a seed-lot that has been diffused to location A without beeing sown and harvested on location B and
+	\item a seed-lot that has been diffused to location B and beeing sown and harvested on location B
+\end{itemize}
+
 This square matrix can be compared to a differentiation distance. 
 It can be put in relation with genetic $F_{st}$ for example \citep{nei_analysis_1973}\footnote{The \R~package \texttt{adegenet} can be used for that.}.
 
@@ -32,19 +38,17 @@ if(use.get.data){
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "network", # network query
-		germplasm.in = "Rouge-du-Roc", # germplasm to keep
 		filter.on = "father-son", # filter on father AND son
 		Mdist = TRUE
 		)
-		# 1. Query SHiNeMaS ...
+} else { 
+	# 1. Query SHiNeMaS ...
+	# Mixtures from replication have been deleted and replaced by reproductions.
 	# 2. Create network matrix ...
 	# 3. Link information to vertex and edges ...
 	# 4. Get network information on seed-lots ...
 	# 5. Get Mdist square matrix ...
-	#data_network = encrypt.data(data_network)
-	#The key has been written in /home/pierre/key_network_Tue Nov 24 11:52:47 2015.RData
 	
-} else { 
 	load("./data/data_network.RData")
 	}
 @
@@ -64,6 +68,11 @@ See \url{http://mbojan.github.io/intergraph/} for more information.
 <<message=TRUE,cache=FALSE>>=
 n_igraph = intergraph::asIgraph(n)
 n_igraph
+@
+
+\item the network.query dataframe coming from the query
+<<message=TRUE,cache=FALSE>>=
+head(data_network$data$network.query)
 @
 
 
@@ -86,56 +95,56 @@ To do so, use \texttt{fill.diffusion.gap = TRUE}.
 
 <<message=TRUE,cache=FALSE>>=
 if(use.get.data){
-	data_network_JAB = get.data(
+	data_network_OLR = get.data(
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password,  # db infos
 		query.type = "network", # network query
-		person.in = "JAB", # person to keep
+		person.in = "OLR", # person to keep
 		filter.on = "father-son" # filter on father AND son
 		)
+} else {
 	# 1. Query SHiNeMaS ...
+	# Mixtures from replication have been deleted and replaced by reproductions.
 	# 2. Create network matrix ...
 	# 3. Link information to vertex and edges ...
 	# 4. Get network information on seed-lots ...
-	
-	#data_network_JAB = encrypt.data(data_network_JAB)
-	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:54:53 2015.RData
-	
-} else {
-	load("./data/data_network_JAB.RData")
+
+	load("./data/data_network_OLR.RData")
 	}
 @
 
 <<message=TRUE,cache=FALSE>>=
 if(use.get.data){
-	data_network_JAB_fill_gap = get.data(
+	data_network_OLR_fill_gap = get.data(
 		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
 		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
 		query.type = "network", # network query
-		person.in = "JAB", # person to keep
+		person.in = "OLR", # person to keep
 		filter.on = "father-son", # filter on father AND son
 		fill.diffusion.gap = TRUE
 		)
+} else {
 	# 1. Query SHiNeMaS ...
+	# Mixtures from replication have been deleted and replaced by reproductions.
 	# 2. Create network matrix ...
 	# 2.1. Fill diffusion gaps ...
 	# 3. Link information to vertex and edges ...
 	# 4. Get network information on seed-lots ...
 	
-	#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)
-	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData
-	
-} else {
-	load("./data/data_network_JAB_fill_gap.RData")
+	load("./data/data_network_OLR_fill_gap.RData")
 	}
-
 @
+
+Sometimes, seed-lots are replicated and then mixted.
+This can be seen as 'false' mixture compared to 'real' mixture where the germplasm father and son are different.
+In order to take this into account in the analysis of the network, it can be useful to delete the 'false' mixture and declare it as a reproduction.
+This can be done with the argument \texttt{mixrep\_to\_repro} which tranform the mixtures of replications into reproductions, i.e. the network keeps only 'real' mixtures (i.e. different germplasm for father and son) and correct the information regarding what have been harvested and sown after as the mixture disappear. 
+The value of \texttt{mixrep\_to\_repro} is \texttt{TRUE} by default.
 
 
 \subsection{Get the ggplots}
 
 Once you have acquired the data, you can create plots with the function \texttt{get.ggplot}.
-
 
 <<message=TRUE,cache=FALSE>>=
 default_network_ggplot = get.ggplot(data_network)
@@ -157,40 +166,40 @@ Each \texttt{ggplot.type} with default and customized arguments are explained in
 By default, the following network is displayed:
 
 <<message=TRUE,cache=FALSE>>=
-p_net_RdR = default_network_ggplot$"network-network"
-p_net_RdR
+p_net_C1 = default_network_ggplot$"network-network"
+p_net_C1
 @
 
 
 Regarding the argument \texttt{fill.diffusion.gap} in the function \texttt{get.data}:
 
 <<message=TRUE,cache=FALSE>>=
-p_JAB = get.ggplot(
-	data_network_JAB,
+p_OLR = get.ggplot(
+	data_network_OLR,
 	ggplot.type = "network-network", 
 	vertex.color = "person"
 	)
-p_JAB = p_JAB$`network-network`
+p_OLR = p_OLR$`network-network`
 
-p_JAB_fill_gap = get.ggplot(
-	data_network_JAB_fill_gap, 
+p_OLR_fill_gap = get.ggplot(
+	data_network_OLR_fill_gap, 
 	ggplot.type = "network-network", 
 	vertex.color = "person"
 	)
-p_JAB_fill_gap = p_JAB_fill_gap$`network-network`
+p_OLR_fill_gap = p_OLR_fill_gap$`network-network`
 @
 
 We can see that extra information is added to know where the seed-lots come from.
 
 \begin{center}
 \begin{tabular}{cc}
-\texttt{p\_JAB} & \texttt{p\_JAB\_fill\_gap} \\
+\texttt{p\_OLR} & \texttt{p\_OLR\_fill\_OLR} \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".5\\textwidth">>=
-p_JAB
+p_OLR
 @
 &
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".5\\textwidth">>=
-p_JAB_fill_gap
+p_OLR_fill_gap
 @
 \\
 \end{tabular}
@@ -209,8 +218,6 @@ It is possible to tune the following arguments (Table \ref{custom.network}):
 \hline
 \texttt{argument} & \texttt{default value} & description \\
 \hline
-
-\texttt{filter.on} & \texttt{"father-son"} & it chooses on which seed-lots the filters are applied: \texttt{"son"}, \texttt{"father"} or \texttt{"father-son"}. \\
 
 \texttt{vertex.size} & \texttt{3} &  size of the vertex \\
 
@@ -394,20 +401,17 @@ p1_slh = get.ggplot(
 	ggplot.display = "barplot",
 	x.axis = "person",
 	in.col = "year",
-	nb_parameters_per_plot_x.axis = 10
+	nb_parameters_per_plot_x.axis = 2
 	)
 
 p11_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-1`
 p12_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-2|in.col-1`
-p13_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-3|in.col-1`
-p14_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-4|in.col-1`
-p15_slh = p1_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-5|in.col-1`
 @
 
 
 Note that you can easily change settings of the plot as it is a ggplot object, for example
 <<message=TRUE,cache=FALSE>>=
-p15_slh_bw = p15_slh + theme_bw()
+p12_slh_bw = p12_slh + theme_bw()
 @
 
 
@@ -422,34 +426,14 @@ p11_slh
 p12_slh
 @
 \\
-\texttt{p13\_slh} & \texttt{p14\_slh} \\
+\texttt{p12\_slh\_bw} &  \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-p13_slh
+p12_slh_bw
 @
 &
-<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-p14_slh
-@
-\\
-\texttt{p15\_slh} & \texttt{p15\_slh\_bw}  \\
-<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-p15_slh
-	# 1. Query SHiNeMaS ...
-	# 2. Create network matrix ...
-	# 2.1. Fill diffusion gaps ...
-	# 3. Link information to vertex and edges ...
-	# 4. Get network information on seed-lots ...
-	
-	#data_network_JAB_fill_gap = encrypt.data(data_network_JAB_fill_gap)
-	# The key has been written in /home/pierre/key_network_Tue Nov 24 11:55:53 2015.RData
-
-<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>
-p15_slh_bw
-@
 \\
 \end{tabular}
 \end{center}
-
 
 
 Or for \texttt{in.col}:
@@ -460,12 +444,11 @@ p2_slh = get.ggplot(
 	ggplot.display = "barplot",
 	x.axis = "person",
 	in.col = "year",
-	nb_parameters_per_plot_in.col = 3
+	nb_parameters_per_plot_in.col = 2
 	)
 
 p21_slh = p2_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-1`
 p22_slh = p2_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-2`
-p23_slh = p2_slh$`network-reproduction-harvested`$barplot$`person-year`$`x.axis-1|in.col-3`
 @
 
 \begin{center}
@@ -478,12 +461,6 @@ p21_slh
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
 p22_slh
 @
-\\
-\texttt{p23\_slh} & \\
-<<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-p23_slh
-@
-&
 \\
 \end{tabular}
 \end{center}
@@ -507,19 +484,19 @@ The scale represent the number of seed-lots harvested.
 m_slh = default_network_ggplot$`network-reproduction-harvested`$map
 names(m_slh)
 
-m4_slh = m_slh$`map-[2011]`
-m9_slh = m_slh$`map-[2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2014]`
+m1_slh = m_slh$`map-[2011]`
+m5_slh = m_slh$`map-[2011, 2012, 2013, 2014]`
 @
 
 \begin{center}
 \begin{tabular}{cc}
-\texttt{m4\_slh} & \texttt{m9\_slh} \\
+\texttt{m1\_slh} & \texttt{m5\_slh} \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-m4_slh
+m1_slh
 @
 &
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-m9_slh
+m5_slh
 @
 \\
 \end{tabular}
@@ -565,7 +542,7 @@ p_slh = get.ggplot(
 	hide.labels.parts = NULL
 	)
 
-p_slh$`network-reproduction-harvested`$map$`map-[2011]`
+p_slh$`network-reproduction-harvested`$map$`map-[2014]`
 @
 
 \end{itemize}
@@ -586,19 +563,19 @@ The size of the arrows is proprotionnal to the number of diffusions (\texttt{nb\
 m_dr = default_network_ggplot$`network-diffusion-relation`$map
 names(m_dr)
 
-m4_dr = m_dr$`map-[2009]`
-m7_dr = m_dr$`map-[2002, 2007, 2008, 2009, 2010, 2011]`
+m1_dr = m_dr$`map-[2012]`
+m3_dr = m_dr$`map-[2012, 2014]`
 @
 
 \begin{center}
 \begin{tabular}{cc}
-\texttt{m4\_dr} & \texttt{m7\_dr} \\
+\texttt{m1\_dr} & \texttt{m3\_dr} \\
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-m4_dr
+m1_dr
 @
 &
 <<message=TRUE,cache=FALSE,echo=FALSE,out.width=".4\\textwidth">>=
-m7_dr
+m3_dr
 @
 \\
 \end{tabular}
@@ -640,7 +617,7 @@ cb$cross$barplot$`year-germplasm`$`x.axis-1|in.col-1`
 @
 
 <<message=TRUE,cache=FALSE,out.width=".6\\textwidth">>=
-cm$cross$map$`map-[2002, 2008, 2009]`
+cm$cross$map$`map-[2011]`
 @
 
 \item Custom arguments
@@ -674,7 +651,11 @@ It corresponds to negative inter selection. \\
 
 \texttt{"network-diffusion-received"} & seed-lots that have been received in a given location. \\
 
-\texttt{"network-mixture"} & seed-lots that have been mixed into a mixture. Note that mixtures of replications are not counted here. \\
+\texttt{"network-mixture-real"} & seed-lots that have been 'really' mixed into a mixture. \\
+
+\texttt{"network-mixture-rep"} & seed-lots coming from replication that have been mixed into a mixture. Note that it is \texttt{NULL} when the argument \texttt{mixrep\_to\_repro} in \texttt{get.data} is \texttt{TRUE} (default argument).\\
+
+\texttt{"network-mixture-all"} & seed-lots that have been mixed into a mixture (i.e. \texttt{"network-mixture-real"} + \texttt{"network-mixture-rep"}. \\
 
 \texttt{"network-positive-intra-selected"} & seed-lots where intra germplasm selection have been done.
 It corresponds to mass selection. \\

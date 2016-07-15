@@ -1,7 +1,7 @@
 Package: shinemas2R
 Type: Package
 Title: An R package to visualize outputs from the data base Seed History and Network Management System (SHiNeMaS)
-Version: 0.9.1
+Version: 0.10
 Date: 2016-20-01
 Authors@R: c(person("Yannick", "de Oliveira", role = "ctb"),
     person("Pierre", "Riviere", role = c("aut", "cre")))
@@ -34,6 +34,7 @@ Suggests:
     agricolae,
     intergraph,
     igraph,
+    adegenet,
     knitr
 SystemRequirements: LaTeX with packages longtable, lscape, graphicx, pdfpages,
     float, hyperref and fancyhdr

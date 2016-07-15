@@ -14,9 +14,9 @@
 
 \item{fuse_g_and_s}{Fuse germplasm and selection name information in a column named germplasm}
 
-\item{correlated_group}{Name of the group of correlation in data. NULL by default.}
+\item{correlated_group}{Name of the group of correlation in data. NULL by default meaning that all the data are taken.}
 
-\item{format}{the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are severals format within a package. Possible values are "PPBstats".}
+\item{format}{the format you want. It is under the form "name_of_the_package" or "name_of_the_package::name_of_the_function" if there are several formats within a package. Possible values are "PPBstats".}
 }
 \value{
 The data set with the right format for the R package
@@ -24,7 +24,10 @@ The data set with the right format for the R package
 \description{
 Format data from \code{get.data} to be used by several R packages
 }
+\examples{
+# See the vignette
+}
 \seealso{
-\code{\link{get.data}}
+\code{\link{get.data}}, \code{\link{is.get.data.output}}
 }
 

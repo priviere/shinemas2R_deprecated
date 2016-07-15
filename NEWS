@@ -1,3 +1,60 @@
+shinemas2R 0.10 -------------------------------------
+-----------------------------------------------------
+* change the nomencalture of the version
+
+
+shinemas2R 0.9.2 ------------------------------------
+-----------------------------------------------------
+* new function added: 
+	- is.get.data.output.R
+	- extra_functions.R
+
+* update functions regarding is.get.data.output.R
+
+* debug some functions:
+	- get.pdf.R
+	- get.data.R: 
+		. cf issue #8
+		. cf issue #12
+	- get.ggplot_pie.on.ggplot.R
+
+* improve some functions:
+	- get.data.R:
+		. update the queries regarding evolution of SHiNeMaS structure
+		. add query.type = "species"
+		. add query.type = "person-info"
+		. add query.type = "grand-father"
+		. change order of the arguments
+		. add error messages and update Rd for filters allowed for each query.type
+		. add argument mixrep_to_repro
+		. delete query.type = "SL.mix"
+		. add query.type = "data-mixture-1"
+
+	- get.ggplot.R:
+		. change argument "display.lables.sex"" to "labels.sex"
+		. rename the argument "fuse_g_and_s"" by "merge_g_and_s"
+		. default argument for "merge_g_and_s"" is TRUE
+		
+	- get.table.R:
+		. rename the argument "fuse_g_and_s"" by "merge_g_and_s"
+		
+	- encrypt.data.R:
+		. update regarding changes in get.data.R
+
+	- format.data.R:
+		. update regarding changes in get.data.R
+
+* add shinemas_tuto.sql in inst/extdata
+
+* vignette:
+	- update regarding new version of SHiNeMaS
+	- orthograph corrections
+	- update for is.get.data.output.R
+	- add section "Other information in SHiNeMaS"
+	- update appendix A1
+	- add appendix A4
+
+
 shinemas2R 0.9.1 ------------------------------------
 -----------------------------------------------------
 * Correct bugs in the code

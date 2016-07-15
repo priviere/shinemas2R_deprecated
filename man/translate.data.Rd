@@ -2,22 +2,22 @@
 % Please edit documentation in R/translate.data.R
 \name{translate.data}
 \alias{translate.data}
-\title{Translate variables present in data coming from \code{get.data}}
+\title{Translate variables and methods present in data coming from \code{get.data}}
 \usage{
 translate.data(data, list_translation)
 }
 \arguments{
 \item{data}{output from the \code{get.data} function}
 
-\item{list_translation}{A list with as many element as variables to translate. It is under the form list(c("tkw", "pmg"), c("protein", "proteine")).}
+\item{list_translation}{A list with as many elements as variables to translate. It is under the form list(c("tkw", "pmg"), c("protein", "proteine")).}
 }
 \value{
-The data with translated variables
+The data with translated data
 }
 \description{
-Translate variables present in data coming from \code{get.data}
+Translate variables and methods present in data coming from \code{get.data}
 }
 \seealso{
-\code{\link{get.data}}
+\code{\link{get.data}}, \code{\link{is.get.data.output}}
 }
 

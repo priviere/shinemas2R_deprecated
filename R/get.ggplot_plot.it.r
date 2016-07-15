@@ -174,19 +174,16 @@ get.ggplot_plot.it = function(
 	if(ggplot.display == "radar") {
 
 			d = reshape.data(d, x.axis = NULL, nb_parameters_per_plot_x.axis = NULL, in.col = in.col, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, vec_variables = vec_variables)
-		
+
 		fun = function(d, vec_variables, in.col){
 			colnames(d)[which(colnames(d) == in.col)] = "in.col"
 			
 			d = droplevels(d[,c(vec_variables, "in.col")])
-			tokeep = apply(d[,vec_variables], 1, function(x){ !is.na(sum(x)) })
-			t = length(which(tokeep))
-			if( t > 0 ) { warning(t, " rows have been deleted for variables ", paste(vec_variables, collapse = ", "), " because of at least one NA on the row for these variables.") }
-			d = droplevels(d[tokeep,])
-			
+
 			m = NULL
 			for(variable in vec_variables){
-				value = tapply(d[,variable], d$in.col, mean)
+				value = tapply(d[,variable], d$in.col, mean, na.rm = TRUE)
+
 				if( length(value) > 1 ) { # rescale all variables to lie between 0 and 1
 					value1 = (value - min(value, na.rm = TRUE)) / (max(value, na.rm = TRUE) - min(value, na.rm = TRUE))
 				} else { value1 = 1 }
@@ -202,8 +199,6 @@ get.ggplot_plot.it = function(
 				structure(coord_polar(...), class = c("radar", "polar", "coord")) 
 			} 
 			is.linear.radar <- function(coord) TRUE
-
-			attributes(p)$x.axis = NULL; attributes(p)$in.col = in.col
 			
 			p = ggplot(m, aes(x = variable, y = value1, color = in.col)) + geom_path(aes(group = in.col)) + coord_radar()
 			p = p  + xlab("measure") + ylab("relative value") + theme(legend.title = element_blank()) 
@@ -217,18 +212,27 @@ get.ggplot_plot.it = function(
 	if(ggplot.display == "biplot") {
 		
 		d = reshape.data(d, x.axis = NULL, nb_parameters_per_plot_x.axis = NULL, in.col = in.col, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, vec_variables = vec_variables, labels.on = labels.on, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
-
+		
 		fun = function(pair_var, d, in.col){
 			funb = function(d, pair_var, in.col){
 				colnames(d)[which(colnames(d) == in.col)] = "in.col"
 				var = unlist(strsplit(pair_var, " -azerty- "))
 				var1 = var[1]; colnames(d)[which(colnames(d) == var1)] = "var1"
 				var2 = var[2]; colnames(d)[which(colnames(d) == var2)] = "var2"
-				p = ggplot(d, aes(x = var1, y = var2, label = labels)) 
-				p = p + stat_smooth(method = "lm", se = FALSE)
-				p = p + geom_text(aes(colour = factor(in.col)), size = labels.size)
-				p = p  + xlab(var1) + ylab(var2) + ggtitle(titre) + theme(axis.text.x = element_text(angle=90, hjust=1), legend.title = element_blank()) 
-				attributes(p)$x.axis = NULL; attributes(p)$in.col = in.col
+				
+				dtmp = cbind.data.frame(d[,c(1, 2)], d[, c("var1", "var2")])
+				dtmp = na.omit(dtmp)
+				if( nrow(dtmp) == 0){
+					warning("No biplot is done for ", var1, " and ", var2, " as there are only NA. This can be due to missing data or to mismatch between raw data linked to individuals with raw data linked to relation."); 
+					p = NULL
+				} else {
+					p = ggplot(dtmp, aes(x = var1, y = var2, label = labels)) 
+					p = p + stat_smooth(method = "lm", se = FALSE)
+					p = p + geom_text(aes(colour = factor(in.col)), size = labels.size)
+					p = p  + xlab(var1) + ylab(var2) + ggtitle(titre) + theme(axis.text.x = element_text(angle=90, hjust=1), legend.title = element_blank()) 
+					attributes(p)$x.axis = NULL; attributes(p)$in.col = in.col
+				}
+
 				return(p)
 			}
 			p = lapply(d, funb, pair_var, in.col)

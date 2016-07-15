@@ -79,13 +79,16 @@
 #' 
 #' @author Pierre Riviere
 #' 
+#' @examples 
+#' # See the vignette
+#' 
 #' @seealso \code{\link{get.ggplot}}, \code{\link{get.table}}
 #' 
 get.pdf = function(
 	dir = "./",
 	form.name,
 	LaTeX_head = NULL,
-	LaTeX_body, 
+	LaTeX_body,
 	compile.tex = TRUE,
 	color1 = "white",
 	color2 = "white"
@@ -94,7 +97,7 @@ get.pdf = function(
 {
 	# 1. Error messages ----------
 	a = dir(dir)
-	if(length(a) == 0){ stop("directory ", dir, " does not exist.") }
+	if( !file.exists(dir) ){ stop("directory ", dir, " does not exist.") }
 	
 	n = unique(names(LaTeX_body))
 	n.ok = c("titlepage", "tableofcontents", "chapter", "section", "subsection", "subsubsection", "table", "figure", "text", "includepdf", "input")
@@ -219,16 +222,16 @@ get.pdf = function(
 		}
 
 		if( n == "includepdf" ) { 
-			if(!is.null(names(d[[1]]))) { stop("Elements of includepdf must be a character") } 
+			if(!is.null(names(d[[1]]))) { stop("Elements of includepdf must be a character") }
 			if(!is.character(d[[1]])) { stop("Elements of includepdf must be a character") } 
-			a = scan(is.character(d[[1]]), what = "character", quiet = TRUE) # Error message if the file does not exist
+			if( !file.exists(d[[1]]) ) { stop(d[[1]], " does not exist") }
 		}
 		
 	if( n == "input" ) { 
 			if(!is.null(names(d[[1]]))) { stop("Elements of input must be a character") } 
 			if(!is.character(d[[1]])) { stop("Elements of input must be a character") } 
-		a = scan(is.character(d[[1]]), what = "character", quiet = TRUE) # Error message if the file does not exist		
-		}
+			if( !file.exists(d[[1]]) ) { stop(d[[1]], " does not exist ") }
+	}
 		
 	}
 
@@ -237,7 +240,7 @@ get.pdf = function(
 	we_are_here = getwd()
 	setwd(dir)
 	if( is.element(form.name, dir()) ) { stop("The folder ",form.name, " already exists ! Delete the folder ", form.name," or find a new name.") }
-	system(paste("mkdir ", form.name, sep="")) # attention, quand il n'y a pas assez de mémoire, ça bug !!!
+	system(paste("mkdir ", form.name, sep="")) # bug when there is not enought memory !!!
 	setwd(form.name)
 	system("mkdir tex.files")
 	system("mkdir figures")
@@ -254,7 +257,6 @@ get.pdf = function(
 		}
 		return(list.tex)
 	}
-	
 	
 	# 4. Open connection to write the .tex ---------- 
 	sink(paste("./tex.files/", form.name,".tex", sep = ""))
@@ -294,15 +296,14 @@ get.pdf = function(
 		cat(to.put.in.LaTeX.head)
 		to.add.in.LaTeX_head = NULL
 		}	else { 
-		LaTeX_head = scan(paste("../", LaTeX_head, sep = ""), "caracter", sep = "\n", quiet = TRUE) 
+		LaTeX_head = scan(paste(we_are_here, "/", LaTeX_head, sep = ""), "caracter", sep = "\n", quiet = TRUE) 
 		
 		# To add in LaTeX.head because it is compulsory
 		
 		test = function(to.add, x.check, x.toadd, LaTeX_head){ 
-			a= NULL
-			for(i in 1:length(x.check)) { a = c(a, grep(x.check[i], LaTeX_head)) }; a = unique(a)
-			if( length(a) == length(x.check) ) { go = FALSE } else { go = TRUE }
-			if( go ) { 
+			a = NULL
+			for(i in 1:length(x.check)) { a = c(a, grep(x.check[i], LaTeX_head)) }
+			if( length(a) == 0 ) { 
 				to.add = c(to.add, x.toadd); message(x.toadd, " has been added to LaTeX head.")
 			} 
 			return(to.add) 
@@ -333,7 +334,7 @@ get.pdf = function(
 		if( !is.null(to.add) ) { 
 			cat(to.add, sep = "\n")
 			cat(LaTeX_head, sep = "\n") 
-		}
+		} else { cat(LaTeX_head, sep = "\n") }
 		
 		to.add = NULL
 		to.add = test(to.add, "document}", "\\begin{document}", LaTeX_head)
@@ -389,9 +390,9 @@ get.pdf = function(
 		if(n == "subsection") { cat("\\subsection{",text.to.tex(d[[1]]),"} \n \n") }
 		if(n == "subsubsection") { cat("\\subsubsection{",text.to.tex(d[[1]]),"} \n \n") }
 		if(n == "text") { cat(text.to.tex(d[[1]]),"\n \n") }
-		if(n == "includepdf") { cat("\\includepdf[]{",d[["includepdf"]] , "} \n \n", sep="") }
-		if(n == "input") { cat("\\input{../../", d[["input"]], "} \n \n", sep="") }
-		
+		if(n == "includepdf") { cat("\\includepdf[page=-]{", we_are_here ,"/", d[["includepdf"]] , "} \n \n", sep = "") }
+		if(n == "input") { cat("\\input{", we_are_here ,"/", d[["input"]], "} \n \n", sep = "") }
+
 		if(n == "table") {
 			
 			tex.tab = function(d, tab, lab.tab){
@@ -603,7 +604,7 @@ get.pdf = function(
 	
 	cat("\\end{document}")
 	
-	# 7. Clode connexion of the .tex ----------
+	# 7. Close connexion of the .tex ----------
 	sink()
 	
 	# 8. Compile .tex two times ----------
