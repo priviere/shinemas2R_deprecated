@@ -9,11 +9,7 @@ translate.data(data, list_translation)
 \arguments{
 \item{data}{output from the \code{get.data} function}
 
-<<<<<<< HEAD
-\item{list_translation}{A list with as many element as variables or methods to translate. It is under the form list(c("tkw", "pmg"), c("protein", "proteine")).}
-=======
 \item{list_translation}{A list with as many elements as variables to translate. It is under the form list(c("tkw", "pmg"), c("protein", "proteine")).}
->>>>>>> master
 }
 \value{
 The data with translated data
