@@ -30,7 +30,7 @@ You can participate in three ways:
 2. translate the package
 3. update functions to answer your specific needs
 
-If you update the code, you can refers to 
+If you update the code, you can refer to 
 [the issues](https://github.com/priviere/shinemas2R/issues)
 and do it in on the [branch v0.10.1](https://github.com/priviere/shinemas2R/tree/v0.10.1) and/or the [branch v0.10.2](https://github.com/priviere/shinemas2R/tree/v0.10.2)
 so that the master branch remains unchanged for tests.
