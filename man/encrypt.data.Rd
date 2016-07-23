@@ -4,10 +4,14 @@
 \alias{encrypt.data}
 \title{Encrypt data from \code{get.data} or \code{is.get.fata.output}}
 \usage{
-encrypt.data(data)
+encrypt.data(data, germplasm_name = "germplasm", person_name = "person")
 }
 \arguments{
 \item{data}{output from \code{get.data}}
+
+\item{germplasm_name}{Name of the germplasms in the encrypted data. "germplasms" by default}
+
+\item{person_name}{Name of the persons an selection persons in the encrypted data. "persons" by default}
 }
 \value{
 The function returns the data frame encrypted and writes in the work directory a file.RData with the key
