@@ -6,6 +6,10 @@
 #'
 #' @param data output from \code{get.data}
 #' 
+#' @param germplasm_name Name of the germplasms in the encrypted data. "germplasms" by default
+#' 
+#' @param person_name Name of the persons an selection persons in the encrypted data. "persons" by default
+#' 
 #' @details
 #' The following information is encrypted: 
 #' person,
@@ -32,7 +36,9 @@
 #' 
 #' 
 encrypt.data <- function(
-data
+data,
+germplasm_name = "germplasm",
+person_name = "person"
 )
 # lets go !!! ----
 {
@@ -50,7 +56,7 @@ data
 	info_db = data$info_db
 	
 	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "person")$data
-	vec = paste("person-", c(1:length(v)), sep = ""); names(vec) = v
+	vec = paste(paste(person_name, "-", sep = ""), c(1:length(v)), sep = ""); names(vec) = v
 	vec_person = vec
 
 	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "year")$data
@@ -70,7 +76,7 @@ data
 	vec_germplasm_type = vec
 	
 	v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "germplasm")$data
-	vec = paste("germplasm-", c(1:length(v)), sep = ""); names(vec) = v
+	vec = paste(paste(germplasm_name, "-", sep = ""), c(1:length(v)), sep = ""); names(vec) = v
 	vec_germplasm = vec
 	
 	encrypt_sl = function(sl, vec_germplasm, vec_person, vec_year){
