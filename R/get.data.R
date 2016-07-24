@@ -136,7 +136,11 @@
 #' 
 #' \item For network it returns a list with
 #' \itemize{
-#' \item the network object
+#' \item the network object with information on:
+#' 	\itemize{
+#' 	\item vertex: year, person, germplasm, germplasm.type, sex
+#' 	\item edges: relation type, number of generations on a given location + confidence of the information, number of generations since the information is known + confidence of the information
+#' 	}
 #' \item the network.query dataframe coming from the query
 #' \item the network.info matrix with information on relations in the network. The possible information are:
 #'  \itemize{
@@ -1785,13 +1789,15 @@ filter_V = V.sql(variable.in)
  				set.vertex.attribute(n, "sex", value = as.vector(SEX))
  				
  				# B. information on relations and generations
- 				R = M_generation = matrix("", ncol = length(point), nrow = length(point))
+ 				R = M_generation_local = M_generation_total = matrix("", ncol = length(point), nrow = length(point))
  				colnames(R) = rownames(R) = colnames(M_generation) = rownames(M_generation) = point
  				
- 				# number of generations
+ 				# number of generations local, total and confidence
  				DD = filter(reseau, !is.na(reproduction_id))
- 				D_generation = unique(DD[,c("father", "son", "son_total_generation_nb")])
+ 				D_generation = unique(DD[,c("father", "son", "son_local_generation_nb", "son_total_generation_nb", "son_generation_confidence")])
  				D_generation$toto = paste(D_generation$father, D_generation$son, sep = ":")
+ 				D_generation$info_local = paste("F ", D_generation$son_local_generation_nb, " (", D_generation$son_generation_confidence, ")", sep = "")
+ 				D_generation$info_total = paste("F ", D_generation$son_total_generation_nb, " (", D_generation$son_generation_confidence, ")", sep = "")
  				
  				stock_type_relation = NULL
  				
@@ -1804,22 +1810,24 @@ filter_V = V.sql(variable.in)
  					m = as.character(reseau[i, "mixture_id"])
  					d = as.character(reseau[i, "diffusion_id"])
  					
- 					generation = ""		
+ 					generation_local = generation_total = ""
  					if(!is.na(r)) {
  						type = "reproduction"
- 						f = D_generation[which(D_generation$toto == paste(Father, Son, sep = ":")), "generation"]
- 						generation = paste("F", f, sep = "") 
+ 						generation_local = D_generation[which(D_generation$toto == paste(Father, Son, sep = ":")), "info_local"]
+ 						generation_total = D_generation[which(D_generation$toto == paste(Father, Son, sep = ":")), "info_total"] 
  					}
  					if(!is.na(s)) {type = "selection"} # selection erase reproduction
  					if(!is.na(m)) {type = "mixture"}
  					if(!is.na(d)) {type = "diffusion"}
  					
  					R[Father, Son] = type
- 					M_generation[Father, Son] = generation
+ 					M_generation_local[Father, Son] = generation_local
+ 					M_generation_total[Father, Son] = generation_total
  				}
  				
  				set.edge.value(n, "relation", value = R)
- 				set.edge.value(n, "generation", value = M_generation)
+ 				set.edge.value(n, "generation_local", value = M_generation_local)
+ 				set.edge.value(n, "generation_total", value = M_generation_total)
  			}
  			
  			# 5.1.4. Get network information on seed-lots ----------	
