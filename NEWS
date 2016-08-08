@@ -1,10 +1,12 @@
 shinemas2R 0.10.1 -------------------------------------
 -----------------------------------------------------
-* resolve issues: #17, #21, #25
+* resolve issues: #17, #20, #21, #25
 
 * update functions
 	- get.ggplot.R: 
-		- update labels.generation argument possible values to "local"" or "total", in relation to #25
+		. update labels.generation argument possible values to "local"" or "total". In relation to #25
+	- get.pdf.R:
+		. add argument "includeimage", beeing a list containing the following elements: "content", "caption"and "width". In relation to #20
 
 
 shinemas2R 0.10 -------------------------------------
