@@ -1,9 +1,11 @@
 shinemas2R 0.10.1 -------------------------------------
 -----------------------------------------------------
-* resolve issues:
-	- #17
-	- #21
-	
+* resolve issues: #17, #21, #25
+
+* update functions
+	- get.ggplot.R: 
+		- update labels.generation argument possible values to "local"" or "total", in relation to #25
+
 
 shinemas2R 0.10 -------------------------------------
 -----------------------------------------------------
