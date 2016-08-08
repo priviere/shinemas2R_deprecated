@@ -71,7 +71,7 @@
 #' 
 #' @param labels.sex For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".
 #' 
-#' @param labels.generation For ggplot.type = "network-network". If TRUE, displays generation for each reproduction
+#' @param labels.generation For ggplot.type = "network-network". If "local", displays generation number on a given location for each reproduction. If "total", displays generation number since the information is known for each reproduction. A confidence in the information is given between brackets: 0 or 1. For exemple F8 (0) for the 8th generation with a confidence of 0.
 #' 
 #' @param labels.size Size of the labels
 #' 
@@ -151,7 +151,7 @@ get.ggplot <- function(
 	labels.on = "son",
 	hide.labels.parts = "all", 
 	labels.sex = TRUE, 
-	labels.generation = TRUE,
+	labels.generation = "local",
 	labels.size = 3,
 	location.map = "france", 
 	pie.size = .5
@@ -521,6 +521,8 @@ if( test ){
 	}
 }
 
+
+if( grep("network-", ggplot.type) & !is.element(labels.generation, c("local", "total")) ) { stop("labels.generation must be \"local\" or \"total\".") }
 
 
 # 2. Initialisation ########## ----------
