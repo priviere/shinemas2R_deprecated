@@ -1790,14 +1790,16 @@ filter_V = V.sql(variable.in)
  				
  				# B. information on relations and generations
  				R = M_generation_local = M_generation_total = matrix("", ncol = length(point), nrow = length(point))
- 				colnames(R) = rownames(R) = colnames(M_generation) = rownames(M_generation) = point
+ 				colnames(R) = rownames(R) = colnames(M_generation_local) = rownames(M_generation_local) = colnames(M_generation_total) = rownames(M_generation_total) = point
  				
  				# number of generations local, total and confidence
  				DD = filter(reseau, !is.na(reproduction_id))
+ 				DD = filter(DD, is_male == "X") # get rid off crossed
+
  				D_generation = unique(DD[,c("father", "son", "son_local_generation_nb", "son_total_generation_nb", "son_generation_confidence")])
  				D_generation$toto = paste(D_generation$father, D_generation$son, sep = ":")
- 				D_generation$info_local = paste("F ", D_generation$son_local_generation_nb, " (", D_generation$son_generation_confidence, ")", sep = "")
- 				D_generation$info_total = paste("F ", D_generation$son_total_generation_nb, " (", D_generation$son_generation_confidence, ")", sep = "")
+ 				D_generation$info_local = paste("F", D_generation$son_local_generation_nb, " (", D_generation$son_generation_confidence, ")", sep = "")
+ 				D_generation$info_total = paste("F", D_generation$son_total_generation_nb, " (", D_generation$son_generation_confidence, ")", sep = "")
  				
  				stock_type_relation = NULL
  				
@@ -1813,8 +1815,11 @@ filter_V = V.sql(variable.in)
  					generation_local = generation_total = ""
  					if(!is.na(r)) {
  						type = "reproduction"
- 						generation_local = D_generation[which(D_generation$toto == paste(Father, Son, sep = ":")), "info_local"]
- 						generation_total = D_generation[which(D_generation$toto == paste(Father, Son, sep = ":")), "info_total"] 
+ 						get = which(D_generation$toto == paste(Father, Son, sep = ":"))
+ 						if(length(get) > 0) { # deal with crosses
+ 							generation_local = D_generation[get, "info_local"]
+ 							generation_total = D_generation[get, "info_total"]
+ 						}
  					}
  					if(!is.na(s)) {type = "selection"} # selection erase reproduction
  					if(!is.na(m)) {type = "mixture"}
