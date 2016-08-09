@@ -35,7 +35,14 @@ The idea of \texttt{get.pdf} is to create a list (\texttt{LaTeX\_body} argument)
 
 \item \texttt{"text"} : text to add
 
-\item \texttt{"includepdf"} : path of a .pdf to include
+\item \texttt{"includepdf"} : path of a .pdf to include. It includes entire document.
+
+\item \texttt{"includeimage"}: a list containing the following elements:
+	\begin{itemize}
+	\item \texttt{"content"}: path of image to include. It can be a pdf, png, jpeg ...
+	\item \texttt{"caption"}: caption of the image
+	\item \texttt{"width"} : width of the picture in textwidth unit. 1 means the same width as the text. It is 1 by default.
+	\end{itemize}
 
 \item \texttt{"input"} : path of a .tex to insert
 
