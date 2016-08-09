@@ -10,8 +10,9 @@ get.ggplot(data, correlated_group = NULL, merge_g_and_s = TRUE,
   nb_parameters_per_plot_x.axis = NULL,
   nb_parameters_per_plot_in.col = NULL, vertex.size = 3,
   vertex.color = "year", organise.sl = FALSE, labels.on = "son",
-  hide.labels.parts = "all", labels.sex = TRUE, labels.generation = TRUE,
-  labels.size = 3, location.map = "france", pie.size = 0.5)
+  hide.labels.parts = "all", labels.sex = TRUE,
+  labels.generation = "local", labels.size = 3, location.map = "france",
+  pie.size = 0.5)
 }
 \arguments{
 \item{data}{output from get.data with query.type = "network" or query.type = "data-...".}
@@ -80,7 +81,7 @@ Note that with ggplot.type "network-" and ggplot.display = "map", hide.labels.pa
 
 \item{labels.sex}{For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".}
 
-\item{labels.generation}{For ggplot.type = "network-network". If TRUE, displays generation for each reproduction}
+\item{labels.generation}{For ggplot.type = "network-network". If "local", displays generation number on a given location for each reproduction. If "total", displays generation number since the information is known for each reproduction. A confidence in the information is given between brackets: 0 or 1. For exemple F8 (0) for the 8th generation with a confidence of 0.}
 
 \item{labels.size}{Size of the labels}
 
