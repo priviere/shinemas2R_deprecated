@@ -71,7 +71,7 @@
 #' 
 #' @param labels.sex For ggplot.type = "network-network". If TRUE, displays the sex of the seed-lot if it has been used in a cross. Nothing is displayed if hide.labels.parts = "all".
 #' 
-#' @param labels.generation For ggplot.type = "network-network". If TRUE, displays generation for each reproduction
+#' @param labels.generation For ggplot.type = "network-network". If "local", displays generation number on a given location for each reproduction. If "total", displays generation number since the information is known for each reproduction. A confidence in the information is given between brackets: 0 or 1. For exemple F8 (0) for the 8th generation with a confidence of 0.
 #' 
 #' @param labels.size Size of the labels
 #' 
@@ -151,7 +151,7 @@ get.ggplot <- function(
 	labels.on = "son",
 	hide.labels.parts = "all", 
 	labels.sex = TRUE, 
-	labels.generation = TRUE,
+	labels.generation = "local",
 	labels.size = 3,
 	location.map = "france", 
 	pie.size = .5
@@ -522,6 +522,8 @@ if( test ){
 }
 
 
+if( grep("network-", ggplot.type) & !is.element(labels.generation, c("local", "total")) ) { stop("labels.generation must be \"local\" or \"total\".") }
+
 
 # 2. Initialisation ########## ----------
 
@@ -721,15 +723,15 @@ if( check.arg("network-diffusion-relation", ggplot.type) ) {
 				
 				if( !is.null(t) ) {
 					text = paste(t, collapse = ", ")
-					message(paste(y, collapse = ", "), ": ",text, " have no informations for coordinates and are not represented on the map.")
+					message(paste(y, collapse = ", "), ": ",text, " have no information for coordinates and are not represented on the map.")
 					d.diff.map_tmp = d.diff.map_tmp[-unique(c(no_lat_or_long_son, no_lat_or_long_father)),]
 				}
 				
 				if( !is.null(hide.labels.parts) ) { if( hide.labels.parts != "all" ){ stop("With ggplot.type \"network-\" and ggplot.display = \"map\" hide.labels.parts can be NULL or \"all\".") } }
 				
-				p = map + geom_segment(data = d.diff.map_tmp, aes(x = father_long, y = father_lat, xend = son_long, yend = son_lat, size = nb_diffusions), arrow = arrow(length = unit(0.5, "cm")))
-				p = p +  scale_size(range = c(1,3))
-				
+				p = map + geom_segment(data = d.diff.map_tmp, aes(x = father_long, y = father_lat, xend = son_long, yend = son_lat, color = nb_diffusions), arrow = arrow(length = unit(0.5, "cm")), size = 1)
+				p = p +  scale_color_gradient(low = "green", high = "red")
+
 				if( is.null(hide.labels.parts) ){
 					p = p + geom_text(data = d.diff.map_tmp, aes(x = son_long, y = son_lat, label = son_person), size = labels.size)
 					p = p + geom_text(data = d.diff.map_tmp, aes(x = father_long, y = father_lat, label = father_person), size = labels.size)
