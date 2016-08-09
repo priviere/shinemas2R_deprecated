@@ -136,7 +136,11 @@
 #' 
 #' \item For network it returns a list with
 #' \itemize{
-#' \item the network object
+#' \item the network object with information on:
+#' 	\itemize{
+#' 	\item vertex: year, person, germplasm, germplasm.type, sex
+#' 	\item edges: relation type, number of generations on a given location + confidence of the information, number of generations since the information is known + confidence of the information
+#' 	}
 #' \item the network.query dataframe coming from the query
 #' \item the network.info matrix with information on relations in the network. The possible information are:
 #'  \itemize{
@@ -1785,13 +1789,17 @@ filter_V = V.sql(variable.in)
  				set.vertex.attribute(n, "sex", value = as.vector(SEX))
  				
  				# B. information on relations and generations
- 				R = M_generation = matrix("", ncol = length(point), nrow = length(point))
- 				colnames(R) = rownames(R) = colnames(M_generation) = rownames(M_generation) = point
+ 				R = M_generation_local = M_generation_total = matrix("", ncol = length(point), nrow = length(point))
+ 				colnames(R) = rownames(R) = colnames(M_generation_local) = rownames(M_generation_local) = colnames(M_generation_total) = rownames(M_generation_total) = point
  				
- 				# number of generations
+ 				# number of generations local, total and confidence
  				DD = filter(reseau, !is.na(reproduction_id))
- 				D_generation = unique(DD[,c("father", "son", "son_total_generation_nb")])
+ 				DD = filter(DD, is_male == "X") # get rid off crossed
+
+ 				D_generation = unique(DD[,c("father", "son", "son_local_generation_nb", "son_total_generation_nb", "son_generation_confidence")])
  				D_generation$toto = paste(D_generation$father, D_generation$son, sep = ":")
+ 				D_generation$info_local = paste("F", D_generation$son_local_generation_nb, " (", D_generation$son_generation_confidence, ")", sep = "")
+ 				D_generation$info_total = paste("F", D_generation$son_total_generation_nb, " (", D_generation$son_generation_confidence, ")", sep = "")
  				
  				stock_type_relation = NULL
  				
@@ -1804,22 +1812,27 @@ filter_V = V.sql(variable.in)
  					m = as.character(reseau[i, "mixture_id"])
  					d = as.character(reseau[i, "diffusion_id"])
  					
- 					generation = ""		
+ 					generation_local = generation_total = ""
  					if(!is.na(r)) {
  						type = "reproduction"
- 						f = D_generation[which(D_generation$toto == paste(Father, Son, sep = ":")), "generation"]
- 						generation = paste("F", f, sep = "") 
+ 						get = which(D_generation$toto == paste(Father, Son, sep = ":"))
+ 						if(length(get) > 0) { # deal with crosses
+ 							generation_local = D_generation[get, "info_local"]
+ 							generation_total = D_generation[get, "info_total"]
+ 						}
  					}
  					if(!is.na(s)) {type = "selection"} # selection erase reproduction
  					if(!is.na(m)) {type = "mixture"}
  					if(!is.na(d)) {type = "diffusion"}
  					
  					R[Father, Son] = type
- 					M_generation[Father, Son] = generation
+ 					M_generation_local[Father, Son] = generation_local
+ 					M_generation_total[Father, Son] = generation_total
  				}
  				
  				set.edge.value(n, "relation", value = R)
- 				set.edge.value(n, "generation", value = M_generation)
+ 				set.edge.value(n, "generation_local", value = M_generation_local)
+ 				set.edge.value(n, "generation_total", value = M_generation_total)
  			}
  			
  			# 5.1.4. Get network information on seed-lots ----------	
@@ -1836,13 +1849,29 @@ filter_V = V.sql(variable.in)
  					reseau_diff = filter(reseau, !is.na(diffusion_id))
  					
  					# get Minfo
- 					Minfo = matrix(NA, ncol = 16, nrow = nrow(reseau))
- 					colnames(Minfo) = c("father", "son", "diffusion_father_info", "diffusion_son_info", "id.diff_son", "id.diff_father", "reproduction_father_info", "reproduction_son_info", "selection_info", "mixture_info", "father_alt", "father_long", "father_lat", "son_alt", "son_long", "son_lat")
+ 					Minfo = matrix(NA, ncol = 24, nrow = nrow(reseau))
+ 					colnames(Minfo) = c(
+ 						"father", "father_germplasm", "father_germplasm_type", "father_year", "father_person",
+ 						"son", "son_germplasm", "son_germplasm_type", "son_year", "son_person",
+ 						"diffusion_father_info", "diffusion_son_info", "id.diff_son", "id.diff_father", 
+ 						"reproduction_father_info", "reproduction_son_info", "selection_info", 
+ 						"mixture_info", 
+ 						"father_alt", "father_long", "father_lat", 
+ 						"son_alt", "son_long", "son_lat")
  					
  					for(i in 1:nrow(reseau)) {
  						
  						Minfo[i, "father"] = f = as.character(reseau[i, "father"])
+ 						Minfo[i, "father_germplasm"] = as.character(reseau[i, "father_germplasm"])
+ 						Minfo[i, "father_germplasm_type"] = as.character(reseau[i, "father_germplasm_type"])
+ 						Minfo[i, "father_year"] = as.character(reseau[i, "father_year"])
+ 						Minfo[i, "father_person"] = as.character(reseau[i, "father_person"])
+ 						
  						Minfo[i, "son"] = s = as.character(reseau[i, "son"])
+ 						Minfo[i, "son_germplasm"] = as.character(reseau[i, "son_germplasm"])
+ 						Minfo[i, "son_germplasm_type"] = as.character(reseau[i, "son_germplasm_type"])
+ 						Minfo[i, "son_year"] = as.character(reseau[i, "son_year"])
+ 						Minfo[i, "son_person"] = as.character(reseau[i, "son_person"])
  						
  						# coordinates and id.diff information
  						Minfo[i, "father_alt"] = reseau[i, "father_alt"]
@@ -1914,6 +1943,10 @@ filter_V = V.sql(variable.in)
  					
  					Minfo = cbind.data.frame(
  						sl = c(as.character(Minfo$son), as.character(Minfo$father), as.character(Mcross$sl)),
+ 						germplasm = as.factor(c(as.character(Minfo$son_germplasm), as.character(Minfo$father_germplasm), as.character(Mcross$germplasm))),
+ 						germplasm_type = as.factor(c(as.character(Minfo$son_germplasm_type), as.character(Minfo$father_germplasm_type), as.character(Mcross$germplasm_type))),
+ 						person = as.factor(c(as.character(Minfo$son_person), as.character(Minfo$father_person), as.character(Mcross$person))),
+ 						year = as.factor(c(as.character(Minfo$son_year), as.character(Minfo$father_year), as.character(Mcross$year))),
  						alt = c(as.numeric(as.character(Minfo$son_alt)), as.numeric(as.character(Minfo$father_alt)), as.numeric(as.character(Mcross$alt))),
  						long = c(as.numeric(as.character(Minfo$son_long)), as.numeric(as.character(Minfo$father_long)), as.numeric(as.character(Mcross$long))),
  						lat = c(as.numeric(as.character(Minfo$son_lat)), as.numeric(as.character(Minfo$father_lat)), as.numeric(as.character(Mcross$lat))),
@@ -1924,12 +1957,6 @@ filter_V = V.sql(variable.in)
  						selection = c(as.character(Minfo$selection_info), rep(NA, nrow(Minfo)), rep(NA, nrow(Mcross))), # only associated to son
  						cross.info = c(rep(NA, nrow(Minfo)), rep(NA, nrow(Minfo)), as.character(Mcross$type))
  					)
- 					
- 					# add extra information on levels in separate columns
- 					gs = sapply(as.character(Minfo$sl), function(x){unlist(strsplit(x,"_"))[1]})
- 					Minfo$germplasm = sapply(as.character(gs), function(x){unlist(strsplit(x,"#"))[1]}); Minfo$germplasm = as.factor(Minfo$germplasm)
- 					Minfo$person = sapply(as.character(Minfo$sl), function(x){unlist(strsplit(x,"_"))[2]}); Minfo$person = as.factor(Minfo$person)
- 					Minfo$year = sapply(as.character(Minfo$sl), function(x){unlist(strsplit(x,"_"))[3]}); Minfo$year = as.factor(Minfo$year)
  					}
  					
  				}
