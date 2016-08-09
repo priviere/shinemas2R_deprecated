@@ -207,11 +207,9 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     pnet <- ggplot()
     pnet = pnet + geom_segment(aes(x = X1, y = Y1, xend = X2, yend = Y2, linetype = relation), data = edges, size = segment.size, alpha = inherit(segment.alpha), arrow = arrow(type = "closed", length = unit(arrow.size, "cm")))    
     
-#    if (!is.null(segment.label) & length(segment.label) == nrow(edges)) {
-#        pnet <- pnet + geom_text(aes(x = midX, y = midY), colour = segment.color, data = edges, label = segment.label, size = 1/segment.size, alpha = inherit(segment.alpha))
-#    }
-
-
+    if (!is.null(segment.label) & length(segment.label) == nrow(edges)) {
+        pnet <- pnet + geom_text(aes(x = midX, y = midY), data = edges, label = segment.label, size = 1/segment.size, alpha = inherit(segment.alpha))
+    }
 
 
     if (weight.method == c("none")) {
