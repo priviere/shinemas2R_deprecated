@@ -115,7 +115,7 @@ get.ggplot_plot.it = function(
 				
 				if(ggplot.display == "barplot") {		
 					d$toto = paste(d$in.col, d$x.axis, sep = "azerty")
-					
+
 					if( length(grep("network", ggplot.type)) > 0 ) { 
 						mm = ddply(d, "toto", summarise, mean = sum(variable, na.rm = TRUE))
 						mm2 = ddply(d, "x.axis", summarise, mean = mean(variable, na.rm = TRUE))
@@ -128,9 +128,9 @@ get.ggplot_plot.it = function(
 					
 					mm$in.col = sapply(mm$toto, function(x){unlist(strsplit(x, "azerty"))[1]})
 					mm$x.axis = sapply(mm$toto, function(x){unlist(strsplit(x, "azerty"))[2]})
-					mm$x.axis = factor(mm$x.axis, levels = levels(d$x.axis))
-					
-					
+					mm$x.axis = as.factor(mm$x.axis)
+					mm$in.col = as.factor(mm$in.col)
+
 					if(is.null(in.col)) {	
 						p = ggplot(mm2, aes(x = x.axis, y = mean)) + geom_bar(stat = "identity") 
 						if( length(grep("data", ggplot.type)) > 0 ) { 
