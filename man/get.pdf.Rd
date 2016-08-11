@@ -38,7 +38,14 @@ This list must contain the following elements:
 
     \item "text": text to add
 
-    \item "includepdf": path of a .pdf to include
+    \item "includepdf": path of a .pdf to include. It includes entire document.
+
+    \item "includeimage": a list containing the following elements:
+    \itemize{
+     \item "content": path of image to include. It can be a pdf, png, jpeg ...
+     \item "caption": caption of the image
+    \item "width" : width of the picture in textwidth unit. 1 means the same width as the text. It is 1 by default.
+    }
 
     \item "input": path of a .tex to insert
 

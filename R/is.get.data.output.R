@@ -190,7 +190,7 @@ is.get.data.output = function(
 			
 			if( !is.factor(ni$father_species) ) { stop("The data fame must have a column \"father_species\" as factor") } 
 			if( !is.factor(ni$father_project) ) { stop("The data fame must have a column \"father_project\" as factor") } 
-			if( !is.factor(ni$father) ) { stop("The data fame must have a column \"son\" as factor") } 
+			if( !is.factor(ni$father) ) { stop("The data fame must have a column \"father\" as factor") } 
 			if( !is.factor(ni$father_germplasm) ) { stop("The data fame must have a column \"father_germplasm\" as factor") } 
 			if( !is.factor(ni$father_person) ) { stop("The data fame must have a column \"father_person\" as factor") } 
 			if( !is.factor(ni$father_year) ) { stop("The data fame must have a column \"father_year\" as factor") } 

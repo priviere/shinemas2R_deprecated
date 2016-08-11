@@ -34,7 +34,14 @@
 #' 	
 #' 	\item "text": text to add
 #' 	
-#' 	\item "includepdf": path of a .pdf to include
+#' 	\item "includepdf": path of a .pdf to include. It includes entire document.
+#' 	
+#' 	\item "includeimage": a list containing the following elements:
+#' 	\itemize{
+#' 	 \item "content": path of image to include. It can be a pdf, png, jpeg ...
+#' 	 \item "caption": caption of the image
+#' 	\item "width" : width of the picture in textwidth unit. 1 means the same width as the text. It is 1 by default.
+#' 	}
 #' 	
 #' 	\item "input": path of a .tex to insert
 #' 	
@@ -226,6 +233,31 @@ get.pdf = function(
 			if(!is.character(d[[1]])) { stop("Elements of includepdf must be a character") } 
 			if( !file.exists(d[[1]]) ) { stop(d[[1]], " does not exist") }
 		}
+		
+		
+		if( n == "includeimage" ) { 
+			
+			dd = d[["includeimage"]]
+			nnn = names(dd)
+			for( nn in nnn ) {
+				if( !is.element(nn, c("content", "caption", "width")) ) { stop("Elements of includeimage must be \"content\", \"caption\", \"width\".") }
+			}
+			
+			t = dd[["caption"]]; if(!is.null(t)) { 
+				if(!is.null(names(t))) { stop("Elements of caption within includeimage must be characters") } 
+				if(!is.character(t)) { stop("Elements of caption within includeimage must be characters") } 
+			}
+
+			t = dd[["width"]]; if(!is.null(t)) { 
+				if ( !is.numeric(t) ) { stop("Element of width within table must be numeric") }
+			}
+			
+			t = dd["content"]; if(!is.null(t)) {
+				if(!is.character(t) ) { stop("Elements of input must be a character") } 
+				if( !file.exists(t) ) { stop(t, " does not exist ") }
+			}
+		}
+		
 		
 	if( n == "input" ) { 
 			if(!is.null(names(d[[1]]))) { stop("Elements of input must be a character") } 
@@ -599,6 +631,28 @@ get.pdf = function(
 				cat("\n")
 			} else { cat(gettext("No data \n \n")) } 
 		}
+		
+		if(n == "includepicture")	{
+			d = d [["includepicture"]]
+			
+			caption = d[["caption"]]
+			if( is.null(caption) ) { caption = "" }
+			
+			content = d[["content"]]
+			
+			width = d[["width"]]
+			if(is.null(width)){ width = 1}
+			
+			cat(
+				"\\begin{center} \n",
+				"\\caption{",text.to.tex(caption),"} \n",
+				"\\includegraphics[page=-,width=", width, "\\textwidth]{", we_are_here ,"/", content, "} \n",
+				"\\end{center} \n",
+				"\\end{figure} \n", sep=""
+				)
+		}
+		
+		
 		
 		}
 	

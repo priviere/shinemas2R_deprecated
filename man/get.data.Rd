@@ -116,7 +116,11 @@ The function returns a list with
 
 \item For network it returns a list with
 \itemize{
-\item the network object
+\item the network object with information on:
+	\itemize{
+	\item vertex: year, person, germplasm, germplasm.type, sex
+	\item edges: relation type, number of generations on a given location + confidence of the information, number of generations since the information is known + confidence of the information
+	}
 \item the network.query dataframe coming from the query
 \item the network.info matrix with information on relations in the network. The possible information are:
  \itemize{
