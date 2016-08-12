@@ -2094,7 +2094,7 @@ filter_V = V.sql(variable.in)
 	if(query.type == "data-S" | query.type == "data-SR" | query.type == "data-mixture-1") { 
 		if(query.type == "data-S") { message("1. Query SHiNeMaS ..."); tab = query.S(info_db = info_db) }
 		if(query.type=="data-SR") { message("1. Query SHiNeMaS ..."); tab = query.SR(info_db = info_db) }
-		if(query.type=="data-mixture-1") { message("1. Query SHiNeMaS ..."); tab = query.mixture1(info_db = info_db) }
+		if(query.type=="data-mixture-1") { message("1. Query SHiNeMaS ..."); tab = query.mixture1(P = filter_P, G = filter_G , GT = filter_GT , Y = filter_Y, R = filter_R, SL = filter_SL, Proj = filter_Proj, info_db = info_db) }
 		
 		if(!is.null(tab)) {
 			vec.seed_lots = tab[,"sl"]
