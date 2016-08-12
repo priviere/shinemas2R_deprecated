@@ -1469,9 +1469,9 @@ return(d)
 
 query.mixture1 = function(P = NULL, G = NULL, GT = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db){
 	dtmp = query.network( P = P, G = G, GT = GT, Y = Y, R = R, SL = SL, Proj = Proj, info_db)
-	dtmp = droplevels(dtmp[which(!is.na(dtmp$mixture_id)),])
 	
-	if(nrow(dtmp) > 0) {	
+	if(!is.null(dtmp)) {
+		dtmp = droplevels(dtmp[which(!is.na(dtmp$mixture_id)),])
 		d = cbind.data.frame(
 			sl = c(as.character(dtmp$father), as.character(dtmp$son)),
 			sl_statut = rep( c("father", "son"), each = nrow(dtmp) ),
