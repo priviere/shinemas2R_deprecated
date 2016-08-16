@@ -54,8 +54,8 @@ list_translation
 		toget = grep(paste("---", n1, sep = ""), data$data$methods$"variable---methods")
 		if( length(toget) > 0 ){ data$data$methods$"variable---methods"[toget] = sub(paste("---", n1, sep = ""), paste("---", n2, sep = ""), data$data$methods$"variable---methods"[toget]) }
 
-		a=unlist(gsub("^([^---]*)---.*$", "\\1",as.character(data$data$methods$"variable---methods")))
-		b=unlist(gsub("^.*---([^---]*).*$", "\\1",as.character(data$data$methods$"variable---methods")))
+		data$data$methods$variable_name=unlist(gsub("^([^---]*)---.*$", "\\1",as.character(data$data$methods$"variable---methods")))
+		data$data$methods$method_name=unlist(gsub("^.*---([^---]*).*$", "\\1",as.character(data$data$methods$"variable---methods")))
 		}
 
 	return(data)
