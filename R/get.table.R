@@ -1,4 +1,54 @@
-function(
+# 0. help -----------------------------------------------------------------
+#' Get table from \code{get.data}
+#'
+#' @description
+#' \code{get.table} generates tables object from \code{get.data} data-set or ggplot.objet from \code{get.ggplot}.
+#'
+#' @param data It can be either output from \code{get.data} or ggplot.object from \code{get.ggplot}.
+#' 
+#' @param correlated_group Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.
+#' 
+#' @param merge_g_and_s Fuse germplasm and selection name information in a column named germplasm. TRUE by default.
+#' 
+#' @param table.type The type of table you wish according to the type of data. 
+#' For data coming from \code{get.data}, it can be:
+#' 	\itemize{
+#' 	\item "raw" display raw data. Useful with text for example
+#' 	\item "mean" display for each variable columns with mean
+#' 	\item "mean.sd" display for each variable columns with mean and standard deviation
+#' 	\item "mean.sd.cv" display for each variable columns with mean, standard deviation and coefficient of variation
+#' 	\item "summary" display "Min.", "1st Qu.", "Median", "3rd Qu.", "Max." of the data
+#' 	}
+#' 
+#' @param table.on For "data-" type. father" or "son" depending on which seed-lot you want to display.
+#' 
+#' @param vec_variables Vector of variables displayed
+#' 
+#' @param nb_row The number of rows in the table
+#'
+#' @param nb_col The number of columns in the table. col_to_display remains fixed.
+#'
+#' @param nb_duplicated_rows Minimum number of duplicated rows for each variable of a table up to which the information is put in only one row. 
+#' 
+#' @param col_to_display Columns to display in the table. It can be a vector with "person", "germplasm", "year", "block", "X" and "Y". If NULL, none of these columns are displayed. The variables follow these columns. For data-S and data-SR type, the column "expe" and "sl_statut" are added by default.
+#' 
+#' @param invert_row_col If TRUE, invert row and col in the table. This is possible only for col_to_display = NULL.
+#' 
+#' @return The function returns a list with two elements
+#' \itemize{
+#' \item "duplicated_infos" : lists of two elements with seed-lots involved and variable values
+#' \item "not_duplicated_infos": a list with the table of non duplicated information
+#' }
+#' 
+#' @author Pierre Riviere
+#' 
+#' @examples 
+#' # See the vignette
+#' 
+#' @seealso \code{\link{get.data}}, \code{\link{get.ggplot}}
+#' 
+#'
+get.table <- function(
 	data,
 	correlated_group = NULL,
 	merge_g_and_s = FALSE,
