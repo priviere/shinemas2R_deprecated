@@ -522,7 +522,7 @@ if( test ){
 }
 
 
-if( grep("network-", ggplot.type) & !is.element(labels.generation, c("local", "total")) ) { stop("labels.generation must be \"local\" or \"total\".") }
+if( length(grep("network-", ggplot.type)>0) & !is.element(labels.generation, c("local", "total")) ) { stop("labels.generation must be \"local\" or \"total\".") }
 
 
 # 2. Initialisation ########## ----------
