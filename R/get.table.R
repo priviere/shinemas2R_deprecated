@@ -1,54 +1,4 @@
-# 0. help -----------------------------------------------------------------
-#' Get table from \code{get.data}
-#'
-#' @description
-#' \code{get.table} generates tables object from \code{get.data} data-set or ggplot.objet from \code{get.ggplot}.
-#'
-#' @param data It can be either output from \code{get.data} or ggplot.object from \code{get.ggplot}.
-#' 
-#' @param correlated_group Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.
-#' 
-#' @param merge_g_and_s Fuse germplasm and selection name information in a column named germplasm. TRUE by default.
-#' 
-#' @param table.type The type of table you wish according to the type of data. 
-#' For data coming from \code{get.data}, it can be:
-#' 	\itemize{
-#' 	\item "raw" display raw data. Useful with text for example
-#' 	\item "mean" display for each variable columns with mean
-#' 	\item "mean.sd" display for each variable columns with mean and standard deviation
-#' 	\item "mean.sd.cv" display for each variable columns with mean, standard deviation and coefficient of variation
-#' 	\item "summary" display "Min.", "1st Qu.", "Median", "3rd Qu.", "Max." of the data
-#' 	}
-#' 
-#' @param table.on For "data-" type. father" or "son" depending on which seed-lot you want to display.
-#' 
-#' @param vec_variables Vector of variables displayed
-#' 
-#' @param nb_row The number of rows in the table
-#'
-#' @param nb_col The number of columns in the table. col_to_display remains fixed.
-#'
-#' @param nb_duplicated_rows Minimum number of duplicated rows for each variable of a table up to which the information is put in only one row. 
-#' 
-#' @param col_to_display Columns to display in the table. It can be a vector with "person", "germplasm", "year", "block", "X" and "Y". If NULL, none of these columns are displayed. The variables follow these columns. For data-S and data-SR type, the column "expe" and "sl_statut" are added by default.
-#' 
-#' @param invert_row_col If TRUE, invert row and col in the table. This is possible only for col_to_display = NULL.
-#' 
-#' @return The function returns a list with two elements
-#' \itemize{
-#' \item "duplicated_infos" : lists of two elements with seed-lots involved and variable values
-#' \item "not_duplicated_infos": a list with the table of non duplicated information
-#' }
-#' 
-#' @author Pierre Riviere
-#' 
-#' @examples 
-#' # See the vignette
-#' 
-#' @seealso \code{\link{get.data}}, \code{\link{get.ggplot}}
-#' 
-#'
-get.table <- function(
+function(
 	data,
 	correlated_group = NULL,
 	merge_g_and_s = FALSE,
@@ -61,7 +11,7 @@ get.table <- function(
 	col_to_display = c("person", "germplasm", "year", "block", "X", "Y"),
 	invert_row_col = FALSE
 )
-	# lets go !!! ----------
+# lets go !!! ----------
 {
 	if( is.ggplot(data) ) {
 		data = data$data
@@ -72,7 +22,7 @@ get.table <- function(
 			in.col = attributes(p)$in.col
 			if( !is.null(x.axis) ) { colnames(list_tab)[which(colnames(list_tab) == "x.axis")] = x.axis }
 			if( !is.null(in.col) ) { colnames(list_tab)[which(colnames(list_tab) == "in.col")] = in.col }
-			} else { stop("ggplot object must come from shinemas2R::get.ggplot with ggplot.type = \"barplot\", \"boxplot\", \"interaction\", \"radar\" or \"interaction\".")}
+		} else { stop("ggplot object must come from shinemas2R::get.ggplot with ggplot.type = \"barplot\", \"boxplot\", \"interaction\", \"radar\" or \"interaction\".")}
 		
 	} else {
 		data = data$data
@@ -132,14 +82,15 @@ get.table <- function(
 			}
 		}
 		
+		
 		# 3. Set up data set ----------
-		vec_variables = get.vec_variables(data, shinemas2R.object)
+		nb_variables = get.vec_variables(data, shinemas2R.object)
 		
 		# get rid off rows and cols with only NA
 		x = data
 		
-		x_head = x[,c(1:(ncol(x) - length(vec_variables)))]
-		x_var = x[,c((ncol(x) - length(vec_variables) + 1):ncol(x))]
+		x_head = x[,c(1:(ncol(x) - length(nb_variables)))]
+		x_var = x[,vec_variables]
 		if( is.null(ncol(x_var)) ) { x_var = as.data.frame(matrix(x_var, ncol = 1)); colnames(x_var) = vec_variables }
 		
 		
@@ -179,22 +130,28 @@ get.table <- function(
 			
 			x_head = x_head[,ctd]; if( is.null(ncol(x_head)) ) { x_head = as.data.frame(matrix(x_head, ncol = 1)) }
 			colnames(x_head) = ctn
+			
+			data = cbind.data.frame(x_head, x_var)
+			
+		}else{
+			data = cbind.data.frame(x_head, x_var)
+			ctn = colnames(x_head)
 		}
 		
-		data = cbind.data.frame(x_head, x_var)
+		
 		
 		
 		# 5. functions to get the table based on table.type ----------
-		transform.tab = function(tab, table.type, invert_row_col, vec_variables){
+		transform.tab = function(tab, table.type, vec_variables,ctn){
 			
 			t = NULL # Depending on table.on, some elements of tab are not used
 			
 			fun.raw = function(tab, vec_variables)	{
-				tab_head = tab[,c(1:(ncol(tab) - length(vec_variables)))]
+				tab_head = tab[,c(1:length(ctn))]
 				if( is.null(ncol(tab_head)) ) { tab_head = as.data.frame(matrix(tab_head, ncol = 1)); colnames(tab_head) = colnames(tab)[1] }
-				tab_var = tab[,c((ncol(tab) - length(vec_variables) + 1):ncol(tab))]
+				tab_var = tab[,c((ncol(tab_head) + 1):ncol(tab))]
 				if( is.null(ncol(tab_var)) ) { tab_var = as.data.frame(matrix(tab_var, ncol = 1)); colnames(tab_var) = vec_variables }
-				tab_var = cbind.data.frame(tab_head, tab_var)
+				tab = cbind.data.frame(tab_head, tab_var)
 				return(tab)
 			}
 			
@@ -296,33 +253,32 @@ get.table <- function(
 			# useful also for t coming from mean.sd.cv and summary
 			# note than if block X Y is deleted, and it is the same line for each rep, one is deleted
 			
-			if(invert_row_col & is.null(col_to_display)) { 
-				t = t(t); t = as.data.frame(t) 
-				t = cbind.data.frame(rownames(t), t)
-				colnames(t) = c("variable", "value")
+			if(is.null(col_to_display)) { 
+				t = as.data.frame(t) 
 			}
 			
 			out = list("tab" = t, "vec_variables" = vec_variables)
 			return(out)
 		}
 		
-		
 		# 6. function to get tables based on nb_row and nb_col and omit rows with only NA ----------
-		reshape.tables = function(tab, nb_row, nb_col, vec_variables, nb_duplicated_rows, col_to_display){
+		reshape.tables = function(tab, nb_row, nb_col, vec_variables, nb_duplicated_rows, col_to_display, ctn, invert_row_col){
 			
 			if( is.null(nb_row) ) { nb_row = nrow(tab) }
 			if( is.null(nb_col) ) { nb_col = ncol(tab) }
 			
 			if(!is.data.frame(tab)){ stop("tab must be a dataframe.")}
-			tab$split_row = rep(c(1:nrow(tab)), each = nb_row)[1:nrow(tab)]
+			tab$split_row = as.factor(rep(c(1:nrow(tab)), each = nb_row)[1:nrow(tab)])
+			for (i in 1:ncol(tab)) {names(tab[,i]) = NULL}
 			tab =  plyr:::splitter_d(tab, .(split_row))
 			
-			fun = function(x, nb_row, nb_col, vec_variables, col_to_display){ 
+			fun = function(x, nb_row, nb_col, vec_variables, ctn){ 
 				x = select(x, -split_row)
-				x_head = x[,c(1:(ncol(x) - length(vec_variables)))]
+				
+				x_head = x[,c(1:length(ctn))]
 				if( is.null(ncol(x_head)) ) { x_head = as.data.frame(matrix(x_head, ncol = 1)); colnames(x_head) = colnames(x)[1] }
-				x_var = x[,c((ncol(x) - length(vec_variables) + 1):ncol(x))]
-				if( is.null(ncol(x_var)) ) { x_var = as.data.frame(matrix(x_var, ncol = 1)); colnames(x_var) = vec_variables }
+				x_var = x[,c((ncol(x_head)+1):ncol(x))]
+				if( is.null(ncol(x_var)) | is.na(ncol(x_var)) ) { x_var = as.data.frame(matrix(x_var, ncol = 1)); colnames(x_var) = vec_variables }
 				
 				if(length(vec_variables) > 0){
 					
@@ -338,7 +294,7 @@ get.table <- function(
 						if( i > 0 ) { # 0 if length(seq_var) == 1
 							
 							if(!is.na(seq_var[i+1])) { 
-								x_var_tmp = x_var[,c(seq_var[i]:(seq_var[i+1]-1))] 
+								x_var_tmp = x_var[,c(seq_var[i]:(seq_var[i+1]-1))]
 							} else {
 								x_var_tmp = x_var[,seq_var[i]]
 							}
@@ -346,6 +302,7 @@ get.table <- function(
 							if( is.null(ncol(x_var_tmp)) ) { x_var_tmp = as.data.frame(matrix(x_var_tmp, ncol = 1)); colnames(x_var_tmp) = colnames(x_var)[seq_var[i]] }
 							
 							t = apply(x_var_tmp, 2, function(x){ as.numeric(as.factor(as.character(x))) })
+							
 							if( is.null(ncol(t)) ) { 
 								tt = as.data.frame(matrix(t, ncol = length(t)))
 								colnames(tt) = names(t)
@@ -368,7 +325,6 @@ get.table <- function(
 									x_head_tmp_1 = x_head[w,]					
 									
 									# table with id
-									x_head_tmp_1 = x_head[w,]
 									if( is.null(ncol(x_head_tmp_1)) ) { x_head_tmp_1 = as.data.frame(matrix(x_head_tmp_1, ncol = 1)); colnames(x_head_tmp_1) = colnames(x_head)[1] }
 									
 									if(!is.null(col_to_display)){ # If NULL, nothing to do
@@ -383,7 +339,9 @@ get.table <- function(
 									
 									# table with variables
 									x_tmp = x_var_tmp_1
+									
 									if( is.null(ncol(x_tmp)) ) { x_tmp = as.data.frame(matrix(x_tmp, ncol = 1)); colnames(x_tmp) = colnames(x_var)[seq_var[i]] }
+									if (invert_row_col == TRUE) { x_tmp = t(x_tmp) }
 									attributes(x_tmp)$get.table.object = "duplicated_infos_variables"
 									x_tmp = list(x_tmp); names(x_tmp) = "duplicated_infos_variables"
 									list_tabs = c(list_tabs, x_tmp)
@@ -398,9 +356,16 @@ get.table <- function(
 								x_head_tmp_1 = x_head[w,]
 								if( is.null(ncol(x_head_tmp_1)) ) { x_head_tmp_1 = as.data.frame(matrix(x_head_tmp_1, ncol = 1)); colnames(x_head_tmp_1) = colnames(x_head)[1] }
 								
-								x_tmp = cbind.data.frame(x_head_tmp_1, x_var_tmp_1)
+								if (!is.null(col_to_display)) { 
+									x_tmp = cbind.data.frame(x_head_tmp_1, x_var_tmp_1)
+								}else{
+									x_tmp = x_var_tmp_1
+								}
+								
+								if (invert_row_col == TRUE ) { x_tmp = t(x_tmp) }
 								attributes(x_tmp)$get.table.object = "not_duplicated_variables"
-								list_tabs = c(list_tabs, list(x_tmp))
+								#x_tmp = list(x_tmp); names(x_tmp) = "not_duplicated_variables"
+								list_tabs = c(list_tabs, "not_duplicated_variables" = list(x_tmp))
 							}
 							
 						}
@@ -410,7 +375,7 @@ get.table <- function(
 				return(list_tabs)
 			}
 			
-			tab = lapply(tab, fun, nb_row, nb_col, vec_variables, col_to_display)
+			tab = lapply(tab, fun, nb_row, nb_col, vec_variables,ctn)
 			
 			# Make tab in one single list
 			tab_ok = list()
@@ -426,11 +391,11 @@ get.table <- function(
 		
 		
 		# 7. Run functions ----------
-		out = transform.tab(data, table.type, invert_row_col, vec_variables)
+		out = transform.tab(data, table.type, vec_variables,ctn)
 		tab = out$tab
 		vec_variables = out$vec_variables
 		
-		list_tab = reshape.tables(tab, nb_row, nb_col, vec_variables, nb_duplicated_rows, col_to_display)
+		list_tab = reshape.tables(tab, nb_row, nb_col, vec_variables, nb_duplicated_rows, col_to_display, ctn, invert_row_col)
 		
 		
 		# Delete NULL elements
@@ -445,17 +410,28 @@ get.table <- function(
 			
 			# Get rid off information with only NA
 			tokeep = NULL
-			for(i in 1:length(duplicated_infos_sl)){
-				t = list_tab[duplicated_infos_variables[[i]]]$duplicated_infos_variables
-				if( length(which(is.na(t))) < length(t) ) { tokeep = c(tokeep, i) }
+			if(length(duplicated_infos_sl) > 0) {
+				for(i in 1:length(duplicated_infos_sl)){
+					t = list_tab[duplicated_infos_variables[[i]]]$duplicated_infos_variables
+					if( length(which(is.na(t))) < length(t) ) { tokeep = c(tokeep, i) }
+				}
+			}else{
+				for(i in 1:length(duplicated_infos_variables)){
+					t = list_tab[duplicated_infos_variables[[i]]]$duplicated_infos_variables
+					if( length(which(is.na(t))) < length(t) ) { tokeep = c(tokeep, i) }
+				}			
 			}
 			
 			if( !is.null(tokeep) ) {
 				duplicated_infos = list()
 				for(i in tokeep){
-					tmp = c(list_tab[duplicated_infos_sl[i]], 
-									list_tab[duplicated_infos_variables[i]]
-					)
+					if (!is.null(col_to_display)) {
+						tmp = c(list_tab[duplicated_infos_sl[i]], 
+										list_tab[duplicated_infos_variables[i]])
+					}else{
+						tmp = list_tab[duplicated_infos_variables[i]]
+					}
+					
 					tmp = list(tmp); names(tmp) = paste("set", i, sep= "-")
 					duplicated_infos = c(duplicated_infos, tmp)
 				}
@@ -470,9 +446,6 @@ get.table <- function(
 		list_tab = list("duplicated_infos" = duplicated_infos, "not_duplicated_infos" = not_duplicated_infos)
 		
 	}
-
+	
 	return(list_tab)
 }
-
-
-
