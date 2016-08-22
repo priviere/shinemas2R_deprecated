@@ -188,7 +188,7 @@ get.table <- function(
 			ctn = colnames(x_head)
 		}
 		
-		
+
 		
 		
 		# 5. functions to get the table based on table.type ----------
@@ -328,7 +328,8 @@ get.table <- function(
 				x_head = x[,c(1:length(ctn))]
 				if( is.null(ncol(x_head)) ) { x_head = as.data.frame(matrix(x_head, ncol = 1)); colnames(x_head) = colnames(x)[1] }
 				x_var = x[,c((ncol(x_head)+1):ncol(x))]
-				if( is.null(ncol(x_var)) | is.na(ncol(x_var)) ) { x_var = as.data.frame(matrix(x_var, ncol = 1)); colnames(x_var) = vec_variables }
+				if (is.array(x_var)) { x_var = as.factor(x_var) }
+				if( is.null(ncol(x_var)) ) { x_var = as.data.frame(matrix(x_var, ncol = 1)); colnames(x_var) = vec_variables }
 				
 				if(length(vec_variables) > 0){
 					
@@ -344,7 +345,7 @@ get.table <- function(
 						if( i > 0 ) { # 0 if length(seq_var) == 1
 							
 							if(!is.na(seq_var[i+1])) { 
-								x_var_tmp = x_var[,c(seq_var[i]:(seq_var[i+1]-1))]
+								if (is.na(ncol(x_var))) {x_var_tmp = x_var }else{ x_var_tmp = x_var[,c(seq_var[i]:(seq_var[i+1]-1))]}
 							} else {
 								x_var_tmp = x_var[,seq_var[i]]
 							}
@@ -444,9 +445,9 @@ get.table <- function(
 		out = transform.tab(data, table.type, vec_variables,ctn)
 		tab = out$tab
 		vec_variables = out$vec_variables
-		
+
 		list_tab = reshape.tables(tab, nb_row, nb_col, vec_variables, nb_duplicated_rows, col_to_display, ctn, invert_row_col)
-		
+
 		
 		# Delete NULL elements
 		list_tab = list_tab[!sapply(list_tab, is.null)]
