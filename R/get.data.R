@@ -1390,7 +1390,7 @@ if( nrow(d) > 0 ) {
 	)
 
 }
-
+return(d)
 }
 
 
@@ -1469,9 +1469,9 @@ return(d)
 
 query.mixture1 = function(P = NULL, G = NULL, GT = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db){
 	dtmp = query.network( P = P, G = G, GT = GT, Y = Y, R = R, SL = SL, Proj = Proj, info_db)
-	dtmp = droplevels(dtmp[which(!is.na(dtmp$mixture_id)),])
 	
-	if(nrow(dtmp) > 0) {	
+	if(!is.null(dtmp)) {
+		dtmp = droplevels(dtmp[which(!is.na(dtmp$mixture_id)),])
 		d = cbind.data.frame(
 			sl = c(as.character(dtmp$father), as.character(dtmp$son)),
 			sl_statut = rep( c("father", "son"), each = nrow(dtmp) ),
@@ -1481,9 +1481,11 @@ query.mixture1 = function(P = NULL, G = NULL, GT = NULL, Y = NULL, R = NULL, SL 
 		d$sl_statut = as.factor(d$sl_statut)
 		d$expe = as.factor(d$expe)
 		d = unique(d) # to have one row for the result of the mixture
+
 	} else { d= NULL }
 	return(d)
 }
+
 
 # 4. Filters --------------------------------------------------------------
 
@@ -2102,7 +2104,7 @@ filter_V = V.sql(variable.in)
 			if(data.type == "relation") { dv = query.data.relation(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj, info_db = info_db) }
 			
 			tab = plyr::rename(tab, replace = c("sl" = "son"))
-			if( !is.null(dv) ) { d = join(tab, dv, by = "son" ) } else { d = NULL }
+			if( !is.null(dv) ) { d = join(tab, dv, by = "son" ) ; attributes(d)$shinemas2R.object = "data-mixture"} else { d = NULL }
 			} else { d = NULL }
 	}		
 

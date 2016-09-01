@@ -430,8 +430,11 @@ get.pdf = function(
 			tex.tab = function(d, tab, lab.tab){
 				display.rownames = d[["display.rownames"]]
 				if(is.null(display.rownames)){ display.rownames = FALSE }
-				if( display.rownames ) { tab = cbind.data.frame(rownames(tab), tab); colnames(tab) = c("", "value") }
-				colnames(tab) = sapply(colnames(tab), function(x) { paste(unlist(strsplit(x, "\\.")), collapse = " ") } ) # change "." to space (" ")
+				if (attributes(tab)$invert == FALSE) {
+					colnames(tab) = sapply(colnames(tab), function(x) { paste(unlist(strsplit(x, "\\.")), collapse = " ") } ) # change "." to space (" ")
+				}
+				if( display.rownames | attributes(tab)$invert == TRUE ) { tab = cbind.data.frame(rownames(tab), tab); colnames(tab) = c("", "value") }
+
 				caption = d[["caption"]]
 				if(is.null(caption)){caption = ""}
 				caption =	text.to.tex(caption)
