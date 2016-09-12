@@ -10,7 +10,7 @@ More information about this licence [here](http://creativecommons.org/licenses/b
 The copyright of the R code and the vignette are owned by Réseau Semences Paysannes and Institut National de la Recherche Agronomique
 
 ## Version
-`shinemas2R` is now at version 0.10.1
+`shinemas2R` is now at version 0.10.2
 
 The version number is under the form A.B.C with
 
@@ -32,8 +32,7 @@ You can participate in three ways:
 
 If you update the code, you can refer to 
 [the issues](https://github.com/priviere/shinemas2R/issues)
-and do it in on the [branch v0.10.2](https://github.com/priviere/shinemas2R/tree/v0.10.2)
-so that the master branch remains unchanged for tests.
+and do it in on another branch.
 Anyhow, send me an email if you wish to participate in order to coordinate our efforts!
 
 ### 1. Test and report bugs
