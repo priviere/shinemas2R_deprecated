@@ -12,6 +12,8 @@ get.ggplot_plot.network = function(data, vertex.color, vertex.size, hide.labels.
 		}
 	} else { gp = col.vertex = NULL }
 	
+	print(gp)
+	
 	label.edge = NULL
 	
 	if(labels.generation == "local") { 
@@ -27,8 +29,6 @@ get.ggplot_plot.network = function(data, vertex.color, vertex.size, hide.labels.
 	label.vertex = get.vertex.attribute(n, "vertex.names") 
 	
 	p = get.ggplot_ggnet.custom(n, size = vertex.size, node.group = gp, node.color = col.vertex, label.nodes = label.vertex, segment.color = col.edge, segment.label = label.edge, organise.sl = organise.sl)
-	
-	
 	plotcoord = p[[1]]
 	pnet = p[[2]]
 	
