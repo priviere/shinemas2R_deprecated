@@ -105,12 +105,13 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     
     edglist <- as.matrix.network.edgelist(net)
     edges <- data.frame(plotcord[edglist[, 1], ], plotcord[edglist[, 2], ])
-
+    
     if (!is.null(node.group)) {
         network::set.vertex.attribute(net, "elements", as.character(node.group))
         plotcord$group <- as.factor(network::get.vertex.attribute(net, 
             "elements"))
     }
+    
     degrees <- data.frame(id = network.vertex.names(net), indegree = sapply(net$iel, 
         length), outdegree = sapply(net$oel, length))
     degrees$freeman <- with(degrees, indegree + outdegree)
