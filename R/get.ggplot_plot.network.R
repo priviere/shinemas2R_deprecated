@@ -12,8 +12,6 @@ get.ggplot_plot.network = function(data, vertex.color, vertex.size, hide.labels.
 		}
 	} else { gp = col.vertex = NULL }
 	
-	print(gp)
-	
 	label.edge = NULL
 	
 	if(labels.generation == "local") { 
