@@ -1020,45 +1020,8 @@ if( check.arg("data-pie.on.network", ggplot.type) ) {
 	for(var in vec_variables){
 		vec_sl = unique(as.character(data$sl))
 		
-		test = unique(is.element(vec_sl, get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "seed.lots")$data))
-		encrypt = length(test) == 1 & !test
+		n = data_network$network$data
 
-		if(encrypt){
-			
-			v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "person")$data
-			vec = paste("person-", c(1:length(v)), sep = ""); names(vec) = v
-			vec_person = vec
-			
-			v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "year")$data
-			vec = c(2000:(2000+length(v))); names(vec) = v
-			vec_year = vec
-			
-			v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "germplasm")$data
-			vec = paste("germplasm-", c(1:length(v)), sep = ""); names(vec) = v
-			vec_germplasm = vec
-			
-			reverse_encrypt_sl = function(sl, vec_germplasm, vec_person, vec_year){
-				a = unlist(strsplit(as.character(sl), "_"))
-				gs = as.character(a[1])
-				gs = unlist(strsplit(as.character(gs), "#"))
-				g = names(vec_germplasm)[which(vec_germplasm == as.character(gs[1]))]
-				if( is.na(gs[2]) ) { s = NULL } else { s = paste("#", gs[2], sep = "") }
-				p = names(vec_person)[which(vec_person == as.character(a[2]))]
-				y = names(vec_year)[which(vec_year == as.character(a[3]))]
-				d = as.character(a[4])
-				sl = paste(g, s, "_", p, "_", y, "_", d, sep = "")
-				return(sl)
-			}
-			
-			vec_sl = sapply(vec_sl, reverse_encrypt_sl, vec_germplasm, vec_person, vec_year)
-			}
-		
-		n = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "network", seed.lot.in = vec_sl, filter.on = "father-son", network.info = FALSE)
-		
-		if(encrypt){ n = encrypt.data(n) }
-		
-		n = n$data
-		
 		p = get.ggplot_plot.network(n, vertex.color, vertex.size, hide.labels.parts, labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)
 		p_net = p$pnet
 		plotcoord = p$plotcoord
