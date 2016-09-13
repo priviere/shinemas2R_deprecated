@@ -4,9 +4,9 @@
 \alias{get.ggplot}
 \title{Get ggplot objects from \code{get.data}}
 \usage{
-get.ggplot(data, correlated_group = NULL, merge_g_and_s = TRUE,
-  ggplot.type = NULL, ggplot.display = NULL, ggplot.on = "son",
-  x.axis = NULL, in.col = NULL, vec_variables = NULL,
+get.ggplot(data, data_network = NULL, correlated_group = NULL,
+  merge_g_and_s = TRUE, ggplot.type = NULL, ggplot.display = NULL,
+  ggplot.on = "son", x.axis = NULL, in.col = NULL, vec_variables = NULL,
   nb_parameters_per_plot_x.axis = NULL,
   nb_parameters_per_plot_in.col = NULL, vertex.size = 3,
   vertex.color = "year", organise.sl = FALSE, labels.on = "son",
@@ -16,6 +16,8 @@ get.ggplot(data, correlated_group = NULL, merge_g_and_s = TRUE,
 }
 \arguments{
 \item{data}{output from get.data with query.type = "network" or query.type = "data-...".}
+
+\item{data_network}{for ggplot.type == "data-pie.on.network", the network ot plot the variable coming from data argument (that must be "data-classic").}
 
 \item{correlated_group}{Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.}
 
