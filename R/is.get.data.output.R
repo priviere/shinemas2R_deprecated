@@ -116,7 +116,7 @@ is.get.data.output = function(
 				test = get.edge.attribute(n, e.att) 
 				if( is.null(test) ) { 
 					set.edge.attribute(n, e.att, value = rep("", network.edgecount(n)))	
-					message("edge attributes \"", e.att,"\" has been set to NA.")
+					message("edge attributes \"", e.att,"\" has been set to \"\".")
 				}
 				return(n)
 			}
