@@ -115,7 +115,7 @@ is.get.data.output = function(
 				if( is.null(test) ) { 
 					set.edge.attribute(n, e.att, value = NA)	
 					message("edge attributes \",", e.att,",\" has been set to NA.")
-				}			
+				}
 			}
 			
 			update.edge.attributes(n = data[[1]], e.att = "relation")
@@ -217,7 +217,6 @@ is.get.data.output = function(
 			if( !is.factor(ni$relation_year_end) ) { stop("The data fame must have a column \"relation_year_end\" as factor") } 
 		}
 		
-		print("test")
 		# 2.3. "network.info" ----------
 		ni = data[[3]]
 		
@@ -256,8 +255,6 @@ is.get.data.output = function(
 		
 		}
 		
-		print("test")
-		
 		# 2.4. "Mdist" ----------
 		Md = data[[4]]
 		
@@ -269,7 +266,6 @@ is.get.data.output = function(
 			if( !test ) { stop(mess) }
 			}
 		
-		print("test")
 		attributes(data)$shinemas2R.object = "network"
 		data = list("data" = data, "info_db" = NULL)
 	}
