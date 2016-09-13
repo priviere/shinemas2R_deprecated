@@ -7,7 +7,6 @@ get.ggplot_plot.network = function(data, vertex.color, vertex.size, hide.labels.
 	
 	if(!is.null(vertex.color)) { 
 		if(vertex.color == "year" | vertex.color == "person" | vertex.color == "germplasm") {
-			
 			gp = (get.vertex.attribute(n, vertex.color))	
 			col.vertex = hue_pal()(length(unique(get.vertex.attribute(n, vertex.color)))) # hue_pal from scale show_col(hue_pal()(10))	
 		}
