@@ -6,6 +6,8 @@
 #'
 #' @param data output from get.data with query.type = "network" or query.type = "data-...".
 #' 
+#' @param data_network for ggplot.type == "data-pie.on.network", the network ot plot the variable coming from data argument (that must be "data-classic").
+#' 
 #' @param correlated_group Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.
 #' 
 #' @param merge_g_and_s Fuse germplasm and selection name information in a column named germplasm. TRUE by default.
@@ -135,6 +137,7 @@
 #' 
 get.ggplot <- function(
 	data,
+	data_network = NULL,
 	correlated_group = NULL,
 	merge_g_and_s = TRUE,
 	ggplot.type = NULL,
