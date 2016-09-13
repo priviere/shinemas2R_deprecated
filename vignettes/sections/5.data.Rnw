@@ -489,7 +489,8 @@ if(use.get.data){
 		ggplot.type = "data-pie.on.network", 
 		vec_variables = "poids_epis---poids_epis", 
 		pie.size = .25, 
-		hide.labels.parts = "person"
+		hide.labels.parts = "person",
+		vertex.color = "person"
 		)
 
 } else { 
