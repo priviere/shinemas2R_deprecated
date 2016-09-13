@@ -1018,8 +1018,8 @@ if( check.arg("data-pie.on.network", ggplot.type) ) {
 	
 	list.plots = NULL
 	for(var in vec_variables){
-		n = data_network$network$data
-
+		n = data_network$data
+		
 		p = get.ggplot_plot.network(n, vertex.color, vertex.size, hide.labels.parts, labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)
 		p_net = p$pnet
 		plotcoord = p$plotcoord
@@ -1028,7 +1028,7 @@ if( check.arg("data-pie.on.network", ggplot.type) ) {
 		tokeep = which(!is.na(d_tmp[,var]))
 		d_tmp = d_tmp[tokeep,]
 		d_tmp$sl = factor(d_tmp$sl)
-
+		
 		p = get.ggplot_pie.on.ggplot(p_net, data = d_tmp, variable = var, factor = "sl", x.origin = "X1", y.origin = "X2", r = pie.size*5, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 		# pie.size*5 to oversize the vertex size
 		
