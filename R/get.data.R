@@ -1663,15 +1663,17 @@ filter_V = V.sql(variable.in)
  				
  				id_mix_rep = unique(as.character(reseau[row_id_mix_rep, "mixture_id"]))
  				
- 				for(id in id_mix_rep){
- 					row_mix_rep = which(id %in% as.character(reseau$mixture_id))
- 					sl_harvested = reseau[row_mix_rep, "father"]
- 					row = which(as.character(reseau$son) == sl_harvested)
- 					reseau[row, "son"] = reseau[row_mix_rep, "son"]
+ 				if ( length(id_mix_rep)>0 ) {
+	 				for(id in id_mix_rep){
+	 					row_mix_rep = which(id %in% as.character(reseau$mixture_id))
+	 					sl_harvested = reseau[row_mix_rep, "father"]
+	 					row = which(as.character(reseau$son) == sl_harvested)
+	 					reseau[row, "son"] = reseau[row_mix_rep, "son"]
+	 				}
+	 				
+	 				reseau = droplevels(reseau[-row_id_mix_rep,])
+	 				message("Mixtures from replication have been deleted and replaced by reproductions.")
  				}
- 				
- 				reseau = droplevels(reseau[-row_id_mix_rep,])
- 				message("Mixtures from replication have been deleted and replaced by reproductions.")
  			}
  			
  			# 5.1.2. Create network matrix ----------	
