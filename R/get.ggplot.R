@@ -1018,8 +1018,6 @@ if( check.arg("data-pie.on.network", ggplot.type) ) {
 	
 	list.plots = NULL
 	for(var in vec_variables){
-		vec_sl = unique(as.character(data$sl))
-		
 		n = data_network$network$data
 
 		p = get.ggplot_plot.network(n, vertex.color, vertex.size, hide.labels.parts, labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)
