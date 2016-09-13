@@ -260,8 +260,7 @@ pnet <- pnet + scale_x_continuous(breaks = NULL) + scale_y_continuous(breaks = N
 
 names(node.color) = sort(unique(node.group))
 
-pnet = pnet + scale_fill_manual(name="Group", values = node.color)
-
+if( length(node.color) > 1) { pnet = pnet + scale_fill_manual(name="Group", values = node.color) }
 
     return(list("plotcoord" = plotcord, "pnet" = pnet))
 }
