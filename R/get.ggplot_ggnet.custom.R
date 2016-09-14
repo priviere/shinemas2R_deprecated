@@ -170,29 +170,64 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     	
     	b = edges
     	
-    	# create a grid to put the seed-lots
-    	sy = summary(factor(a$y))
-    	sp = summary(factor(a$p))
+    	# create a vector of X and Y according to sl
+    	# X according to year. Fo each year, there SL coming from diffusion, mixture or reproduction/selection
+    	y = sort(unique(a$y))
+    	# for the first year
+    	X = x = c(1:5)
+    	# for next year
+    	for(i in 1:(length(y)-1)){ x = x + 7 ;X = c(X, x)}
+
+    	year = rep(y, each = 5)
+    	relation = rep(c("diffusion_son", "diffusion_father", "mixture", "reproduction", "selection"), length(y))
+    	dX = data.frame(year, relation, X)
     	
-    	grid = matrix(0, ncol = length(sy), nrow = sum(sp))    	
-    	col = c(1:length(sy)); names(col) = names(sy)
-    	row = c(1: sum(sp)); names(row) = rep(names(sp), as.vector(sp))
+    	pg = with(a,table(p,g))
+    	vec_p = rownames(pg)
+    	
+    	# Y according to person and germplasm for a given person (location)
+    	Y = person = germplasm = NULL
+    	for(per in vec_p){
+    		d = droplevels(filter(a, p == per))
+    		yg = with(d, table(y,g))
+     		y = NULL
+    		for(j in 1:ncol(yg)){ y = c(y, max(yg[,j])) }
+    		Y = c(Y, y)
+    		person = c(person, rep(per, length(y)))
+    		germplasm = c(germplasm, colnames(yg))
+    	}
+    	Y = cumsum(Y)
+    	dY = data.frame(person, germplasm, Y)
 
-    	# place the sl onthe grid
+    	# place sl on the grid
     	for(i in 1:nrow(a)) {
-    		x1 = col[a$y[i]]
-    		x2 = sample(row[grep(a$p[i], names(row))], 1)
+    		# Get info
+    		# vertex
+    		germ = a[i,"g"]
+    		pers = a[i,"p"]
+    		year = a[i,"y"]
+    		x1 = a[i,"X1"]
+    		x2 = a[i,"X2"]
     		
-    		r = b[which( b$X1 == a$X1[i] & b$Y1 == a$X2[i] ), "relation"]
-    		if( is.element("diffusion", r) ) { x1 = x1 + 0.5 }
-
-    		b[which( b$X1 == a$X1[i] ), "X1"] = x1
-    		b[which( b$Y1 == a$X2[i] ), "Y1"] = x2
-    		b[which( b$X2 == a$X1[i] ), "X2"] = x1
-    		b[which( b$Y2 == a$X2[i] ), "Y2"] = x2
-    		a$X1[i] = x1
-    		a$X2[i] = x2
+    		# edges
+    		r_son = b[which( b$X1 == x1 & b$Y1 == x2 ), "relation"]
+    		r_father = b[which( b$X2 == x1 & b$Y2 == x2 ), "relation"]
     		
+    		# son erase father, which is not so bad ! Except for diffusion
+    		if( length(r_father) > 0 ) { r = r_father[1] ; if(r == "diffusion") {r = "diffusion_father"} }
+    		if( length(r_son) > 0 ) { r = r_son[1]  ; if(r == "diffusion") {r = "diffusion_son"}}
+    		
+    		x = dX[which(dX$year == year & dX$relation == r), "X"]
+    		y = dY[which(dY$person == pers & dY$germplasm == germ), "Y"]
+    		
+     		b[which( b$X1 == x1 ), "X1"] = x
+    		b[which( b$Y1 == x2 ), "Y1"] = y
+    		b[which( b$X2 == x1 ), "X2"] = x
+    		b[which( b$Y2 == x2 ), "Y2"] = y
+    		
+    		# vertex
+    		a$X1[i] = x
+    		a$X2[i] = y
     	}
     	
     	plotcord$X1 = a$X1
@@ -202,8 +237,9 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     	edges$Y1 = b$Y1
     	edges$X2 = b$X2
     	edges$Y2 = b$Y2	
+    	edges$midX = (b$X1 + b$X2) / 2
+    	edges$midY = (b$Y1 + b$Y2) / 2
     }
-    
     
     pnet <- ggplot()
     pnet = pnet + geom_segment(aes(x = X1, y = Y1, xend = X2, yend = Y2, linetype = relation), data = edges, size = segment.size, alpha = inherit(segment.alpha), arrow = arrow(type = "closed", length = unit(arrow.size, "cm")))    
