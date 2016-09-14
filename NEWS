@@ -6,7 +6,7 @@ shinemas2R 0.10.2 -------------------------------------
 	- get.ggplot.R: 
 		. add argument data_network
 	- get.ggplot_ggnet.custom.R
-		. improve organise.sl, cf #30
+		. improve organise.sl, but still has to be finished ! cf #30
 
 * vignette:
 	- update regarding changes in .R
