@@ -2106,7 +2106,7 @@ filter_V = V.sql(variable.in)
 			if(data.type == "relation") { dv = query.data.relation(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj, info_db = info_db) }
 			
 			tab = plyr::rename(tab, replace = c("sl" = "son"))
-			if( !is.null(dv) ) { d = merge(tab, dv, by = "son" ) ; if(query.type=="data-mixture-1"){ attributes(d)$shinemas2R.object = "data-mixture"}} else { d = NULL }
+			if( !is.null(dv) ) { d = join(tab, dv, by = "son" ) ; if(query.type=="data-mixture-1"){ attributes(d)$shinemas2R.object = "data-mixture"}} else { d = NULL }
 			} else { d = NULL }
 	}		
 
