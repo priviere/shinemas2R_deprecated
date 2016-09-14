@@ -179,8 +179,9 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     	for(i in 1:(length(y)-1)){ x = x + 7 ;X = c(X, x)}
 
     	year = rep(y, each = 5)
-    	relation = rep(c("diffusion_son", "diffusion_father", "mixture", "reproduction", "selection"), length(y))
+    	relation = rep(c("diffusion_father", "diffusion_son", "reproduction", "selection", "mixture"), length(y))
     	dX = data.frame(year, relation, X)
+    	print(dX)
     	
     	pg = with(a,table(p,g))
     	vec_p = rownames(pg)
@@ -213,10 +214,10 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     		r_son = b[which( b$X1 == x1 & b$Y1 == x2 ), "relation"]
     		r_father = b[which( b$X2 == x1 & b$Y2 == x2 ), "relation"]
     		
-    		# son erase father, which is not so bad ! Except for diffusion
-    		if( length(r_father) > 0 ) { r = r_father[1] ; if(r == "diffusion") {r = "diffusion_father"} }
+    		# father erase son, so it is in the chronological order
     		if( length(r_son) > 0 ) { r = r_son[1]  ; if(r == "diffusion") {r = "diffusion_son"}}
-    		
+    		if( length(r_father) > 0 ) { r = r_father[1] ; if(r == "diffusion") {r = "diffusion_father"} }
+
     		x = dX[which(dX$year == year & dX$relation == r), "X"]
     		y = dY[which(dY$person == pers & dY$germplasm == germ), "Y"]
     		
