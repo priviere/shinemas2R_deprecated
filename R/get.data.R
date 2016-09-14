@@ -2244,4 +2244,5 @@ if(query.type == "grandfather") {
 d = list("data" = d, "info_db" = info_db)
 return(d)
 }
+}
 
