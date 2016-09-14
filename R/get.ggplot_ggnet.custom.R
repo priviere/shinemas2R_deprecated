@@ -167,11 +167,13 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     	a$g = sapply(a$names, function(x){ unlist(strsplit(x, "_"))[1] })
     	a$p = sapply(a$names, function(x){ unlist(strsplit(x, "_"))[2] })
     	a$y = sapply(a$names, function(x){ unlist(strsplit(x, "_"))[3] }) 
+    	a$d = sapply(a$names, function(x){ unlist(strsplit(x, "_"))[4] }) 
+    	a$gd = paste(a$g, a$d, sep = "_")
     	
     	b = edges
     	
     	# create a vector of X and Y according to sl
-    	# X according to year. Fo each year, there SL coming from diffusion, mixture or reproduction/selection
+    	# X according to year. Fo each year, there SL coming from diffusion, mixture or reproduction/selection. update when #30 is OK
     	y = sort(unique(a$y))
     	# for the first year
     	X = x = c(1:5)
@@ -181,30 +183,31 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     	year = rep(y, each = 5)
     	relation = rep(c("diffusion_father", "diffusion_son", "reproduction", "selection", "mixture"), length(y))
     	dX = data.frame(year, relation, X)
-    	print(dX)
     	
-    	pg = with(a,table(p,g))
-    	vec_p = rownames(pg)
+    	pgd = with(a,table(p,gd))
+    	vec_p = rownames(pgd)
     	
     	# Y according to person and germplasm for a given person (location)
-    	Y = person = germplasm = NULL
+    	Y = person = germplasm_digit = NULL
     	for(per in vec_p){
     		d = droplevels(filter(a, p == per))
-    		yg = with(d, table(y,g))
+    		ygd = with(d, table(y,gd))
      		y = NULL
-    		for(j in 1:ncol(yg)){ y = c(y, max(yg[,j])) }
+    		for(j in 1:ncol(ygd)){ y = c(y, max(ygd[,j])) }
     		Y = c(Y, y)
     		person = c(person, rep(per, length(y)))
-    		germplasm = c(germplasm, colnames(yg))
+    		germplasm_digit = c(germplasm_digit, colnames(ygd))
     	}
     	Y = cumsum(Y)
-    	dY = data.frame(person, germplasm, Y)
-
+    	dY = data.frame(person, germplasm_digit, Y)
+    	
+    	print(dY)
+    	
     	# place sl on the grid
     	for(i in 1:nrow(a)) {
     		# Get info
     		# vertex
-    		germ = a[i,"g"]
+    		germ_digit = a[i,"gd"]
     		pers = a[i,"p"]
     		year = a[i,"y"]
     		x1 = a[i,"X1"]
@@ -214,12 +217,12 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     		r_son = b[which( b$X1 == x1 & b$Y1 == x2 ), "relation"]
     		r_father = b[which( b$X2 == x1 & b$Y2 == x2 ), "relation"]
     		
-    		# father erase son, so it is in the chronological order
+    		# father erase son, so it is in the chronological order: cf #30 to have a better chronology
     		if( length(r_son) > 0 ) { r = r_son[1]  ; if(r == "diffusion") {r = "diffusion_son"}}
     		if( length(r_father) > 0 ) { r = r_father[1] ; if(r == "diffusion") {r = "diffusion_father"} }
 
     		x = dX[which(dX$year == year & dX$relation == r), "X"]
-    		y = dY[which(dY$person == pers & dY$germplasm == germ), "Y"]
+    		y = dY[which(dY$person == pers & dY$germplasm_digit == germ_digit), "Y"]
     		
      		b[which( b$X1 == x1 ), "X1"] = x
     		b[which( b$Y1 == x2 ), "Y1"] = y
