@@ -1,3 +1,17 @@
+shinemas2R 0.10.2 -------------------------------------
+-----------------------------------------------------
+* update some little bugs regarding tests
+
+* update functions
+	- get.ggplot.R: 
+		. add argument data_network
+	- get.ggplot_ggnet.custom.R
+		. improve organise.sl, cf #30
+
+* vignette:
+	- update regarding changes in .R
+
+
 shinemas2R 0.10.1 -------------------------------------
 -----------------------------------------------------
 * resolve issues: #17, #19, #20, #21, #25, #40
@@ -6,7 +20,10 @@ shinemas2R 0.10.1 -------------------------------------
 	- get.ggplot.R: 
 		. update labels.generation argument possible values to "local"" or "total". In relation to #25
 	- get.pdf.R:
-		. add argument "includeimage", beeing a list containing the following elements: "content", "caption"and "width". In relation to #20
+		. add argument "includeimage", beeing a list containing the following elements: "content", "caption" and "width". In relation to #20
+
+* vignette:
+	- update regarding changes in .R
 
 
 shinemas2R 0.10 -------------------------------------
