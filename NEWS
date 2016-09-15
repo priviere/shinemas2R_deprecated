@@ -9,6 +9,8 @@ shinemas2R 0.10.2 -------------------------------------
 		. improve organise.sl, but still has to be finished ! cf #30
 	- get.data.R
 		.	update format of data for SR in order to have pairs of barplot for S and R
+	- format.data.R
+		. update S and SR output regarding PPBstats
 		
 * vignette:
 	- update regarding changes in .R
