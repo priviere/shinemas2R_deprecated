@@ -1150,44 +1150,53 @@ if(nrow(d) > 0)  {
 											) 
 	d$sl_statut = paste(sapply(d$sl, function(x){unlist(strsplit(as.character(x),"_"))[3]}), d$sl_stat, sep = ":")
 	d = select(d, - sl_stat)
-	
-	expinfo = unique(
-									cbind.data.frame(
-																		exp = d$expe, 
-																		g = sapply(d$sl, function(x){unlist(strsplit(as.character(x),"_"))[1]}), 
-																		sl_statut = d$sl_statut,
-																		sl = d$sl
-																	)
-									)
+	d$g = sapply(d$sl, function(x){unlist(strsplit(as.character(x),"_"))[1]})
+	d$exp_stat = paste(d$expe, d$sl_statut, sep = "-")
 
-	expinfo = expinfo[order(expinfo$exp, expinfo$sl_statut, decreasing = TRUE), ]
-	expinfo$ok = sapply( expinfo$exp, function(x){floor(as.numeric(as.character(x)))} )
-	liste = unique(expinfo$ok); name.exp = NULL
+	#expinfo = unique(
+	#								cbind.data.frame(
+	#																	exp = d$expe,
+	#																	g = sapply(d$sl, function(x){unlist(strsplit(as.character(x),"_"))[1]}), 
+	#																	sl_statut = d$sl_statut,
+	#																	sl = d$sl
+	#																)
+	#								)
 	
+	#expinfo = expinfo[order(expinfo$exp, expinfo$sl_statut, decreasing = TRUE), ]
+	#expinfo$ok = sapply( expinfo$exp, function(x){floor(as.numeric(as.character(x)))} )
+	#liste = sort(unique(expinfo$ok)); name.exp = NULL
+	liste = sort(unique(d$expe))
+
 	name.exp.1 = name.exp.2 = NULL
 	
 	for(i in 1:length(liste)) {
-		toto = droplevels(subset(expinfo, ok %in% liste[i]))
-		toget = grep("vracR", toto[,"sl_statut"])[1]
-		n11 = toto[toget,"g"]
-		n21 = toto[toget, "sl"]
+		toto = droplevels(subset(d, expe %in% liste[i]))
 		
-		toget = grep("bouquetR",toto[,"sl_statut"])[1]
-		n12 = toto[toget,"g"]
-		n22 = toto[toget, "sl"]
+		toget_v = grep("vracS", toto[,"sl_statut"])
+		toget_b = grep("bouquetS", toto[,"sl_statut"])
+
+		n1_S = paste( as.character(toto[toget_v,"g"]), "|", as.character(toto[toget_b,"g"]), "(S)" )
+		n1_S = rep( n1_S, 2 ); names(n1_S) = toto[c(toget_v, toget_b), "exp_stat"]
 		
-		n1 = paste( as.character(n11), as.character(n12), sep = " | " )
-		n1 = rep( n1, nrow(toto) ); names(n1) = toto[, "exp"]
+		n2_S = paste( as.character(toto[toget_v, "sl"]), "|", as.character(toto[toget_b, "sl"]), "(S)" )
+		n2_S = rep( n2_S, 2 ); names(n2_S) = toto[c(toget_v, toget_b), "exp_stat"]
+
+		toget_v = grep("vracR", toto[,"sl_statut"])
+		toget_b = grep("bouquetR", toto[,"sl_statut"])
 		
-		n2 = paste( as.character(n21), as.character(n22), sep = " | " )
-		n2 = rep( n2, nrow(toto) ); names(n2) = toto[, "exp"]
+		n1_R = paste( as.character(toto[toget_v,"g"]), "|", as.character(toto[toget_b,"g"]), "(R)" )
+		n1_R = rep( n1_R, 2 ); names(n1_R) = toto[c(toget_v, toget_b), "exp_stat"]
 		
-		name.exp.1 = c(name.exp.1, n1)
-		name.exp.2 = c(name.exp.2, n2)
+		n2_R = paste( as.character(toto[toget_v, "sl"]), "|", as.character(toto[toget_b, "sl"]), "(R)" )
+		n2_R = rep( n2_R, 2 ); names(n2_R) = toto[c(toget_v, toget_b), "exp_stat"]
+		
+		name.exp.1 = c(name.exp.1, n1_S, n1_R)
+		name.exp.2 = c(name.exp.2, n2_S, n2_R)
 		}
 	
-	d$expe_name = name.exp.1[as.character(d$expe)]	
-	d$expe_name_2 = name.exp.2[as.character(d$expe)]	
+	d$expe_name = name.exp.1[as.character(d$exp_stat)]	
+	d$expe_name_2 = name.exp.2[as.character(d$exp_stat)]	
+	d = select(d, - exp_stat)
 	
 	d$sl = as.factor(d$sl)
 	d$sl_statut = as.factor(d$sl_statut)
