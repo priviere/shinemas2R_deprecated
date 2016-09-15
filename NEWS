@@ -7,7 +7,9 @@ shinemas2R 0.10.2 -------------------------------------
 		. add argument data_network
 	- get.ggplot_ggnet.custom.R
 		. improve organise.sl, but still has to be finished ! cf #30
-
+	- get.data.R
+		.	update format of data for SR in order to have pairs of barplot for S and R
+		
 * vignette:
 	- update regarding changes in .R
 
