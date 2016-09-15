@@ -61,13 +61,13 @@ vec_variables = get.vec_variables(data, shinemas2R.object)
 if( format == "PPBstats" ) {
 
 	if( data.on == "son" ){ 
-		if( fuse_g_and_s ) { data$format_germplasm = sapply(data$son, function(x){unlist(strsplit(x,"_"))[1]}) } else { data$format_germplasm = data$son_germplasm }
+		if( fuse_g_and_s ) { data$format_germplasm = sapply(data$son, function(x){unlist(strsplit(as.character(x),"_"))[1]}) } else { data$format_germplasm = data$son_germplasm }
 		data$format_year = data$son_year
 		data$format_location = data$son_person
 		}
 	
 	if( data.on == "father" ){ 
-		if( fuse_g_and_s ) { data$format_germplasm = sapply(data$father, function(x){unlist(strsplit(x,"_"))[1]}) } else { data$format_germplasm = data$father_germplasm }
+		if( fuse_g_and_s ) { data$format_germplasm = sapply(data$father, function(x){unlist(strsplit(as.character(x),"_"))[1]}) } else { data$format_germplasm = data$father_germplasm }
 		data$format_year = data$father_year
 		data$format_location = data$father_person
 	}
