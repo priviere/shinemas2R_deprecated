@@ -201,8 +201,6 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     	Y = cumsum(Y)
     	dY = data.frame(person, germplasm_digit, Y)
     	
-    	print(dY)
-    	
     	# place sl on the grid
     	for(i in 1:nrow(a)) {
     		# Get info
@@ -218,8 +216,17 @@ get.ggplot_ggnet.custom = function (net, mode = "fruchtermanreingold", layout.pa
     		r_father = b[which( b$X2 == x1 & b$Y2 == x2 ), "relation"]
     		
     		# father erase son, so it is in the chronological order: cf #30 to have a better chronology
-    		if( length(r_son) > 0 ) { r = r_son[1]  ; if(r == "diffusion") {r = "diffusion_son"}}
-    		if( length(r_father) > 0 ) { r = r_father[1] ; if(r == "diffusion") {r = "diffusion_father"} }
+    		if( length(r_son) > 0 ) { 
+    			r = r_son[1]
+    			if(r == "diffusion") {r = "diffusion_son"}
+    			if(r == "") {r = "reproduction"} # If no data, it is considered as reproduction
+    		}
+    		
+    		if( length(r_father) > 0 ) { 
+    			r = r_father[1]
+    			if(r == "diffusion") {r = "diffusion_father"} 
+    			if(r == "") {r = "reproduction"} # If no data, it is considered as reproduction
+    			}
 
     		x = dX[which(dX$year == year & dX$relation == r), "X"]
     		y = dY[which(dY$person == pers & dY$germplasm_digit == germ_digit), "Y"]
