@@ -24,6 +24,15 @@ The data set with the right format for the R package
 \description{
 Format data from \code{get.data} to be used by several R packages
 }
+\details{
+\itemize{
+ \item For PPBstats, it returns
+ \itemize{
+  \item a data-set fitting argument \code{data} in functions \code{MC} or \code{FWH} for shinemas2R.object = "data-classic-relation" or "data-classic-seed-lots"
+  \item a data-set fitting argument \code{data_version} in \code{get.ggplot} for shinemas2R.object = "data-S-relation", "data-SR-relation", "data-S-seed-lots" or "data-SR-seed-lots"
+ }
+}
+}
 \examples{
 # See the vignette
 }

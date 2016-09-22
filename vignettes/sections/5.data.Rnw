@@ -461,30 +461,52 @@ Indeed, the pies are drawn with a polygon which needs lots of points that take m
 
 <<message=TRUE,cache=FALSE>>=
 if(use.get.data){
-	data_classic_bis = get.data(
-		db_user = info_db$db_user, db_host = info_db$db_host, # db infos
-		db_name = info_db$db_name, db_password = info_db$db_password, # db infos
-		query.type = "data-classic", # data-classic query
-		person.in = "OLR", # person to keep
-		filter.on = "father-son", # filters on father AND son
-		data.type = "relation", # data linked to relation between seed-lots
-		variable = "poids_epis", # the variables to display
-		project.in = "DEMO" # the project 
-		)
 	
-	pn = get.ggplot(
-		data_classic_bis, 
-		ggplot.type = "data-pie.on.network", 
-		vec_variables = "poids_epis---poids_epis", 
-		pie.size = .25, 
-		hide.labels.parts = "person"
-		)
+	data_classic_bis = get.data(
+	db_user = info_db$db_user, db_host = info_db$db_host, # db infos
+	db_name = info_db$db_name, db_password = info_db$db_password, # db infos
+	query.type = "data-classic", # data-classic query
+	person.in = "OLR", # person to keep
+	filter.on = "father-son", # filters on father AND son
+	data.type = "relation", # data linked to relation between seed-lots
+	variable = "poids_epis", # the variables to display
+	project.in = "DEMO" # the project 
+)
+
+vec_sl = unique(as.character(data_classic_bis$data$data$son))
+
+data_classic_bis_network = get.data(
+	db_user = info_db$db_user, 
+	db_host = info_db$db_host, 
+	db_name = info_db$db_name, 
+	db_password = info_db$db_password, 
+	query.type = "network", 
+	seed.lot.in = vec_sl, 
+	filter.on = "father-son", 
+	network.info = FALSE
+	)
+
+pn = get.ggplot(
+	data_classic_bis, 
+	data_classic_bis_network,
+	ggplot.type = "data-pie.on.network", 
+	vec_variables = "poids_epis---poids_epis", 
+	pie.size = .25, 
+	hide.labels.parts = "person",
+	vertex.color = "person", organise.sl = TRUE
+)
 
 } else { 
 	# 1. Query SHiNeMaS ...
 	# 2. Set up data set ...
 	# |==========================================================| 100%
 	load("./data/data_classic_bis.RData")
+	
+	# 1. Query SHiNeMaS ...
+	# Mixtures from replication have been deleted and replaced by reproductions.
+	# 2. Create network matrix ...
+	# 3. Link information to vertex and edges ...
+	load("./data/data_classic_bis_network.RData")
 	
 	# 1. Query SHiNeMaS ...
 	# 2. Create network matrix ...

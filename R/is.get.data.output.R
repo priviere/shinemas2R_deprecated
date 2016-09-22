@@ -97,28 +97,33 @@ is.get.data.output = function(
 		# 2.1. "network" ----------
 		if( !is.null(data[[1]]) ) {
 			if( !is.network(data[[1]]) ) { stop("The first element of data must be NULL or a network object.") }
+			
 			update.vertex.attributes = function(n = data, v.att = "year"){
 				test = get.vertex.attribute(n, v.att)
 				if( length(which(is.na(test))) == length(test) ) { 
-					set.vertex.attribute(n, v.att, value = NA)	
-					message("vertex attributes \",", v.att,",\" has been set to NA.")
-				}			
+					set.vertex.attribute(n, v.att, value = rep("", length(network.vertex.names(data[[1]]))))	
+					message("vertex attributes \"", v.att,"\" has been set to \"\".")
+				}
+				return(n)
 			}
-			update.vertex.attributes(n = data[[1]], v.att = "year")
-			update.vertex.attributes(n = data[[1]], v.att = "person")
-			update.vertex.attributes(n = data[[1]], v.att = "germplasm")
-			update.vertex.attributes(n = data[[1]], v.att = "germplasm.type")
-			update.vertex.attributes(n = data[[1]], v.att = "sex")
+			data[[1]] = update.vertex.attributes(n = data[[1]], v.att = "year")
+			data[[1]] = update.vertex.attributes(n = data[[1]], v.att = "person")
+			data[[1]] = update.vertex.attributes(n = data[[1]], v.att = "germplasm")
+			data[[1]] = update.vertex.attributes(n = data[[1]], v.att = "germplasm.type")
+			data[[1]] = update.vertex.attributes(n = data[[1]], v.att = "sex")
 			
-			update.edge.attributes = function(n = data, e.att = "relation"){
-				test = get.edge.attribute(n, e.att)
-				if( length(which(is.na(test))) == length(test) ) { 
-					set.edge.value(n, e.att, value = NULL)	
-					message("edge attributes \",", e.att,",\" has been set to NULL.")
-				}			
+			update.edge.attributes = function(n = n, e.att = "relation"){
+				test = get.edge.attribute(n, e.att) 
+				if( is.null(test) ) { 
+					set.edge.attribute(n, e.att, value = rep("", network.edgecount(n)))	
+					message("edge attributes \"", e.att,"\" has been set to \"\".")
+				}
+				return(n)
 			}
-			update.edge.attributes(n = data[[1]], e.att = "relation")
-			update.edge.attributes(n = data[[1]], e.att = "generation")
+				
+			data[[1]] = update.edge.attributes(n = data[[1]], e.att = "relation")
+			data[[1]] = update.edge.attributes(n = data[[1]], e.att = "generation")
+			
 		}
 
 		# 2.2. "network.query" ----------
@@ -216,7 +221,6 @@ is.get.data.output = function(
 			if( !is.factor(ni$relation_year_end) ) { stop("The data fame must have a column \"relation_year_end\" as factor") } 
 		}
 		
-		
 		# 2.3. "network.info" ----------
 		ni = data[[3]]
 		
@@ -255,7 +259,6 @@ is.get.data.output = function(
 		
 		}
 		
-
 		# 2.4. "Mdist" ----------
 		Md = data[[4]]
 		

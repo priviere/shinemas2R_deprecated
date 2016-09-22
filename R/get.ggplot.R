@@ -6,6 +6,8 @@
 #'
 #' @param data output from get.data with query.type = "network" or query.type = "data-...".
 #' 
+#' @param data_network for ggplot.type == "data-pie.on.network", the network ot plot the variable coming from data argument (that must be "data-classic").
+#' 
 #' @param correlated_group Name of the group of correlation in data. NULL by default meaning that \code{shinemas2R::get.data()$data$data} is taken.
 #' 
 #' @param merge_g_and_s Fuse germplasm and selection name information in a column named germplasm. TRUE by default.
@@ -135,6 +137,7 @@
 #' 
 get.ggplot <- function(
 	data,
+	data_network = NULL,
 	correlated_group = NULL,
 	merge_g_and_s = TRUE,
 	ggplot.type = NULL,
@@ -294,10 +297,6 @@ if(is.null(ggplot.type) & test2) {
 
 
 if( test2 & length(grep("data-", ggplot.type)) == 0 ) { stop("With data from \"data-...\", ggplot.type must be", paste(vec_all_ggplot_data, collapse = ", \n")) }
-
-t = is.null(info_db) & (ggplot.type == "data-pie.on.network" | ggplot.type == "data-pie.on.map")
-
-if( is.null(info_db) & (is.element("data-pie.on.network", ggplot.type) | is.element("data-pie.on.map", ggplot.type) ) ) { stop("You can not use ggplot.type == \"data-pie.on.network\" or \"data-pie.on.map\" because you can not be connected to SHiNeMaS, as you used is.get.data.output function.") }
 
 # 1.3. ggplot.display ----------
 
@@ -1015,46 +1014,7 @@ if( check.arg("data-pie.on.network", ggplot.type) ) {
 	
 	list.plots = NULL
 	for(var in vec_variables){
-		vec_sl = unique(as.character(data$sl))
-		
-		test = unique(is.element(vec_sl, get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "seed.lots")$data))
-		encrypt = length(test) == 1 & !test
-
-		if(encrypt){
-			
-			v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "person")$data
-			vec = paste("person-", c(1:length(v)), sep = ""); names(vec) = v
-			vec_person = vec
-			
-			v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "year")$data
-			vec = c(2000:(2000+length(v))); names(vec) = v
-			vec_year = vec
-			
-			v = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "germplasm")$data
-			vec = paste("germplasm-", c(1:length(v)), sep = ""); names(vec) = v
-			vec_germplasm = vec
-			
-			reverse_encrypt_sl = function(sl, vec_germplasm, vec_person, vec_year){
-				a = unlist(strsplit(as.character(sl), "_"))
-				gs = as.character(a[1])
-				gs = unlist(strsplit(as.character(gs), "#"))
-				g = names(vec_germplasm)[which(vec_germplasm == as.character(gs[1]))]
-				if( is.na(gs[2]) ) { s = NULL } else { s = paste("#", gs[2], sep = "") }
-				p = names(vec_person)[which(vec_person == as.character(a[2]))]
-				y = names(vec_year)[which(vec_year == as.character(a[3]))]
-				d = as.character(a[4])
-				sl = paste(g, s, "_", p, "_", y, "_", d, sep = "")
-				return(sl)
-			}
-			
-			vec_sl = sapply(vec_sl, reverse_encrypt_sl, vec_germplasm, vec_person, vec_year)
-			}
-		
-		n = get.data(db_user = info_db$db_user, db_host = info_db$db_host, db_name = info_db$db_name, db_password = info_db$db_password, query.type = "network", seed.lot.in = vec_sl, filter.on = "father-son", network.info = FALSE)
-		
-		if(encrypt){ n = encrypt.data(n) }
-		
-		n = n$data
+		n = data_network$data
 		
 		p = get.ggplot_plot.network(n, vertex.color, vertex.size, hide.labels.parts, labels.sex, labels.generation, organise.sl = organise.sl, labels.size = labels.size)
 		p_net = p$pnet
@@ -1064,7 +1024,7 @@ if( check.arg("data-pie.on.network", ggplot.type) ) {
 		tokeep = which(!is.na(d_tmp[,var]))
 		d_tmp = d_tmp[tokeep,]
 		d_tmp$sl = factor(d_tmp$sl)
-
+		
 		p = get.ggplot_pie.on.ggplot(p_net, data = d_tmp, variable = var, factor = "sl", x.origin = "X1", y.origin = "X2", r = pie.size*5, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
 		# pie.size*5 to oversize the vertex size
 		

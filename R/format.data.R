@@ -13,6 +13,15 @@
 #' 
 #' @return The data set with the right format for the R package
 #' 
+#' @details 
+#' \itemize{
+#'  \item For PPBstats, it returns
+#'  \itemize{
+#'   \item a data-set fitting argument \code{data} in functions \code{MC} or \code{FWH} for shinemas2R.object = "data-classic-relation" or "data-classic-seed-lots"
+#'   \item a data-set fitting argument \code{data_version} in \code{get.ggplot} for shinemas2R.object = "data-S-relation", "data-SR-relation", "data-S-seed-lots" or "data-SR-seed-lots"
+#'  }
+#' }
+#' 
 #' @examples
 #' # See the vignette
 #' 
@@ -72,14 +81,28 @@ if( format == "PPBstats" ) {
 		data$format_location = data$father_person
 	}
 	
-	out = data[,c("format_year", "format_location", "format_germplasm", "block", "X", "Y", vec_variables)]
-	colnames(out) = c("year", "location", "germplasm", "block", "X", "Y", vec_variables)
-	out$year = factor(out$year)
-	out$location = factor(out$location)
-	out$germplasm = factor(out$germplasm)
-	out$block = factor(out$block)
-	out$X = factor(out$X)
-	out$Y = factor(out$Y)
+	if( is.element(shinemas2R.object, c("data-classic-relation", "data-classic-seed-lots")) ) {
+		out = data[,c("format_year", "format_location", "format_germplasm", "block", "X", "Y", vec_variables)]
+		colnames(out) = c("year", "location", "germplasm", "block", "X", "Y", vec_variables)
+		out$year = factor(out$year)
+		out$location = factor(out$location)
+		out$germplasm = factor(out$germplasm)
+		out$block = factor(out$block)
+		out$X = factor(out$X)
+		out$Y = factor(out$Y)
+	}
+		
+	
+	if( is.element(shinemas2R.object, c("data-S-relation", "data-SR-relation", "data-S-seed-lots", "data-SR-seed-lots"))){
+		out = data[,c("format_year", "format_location", "format_germplasm", "expe_name", "sl_statut")]
+		colnames(out) = c("year", "location", "germplasm", "group", "version")
+		out$year = factor(out$year)
+		out$location = factor(out$location)
+		out$germplasm = factor(out$germplasm)
+		out$group = factor(out$group)
+		out$version = factor(out$version)
+	}
+	
 	}
 
 return(out)

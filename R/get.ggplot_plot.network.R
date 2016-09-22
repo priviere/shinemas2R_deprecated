@@ -7,7 +7,6 @@ get.ggplot_plot.network = function(data, vertex.color, vertex.size, hide.labels.
 	
 	if(!is.null(vertex.color)) { 
 		if(vertex.color == "year" | vertex.color == "person" | vertex.color == "germplasm") {
-			
 			gp = (get.vertex.attribute(n, vertex.color))	
 			col.vertex = hue_pal()(length(unique(get.vertex.attribute(n, vertex.color)))) # hue_pal from scale show_col(hue_pal()(10))	
 		}
@@ -28,8 +27,6 @@ get.ggplot_plot.network = function(data, vertex.color, vertex.size, hide.labels.
 	label.vertex = get.vertex.attribute(n, "vertex.names") 
 	
 	p = get.ggplot_ggnet.custom(n, size = vertex.size, node.group = gp, node.color = col.vertex, label.nodes = label.vertex, segment.color = col.edge, segment.label = label.edge, organise.sl = organise.sl)
-	
-	
 	plotcoord = p[[1]]
 	pnet = p[[2]]
 	
