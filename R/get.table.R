@@ -479,11 +479,6 @@ get.table <- function(
 				duplicated_infos = list()
 				for(i in tokeep){
 					if (!is.null(col_to_display)) {
-						
-						print(duplicated_infos_sl[i])
-						print(attributes(list_tab[duplicated_infos_sl[i]]))
-						print(attributes(list_tab[duplicated_infos_variables[i]]))
-						
 						tmp = c(list_tab[duplicated_infos_sl[i]], 
 										list_tab[duplicated_infos_variables[i]])
 					}else{
