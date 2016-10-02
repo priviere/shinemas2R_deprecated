@@ -384,6 +384,7 @@ get.table <- function(
 										id = as.data.frame(matrix(id), ncol = 1)
 										colnames(id) = gettext("seed-lots")
 										attributes(id)$get.table.object = "duplicated_infos_seed-lots"
+										attributes(id)$invert = FALSE # As there will be only one row and one column, it is obviously FALSE
 										id = list(id); names(id) = "duplicated_infos_seed-lots"
 										list_tabs = c(list_tabs, id)
 									}
@@ -478,6 +479,11 @@ get.table <- function(
 				duplicated_infos = list()
 				for(i in tokeep){
 					if (!is.null(col_to_display)) {
+						
+						print(duplicated_infos_sl[i])
+						print(attributes(list_tab[duplicated_infos_sl[i]]))
+						print(attributes(list_tab[duplicated_infos_variables[i]]))
+						
 						tmp = c(list_tab[duplicated_infos_sl[i]], 
 										list_tab[duplicated_infos_variables[i]])
 					}else{
