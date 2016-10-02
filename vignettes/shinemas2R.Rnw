@@ -36,7 +36,7 @@
 \newcommand{\BD}{SHiNeMaS}
 \newcommand{\pack}{\texttt{shinemas2R}}
 \newcommand{\listpackformatdata}{\texttt{PPBstats}}
-\newcommand{\versionnumber}{0.10}
+\newcommand{\versionnumber}{0.11}
 
 \begin{document}
 

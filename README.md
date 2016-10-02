@@ -10,15 +10,13 @@ More information about this licence [here](http://creativecommons.org/licenses/b
 The copyright of the R code and the vignette are owned by Réseau Semences Paysannes and Institut National de la Recherche Agronomique
 
 ## Version
-`shinemas2R` is now at version 0.10.3
+`shinemas2R` is now at version 0.11
 
-The version number is under the form A.B.C with
+The version number is under the form A.B with
 
 * A: the number of the version on CRAN (0 = no version on CRAN yet)
 
 * B: +1 when the code and/or the vignette change
-
-* C: +1 when the code change but not the vignette
 
 See NEWS [here](https://github.com/priviere/shinemas2R/blob/master/NEWS) to know the evolution of the codes.
 
@@ -45,7 +43,7 @@ First, load the development version:
 
 The easiest way to start is to look at the vignette to know how the package works.
 
-You can see the vignette [here](https://github.com/priviere/shinemas2R/blob/master/vignettes/shinemas2R.pdf). You can download it by clicking on 'Raw' in the top right corner.
+You can see the vignette [here](https://www.dropbox.com/s/8gmuxttrga7hfe1/shinemas2R.pdf?dl=0). You can download it by clicking on 'Raw' in the top right corner.
 
 Do not hesitate to let a message [in the issues](https://github.com/priviere/shinemas2R/issues) or to send me an email if some points are not clear in the vignette or you find bugs.
 

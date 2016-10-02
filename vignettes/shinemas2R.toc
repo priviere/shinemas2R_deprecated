@@ -11,53 +11,53 @@
 \contentsline {subsubsection}{\numberline {3.2.1}\texttt {ggplot.type = "network-network"}}{13}{subsubsection.3.2.1}
 \contentsline {paragraph}{Default arguments}{13}{section*.2}
 \contentsline {paragraph}{Custom arguments}{14}{section*.3}
-\contentsline {subsubsection}{\numberline {3.2.2}\texttt {ggplot.type = "network-reproduction-harvested"}}{15}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.2}\texttt {ggplot.type = "network-reproduction-harvested"}}{16}{subsubsection.3.2.2}
 \contentsline {paragraph}{\texttt {ggplot.display = barplot}}{16}{section*.4}
-\contentsline {paragraph}{\texttt {ggplot.display = map}}{20}{section*.5}
-\contentsline {subsubsection}{\numberline {3.2.3}\texttt {ggplot.type = "network-diffusion-relation"}}{21}{subsubsection.3.2.3}
-\contentsline {subsubsection}{\numberline {3.2.4}\texttt {ggplot.type = "network-reproduction-crossed"}}{22}{subsubsection.3.2.4}
-\contentsline {subsubsection}{\numberline {3.2.5}Others \texttt {ggplot.type}}{24}{subsubsection.3.2.5}
-\contentsline {subsection}{\numberline {3.3}Get the tables}{24}{subsection.3.3}
-\contentsline {section}{\numberline {4}Data linked to the seed-lots\nobreakspace {}and to the relations between seed-lots}{25}{section.4}
-\contentsline {subsection}{\numberline {4.1}Get the data set}{25}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}\texttt {query.type = "data-classic"}}{25}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Selection differential (\texttt {query.type = "data-S"}), response to selection (\texttt {query.type = "data-SR"}) and heritability}{27}{subsubsection.4.1.2}
-\contentsline {paragraph}{\texttt {query.type = "data-S"}}{28}{section*.6}
-\contentsline {paragraph}{\texttt {query.type = "data-SR"}}{29}{section*.7}
-\contentsline {subsection}{\numberline {4.2}Get the ggplots}{30}{subsection.4.2}
-\contentsline {subsubsection}{\numberline {4.2.1}ggplots for \texttt {data-classic} }{30}{subsubsection.4.2.1}
-\contentsline {subsubsection}{\numberline {4.2.2}ggplots for \texttt {data-S} }{38}{subsubsection.4.2.2}
-\contentsline {subsubsection}{\numberline {4.2.3}ggplots for \texttt {data-SR} }{39}{subsubsection.4.2.3}
-\contentsline {subsection}{\numberline {4.3}Get the tables}{41}{subsection.4.3}
-\contentsline {subsubsection}{\numberline {4.3.1}tables for \texttt {data-classic} }{42}{subsubsection.4.3.1}
-\contentsline {subsubsection}{\numberline {4.3.2}tables for \texttt {data-S} and \texttt {data-SR}}{45}{subsubsection.4.3.2}
-\contentsline {subsection}{\numberline {4.4}Format the data for existing \texttt {R}\nobreakspace {}packages}{45}{subsection.4.4}
-\contentsline {section}{\numberline {5}Other information in SHiNeMaS}{47}{section.5}
-\contentsline {subsection}{\numberline {5.1}\texttt {query.type = "cross"}}{47}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}\texttt {query.type = "method"}}{47}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}\texttt {query.type = "person-info"}}{47}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}\texttt {query.type = "grandfather"}}{47}{subsection.5.4}
-\contentsline {section}{\numberline {6}pdf compilation with \LaTeX }{48}{section.6}
-\contentsline {subsection}{\numberline {6.1}Philosophy of \texttt {get.pdf} }{48}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Examples}{49}{subsection.6.2}
-\contentsline {subsubsection}{\numberline {6.2.1}First Information}{49}{subsubsection.6.2.1}
-\contentsline {subsubsection}{\numberline {6.2.2}\LaTeX \nobreakspace {}body}{49}{subsubsection.6.2.2}
-\contentsline {subsubsection}{\numberline {6.2.3}Compile the pdf}{51}{subsubsection.6.2.3}
-\contentsline {section}{\numberline {7}Common use rules}{53}{section.7}
-\contentsline {section}{To cite \texttt {shinemas2R}}{54}{section*.8}
-\contentsline {section}{Aknowledgement}{55}{section*.9}
-\contentsline {section}{References}{55}{section*.10}
-\contentsline {section}{Appendix \numberline {A}Install SHiNeMaS\nobreakspace {}on localhost}{56}{Appendix.a.A}
-\contentsline {subsection}{\numberline {A.1}Install PostgreSQL and SHiNeMaS}{56}{subsection.a.A.1}
-\contentsline {subsection}{\numberline {A.2}Set up the information to connect to SHiNeMaS\nobreakspace {}with \texttt {get.data}}{56}{subsection.a.A.2}
-\contentsline {section}{Appendix \numberline {B}Therory regarding selection differential, response to selection and heritability}{57}{Appendix.a.B}
-\contentsline {section}{Appendix \numberline {C}\texttt {get.pdf} examples}{58}{Appendix.a.C}
-\contentsline {subsection}{\numberline {C.1}\texttt {LaTeX\_head} examples}{58}{subsection.a.C.1}
-\contentsline {subsection}{\numberline {C.2}\texttt {.tex} examples for \texttt {input}}{58}{subsection.a.C.2}
-\contentsline {section}{Appendix \numberline {D}Examples of \texttt {is.get.data.output}}{59}{Appendix.a.D}
-\contentsline {subsection}{\numberline {D.1}\texttt {shinemas2R.object == "network"}}{59}{subsection.a.D.1}
-\contentsline {subsection}{\numberline {D.2}\texttt {shinemas2R.object == "data..."}}{60}{subsection.a.D.2}
-\contentsline {subsubsection}{\numberline {D.2.1}\texttt {shinemas2R.object == "data-classic-seed-lots"}}{60}{subsubsection.a.D.2.1}
-\contentsline {subsubsection}{\numberline {D.2.2}\texttt {shinemas2R.object == "data-classic-relation"}}{61}{subsubsection.a.D.2.2}
-\contentsline {subsubsection}{\numberline {D.2.3}\texttt {shinemas2R.object == "data-S-seed-lots"} \& \texttt {shinemas2R.object == "data-SR-seed-lots"}}{62}{subsubsection.a.D.2.3}
-\contentsline {subsubsection}{\numberline {D.2.4}\texttt {shinemas2R.object == "data-S-relation"} \& \texttt {shinemas2R.object == "data-SR-relation"}}{62}{subsubsection.a.D.2.4}
+\contentsline {paragraph}{\texttt {ggplot.display = map}}{21}{section*.5}
+\contentsline {subsubsection}{\numberline {3.2.3}\texttt {ggplot.type = "network-diffusion-relation"}}{22}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.4}\texttt {ggplot.type = "network-reproduction-crossed"}}{23}{subsubsection.3.2.4}
+\contentsline {subsubsection}{\numberline {3.2.5}Others \texttt {ggplot.type}}{25}{subsubsection.3.2.5}
+\contentsline {subsection}{\numberline {3.3}Get the tables}{25}{subsection.3.3}
+\contentsline {section}{\numberline {4}Data linked to the seed-lots\nobreakspace {}and to the relations between seed-lots}{26}{section.4}
+\contentsline {subsection}{\numberline {4.1}Get the data set}{26}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}\texttt {query.type = "data-classic"}}{26}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Selection differential (\texttt {query.type = "data-S"}), response to selection (\texttt {query.type = "data-SR"}) and heritability}{28}{subsubsection.4.1.2}
+\contentsline {paragraph}{\texttt {query.type = "data-S"}}{29}{section*.6}
+\contentsline {paragraph}{\texttt {query.type = "data-SR"}}{30}{section*.7}
+\contentsline {subsection}{\numberline {4.2}Get the ggplots}{31}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}ggplots for \texttt {data-classic} }{31}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}ggplots for \texttt {data-S} }{40}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}ggplots for \texttt {data-SR} }{41}{subsubsection.4.2.3}
+\contentsline {subsection}{\numberline {4.3}Get the tables}{43}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}tables for \texttt {data-classic} }{44}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}tables for \texttt {data-S} and \texttt {data-SR}}{46}{subsubsection.4.3.2}
+\contentsline {subsection}{\numberline {4.4}Format the data for existing \texttt {R}\nobreakspace {}packages}{47}{subsection.4.4}
+\contentsline {section}{\numberline {5}Other information in SHiNeMaS}{49}{section.5}
+\contentsline {subsection}{\numberline {5.1}\texttt {query.type = "cross"}}{49}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}\texttt {query.type = "method"}}{49}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}\texttt {query.type = "person-info"}}{49}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}\texttt {query.type = "grandfather"}}{49}{subsection.5.4}
+\contentsline {section}{\numberline {6}pdf compilation with \LaTeX }{50}{section.6}
+\contentsline {subsection}{\numberline {6.1}Philosophy of \texttt {get.pdf} }{50}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Examples}{51}{subsection.6.2}
+\contentsline {subsubsection}{\numberline {6.2.1}First Information}{51}{subsubsection.6.2.1}
+\contentsline {subsubsection}{\numberline {6.2.2}\LaTeX \nobreakspace {}body}{51}{subsubsection.6.2.2}
+\contentsline {subsubsection}{\numberline {6.2.3}Compile the pdf}{53}{subsubsection.6.2.3}
+\contentsline {section}{\numberline {7}Common use rules}{55}{section.7}
+\contentsline {section}{To cite \texttt {shinemas2R}}{56}{section*.8}
+\contentsline {section}{Aknowledgement}{57}{section*.9}
+\contentsline {section}{References}{57}{section*.10}
+\contentsline {section}{Appendix \numberline {A}Install SHiNeMaS\nobreakspace {}on localhost}{58}{Appendix.a.A}
+\contentsline {subsection}{\numberline {A.1}Install PostgreSQL and SHiNeMaS}{58}{subsection.a.A.1}
+\contentsline {subsection}{\numberline {A.2}Set up the information to connect to SHiNeMaS\nobreakspace {}with \texttt {get.data}}{58}{subsection.a.A.2}
+\contentsline {section}{Appendix \numberline {B}Therory regarding selection differential, response to selection and heritability}{59}{Appendix.a.B}
+\contentsline {section}{Appendix \numberline {C}\texttt {get.pdf} examples}{60}{Appendix.a.C}
+\contentsline {subsection}{\numberline {C.1}\texttt {LaTeX\_head} examples}{60}{subsection.a.C.1}
+\contentsline {subsection}{\numberline {C.2}\texttt {.tex} examples for \texttt {input}}{60}{subsection.a.C.2}
+\contentsline {section}{Appendix \numberline {D}Examples of \texttt {is.get.data.output}}{61}{Appendix.a.D}
+\contentsline {subsection}{\numberline {D.1}\texttt {shinemas2R.object == "network"}}{61}{subsection.a.D.1}
+\contentsline {subsection}{\numberline {D.2}\texttt {shinemas2R.object == "data..."}}{62}{subsection.a.D.2}
+\contentsline {subsubsection}{\numberline {D.2.1}\texttt {shinemas2R.object == "data-classic-seed-lots"}}{62}{subsubsection.a.D.2.1}
+\contentsline {subsubsection}{\numberline {D.2.2}\texttt {shinemas2R.object == "data-classic-relation"}}{63}{subsubsection.a.D.2.2}
+\contentsline {subsubsection}{\numberline {D.2.3}\texttt {shinemas2R.object == "data-S-seed-lots"} \& \texttt {shinemas2R.object == "data-SR-seed-lots"}}{64}{subsubsection.a.D.2.3}
+\contentsline {subsubsection}{\numberline {D.2.4}\texttt {shinemas2R.object == "data-S-relation"} \& \texttt {shinemas2R.object == "data-SR-relation"}}{64}{subsubsection.a.D.2.4}
