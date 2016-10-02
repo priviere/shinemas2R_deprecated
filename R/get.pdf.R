@@ -430,7 +430,7 @@ get.pdf = function(
 			tex.tab = function(d, tab, lab.tab){
 				display.rownames = d[["display.rownames"]]
 				if(is.null(display.rownames)){ display.rownames = FALSE }
-				if (attributes(tab)$invert == FALSE) {
+				if (!attributes(tab)$invert) {
 					colnames(tab) = sapply(colnames(tab), function(x) { paste(unlist(strsplit(x, "\\.")), collapse = " ") } ) # change "." to space (" ")
 				}
 				if( display.rownames | attributes(tab)$invert == TRUE ) { tab = cbind.data.frame(rownames(tab), tab); colnames(tab) = c("", "value") }
