@@ -2,6 +2,9 @@
 *.aux
 *.log
 *.toc
+*.bbl
+*.blg
+*.out
 .Rproj.user
 .Rhistory
 .RData
