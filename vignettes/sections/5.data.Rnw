@@ -985,4 +985,15 @@ data_for_PPBstats = format.data(
 head(data_for_PPBstats)
 @
 
+Or to use data coming from \texttt{data-S} type:
+
+<<message=TRUE,cache=FALSE>>=
+data_version_for_PPBstats = format.data(
+	data_S,
+	format = "PPBstats"
+)
+
+head(data_version_for_PPBstats)
+@
+
 
