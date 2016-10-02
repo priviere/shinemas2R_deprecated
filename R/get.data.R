@@ -1687,7 +1687,7 @@ filter_V = V.sql(variable.in)
  			message("2. Create network matrix ..."); {
  				
  				# fill diffusion gap
- 				fill.diff.gap = function(reseau){
+ 				fill.diff.gap = function(reseau, info_db){
  					message("2.1. Fill diffusion gaps ...")
  					RESEAU = query.network(P = NULL, G = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db = info_db)
  					
@@ -1716,7 +1716,7 @@ filter_V = V.sql(variable.in)
  				}
  				
  				if(fill.diffusion.gap | Mdist) { # To get Mdist, you need to fill the gap
- 					reseau = fill.diff.gap(reseau)	
+ 					reseau = fill.diff.gap(reseau, info_db)	
  				}
  				
  				point = unique(c(as.character(reseau[,"father"]),as.character(reseau[,"son"])))
