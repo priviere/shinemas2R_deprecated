@@ -105,6 +105,7 @@ get.pdf = function(
 	# 1. Error messages ----------
 	a = dir(dir)
 	if( !file.exists(dir) ){ stop("directory ", dir, " does not exist.") }
+	setwd(dir)
 	
 	n = unique(names(LaTeX_body))
 	n.ok = c("titlepage", "tableofcontents", "chapter", "section", "subsection", "subsubsection", "table", "figure", "text", "includepdf", "input")
