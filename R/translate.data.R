@@ -25,7 +25,8 @@ list_translation
 										"data-SR-relation", 
 										"data-classic-seed-lots",
 										"data-S-seed-lots", 
-										"data-SR-seed-lots")) 
+										"data-SR-seed-lots",
+										"data-mixture")) 
 	) { stop(mess) }  
 	
 	

@@ -1672,15 +1672,17 @@ filter_V = V.sql(variable.in)
  				
  				id_mix_rep = unique(as.character(reseau[row_id_mix_rep, "mixture_id"]))
  				
- 				for(id in id_mix_rep){
- 					row_mix_rep = which(id %in% as.character(reseau$mixture_id))
- 					sl_harvested = reseau[row_mix_rep, "father"]
- 					row = which(as.character(reseau$son) == sl_harvested)
- 					reseau[row, "son"] = reseau[row_mix_rep, "son"]
+ 				if ( length(id_mix_rep)>0 ) {
+	 				for(id in id_mix_rep){
+	 					row_mix_rep = which(id %in% as.character(reseau$mixture_id))
+	 					sl_harvested = reseau[row_mix_rep, "father"]
+	 					row = which(as.character(reseau$son) == sl_harvested)
+	 					reseau[row, "son"] = reseau[row_mix_rep, "son"]
+	 				}
+	 				
+	 				reseau = droplevels(reseau[-row_id_mix_rep,])
+	 				message("Mixtures from replication have been deleted and replaced by reproductions.")
  				}
- 				
- 				reseau = droplevels(reseau[-row_id_mix_rep,])
- 				message("Mixtures from replication have been deleted and replaced by reproductions.")
  			}
  			
  			# 5.1.2. Create network matrix ----------	
@@ -2113,7 +2115,7 @@ filter_V = V.sql(variable.in)
 			if(data.type == "relation") { dv = query.data.relation(filter_G, filter_GT, Y = filter_Y, filter_P, filter_R, filter_V, SL = get.filters(filter.in = vec.seed_lots, filter.out = NULL, filter.on = "son", sql.son.tag = "sl1.name", sql.father.tag = "sl2.name"), filter_Proj, info_db = info_db) }
 			
 			tab = plyr::rename(tab, replace = c("sl" = "son"))
-			if( !is.null(dv) ) { d = join(tab, dv, by = "son" ) ; attributes(d)$shinemas2R.object = "data-mixture"} else { d = NULL }
+			if( !is.null(dv) ) { d = join(tab, dv, by = "son" ) ; if(query.type=="data-mixture-1"){ attributes(d)$shinemas2R.object = "data-mixture"}} else { d = NULL }
 			} else { d = NULL }
 	}		
 
@@ -2251,4 +2253,5 @@ if(query.type == "grandfather") {
 d = list("data" = d, "info_db" = info_db)
 return(d)
 }
+
 
