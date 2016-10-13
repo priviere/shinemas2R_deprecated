@@ -945,7 +945,7 @@ if( check.arg("data-radar", ggplot.type) & length(vec_variables) < 2 ) { warning
 if( check.arg("data-biplot", ggplot.type) & length(vec_variables) > 1 ) {
 	list.plots = NULL
 	nb_col = c(nb_parameters_per_plot_x.axis,nb_parameters_per_plot_in.col)[which(!is.null(c(nb_parameters_per_plot_x.axis,nb_parameters_per_plot_in.col)))]
-  if(is.null(nb_col)){nb_col=nrow(data);plot_stats_smooth = T}else{plot_stats_smooth=F}
+  if(is.null(nb_col) | nb_col<nrow(data)){nb_col=nrow(data);plot_stats_smooth = T}else{plot_stats_smooth=F}
 	
 		for(in.col in combi_in.col) {
 		to_plot = data[which(!is.na(data[,vec_variables[1]]) & !is.na(data[,vec_variables[2]])),]
