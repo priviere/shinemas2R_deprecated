@@ -945,7 +945,7 @@ if( check.arg("data-radar", ggplot.type) & length(vec_variables) < 2 ) { warning
 if( check.arg("data-biplot", ggplot.type) & length(vec_variables) > 1 ) {
 	list.plots = NULL
 	nb_col = c(nb_parameters_per_plot_x.axis,nb_parameters_per_plot_in.col)[which(!is.null(c(nb_parameters_per_plot_x.axis,nb_parameters_per_plot_in.col)))]
-  if(is.null(nb_col)){nb_col=nrow(data)}
+  if(is.null(nb_col)){nb_col=nrow(data);plot_stats_smooth = T}else{plot_stats_smooth=F}
 	
 		for(in.col in combi_in.col) {
 		to_plot = data[which(!is.na(data[,vec_variables[1]]) & !is.na(data[,vec_variables[2]])),]
@@ -955,7 +955,7 @@ if( check.arg("data-biplot", ggplot.type) & length(vec_variables) > 1 ) {
     return(get.ggplot_plot.it(d = x, titre = NULL, ggplot.display = "biplot", 
                               x.axis = NULL, in.col = in.col, ggplot.type = "data-biplot", vec_variables, 
                               nb_parameters_per_plot_x.axis = NULL, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, 
-                              labels.on = labels.on, hide.labels.parts = hide.labels.parts, labels.size = labels.size))
+                              labels.on = labels.on, hide.labels.parts = hide.labels.parts, labels.size = labels.size, plot_stats_smooth))
 	    
 	  })
 		out = list(p)
