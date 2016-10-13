@@ -15,7 +15,8 @@ get.ggplot_plot.it = function(
 	nb_parameters_per_plot_in.col = NULL,
 	labels.on = NULL,
 	hide.labels.parts = NULL,
-	labels.size = 1
+	labels.size = 1,
+	plot_stats_smooth=T
 	) 
 	# Lets'go ----------
 	{
@@ -227,7 +228,7 @@ get.ggplot_plot.it = function(
 					p = NULL
 				} else {
 					p = ggplot(dtmp, aes(x = var1, y = var2, label = labels)) 
-					p = p + stat_smooth(method = "lm", se = FALSE)
+					if(plot_stats_smooth==T){p = p + stat_smooth(method = "lm", se = FALSE)}
 					p = p + geom_text(aes(colour = factor(in.col)), size = labels.size)
 					p = p  + xlab(var1) + ylab(var2) + ggtitle(titre) + theme(axis.text.x = element_text(angle=90, hjust=1), legend.title = element_blank()) 
 					attributes(p)$x.axis = NULL; attributes(p)$in.col = in.col
