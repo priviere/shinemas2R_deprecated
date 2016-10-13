@@ -944,8 +944,19 @@ if( check.arg("data-radar", ggplot.type) & length(vec_variables) < 2 ) { warning
 # 4.5. data-biplot ----------
 if( check.arg("data-biplot", ggplot.type) & length(vec_variables) > 1 ) {
 	list.plots = NULL
-	for(in.col in combi_in.col) {
-		out = get.ggplot_plot.it(d = data, titre = NULL, ggplot.display = "biplot", x.axis = NULL, in.col = in.col, ggplot.type = "data-biplot", vec_variables, nb_parameters_per_plot_x.axis = NULL, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, labels.on = labels.on, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
+	nb_col = c(nb_parameters_per_plot_x.axis,nb_parameters_per_plot_in.col)[which(!is.null(c(nb_parameters_per_plot_x.axis,nb_parameters_per_plot_in.col)))]
+  if(is.null(nb_col)){nb_col=nrow(data)}
+		for(in.col in combi_in.col) {
+		to_plot = data[which(!is.na(data[,vec_variables])),]
+		to_plot$split=add_split_col(to_plot,nb_col)
+		to_plot = plyr:::splitter_d(to_plot, .(split))
+	  p = lapply(to_plot,function(x) {
+    return(get.ggplot_plot.it(d = x, titre = NULL, ggplot.display = "biplot", 
+                              x.axis = NULL, in.col = in.col, ggplot.type = "data-biplot", vec_variables, 
+                              nb_parameters_per_plot_x.axis = NULL, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, 
+                              labels.on = labels.on, hide.labels.parts = hide.labels.parts, labels.size = labels.size))
+	    
+	  })
 		out = list(out)
 		list.plots = c(list.plots, out)
 	}
