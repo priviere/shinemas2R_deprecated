@@ -951,7 +951,7 @@ if( check.arg("data-biplot", ggplot.type) & length(vec_variables) > 1 ) {
 		for(in.col in combi_in.col) {
 		to_plot = data[which(!is.na(data[,vec_variables[1]]) & !is.na(data[,vec_variables[2]])),]
 		if (nrow(to_plot) ==0){
-		  warning(paste("no data for",vec_variables[1],"and",vec_variables[2],sep=" "))
+		  stop(paste("no data for",vec_variables[1],"and",vec_variables[2],sep=" "))
 		  p=NULL
 		}else{
 		  to_plot$split=add_split_col(to_plot,nb_col)
