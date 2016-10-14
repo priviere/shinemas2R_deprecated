@@ -16,7 +16,7 @@ get.ggplot_plot.it = function(
 	labels.on = NULL,
 	hide.labels.parts = NULL,
 	labels.size = 1,
-	plot_stats_smooth=T
+	plot_stats_smooth=F
 	) 
 	# Lets'go ----------
 	{
