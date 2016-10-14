@@ -952,7 +952,7 @@ if( check.arg("data-biplot", ggplot.type) & length(vec_variables) > 1 ) {
 		to_plot = data[which(!is.na(data[,vec_variables[1]]) & !is.na(data[,vec_variables[2]])),]
 		if (nrow(to_plot) ==0){
 		  warning(paste("no data for",vec_variables[1],"and",vec_variables[2],sep=" "))
-		  p=NULL
+		  out=NULL
 		}else{
 		  to_plot$split=add_split_col(to_plot,nb_col)
 		  to_plot = plyr:::splitter_d(to_plot, .(split))
@@ -968,9 +968,10 @@ if( check.arg("data-biplot", ggplot.type) & length(vec_variables) > 1 ) {
 
 		list.plots = c(list.plots, out)
 		}
-
-	names(list.plots) = paste("NA-", combi_in.col, sep = "")
-	list.plots = list("data-biplot" = list.plots)
+  if(!is.null(list.plots)){
+    names(list.plots) = paste("NA-", combi_in.col, sep = "")
+    list.plots = list("data-biplot" = list.plots)
+  }
 	LIST.PLOTS = c(LIST.PLOTS, list.plots)
 }
 if( check.arg("data-biplot", ggplot.type) & length(vec_variables) < 2 ) { warning("No biplot plot because there is only one variable in vec_variables. You need at least two variables.") }
