@@ -382,7 +382,7 @@ get.pdf = function(
 	
 	for(i in 1:length(LaTeX_body)) {
 		d = LaTeX_body[i]
-		
+		print(i)
 		n = names(d)
 		
 		if(n == "titlepage") { 
