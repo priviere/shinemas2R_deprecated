@@ -955,12 +955,16 @@ if( check.arg("data-biplot", ggplot.type) & length(vec_variables) > 1 ) {
 		  out=NULL
 		}else{
 		  to_plot$split=add_split_col(to_plot,nb_col)
+		  a=lapply(to_plot[,vec_variables],function(x) {return(c(min(x),max(x)))})
+		  x_y_lim = as.data.frame(cbind(a[[1]],a[[2]]))
+		  colnames(x_y_lim) = names(a)
+		  rownames(x_y_lim) = c("min","max")
 		  to_plot = plyr:::splitter_d(to_plot, .(split))
 		  p = lapply(to_plot,function(x) {
 		    return(get.ggplot_plot.it(d = x, titre = NULL, ggplot.display = "biplot", 
 		                              x.axis = NULL, in.col = in.col, ggplot.type = "data-biplot", vec_variables, 
 		                              nb_parameters_per_plot_x.axis = NULL, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, 
-		                              labels.on = labels.on, hide.labels.parts = hide.labels.parts, labels.size = labels.size, plot_stats_smooth))
+		                              labels.on = labels.on, hide.labels.parts = hide.labels.parts, labels.size = labels.size, plot_stats_smooth,graph_lim=x_y_lim))
 		    
 		  })
 		  out = list(p)
