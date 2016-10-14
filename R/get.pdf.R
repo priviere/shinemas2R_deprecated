@@ -382,7 +382,6 @@ get.pdf = function(
 	
 	for(i in 1:length(LaTeX_body)) {
 		d = LaTeX_body[i]
-		print(i)
 		n = names(d)
 		
 		if(n == "titlepage") { 
@@ -473,7 +472,7 @@ get.pdf = function(
 			
 			if(!is.null(list.tab)) {
 			
-			 if(length(list.tab >1)) {
+			 if(length(list.tab) >1) {
 			   l = list.tab$duplicated_infos
 			   t = list()
 			   for(i in 1:length(l)){
