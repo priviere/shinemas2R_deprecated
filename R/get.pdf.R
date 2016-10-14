@@ -472,57 +472,62 @@ get.pdf = function(
 			if ( !is.null(ncol(list.tab)) ) { list.tab = list(list.tab) } # In case there is only on table not in a list
 			
 			if(!is.null(list.tab)) {
-				
-				l = list.tab$duplicated_infos
-				t = list()
-				for(i in 1:length(l)){
-					t1 = l[[i]]$"duplicated_infos_seed-lots"
-					t2 = l[[i]]$duplicated_infos_variables
-					t_tmp = list("t1" = t1, "t2" = t2)
-					t = c(t, t_tmp)
-				}
-				
-				l = list.tab$not_duplicated_infos
-				for(i in 1:length(l)){
-					t1 = l[[i]]
-					t_tmp = list("t1" = t1)
-					t = c(t, t_tmp)
-				}
-				
-				list.tab = t
-				list.tab = list.tab[!sapply(list.tab, is.null)]
-				
-				if( length(list.tab) > 0 ) {
-					# labels for duplicated infos
-					lab.tab.sl = lab.tab.var = NULL
-					for(azerty in 1:length(list.tab)){
-						lab.tab.sl = c(lab.tab.sl, as.character(round(runif(1,0,10000000000))))
-						lab.tab.sl = rep(lab.tab.sl, each = 2) # Two times the same as the two tables are by pairs
-						lab.tab.var = c(lab.tab.var, as.character(round(runif(1,0,10000000000))))
-						lab.tab.var = rep(lab.tab.var, each = 2) # Two times the same as the two tables are by pairs
-					}
-					
+			
+			 if(length(list.tab >1)) {
+			   l = list.tab$duplicated_infos
+			   t = list()
+			   for(i in 1:length(l)){
+			     t1 = l[[i]]$"duplicated_infos_seed-lots"
+			     t2 = l[[i]]$duplicated_infos_variables
+			     t_tmp = list("t1" = t1, "t2" = t2)
+			     t = c(t, t_tmp)
+			   }
+			   
+			   l = list.tab$not_duplicated_infos
+			   for(i in 1:length(l)){
+			     t1 = l[[i]]
+			     t_tmp = list("t1" = t1)
+			     t = c(t, t_tmp)
+			   }
+			   
+			   list.tab = t
+			   list.tab = list.tab[!sapply(list.tab, is.null)]
+			   
+			   if( length(list.tab) > 0 ) {
+			     # labels for duplicated infos
+			     lab.tab.sl = lab.tab.var = NULL
+			     for(azerty in 1:length(list.tab)){
+			       lab.tab.sl = c(lab.tab.sl, as.character(round(runif(1,0,10000000000))))
+			       lab.tab.sl = rep(lab.tab.sl, each = 2) # Two times the same as the two tables are by pairs
+			       lab.tab.var = c(lab.tab.var, as.character(round(runif(1,0,10000000000))))
+			       lab.tab.var = rep(lab.tab.var, each = 2) # Two times the same as the two tables are by pairs
+			     }
+			     
+			     
+			     for(i in 1:length(list.tab)) { # take all elements of the list
+			       tab = list.tab[[i]]
+			       
+			       attr = attributes(tab)$get.table.object
+			       
+			       if( attr == "duplicated_infos_seed-lots" ){ 
+			         cat(gettext(paste("The following seeds-lots present in table (\\ref{", lab.tab.sl[i],"}) are linked to variables present in table (\\ref{", lab.tab.var[i],"}). \n", sep = "")))
+			         tex.tab(d = d, tab = tab, lab.tab = lab.tab.sl[i])
+			       }
+			       
+			       if( attr == "duplicated_infos_variables" ){ 
+			         cat(gettext(paste("The following variables in table (\\ref{", lab.tab.var[i],"}) are linked to seeds-lots present in table (\\ref{", lab.tab.sl[i],"}) \n.", sep = "")))
+			         tex.tab(d = d, tab = tab, lab.tab = lab.tab.var[i])
+			       }
+			       
+			       if( attr == "not_duplicated_variables" ){
+			         tex.tab(d = d, tab = tab, lab.tab = NULL)
+			       }
+			     }
+			   } else { cat(gettext("No data \n \n")) }
+			 }else{ # Only one table present with no name in the list
+			   tex.tab(d = d, tab = tab, lab.tab = NULL)
+			 }	
 
-					for(i in 1:length(list.tab)) { # take all elements of the list
-						tab = list.tab[[i]]
-						
-						attr = attributes(tab)$get.table.object
-						
-						if( attr == "duplicated_infos_seed-lots" ){ 
-							cat(gettext(paste("The following seeds-lots present in table (\\ref{", lab.tab.sl[i],"}) are linked to variables present in table (\\ref{", lab.tab.var[i],"}). \n", sep = "")))
-							tex.tab(d = d, tab = tab, lab.tab = lab.tab.sl[i])
-						}
-						
-						if( attr == "duplicated_infos_variables" ){ 
-							cat(gettext(paste("The following variables in table (\\ref{", lab.tab.var[i],"}) are linked to seeds-lots present in table (\\ref{", lab.tab.sl[i],"}) \n.", sep = "")))
-							tex.tab(d = d, tab = tab, lab.tab = lab.tab.var[i])
-						}
-						
-						if( attr == "not_duplicated_variables" ){
-							tex.tab(d = d, tab = tab, lab.tab = NULL)
-						}
-					}
-				} else { cat(gettext("No data \n \n")) }
 			} else { cat(gettext("No data \n \n")) }
 		}
 		
