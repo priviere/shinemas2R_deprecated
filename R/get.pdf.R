@@ -468,7 +468,7 @@ get.pdf = function(
 			
 			d = d[["table"]]
 			list.tab = d[["content"]]
-			if ( !is.null(ncol(list.tab)) ) { list.tab = list(list.tab) } # In case there is only on table not in a list
+			if ( !is.null(ncol(list.tab)) ) { list.tab = list(list.tab) } # In case there is only one table not in a list
 			
 			if(!is.null(list.tab)) {
 			
@@ -524,6 +524,7 @@ get.pdf = function(
 			     }
 			   } else { cat(gettext("No data \n \n")) }
 			 }else{ # Only one table present with no name in the list
+			   tab = list.tab[[1]]
 			   tex.tab(d = d, tab = tab, lab.tab = NULL)
 			 }	
 
