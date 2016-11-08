@@ -688,7 +688,7 @@ LEFT OUTER JOIN entities_germplasm gp2 ON sl2.germplasm_id = gp2.id
 LEFT OUTER JOIN entities_species sp2 ON sp2.id = gp2.species_id
 LEFT OUTER JOIN entities_germplasm_type gpt2 ON gp2.germplasm_type_id = gpt2.id
 LEFT OUTER JOIN actors_person p2 ON sl2.person_id = p2.id
-LEFT OUTER JOIN actors_location l2 ON p2.location_id = l2.id",
+LEFT OUTER JOIN actors_location l2 ON p2.location_id = l2.id ",
 							
 # LEFT OUTER JOIN network_relation relfat ON nr.seed_lot_father_id = relfat.seed_lot_son_id
 # LEFT OUTER JOIN entities_seed_lot slf ON relfat.seed_lot_father_id = slf.id
