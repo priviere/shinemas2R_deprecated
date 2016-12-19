@@ -34,6 +34,8 @@
 #' 
 #' @param invert_row_col If TRUE, invert row and col in the table. This is possible only for col_to_display = NULL.
 #' 
+#' @param order_var The element of vec_variables the table as to be ordered according to. Default is NULL.
+#' 
 #' @return The function returns a list with two elements
 #' \itemize{
 #' \item "duplicated_infos" : lists of two elements with seed-lots involved and variable values
@@ -59,7 +61,8 @@ get.table <- function(
 	nb_col = NULL,
 	nb_duplicated_rows = 10,
 	col_to_display = c("person", "germplasm", "year", "block", "X", "Y"),
-	invert_row_col = FALSE
+	invert_row_col = FALSE,
+	order_var=NULL
 )
 # lets go !!! ----------
 {
@@ -448,7 +451,7 @@ get.table <- function(
 		out = transform.tab(data, table.type, vec_variables,ctn)
 		tab = out$tab
 		vec_variables = out$vec_variables
-		if (order == TRUE) {tab = tab[order(tab[,vec_variables]),]}
+		if (!is.null(order_var)) {tab = tab[order(tab[,paste(order_var,table.type,sep=" ")]),]}
 		list_tab = reshape.tables(tab, nb_row, nb_col, vec_variables, nb_duplicated_rows, col_to_display, ctn, invert_row_col)
 
 		
