@@ -15,7 +15,9 @@ get.ggplot_plot.it = function(
 	nb_parameters_per_plot_in.col = NULL,
 	labels.on = NULL,
 	hide.labels.parts = NULL,
-	labels.size = 1
+	labels.size = 1,
+	plot_stats_smooth=F,
+	graph_lim=NULL
 	) 
 	# Lets'go ----------
 	{
@@ -226,9 +228,10 @@ get.ggplot_plot.it = function(
 					warning("No biplot is done for ", var1, " and ", var2, " as there are only NA. This can be due to missing data or to mismatch between raw data linked to individuals with raw data linked to relation."); 
 					p = NULL
 				} else {
-					p = ggplot(dtmp, aes(x = var1, y = var2, label = labels)) 
-					p = p + stat_smooth(method = "lm", se = FALSE)
-					p = p + geom_text(aes(colour = factor(in.col)), size = labels.size)
+					p = ggplot(dtmp, aes(x = var1, y = var2, label = labels)) + coord_cartesian(xlim = graph_lim[var1], ylim = graph_lim[var2])
+					if(plot_stats_smooth==T){p = p + stat_smooth(method = "lm", se = FALSE)}
+					p = p + geom_text(aes(colour = factor(in.col)), size = labels.size) 
+					
 					p = p  + xlab(var1) + ylab(var2) + ggtitle(titre) + theme(axis.text.x = element_text(angle=90, hjust=1), legend.title = element_blank()) 
 					attributes(p)$x.axis = NULL; attributes(p)$in.col = in.col
 				}

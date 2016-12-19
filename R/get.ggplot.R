@@ -162,7 +162,7 @@ get.ggplot <- function(
 # lets go !!! ----------
 {
 check.arg = function(x, vec_x) { length(which(is.element(x, vec_x))) > 0 }
-
+add_split_col = function(x, each){ rep(c(1:nrow(x)), each = each)[1:nrow(x)] } 
 info_db = data$info_db
 data = data$data
 
@@ -944,13 +944,38 @@ if( check.arg("data-radar", ggplot.type) & length(vec_variables) < 2 ) { warning
 # 4.5. data-biplot ----------
 if( check.arg("data-biplot", ggplot.type) & length(vec_variables) > 1 ) {
 	list.plots = NULL
-	for(in.col in combi_in.col) {
-		out = get.ggplot_plot.it(d = data, titre = NULL, ggplot.display = "biplot", x.axis = NULL, in.col = in.col, ggplot.type = "data-biplot", vec_variables, nb_parameters_per_plot_x.axis = NULL, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, labels.on = labels.on, hide.labels.parts = hide.labels.parts, labels.size = labels.size)
-		out = list(out)
+	nb_col = c(nb_parameters_per_plot_x.axis,nb_parameters_per_plot_in.col)[which(!is.null(c(nb_parameters_per_plot_x.axis,nb_parameters_per_plot_in.col)))]
+  if( is.null(nb_col)){nb_col=nrow(data);plot_stats_smooth = T}
+	if (nb_col < nrow(data)){ plot_stats_smooth=F }else{plot_stats_smooth = T}
+	
+		for(in.col in combi_in.col) {
+		to_plot = data[which(!is.na(data[,vec_variables[1]]) & !is.na(data[,vec_variables[2]])),]
+		if (nrow(to_plot) ==0){
+		  warning(paste("no data for",vec_variables[1],"and",vec_variables[2],sep=" "))
+		  out=NULL
+		}else{
+		  to_plot$split=add_split_col(to_plot,nb_col)
+		  a=lapply(to_plot[,vec_variables],function(x) {return(c(min(x),max(x)))})
+		  x_y_lim = as.data.frame(cbind(a[[1]],a[[2]]))
+		  colnames(x_y_lim) = names(a)
+		  rownames(x_y_lim) = c("min","max")
+		  to_plot = plyr:::splitter_d(to_plot, .(split))
+		  p = lapply(to_plot,function(x) {
+		    return(get.ggplot_plot.it(d = x, titre = NULL, ggplot.display = "biplot", 
+		                              x.axis = NULL, in.col = in.col, ggplot.type = "data-biplot", vec_variables, 
+		                              nb_parameters_per_plot_x.axis = NULL, nb_parameters_per_plot_in.col = nb_parameters_per_plot_in.col, 
+		                              labels.on = labels.on, hide.labels.parts = hide.labels.parts, labels.size = labels.size, plot_stats_smooth,graph_lim=x_y_lim))
+		    
+		  })
+		  out = list(p)
+		}
+
 		list.plots = c(list.plots, out)
-	}
-	names(list.plots) = paste("NA-", combi_in.col, sep = "")
-	list.plots = list("data-biplot" = list.plots)
+		}
+  if(!is.null(list.plots)){
+    names(list.plots) = paste("NA-", combi_in.col, sep = "")
+    list.plots = list("data-biplot" = list.plots)
+  }
 	LIST.PLOTS = c(LIST.PLOTS, list.plots)
 }
 if( check.arg("data-biplot", ggplot.type) & length(vec_variables) < 2 ) { warning("No biplot plot because there is only one variable in vec_variables. You need at least two variables.") }

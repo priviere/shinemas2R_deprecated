@@ -448,7 +448,7 @@ get.table <- function(
 		out = transform.tab(data, table.type, vec_variables,ctn)
 		tab = out$tab
 		vec_variables = out$vec_variables
-
+		if (order == TRUE) {tab = tab[order(tab[,vec_variables]),]}
 		list_tab = reshape.tables(tab, nb_row, nb_col, vec_variables, nb_duplicated_rows, col_to_display, ctn, invert_row_col)
 
 		

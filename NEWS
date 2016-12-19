@@ -17,6 +17,8 @@ shinemas2R 0.10.3 -------------------------------------
 * update functions
 	- format.data.R
 		. put fuse_g_and_s = TRUE with data-S and SR + little debug
+	- get.ggplot:
+		. add the possibility to split data for biplots. If the data are split then there is no line showing the result of the lm on the graph
 		
 
 shinemas2R 0.10.2 -------------------------------------
