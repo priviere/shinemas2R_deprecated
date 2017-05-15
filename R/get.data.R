@@ -591,7 +591,7 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id
 filters,
 
 "
-GROUP BY sl1.name, sl1.date, gp1.germplasm_name, gpt1.germplasm_type, sp1.species, p1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude
+GROUP BY sl1.name, sl1.date, gp1.germplasm_name, gpt1.germplasm_type, sp1.species, l1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude
 ",
 sep = "")
 
@@ -713,7 +713,7 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 filters,
 
 "
-GROUP BY sl1.name, rd1.individual, sl1.date, gp1.germplasm_name, sp1.species, gpt1.germplasm_type, p1.short_name, l1.altitude, l1.longitude, l1.latitude, sl2.name, sl2.date, gp2.germplasm_name, sp2.species, gpt2.germplasm_type, p2.short_name, l2.altitude, l2.longitude, l2.latitude, v1.name, rd1.raw_data, rd1.group, rd1.date, met1.method_name, rep1.start_date, rep1.end_date, nr.reproduction_id, nrm1.reproduction_methode_name, nr.selection_id, psel1.short_name, nr.mixture_id, nr.diffusion_id, nr.\"X\", nr.\"Y\", nr.block
+GROUP BY sl1.name, rd1.individual, sl1.date, gp1.germplasm_name, sp1.species, gpt1.germplasm_type, l1.short_name, l1.altitude, l1.longitude, l1.latitude, sl2.name, sl2.date, gp2.germplasm_name, sp2.species, gpt2.germplasm_type, l2.short_name, l2.altitude, l2.longitude, l2.latitude, v1.name, rd1.raw_data, rd1.group, rd1.date, met1.method_name, rep1.start_date, rep1.end_date, nr.reproduction_id, nrm1.reproduction_methode_name, nr.selection_id, psel1.short_name, nr.mixture_id, nr.diffusion_id, nr.\"X\", nr.\"Y\", nr.block
 ", sep = "")
 
 d = get.d(query, info_db)
@@ -1593,7 +1593,7 @@ clean.ap = function(a) { # be careful with the ' in names with SQL queries
 if( !is.null(person.in) ) { person.in = clean.ap(person.in) }
 if( !is.null(person.out) ) { person.out = clean.ap(person.out) }
 
-filter_P = get.filters(filter.in = person.in, filter.out = person.out, filter.on, sql.son.tag = "p1.short_name", sql.father.tag = "p2.short_name")
+filter_P = get.filters(filter.in = person.in, filter.out = person.out, filter.on, sql.son.tag = "l1.short_name", sql.father.tag = "l2.short_name")
 
 # 4.2.2. germplasm --------------------------------------------------------
 if( !is.null(germplasm.in) ) { germplasm.in = clean.ap(germplasm.in) }
