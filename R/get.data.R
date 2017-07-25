@@ -1062,6 +1062,7 @@ LEFT OUTER JOIN entities_seed_lot sl4 ON nr2.seed_lot_son_id = sl4.id
 
 WHERE
 
+sl1.germplasm_id = sl3.germplasm_id AND
 nrsel.selection_id IS NOT NULL AND
 nr.reproduction_id IS NOT NULL AND
 nr.selection_id IS NULL AND
