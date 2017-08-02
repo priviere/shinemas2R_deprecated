@@ -405,14 +405,14 @@ query =
 paste("
 SELECT 
 
-sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, p1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type, 
+sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, l1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type, 
 l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, ",
 # waiting for generation and sl comments to be implemented in SHiNeMaS
 #sl1.generation AS son_total_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_generation_confidence, sl1.comments AS son_comments, 
 "", "
 string_agg(DISTINCT pro1.project_name,',') AS son_project,
 			
-sp2.species AS father_species, sl2.name AS father, gp2.germplasm_name AS father_germplasm, p2.short_name AS father_person, sl2.date AS father_year, gpt2.germplasm_type AS father_germplasm_type,
+sp2.species AS father_species, sl2.name AS father, gp2.germplasm_name AS father_germplasm, l2.short_name AS father_person, sl2.date AS father_year, gpt2.germplasm_type AS father_germplasm_type,
 l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat,  ",
 # waiting for generation and sl comments to be implemented in SHiNeMaS
 #sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence, sl2.comments AS father_comments,
@@ -437,20 +437,20 @@ LEFT OUTER JOIN entities_species sp1 ON gp1.species_id = sp1.id
 LEFT OUTER JOIN entities_species sp2 ON gp2.species_id = sp2.id
 LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id = gpt1.id
 LEFT OUTER JOIN entities_germplasm_type gpt2 ON gp2.germplasm_type_id = gpt2.id
-LEFT OUTER JOIN actors_person p1 ON sl1.person_id = p1.id
-LEFT OUTER JOIN actors_person p2 ON sl2.person_id = p2.id
-LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id
-LEFT OUTER JOIN actors_location l2 ON p2.location_id = l2.id
+LEFT OUTER JOIN actors_location l1 ON sl1.location_id = l1.id
+LEFT OUTER JOIN actors_location l2 ON sl2.location_id = l2.id
 			
 LEFT OUTER JOIN network_relation_project rp1 ON rp1.relation_id = nr.id
 LEFT OUTER JOIN actors_project pro1 ON pro1.id = rp1.project_id
 LEFT OUTER JOIN network_relation_project rp2 ON rp2.relation_id = nr.id
 LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 	
+				
+				
 filters,
 
 "
-GROUP BY sp1.species, sl1.name, gp1.germplasm_name, p1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, p2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, nr.reproduction_id, nrm.reproduction_methode_name, nr.is_male, nr.block, nr.selection_id, psel.short_name, nr.mixture_id, nr.diffusion_id, rep.start_date, rep.end_date
+GROUP BY sp1.species, sl1.name, gp1.germplasm_name, l1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, l2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, nr.reproduction_id, nrm.reproduction_methode_name, nr.is_male, nr.block, nr.selection_id, psel.short_name, nr.mixture_id, nr.diffusion_id, rep.start_date, rep.end_date
 ",
 sep = "")
 
@@ -560,7 +560,7 @@ query.data.seed_lots = function(G = NULL, GT = NULL, Y = NULL, P = NULL, V = NUL
 	
 query = 
 paste("
-SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, gpt1.germplasm_type AS germplasm_type, sp1.species, p1.short_name AS person, v1.name AS variable_name,rd.raw_data, rd.date AS raw_data_date, met.method_name, l1.latitude AS lat, l1.longitude AS long, l1.altitude AS alt, string_agg(DISTINCT pro1.project_name,',')|| ', ' || string_agg(DISTINCT pro2.project_name,',') AS project
+SELECT sl1.name AS sl, sl1.date AS year, gp1.germplasm_name AS germplasm, gpt1.germplasm_type AS germplasm_type, sp1.species, l1.short_name AS person, v1.name AS variable_name,rd.raw_data, rd.date AS raw_data_date, met.method_name, l1.latitude AS lat, l1.longitude AS long, l1.altitude AS alt, string_agg(DISTINCT pro1.project_name,',')|| ', ' || string_agg(DISTINCT pro2.project_name,',') AS project
  ",
 # waiting for generation and sl comments to be implemented in SHiNeMaS
 #, sl1.generation AS total_generation_nb, sl1.lgeneration AS local_generation_nb, sl1.confidence AS generation_confidence, sl1.comments AS sl_comments 
@@ -574,9 +574,8 @@ LEFT OUTER JOIN eppdata_variable v1 ON rd.variable_id = v1.id
 LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
 LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id = gpt1.id
 LEFT OUTER JOIN entities_species sp1 ON sp1.id = gp1.species_id
-LEFT OUTER JOIN actors_person p1 ON sl1.person_id=p1.id
-LEFT OUTER JOIN actors_location l1 ON l1.id = p1.location_id
-			
+LEFT OUTER JOIN actors_location l1 ON sl1.location_id = l1.id
+		
 LEFT OUTER JOIN network_relation r1 ON r1.seed_lot_father_id=sl1.id
 LEFT OUTER JOIN network_relation_project rp1 ON rp1.relation_id = r1.id
 LEFT OUTER JOIN actors_project pro1 ON pro1.id = rp1.project_id
@@ -586,10 +585,13 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id
 
 ",
 
+#LEFT OUTER JOIN actors_person p1 ON sl1.location_id = p1.location_id
+#LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id
+
 filters,
 
 "
-GROUP BY sl1.name, sl1.date, gp1.germplasm_name, gpt1.germplasm_type, sp1.species, p1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude
+GROUP BY sl1.name, sl1.date, gp1.germplasm_name, gpt1.germplasm_type, sp1.species, l1.short_name, v1.name, rd.raw_data, rd.date, met.method_name, l1.latitude, l1.longitude, l1.altitude
 ",
 sep = "")
 
@@ -654,13 +656,13 @@ query.data.relation = function(G = NULL, GT = NULL, Y = NULL, P = NULL, R = NULL
 
 query = paste("	
 SELECT 
-sl1.name AS son, rd1.individual AS son_ind, sl1.date AS son_year, gp1.germplasm_name AS son_germplasm, sp1.species AS son_species, gpt1.germplasm_type AS son_germplasm_type, p1.short_name AS son_person, l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, ",
+sl1.name AS son, rd1.individual AS son_ind, sl1.date AS son_year, gp1.germplasm_name AS son_germplasm, sp1.species AS son_species, gpt1.germplasm_type AS son_germplasm_type, l1.short_name AS son_person, l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat, ",
 # waiting for generation and sl comments to be implemented in SHiNeMaS
 # sl1.generation AS son_total__generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.generation_confidence AS son_confidence, sl1.generation_comments AS son_comments,
 "","
 string_agg(DISTINCT pro1.project_name,',') AS son_project,
 
-sl2.name AS father, sl2.date AS father_year, gp2.germplasm_name AS father_germplasm, sp2.species AS father_species, gpt2.germplasm_type AS father_germplasm_type, p2.short_name AS father_person, l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat, ",
+sl2.name AS father, sl2.date AS father_year, gp2.germplasm_name AS father_germplasm, sp2.species AS father_species, gpt2.germplasm_type AS father_germplasm_type, l2.short_name AS father_person, l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat, ",
 # waiting for generation and sl comments to be implemented in SHiNeMaS
 # sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence, sl2.comments AS father_comments,
 "","
@@ -680,15 +682,18 @@ LEFT OUTER JOIN entities_seed_lot sl1 ON nr.seed_lot_son_id = sl1.id
 LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
 LEFT OUTER JOIN entities_species sp1 ON sp1.id = gp1.species_id
 LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id = gpt1.id
-LEFT OUTER JOIN actors_person p1 ON sl1.person_id = p1.id
-LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id
+LEFT OUTER JOIN actors_location l1 ON sl1.location_id = l1.id
 							
 LEFT OUTER JOIN entities_seed_lot sl2 ON nr.seed_lot_father_id=sl2.id
 LEFT OUTER JOIN entities_germplasm gp2 ON sl2.germplasm_id = gp2.id
 LEFT OUTER JOIN entities_species sp2 ON sp2.id = gp2.species_id
 LEFT OUTER JOIN entities_germplasm_type gpt2 ON gp2.germplasm_type_id = gpt2.id
-LEFT OUTER JOIN actors_person p2 ON sl2.person_id = p2.id
-LEFT OUTER JOIN actors_location l2 ON p2.location_id = l2.id ",
+LEFT OUTER JOIN actors_location l2 ON sl2.location_id = l2.id ",
+
+#LEFT OUTER JOIN actors_person p1 ON sl1.location_id = p1.location_id
+#LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id
+#LEFT OUTER JOIN actors_person p2 ON sl2.location_id = p2.location_id
+#LEFT OUTER JOIN actors_location l2 ON p2.location_id = l2.id ",
 							
 # LEFT OUTER JOIN network_relation relfat ON nr.seed_lot_father_id = relfat.seed_lot_son_id
 # LEFT OUTER JOIN entities_seed_lot slf ON relfat.seed_lot_father_id = slf.id
@@ -708,7 +713,7 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 filters,
 
 "
-GROUP BY sl1.name, rd1.individual, sl1.date, gp1.germplasm_name, sp1.species, gpt1.germplasm_type, p1.short_name, l1.altitude, l1.longitude, l1.latitude, sl2.name, sl2.date, gp2.germplasm_name, sp2.species, gpt2.germplasm_type, p2.short_name, l2.altitude, l2.longitude, l2.latitude, v1.name, rd1.raw_data, rd1.group, rd1.date, met1.method_name, rep1.start_date, rep1.end_date, nr.reproduction_id, nrm1.reproduction_methode_name, nr.selection_id, psel1.short_name, nr.mixture_id, nr.diffusion_id, nr.\"X\", nr.\"Y\", nr.block
+GROUP BY sl1.name, rd1.individual, sl1.date, gp1.germplasm_name, sp1.species, gpt1.germplasm_type, l1.short_name, l1.altitude, l1.longitude, l1.latitude, sl2.name, sl2.date, gp2.germplasm_name, sp2.species, gpt2.germplasm_type, l2.short_name, l2.altitude, l2.longitude, l2.latitude, v1.name, rd1.raw_data, rd1.group, rd1.date, met1.method_name, rep1.start_date, rep1.end_date, nr.reproduction_id, nrm1.reproduction_methode_name, nr.selection_id, psel1.short_name, nr.mixture_id, nr.diffusion_id, nr.\"X\", nr.\"Y\", nr.block
 ", sep = "")
 
 d = get.d(query, info_db)
@@ -839,15 +844,15 @@ query.cross = function(G = NULL, GT = NULL, Y = NULL, P = NULL, Proj = NULL, inf
 query = paste(
 "
 SELECT
-sl10.name AS father, gp10.germplasm_name AS father_germplasm, gpt10.germplasm_type AS father_germplasm_type, p10.short_name AS father_person, sl10.date AS father_year, pro10.project_name AS father_project, l10.altitude AS father_alt, l10.longitude AS father_long, l10.latitude AS father_lat,
+sl10.name AS father, gp10.germplasm_name AS father_germplasm, gpt10.germplasm_type AS father_germplasm_type, l10.short_name AS father_person, sl10.date AS father_year, pro10.project_name AS father_project, l10.altitude AS father_alt, l10.longitude AS father_long, l10.latitude AS father_lat,
 
-sl3.name AS grandfather, gp3.germplasm_name AS grandfather_germplasm, gpt3.germplasm_type AS grandfather_germplasm_type, p3.short_name AS grandfather_person, sl3.date AS grandfather_year, pro3.project_name AS grandfather_project, l3.altitude AS grandfather_alt, l3.longitude AS grandfather_long, l3.latitude AS grandfather_lat,
+sl3.name AS grandfather, gp3.germplasm_name AS grandfather_germplasm, gpt3.germplasm_type AS grandfather_germplasm_type, l3.short_name AS grandfather_person, sl3.date AS grandfather_year, pro3.project_name AS grandfather_project, l3.altitude AS grandfather_alt, l3.longitude AS grandfather_long, l3.latitude AS grandfather_lat,
 
-sl2.name AS mother, gp2.germplasm_name AS mother_germplasm, gpt2.germplasm_type AS mother_germplasm_type, p2.short_name AS mother_person, sl2.date AS mother_year, pro2.project_name AS mother_project, l2.altitude AS mother_alt, l2.longitude AS mother_long, l2.latitude AS mother_lat,
+sl2.name AS mother, gp2.germplasm_name AS mother_germplasm, gpt2.germplasm_type AS mother_germplasm_type, l2.short_name AS mother_person, sl2.date AS mother_year, pro2.project_name AS mother_project, l2.altitude AS mother_alt, l2.longitude AS mother_long, l2.latitude AS mother_lat,
 
-sl4.name AS grandmother, gp4.germplasm_name AS grandmother_germplasm, gpt4.germplasm_type AS grandmother_germplasm_type, p4.short_name AS grandmother_person, sl4.date AS grandmother_year, pro4.project_name AS grandmother_project, l4.altitude AS grandmother_alt, l4.longitude AS grandmother_long, l4.latitude AS grandmother_lat,
+sl4.name AS grandmother, gp4.germplasm_name AS grandmother_germplasm, gpt4.germplasm_type AS grandmother_germplasm_type, l4.short_name AS grandmother_person, sl4.date AS grandmother_year, pro4.project_name AS grandmother_project, l4.altitude AS grandmother_alt, l4.longitude AS grandmother_long, l4.latitude AS grandmother_lat,
 
-sl1.name AS cross, gp1.germplasm_name AS cross_germplasm, gpt1.germplasm_type AS cross_germplasm_type, p1.short_name AS cross_person, sl1.date AS cross_year, pro1.project_name AS cross_project, l1.altitude AS cross_alt, l1.longitude AS cross_long, l1.latitude AS cross_lat
+sl1.name AS cross, gp1.germplasm_name AS cross_germplasm, gpt1.germplasm_type AS cross_germplasm_type, l1.short_name AS cross_person, sl1.date AS cross_year, pro1.project_name AS cross_project, l1.altitude AS cross_alt, l1.longitude AS cross_long, l1.latitude AS cross_lat
 
 FROM network_relation r1 JOIN network_relation r2 ON r1.seed_lot_son_id = r2.seed_lot_son_id
 
@@ -875,17 +880,12 @@ LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id=gpt1.id
 LEFT OUTER JOIN entities_germplasm_type gpt3 ON gp3.germplasm_type_id=gpt3.id
 LEFT OUTER JOIN entities_germplasm_type gpt4 ON gp4.germplasm_type_id=gpt4.id
 
-LEFT OUTER JOIN actors_person p10 ON sl10.person_id = p10.id
-LEFT OUTER JOIN actors_person p2 ON sl2.person_id = p2.id
-LEFT OUTER JOIN actors_person p1 ON sl1.person_id = p1.id
-LEFT OUTER JOIN actors_person p3 ON sl3.person_id = p3.id
-LEFT OUTER JOIN actors_person p4 ON sl4.person_id = p4.id
 
-LEFT OUTER JOIN actors_location l10 ON p10.location_id = l10.id
-LEFT OUTER JOIN actors_location l2 ON p2.location_id = l2.id
-LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id
-LEFT OUTER JOIN actors_location l3 ON p3.location_id = l3.id
-LEFT OUTER JOIN actors_location l4 ON p4.location_id = l4.id
+LEFT OUTER JOIN actors_location l10 ON sl10.location_id = l10.id
+LEFT OUTER JOIN actors_location l2 ON sl2.location_id = l2.id
+LEFT OUTER JOIN actors_location l1 ON sl1.location_id = l1.id
+LEFT OUTER JOIN actors_location l3 ON sl3.location_id = l3.id
+LEFT OUTER JOIN actors_location l4 ON sl4.location_id = l4.id
 
 LEFT OUTER JOIN network_relation_project nrp ON nrp.relation_id = r2.id
 LEFT OUTER JOIN actors_project pro1 ON nrp.project_id = pro1.id
@@ -1062,6 +1062,7 @@ LEFT OUTER JOIN entities_seed_lot sl4 ON nr2.seed_lot_son_id = sl4.id
 
 WHERE
 
+sl1.germplasm_id = sl3.germplasm_id AND
 nrsel.selection_id IS NOT NULL AND
 nr.reproduction_id IS NOT NULL AND
 nr.selection_id IS NULL AND
@@ -1222,14 +1223,14 @@ query.grand.father = function(G = NULL, GT = NULL, Y = NULL, P = NULL, SL = NULL
 query = paste(
 "
 SELECT
-sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, p1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type,
+sp1.species AS son_species, sl1.name AS son, gp1.germplasm_name AS son_germplasm, l1.short_name AS son_person, sl1.date AS son_year, gpt1.germplasm_type AS son_germplasm_type,
 l1.altitude AS son_alt, l1.longitude AS son_long, l1.latitude AS son_lat,",
 # waiting for generation and sl comments to be implemented in SHiNeMaS
 #sl1.generation AS son_total_generation_nb, sl1.lgeneration AS son_local_generation_nb, sl1.confidence AS son_generation_confidence,
 #sl1.comments AS son_comments, 
 "","string_agg(DISTINCT pro1.project_name,',') AS son_project,
 
-sp2.species AS father_species, sl2.name AS father, gp2.germplasm_name AS father_germplasm, p2.short_name AS father_person, sl2.date AS father_year, gpt2.germplasm_type AS father_germplasm_type,
+sp2.species AS father_species, sl2.name AS father, gp2.germplasm_name AS father_germplasm, l2.short_name AS father_person, sl2.date AS father_year, gpt2.germplasm_type AS father_germplasm_type,
 l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_lat,",
 # waiting for generation and sl comments to be implemented in SHiNeMaS
 # sl2.generation AS father_total_generation_nb, sl2.lgeneration AS father_local_generation_nb, sl2.confidence AS father_generation_confidence,
@@ -1238,7 +1239,7 @@ l2.altitude AS father_alt, l2.longitude AS father_long, l2.latitude AS father_la
 
 rep1.start_date AS relation_year_start, rep1.end_date AS relation_year_end,
 
-spf.species AS grandfather_species, slf.name AS grandfather, gpf.germplasm_name AS grandfather_germplasm, pf.short_name AS grandfather_person, slf.date AS grandfather_year, gptf.germplasm_type AS grandfather_germplasm_type,
+spf.species AS grandfather_species, slf.name AS grandfather, gpf.germplasm_name AS grandfather_germplasm, lf.short_name AS grandfather_person, slf.date AS grandfather_year, gptf.germplasm_type AS grandfather_germplasm_type,
 lf.altitude AS grandfather_alt, lf.longitude AS grandfather_long, lf.latitude AS grandfather_lat,",
 # waiting for generation and sl comments to be implemented in SHiNeMaS
 # slf.generation AS grandfather_total_generation_nb, slf.lgeneration AS grandfather_local_generation_nb, slf.confidence AS grandfather_generation_confidence,
@@ -1256,24 +1257,22 @@ LEFT OUTER JOIN network_reproduction_method nrm1 ON rep1.reproduction_method_id 
 LEFT OUTER JOIN entities_seed_lot sl1 ON nr.seed_lot_son_id=sl1.id
 LEFT OUTER JOIN entities_germplasm gp1 ON sl1.germplasm_id = gp1.id
 LEFT OUTER JOIN entities_germplasm_type gpt1 ON gp1.germplasm_type_id = gpt1.id
-LEFT OUTER JOIN actors_person p1 ON sl1.person_id=p1.id
-LEFT OUTER JOIN actors_location l1 ON p1.location_id = l1.id
+LEFT OUTER JOIN actors_location l1 ON sl1.location_id = l1.id
 LEFT OUTER JOIN entities_species sp1 ON gp1.species_id = sp1.id
+
 
 LEFT OUTER JOIN entities_seed_lot sl2 ON nr.seed_lot_father_id=sl2.id
 LEFT OUTER JOIN entities_germplasm gp2 ON sl2.germplasm_id = gp2.id
 LEFT OUTER JOIN entities_germplasm_type gpt2 ON gp2.germplasm_type_id = gpt2.id
-LEFT OUTER JOIN actors_person p2 ON sl2.person_id=p2.id
-LEFT OUTER JOIN actors_location l2 ON p2.location_id = l2.id
+LEFT OUTER JOIN actors_location l2 ON sl2.location_id = l2.id
 LEFT OUTER JOIN entities_species sp2 ON gp2.species_id = sp2.id
 
 LEFT OUTER JOIN network_relation relfat ON nr.seed_lot_father_id = relfat.seed_lot_son_id
 LEFT OUTER JOIN entities_seed_lot slf ON relfat.seed_lot_father_id = slf.id
 LEFT OUTER JOIN entities_germplasm gpf ON slf.germplasm_id = gpf.id
-LEFT OUTER JOIN actors_person pf ON slf.person_id = pf.id
 LEFT OUTER JOIN entities_species spf ON gpf.species_id=spf.id
 LEFT OUTER JOIN entities_germplasm_type gptf ON gpf.germplasm_type_id=gptf.id
-LEFT OUTER JOIN actors_location lf ON pf.location_id=lf.id
+LEFT OUTER JOIN actors_location lf ON slf.location_id = lf.id
 LEFT OUTER JOIN network_reproduction repf ON relfat.reproduction_id=repf.id
 
 LEFT OUTER JOIN network_relation_project rp1 ON rp1.relation_id = nr.id
@@ -1284,7 +1283,7 @@ LEFT OUTER JOIN actors_project pro2 ON pro2.id = rp2.project_id",
 filters,
 
 "
-GROUP BY sp1.species, sl1.name, gp1.germplasm_name, p1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, p2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, rep1.start_date, rep1.end_date, spf.species, slf.name, gpf.germplasm_name, pf.short_name, slf.date, gptf.germplasm_type, lf.altitude, lf.longitude, lf.latitude, repf.start_date, repf.end_date
+GROUP BY sp1.species, sl1.name, gp1.germplasm_name, l1.short_name, sl1.date, gpt1.germplasm_type, l1.altitude, l1.longitude, l1.latitude, sp2.species, sl2.name, gp2.germplasm_name, l2.short_name, sl2.date, gpt2.germplasm_type, l2.altitude, l2.longitude, l2.latitude, rep1.start_date, rep1.end_date, spf.species, slf.name, gpf.germplasm_name, lf.short_name, slf.date, gptf.germplasm_type, lf.altitude, lf.longitude, lf.latitude, repf.start_date, repf.end_date
 ",
 
 sep = "")
@@ -1595,7 +1594,7 @@ clean.ap = function(a) { # be careful with the ' in names with SQL queries
 if( !is.null(person.in) ) { person.in = clean.ap(person.in) }
 if( !is.null(person.out) ) { person.out = clean.ap(person.out) }
 
-filter_P = get.filters(filter.in = person.in, filter.out = person.out, filter.on, sql.son.tag = "p1.short_name", sql.father.tag = "p2.short_name")
+filter_P = get.filters(filter.in = person.in, filter.out = person.out, filter.on, sql.son.tag = "l1.short_name", sql.father.tag = "l2.short_name")
 
 # 4.2.2. germplasm --------------------------------------------------------
 if( !is.null(germplasm.in) ) { germplasm.in = clean.ap(germplasm.in) }
