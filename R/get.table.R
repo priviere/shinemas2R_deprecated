@@ -388,6 +388,7 @@ get.table <- function(
 										id = as.data.frame(matrix(id), ncol = 1)
 										colnames(id) = gettext("seed-lots")
 										attributes(id)$get.table.object = "duplicated_infos_seed-lots"
+										attributes(id)$invert = FALSE # As there will be only one row and one column, it is obviously FALSE
 										id = list(id); names(id) = "duplicated_infos_seed-lots"
 										list_tabs = c(list_tabs, id)
 									}
@@ -396,7 +397,7 @@ get.table <- function(
 									x_tmp = x_var_tmp_1
 									
 									if( is.null(ncol(x_tmp)) ) { x_tmp = as.data.frame(matrix(x_tmp, ncol = 1)); colnames(x_tmp) = colnames(x_var)[seq_var[i]] }
-									if (invert_row_col == TRUE) { x_tmp = t(x_tmp) ; attributes(x_tmp)$invert = TRUE }else{ attributes(x_tmp)$invert = FALSE }
+									if (invert_row_col) { x_tmp = t(x_tmp) ; attributes(x_tmp)$invert = TRUE }else{ attributes(x_tmp)$invert = FALSE }
 									attributes(x_tmp)$get.table.object = "duplicated_infos_variables"
 		
 									x_tmp = list(x_tmp); names(x_tmp) = "duplicated_infos_variables"
@@ -418,7 +419,7 @@ get.table <- function(
 									x_tmp = x_var_tmp_1
 								}
 								
-								if (invert_row_col == TRUE ) { x_tmp = t(x_tmp); attributes(x_tmp)$invert = TRUE }else{ attributes(x_tmp)$invert = FALSE }
+								if (invert_row_col) { x_tmp = t(x_tmp); attributes(x_tmp)$invert = TRUE }else{ attributes(x_tmp)$invert = FALSE }
 								attributes(x_tmp)$get.table.object = "not_duplicated_variables"
 								#x_tmp = list(x_tmp); names(x_tmp) = "not_duplicated_variables"
 								list_tabs = c(list_tabs, "not_duplicated_variables" = list(x_tmp))

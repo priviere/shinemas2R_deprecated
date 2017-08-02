@@ -467,9 +467,9 @@ if(nrow(d) > 0) {
 	son_alt = as.numeric(as.character(d$son_alt))
 	son_long = as.numeric(as.character(d$son_long))
 	son_lat = as.numeric(as.character(d$son_lat))
-	son_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$son_total_generation_nb))
-	son_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$son_local_generation_nb))
-	son_generation_confidence = sample( c(0,1), nrow(d), replace = TRUE) # as.character(d$son_generation_confidence)
+	son_total_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$son_total_generation_nb))
+	son_local_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$son_local_generation_nb))
+	son_generation_confidence = rep(1, nrow(d)) # as.character(d$son_generation_confidence)
 	son_comments = rep("blablabla", nrow(d)) # as.character(d$son_comments)
 	
 	father_species = as.factor(d$father_species)
@@ -482,9 +482,9 @@ if(nrow(d) > 0) {
 	father_alt = as.numeric(as.character(d$father_alt))
 	father_long = as.numeric(as.character(d$father_long))
 	father_lat = as.numeric(as.character(d$father_lat))
-	father_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_total_generation_nb))
-	father_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_local_generation_nb))
-	father_generation_confidence = sample( c(0,1), nrow(d), replace = TRUE) # as.character(d$father_generation_confidence)
+	father_total_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$father_total_generation_nb))
+	father_local_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$father_local_generation_nb))
+	father_generation_confidence = rep(1, nrow(d)) # as.character(d$father_generation_confidence)
 	father_comments = rep("blablabla", nrow(d)) # as.character(d$father_comments)
 	
 	reproduction_id = as.character(d$reproduction_id)
@@ -612,9 +612,9 @@ if(nrow(d) > 0) {
 		lat = as.numeric(as.character(d$lat))
 		long = as.numeric(as.character(d$long))
 		alt = as.numeric(as.character(d$alt))
-		total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$total_generation_nb))
-		local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$local_generation_nb))
-		generation_confidence = sample( c(1:0), nrow(d), replace = TRUE) # as.character(d$generation_confidence)
+		total_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$total_generation_nb))
+		local_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$local_generation_nb))
+		generation_confidence = rep(1, nrow(d)) # as.character(d$generation_confidence)
 		sl_comments = rep("blablabla", nrow(d)) # as.character(d$sl_comments)
 
 	d = data.frame(
@@ -732,9 +732,9 @@ if( nrow(d) > 0 ) {
 	son_alt = as.numeric(d$son_alt)
 	son_long = as.numeric(d$son_long)
 	son_lat = as.numeric(d$son_lat)
-	son_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(son_total_generation_nb))
-	son_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(son_local_generation_nb))
-	son_generation_confidence = sample( c(1:0), nrow(d), replace = TRUE) # as.character(son_generation_confidence)
+	son_total_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(son_total_generation_nb))
+	son_local_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(son_local_generation_nb))
+	son_generation_confidence = rep(1, nrow(d)) # as.character(son_generation_confidence)
 	son_comments = rep("blablabla", nrow(d)) # as.character(d$son_comments)
 	
 	father_species = as.factor(d$father_species)
@@ -747,9 +747,9 @@ if( nrow(d) > 0 ) {
 	father_alt = as.numeric(d$father_alt)
 	father_long = as.numeric(d$father_long)
 	father_lat = as.numeric(d$father_lat)
-	father_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_total_generation_nb))
-	father_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_local_generation_nb))
-	father_generation_confidence = sample( c(1:0), nrow(d), replace = TRUE) # as.character(d$father_generation_confidence)
+	father_total_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$father_total_generation_nb))
+	father_local_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$father_local_generation_nb))
+	father_generation_confidence = rep(1, nrow(d)) # as.character(d$father_generation_confidence)
 	father_comments = rep("blablabla", nrow(d)) # as.character(d$father_comments)
 	
 	variable_name = as.character(d$variable_name)
@@ -1302,9 +1302,9 @@ if( nrow(d) > 0 ) {
 	son_alt = as.numeric(as.character(d$son_alt))
 	son_long = as.numeric(as.character(d$son_long))
 	son_lat = as.numeric(as.character(d$son_lat))
-	son_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$son_total_generation_nb))
-	son_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$son_local_generation_nb))
-	son_generation_confidence = sample( c(1:0), nrow(d), replace = TRUE) # as.character(d$son_generation_confidence)
+	son_total_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$son_total_generation_nb))
+	son_local_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$son_local_generation_nb))
+	son_generation_confidence = rep(1, nrow(d)) # as.character(d$son_generation_confidence)
 	son_comments = rep("blablabla", nrow(d)) # as.character(d$son_comments)
 	
 	father_species = as.factor(d$father_species)
@@ -1317,9 +1317,9 @@ if( nrow(d) > 0 ) {
 	father_alt = as.numeric(as.character(d$father_alt))
 	father_long = as.numeric(as.character(d$father_long))
 	father_lat = as.numeric(as.character(d$father_lat))
-	father_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_total_generation_nb))
-	father_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$father_local_generation_nb))
-	father_generation_confidence = sample( c(1:8), nrow(d), replace = TRUE) # as.character(d$father_generation_confidence)
+	father_total_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$father_total_generation_nb))
+	father_local_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$father_local_generation_nb))
+	father_generation_confidence = rep(1, nrow(d)) # as.character(d$father_generation_confidence)
 	father_comments = rep("blablabla", nrow(d)) # as.character(d$father_comments)
 		
 	relation_year_start = as.factor(d$relation_year_start)
@@ -1335,9 +1335,9 @@ if( nrow(d) > 0 ) {
 	grandfather_alt = as.numeric(as.character(d$grandfather_alt))
 	grandfather_long = as.numeric(as.character(d$grandfather_long))
 	grandfather_lat = as.numeric(as.character(d$grandfather_lat))
-	grandfather_total_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$grandfather_total_generation_nb))
-	grandfather_local_generation_nb = sample( c(1:8), nrow(d), replace = TRUE) # as.numeric(as.character(d$grandfather_local_generation_nb))
-	grandfather_generation_confidence = sample( c(1:8), nrow(d), replace = TRUE) # as.character(d$grandfather_generation_confidence)
+	grandfather_total_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$grandfather_total_generation_nb))
+	grandfather_local_generation_nb = rep(1, nrow(d)) # as.numeric(as.character(d$grandfather_local_generation_nb))
+	grandfather_generation_confidence = rep(1, nrow(d)) # as.character(d$grandfather_generation_confidence)
 	grandfather_comments = rep("blablabla", nrow(d)) # as.character(d$grandfather_comments)
 		
 	relation_father_grandfather_year_start = as.factor(d$relation_father_grandfather_year_start)
@@ -1688,7 +1688,7 @@ filter_V = V.sql(variable.in)
  			message("2. Create network matrix ..."); {
  				
  				# fill diffusion gap
- 				fill.diff.gap = function(reseau){
+ 				fill.diff.gap = function(reseau, info_db){
  					message("2.1. Fill diffusion gaps ...")
  					RESEAU = query.network(P = NULL, G = NULL, Y = NULL, R = NULL, SL = NULL, Proj = NULL, info_db = info_db)
  					
@@ -1717,7 +1717,7 @@ filter_V = V.sql(variable.in)
  				}
  				
  				if(fill.diffusion.gap | Mdist) { # To get Mdist, you need to fill the gap
- 					reseau = fill.diff.gap(reseau)	
+ 					reseau = fill.diff.gap(reseau, info_db)	
  				}
  				
  				point = unique(c(as.character(reseau[,"father"]),as.character(reseau[,"son"])))
