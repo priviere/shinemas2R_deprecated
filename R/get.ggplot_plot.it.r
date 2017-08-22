@@ -78,7 +78,7 @@ get.ggplot_plot.it = function(
 			
 			# Overall split
 			d$split = paste(paste("x.axis", d$split_x.axis, sep = "-"), paste("in.col", d$split_in.col, sep = "-"), sep = "|")
-			d = select(d, - split_x.axis, - split_in.col)
+			d = d[,-grep("split_",colnames(d))]
 			d =  plyr:::splitter_d(d, .(split))
 			
 			return(d)
@@ -151,9 +151,14 @@ get.ggplot_plot.it = function(
 					}
 				}
 				
-				if(ggplot.display == "interaction") {										
-					p = ggplot(d, aes(y = variable, x = factor(x.axis), colour = factor(in.col), group = factor(in.col)))
-					p = p + stat_summary(fun.y = mean, geom = "point") + stat_summary(fun.y = mean, geom = "line")
+				if(ggplot.display == "interaction") {
+					p = ggplot(d, aes(y = variable, x = factor(x.axis), colour = factor(in.col), group = factor(in.col))) 
+					if(length(unique(d$x.axis)) == 1){
+						p = p + geom_jitter(inherit.aes=TRUE,width=0.1,height=0)
+					}else{
+						p = p + stat_summary(fun.y = mean, geom = "line") + stat_summary(fun.y = mean, geom = "point") 
+					}
+				
 				}
 				
 				attributes(p)$x.axis = x.axis; attributes(p)$in.col = in.col
