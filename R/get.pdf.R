@@ -652,7 +652,7 @@ get.pdf = function(
 			width = d[["width"]]
 			if(is.null(width)){ width = 1}
 			
-			cat("\\begin{figure} \n",
+			cat("\\begin{figure}[!h] \n",
 				"\\begin{center} \n",
 				"\\caption{",text.to.tex(caption),"} \n",
 				"\\includegraphics[page=-,width=", width, "\\textwidth]{", we_are_here ,"/", content, "} \n",
