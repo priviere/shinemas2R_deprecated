@@ -108,7 +108,7 @@ get.pdf = function(
 	setwd(dir)
 	
 	n = unique(names(LaTeX_body))
-	n.ok = c("titlepage", "tableofcontents", "chapter", "section", "subsection", "subsubsection", "table", "figure", "text", "includepdf", "input")
+	n.ok = c("titlepage", "tableofcontents", "chapter", "section", "subsection", "subsubsection", "table", "figure", "text", "includeimage", "includepdf", "input")
 	test = n[which(!is.element(n, n.ok))]
 	
 	if(length(test) > 0) {
@@ -253,7 +253,7 @@ get.pdf = function(
 				if ( !is.numeric(t) ) { stop("Element of width within table must be numeric") }
 			}
 			
-			t = dd["content"]; if(!is.null(t)) {
+			t = dd[["content"]]; if(!is.null(t)) {
 				if(!is.character(t) ) { stop("Elements of input must be a character") } 
 				if( !file.exists(t) ) { stop(t, " does not exist ") }
 			}
@@ -641,8 +641,8 @@ get.pdf = function(
 			} else { cat(gettext("No data \n \n")) } 
 		}
 		
-		if(n == "includepicture")	{
-			d = d [["includepicture"]]
+		if(n == "includeimage")	{
+			d = d [["includeimage"]]
 			
 			caption = d[["caption"]]
 			if( is.null(caption) ) { caption = "" }
