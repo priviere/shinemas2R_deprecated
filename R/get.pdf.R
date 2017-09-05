@@ -551,6 +551,7 @@ get.pdf = function(
 				
 				fig.name = caption
 				for(c in character_to_delete) { char = which(character_to_delete == c); fig.name = gsub(c, names(character_to_delete)[char], fig.name) }
+				fig.name = gsub("\\\\","",gsub("\\}","",gsub("\\{","",fig.name)))
 				fig.name = paste(na.omit(unlist(strsplit(fig.name, ""))[1:100]), collapse = "") # if it is too long pdf() does not work
 				
 				figure.name = paste(fig.name, "_", as.character(round(runif(1,0,10000000000))), ".pdf", sep="") # to have unicity in the name of the pdf
