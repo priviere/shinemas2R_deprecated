@@ -546,8 +546,8 @@ get.pdf = function(
 				caption = d[["caption"]]
 				if( is.null(caption) ) { caption = "" }
 				
-				character_to_delete = c("\\.", "\n", "\t", "'", " ", "ù", "û", "ü", "ÿ", "à", "â", "ç", "é", "è", "ê", "ë", "ï", "î", "ô")
-				names(character_to_delete) = c("", "", "", "_", "_", "u", "u", "u", "y", "a", "a", "c", "e", "e", "e", "e", "i", "i", "o")
+				character_to_delete = c("\\.", "\n", "\t", "'", " ", "ù", "û", "ü", "ÿ", "à", "â", "ç", "é", "è", "ê", "ë", "ï", "î", "ô","=",";")
+				names(character_to_delete) = c("", "", "", "_", "_", "u", "u", "u", "y", "a", "a", "c", "e", "e", "e", "e", "i", "i", "o","","")
 				
 				fig.name = caption
 				for(c in character_to_delete) { char = which(character_to_delete == c); fig.name = gsub(c, names(character_to_delete)[char], fig.name) }
