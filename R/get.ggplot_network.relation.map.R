@@ -34,7 +34,6 @@ get.ggplot_network.relation.map = function(map, data, relation = "reproduction",
 		
 		tmp = NULL
 		for(i in all_year){tmp = c(tmp, list(i))}
-		all_year = c(tmp, list(all_year))
 		
 		out = list()
 		n = NULL
