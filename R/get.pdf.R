@@ -108,7 +108,7 @@ get.pdf = function(
 	setwd(dir)
 	
 	n = unique(names(LaTeX_body))
-	n.ok = c("titlepage", "tableofcontents", "chapter", "section", "subsection", "subsubsection", "table", "figure", "text", "includepdf", "input")
+	n.ok = c("titlepage", "tableofcontents", "chapter", "section", "subsection", "subsubsection", "table", "figure", "text", "includeimage", "includepdf", "input")
 	test = n[which(!is.element(n, n.ok))]
 	
 	if(length(test) > 0) {
@@ -253,7 +253,7 @@ get.pdf = function(
 				if ( !is.numeric(t) ) { stop("Element of width within table must be numeric") }
 			}
 			
-			t = dd["content"]; if(!is.null(t)) {
+			t = dd[["content"]]; if(!is.null(t)) {
 				if(!is.character(t) ) { stop("Elements of input must be a character") } 
 				if( !file.exists(t) ) { stop(t, " does not exist ") }
 			}
@@ -546,11 +546,12 @@ get.pdf = function(
 				caption = d[["caption"]]
 				if( is.null(caption) ) { caption = "" }
 				
-				character_to_delete = c("\\.", "\n", "\t", "'", " ", "ù", "û", "ü", "ÿ", "à", "â", "ç", "é", "è", "ê", "ë", "ï", "î", "ô")
-				names(character_to_delete) = c("", "", "", "_", "_", "u", "u", "u", "y", "a", "a", "c", "e", "e", "e", "e", "i", "i", "o")
+				character_to_delete = c("\\.", "\n", "\t", "'", " ", "ù", "û", "ü", "ÿ", "à", "â", "ç", "é", "è", "ê", "ë", "ï", "î", "ô","=",";")
+				names(character_to_delete) = c("", "", "", "_", "_", "u", "u", "u", "y", "a", "a", "c", "e", "e", "e", "e", "i", "i", "o","","")
 				
 				fig.name = caption
 				for(c in character_to_delete) { char = which(character_to_delete == c); fig.name = gsub(c, names(character_to_delete)[char], fig.name) }
+				fig.name = gsub("\\\\","",gsub("\\}","",gsub("\\{","",fig.name)))
 				fig.name = paste(na.omit(unlist(strsplit(fig.name, ""))[1:100]), collapse = "") # if it is too long pdf() does not work
 				
 				figure.name = paste(fig.name, "_", as.character(round(runif(1,0,10000000000))), ".pdf", sep="") # to have unicity in the name of the pdf
@@ -641,8 +642,8 @@ get.pdf = function(
 			} else { cat(gettext("No data \n \n")) } 
 		}
 		
-		if(n == "includepicture")	{
-			d = d [["includepicture"]]
+		if(n == "includeimage")	{
+			d = d [["includeimage"]]
 			
 			caption = d[["caption"]]
 			if( is.null(caption) ) { caption = "" }
@@ -652,7 +653,7 @@ get.pdf = function(
 			width = d[["width"]]
 			if(is.null(width)){ width = 1}
 			
-			cat(
+			cat("\\begin{figure}[H] \n",
 				"\\begin{center} \n",
 				"\\caption{",text.to.tex(caption),"} \n",
 				"\\includegraphics[page=-,width=", width, "\\textwidth]{", we_are_here ,"/", content, "} \n",

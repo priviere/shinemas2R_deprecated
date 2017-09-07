@@ -78,7 +78,7 @@ get.ggplot_plot.it = function(
 			
 			# Overall split
 			d$split = paste(paste("x.axis", d$split_x.axis, sep = "-"), paste("in.col", d$split_in.col, sep = "-"), sep = "|")
-			d = select(d, - split_x.axis, - split_in.col)
+			d = d[,-grep("split_",colnames(d))]
 			d =  plyr:::splitter_d(d, .(split))
 			
 			return(d)
@@ -151,9 +151,14 @@ get.ggplot_plot.it = function(
 					}
 				}
 				
-				if(ggplot.display == "interaction") {										
-					p = ggplot(d, aes(y = variable, x = factor(x.axis), colour = factor(in.col), group = factor(in.col)))
-					p = p + stat_summary(fun.y = mean, geom = "point") + stat_summary(fun.y = mean, geom = "line")
+				if(ggplot.display == "interaction") {
+					p = ggplot(d, aes(y = variable, x = factor(x.axis), colour = factor(in.col), group = factor(in.col))) 
+					if(length(unique(d$x.axis)) == 1){
+						p = p + geom_jitter(inherit.aes=TRUE,width=0.1,height=0)
+					}else{
+						p = p + stat_summary(fun.y = mean, geom = "line") + stat_summary(fun.y = mean, geom = "point") 
+					}
+				
 				}
 				
 				attributes(p)$x.axis = x.axis; attributes(p)$in.col = in.col
@@ -217,18 +222,19 @@ get.ggplot_plot.it = function(
 		
 		fun = function(pair_var, d, in.col){
 			funb = function(d, pair_var, in.col){
+
 				colnames(d)[which(colnames(d) == in.col)] = "in.col"
 				var = unlist(strsplit(pair_var, " -azerty- "))
 				var1 = var[1]; colnames(d)[which(colnames(d) == var1)] = "var1"
 				var2 = var[2]; colnames(d)[which(colnames(d) == var2)] = "var2"
-				
+
 				dtmp = cbind.data.frame(d[,c(1, 2)], d[, c("var1", "var2")])
 				dtmp = na.omit(dtmp)
 				if( nrow(dtmp) == 0){
 					warning("No biplot is done for ", var1, " and ", var2, " as there are only NA. This can be due to missing data or to mismatch between raw data linked to individuals with raw data linked to relation."); 
 					p = NULL
 				} else {
-					p = ggplot(dtmp, aes(x = var1, y = var2, label = labels)) + coord_cartesian(xlim = graph_lim[var1], ylim = graph_lim[var2])
+					p = ggplot(dtmp, aes(x = var1, y = var2, label = labels)) + coord_cartesian(xlim = graph_lim[,var1], ylim = graph_lim[,var2])
 					if(plot_stats_smooth==T){p = p + stat_smooth(method = "lm", se = FALSE)}
 					p = p + geom_text(aes(colour = factor(in.col)), size = labels.size) 
 					
