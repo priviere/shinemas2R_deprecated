@@ -525,6 +525,7 @@ get.pdf = function(
 			   } else { cat(gettext("No data \n \n")) }
 			 }else{ # Only one table present with no name in the list
 			   tab = list.tab[[1]]
+			   if(class(tab) == "list"){tab=tab[[1]]}
 			   tex.tab(d = d, tab = tab, lab.tab = NULL)
 			 }	
 
