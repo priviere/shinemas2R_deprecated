@@ -431,7 +431,11 @@ get.pdf = function(
 				display.rownames = d[["display.rownames"]]
 				if(is.null(display.rownames)){ display.rownames = FALSE }
 				 if (!attributes(tab)$invert) {
-				 	colnames(tab) = sapply(colnames(tab), function(x) { paste(unlist(strsplit(x, "\\.")), collapse = " ") } ) # change "." to space (" ")
+				   if(class(tab)=="character"){
+				     tab=t(as.data.frame(tab))
+				     attributes(tab)$invert=FALSE
+				    }
+				  	colnames(tab) = sapply(colnames(tab), function(x) { paste(unlist(strsplit(x, "\\.")), collapse = " ") } ) # change "." to space (" ")
 				 }
 				if( display.rownames | attributes(tab)$invert == TRUE) { if(!is.null(dim(tab))){tab = cbind.data.frame(rownames(tab), tab); colnames(tab) = c("", "value") }}
 
