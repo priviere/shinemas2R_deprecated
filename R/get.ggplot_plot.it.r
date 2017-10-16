@@ -236,7 +236,7 @@ get.ggplot_plot.it = function(
 				} else {
 					p = ggplot(dtmp, aes(x = var1, y = var2, label = labels)) + coord_cartesian(xlim = graph_lim[,var1], ylim = graph_lim[,var2])
 					if(plot_stats_smooth==T){p = p + stat_smooth(method = "lm", se = FALSE)}
-					p = p + geom_text(aes(colour = factor(in.col)), size = labels.size) 
+					p = p + geom_text_repel(aes(colour = factor(in.col),label = labels))
 					
 					p = p  + xlab(var1) + ylab(var2) + ggtitle(titre) + theme(axis.text.x = element_text(angle=90, hjust=1), legend.title = element_blank()) 
 					attributes(p)$x.axis = NULL; attributes(p)$in.col = in.col

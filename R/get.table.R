@@ -210,40 +210,50 @@ get.table <- function(
 			}
 			
 			fun.mean.sd.cv = function(tab,vec_variables, display = "mean"){ 
-				tab_head = tab[,c(1:(ncol(tab) - length(vec_variables)))]
-				if( is.null(ncol(tab_head)) ) { tab_head = as.data.frame(matrix(tab_head, ncol = 1)); colnames(tab_head) = colnames(tab)[1] }
-				tab_var = tab[,c((ncol(tab) - length(vec_variables) + 1):ncol(tab))]
-				if( is.null(ncol(tab_var)) ) { tab_var = as.data.frame(matrix(tab_var, ncol = 1)); colnames(tab_var) = vec_variables }
+			  
+#				tab_head = tab[,c(1:(ncol(tab) - length(vec_variables)))]
+#				if( is.null(ncol(tab_head)) ) { tab_head = as.data.frame(matrix(tab_head, ncol = 1)); colnames(tab_head) = colnames(tab)[1] }
+#				tab_var = tab[,c((ncol(tab) - length(vec_variables) + 1):ncol(tab))]
+#				if( is.null(ncol(tab_var)) ) { tab_var = as.data.frame(matrix(tab_var, ncol = 1)); colnames(tab_var) = vec_variables }
+
+#				tab_head$id_azerty = factor(apply(tab_head, 1, function(x){paste(x, collapse = "")}))
+#				colnames(tab_head)[ncol(tab_head)] = "id_azerty"
+#				tab_head = arrange(tab_head, id_azerty)
 				
-				tab_head$id_azerty = factor(apply(tab_head, 1, function(x){paste(x, collapse = "")}))
-				colnames(tab_head)[ncol(tab_head)] = "id_azerty"
-				tab_head = arrange(tab_head, id_azerty)
-				
-				t = tab_head[!duplicated(tab_head$id_azerty),] 
-				t = select(t, - id_azerty)
-				vec_var = NULL
-				for(i in 1:ncol(tab_var)){
-					warning("virer le as num as char quand les données seront prorpes ?!?")
-					mean = tapply(as.numeric(as.character(tab_var[,i])), tab_head$id_azerty, mean, na.rm = TRUE)
-					sd = tapply(as.numeric(as.character(tab_var[,i])), tab_head$id_azerty, sd, na.rm = TRUE)
+#				t = tab_head[!duplicated(tab_head$id_azerty),] 
+#				t = select(t, - id_azerty)
+        
+			  vec_var = NULL
+				for(i in vec_variables){
+				  t = tab[,c(1,grep(i,colnames(tab)))]
+				  t = na.omit(t)
+					mean = aggregate(t[,2],by=list(tab[,1]),function(x){mean(x)})
+					sd = aggregate(t[,2],by=list(tab[,1]),function(x){sd(x)})
 					cv = sd / mean
+					colnames(mean)=colnames(sd)=colnames(cv) = colnames(tab)
 					
 					if(display == "mean") { 
 						tab_var_tmp = cbind.data.frame(mean) 
-						colnames(tab_var_tmp) = paste(colnames(tab_var)[i], "mean")
+						colnames(tab_var_tmp)[2] = paste(colnames(mean)[2], "mean")
 					}
 					
 					if(display == "mean.sd") { 
-						tab_var_tmp = cbind.data.frame(mean, sd) 
-						colnames(tab_var_tmp) = paste(colnames(tab_var)[i], c("mean", "sd"))
+						tab_var_tmp = merge(mean,sd,by=colnames(mean)[1])
+						colnames(tab_var_tmp)[2:3] = paste(i,c("mean","sd"))
 					}
 					
 					if(display == "mean.sd.cv") { 
-						tab_var_tmp = cbind.data.frame(mean, sd, cv) 
-						colnames(tab_var_tmp) = paste(colnames(tab_var)[i], c("mean", "sd", "cv"))
+					  if( length(cv[!is.na(cv[,2]),2])>0 ){
+					    tab_var_tmp = merge(merge(mean,sd,by=colnames(mean)[1]),cv,by=colnames(mean)[1])
+					    colnames(tab_var_tmp)[2:4] = paste(i,c("mean","sd","cv"))
+					  }else{
+					    warning("no cv is calculated because only 1 value for each group : returning only mean and sd")
+					    tab_var_tmp = merge(mean,sd,by=colnames(mean)[1])
+					    colnames(tab_var_tmp)[2:3] = paste(i,c("mean","sd"))
+					  }
 					}
-					vec_var = c(vec_var, colnames(tab_var_tmp))
-					t = cbind.data.frame(t, tab_var_tmp)
+					vec_var = c(vec_var, colnames(tab_var_tmp)[2:ncol(tab_var_tmp)])
+					t = tab_var_tmp
 				} 
 				out = list("t" = t, "vec_var" = vec_var)
 				return(out)

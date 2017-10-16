@@ -1071,6 +1071,7 @@ nr2.reproduction_id IS NOT NULL AND
 nr1.selection_id IS NULL AND
 nr2.selection_id IS NULL AND
 nr1mix.mixture_id IS NOT NULL AND
+sl4.germplasm_id = sl3.germplasm_id AND
 
 nr.block = nrsel.block AND
 (nr.\"X\" = nrsel.\"X\" OR (nr.\"X\" IS NULL AND nr.\"X\" IS NULL)) AND
@@ -1078,6 +1079,73 @@ nr.block = nrsel.block AND
 
 d2 = get.d(query, info_db)
 
+# special query when selection have been done in a seed-lot that have been merged after
+query = "
+SELECT sl1.name AS vrac_S, sl2.name AS bouquet_S, sl3.name AS vrac_R, sl4.name AS bouquet_R, nr1.block AS bloc_vrac, nr1.\"X\" AS X_vrac, nr1.\"Y\" AS Y_vrac, nr2.block AS bloc_bouquet, nr2.\"X\" AS X_bouquet, nr2.\"Y\" AS Y_bouquet
+
+FROM network_relation nr
+JOIN network_relation nrsel ON nr.seed_lot_father_id = nrsel.seed_lot_father_id
+JOIN network_relation nr2mix ON nr2mix.seed_lot_father_id = nrsel.seed_lot_son_id
+JOIN network_relation nr1 ON nr1.seed_lot_father_id = nr.seed_lot_son_id
+JOIN network_relation nr2 ON nr2.seed_lot_father_id = nr2mix.seed_lot_son_id
+LEFT OUTER JOIN entities_seed_lot sl1 ON nr.seed_lot_son_id = sl1.id
+LEFT OUTER JOIN entities_seed_lot sl2 ON nrsel.seed_lot_son_id = sl2.id
+LEFT OUTER JOIN entities_seed_lot sl3 ON nr1.seed_lot_son_id = sl3.id
+LEFT OUTER JOIN entities_seed_lot sl4 ON nr2.seed_lot_son_id = sl4.id
+
+WHERE
+
+sl1.germplasm_id = sl3.germplasm_id AND
+nrsel.selection_id IS NOT NULL AND
+nr.reproduction_id IS NOT NULL AND
+nr.selection_id IS NULL AND
+nr1.reproduction_id IS NOT NULL AND
+nr2.reproduction_id IS NOT NULL AND
+nr1.selection_id IS NULL AND
+nr2.selection_id IS NULL AND
+nr2mix.mixture_id IS NOT NULL AND
+sl4.germplasm_id = sl3.germplasm_id AND
+
+nr.block = nrsel.block AND
+(nr.\"X\" = nrsel.\"X\" OR (nr.\"X\" IS NULL AND nr.\"X\" IS NULL)) AND
+(nr.\"Y\" = nrsel.\"Y\" OR (nr.\"Y\" IS NULL AND nr.\"Y\" IS NULL))"
+
+d3 = get.d(query, info_db)
+
+# special query when selection have been done in a seed-lot that have been merged after
+query = "
+SELECT sl1.name AS vrac_S, sl2.name AS bouquet_S, sl3.name AS vrac_R, sl4.name AS bouquet_R, nr1.block AS bloc_vrac, nr1.\"X\" AS X_vrac, nr1.\"Y\" AS Y_vrac, nr2.block AS bloc_bouquet, nr2.\"X\" AS X_bouquet, nr2.\"Y\" AS Y_bouquet
+
+FROM network_relation nr
+JOIN network_relation nrsel ON nr.seed_lot_father_id = nrsel.seed_lot_father_id
+JOIN network_relation nr1mix ON nr1mix.seed_lot_father_id = nr.seed_lot_son_id
+JOIN network_relation nr2mix ON nr2mix.seed_lot_father_id = nrsel.seed_lot_son_id
+JOIN network_relation nr1 ON nr1.seed_lot_father_id = nr1mix.seed_lot_son_id
+JOIN network_relation nr2 ON nr2.seed_lot_father_id = nr2mix.seed_lot_son_id
+LEFT OUTER JOIN entities_seed_lot sl1 ON nr.seed_lot_son_id = sl1.id
+LEFT OUTER JOIN entities_seed_lot sl2 ON nrsel.seed_lot_son_id = sl2.id
+LEFT OUTER JOIN entities_seed_lot sl3 ON nr1.seed_lot_son_id = sl3.id
+LEFT OUTER JOIN entities_seed_lot sl4 ON nr2.seed_lot_son_id = sl4.id
+
+WHERE
+
+sl1.germplasm_id = sl3.germplasm_id AND
+nrsel.selection_id IS NOT NULL AND
+nr.reproduction_id IS NOT NULL AND
+nr.selection_id IS NULL AND
+nr1.reproduction_id IS NOT NULL AND
+nr2.reproduction_id IS NOT NULL AND
+nr1.selection_id IS NULL AND
+nr2.selection_id IS NULL AND
+nr1mix.mixture_id IS NOT NULL AND
+nr2mix.mixture_id IS NOT NULL AND
+sl4.germplasm_id = sl3.germplasm_id AND
+
+nr.block = nrsel.block AND
+(nr.\"X\" = nrsel.\"X\" OR (nr.\"X\" IS NULL AND nr.\"X\" IS NULL)) AND
+(nr.\"Y\" = nrsel.\"Y\" OR (nr.\"Y\" IS NULL AND nr.\"Y\" IS NULL))"
+
+d4 = get.d(query, info_db)
 
 if(FALSE){
 # On nettoie les données
@@ -1141,7 +1209,7 @@ d2 = d2[LINE,]
 
 print("vérifier ce que donne d2, est ce que ça a un sens?")
 
-d = rbind(d1,d2)[,1:4]
+d = rbind(d1,d2,d3,d4)[,1:4]
 
 if(nrow(d) > 0)  { 
 	d = cbind.data.frame(

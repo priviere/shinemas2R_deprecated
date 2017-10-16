@@ -430,10 +430,14 @@ get.pdf = function(
 			tex.tab = function(d, tab, lab.tab){
 				display.rownames = d[["display.rownames"]]
 				if(is.null(display.rownames)){ display.rownames = FALSE }
-				if (!attributes(tab)$invert) {
-					colnames(tab) = sapply(colnames(tab), function(x) { paste(unlist(strsplit(x, "\\.")), collapse = " ") } ) # change "." to space (" ")
-				}
-				if( display.rownames | attributes(tab)$invert == TRUE ) { tab = cbind.data.frame(rownames(tab), tab); colnames(tab) = c("", "value") }
+				 if (!attributes(tab)$invert) {
+				   if(class(tab)=="character"){
+				     tab=t(as.data.frame(tab))
+				     attributes(tab)$invert=FALSE
+				    }
+				  	colnames(tab) = sapply(colnames(tab), function(x) { paste(unlist(strsplit(x, "\\.")), collapse = " ") } ) # change "." to space (" ")
+				 }
+				if( display.rownames | attributes(tab)$invert == TRUE) { if(!is.null(dim(tab))){tab = cbind.data.frame(rownames(tab), tab); colnames(tab) = c("", "value") }}
 
 				caption = d[["caption"]]
 				if(is.null(caption)){caption = ""}
@@ -525,6 +529,7 @@ get.pdf = function(
 			   } else { cat(gettext("No data \n \n")) }
 			 }else{ # Only one table present with no name in the list
 			   tab = list.tab[[1]]
+			   if(class(tab) == "list"){tab=tab[[1]]}
 			   tex.tab(d = d, tab = tab, lab.tab = NULL)
 			 }	
 
