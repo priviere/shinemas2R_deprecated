@@ -1,3 +1,11 @@
+This version of `shinemas2R` is deprecated because:
+
+- the sql queries are not updated (`get.data.R`)
+- the idea is to separate queries from SHiNeMaS from the analysis: all descriptive fonction has been moved to `PPBstats`, see here for more information: https://github.com/priviere/PPBstats
+- the generation of report throught `get.pdf.R` is not really useful as Rmarkdown now does beautiful things! See https://github.com/priviere/PPBstats/issues/81
+
+A new version of `shinemas2R` may be done one day with only one fonction `shinemas()` that could get dataset formated for a given package as `PPBstats` for example.
+
 # shinemas2R
 
 `shinemas2R` is an R package that analyses outputs from the data base [SHiNeMaS (Seeds History and Network Management System)](http://moulon.inra.fr/index.php/en/tranverse-team/atelier-de-bioinformatique/projects/181). 
